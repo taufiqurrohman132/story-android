@@ -1,0 +1,109 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.InstogramApplication" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/color_base</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/color_variant</item>
+        <!-- Customize your theme here. -->
+        <item name="elevationOverlayEnabled">true</item>
+        <!-- background layout. -->
+        <item name="colorSurface">@color/white</item>
+        <item name="colorSurfaceVariant">@color/white</item>      <!-- search bar color dll . -->
+        <item name="android:colorBackground">@color/white</item>>
+
+    </style>
+
+    <!--    <style name="ActiveIndikatorStyle" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">-->
+    <!--        <item name="android:color">@color/biru_tua_trans30</item>-->
+    <!--    </style>-->
+
+    <style name="Text.Header24" parent="Theme.InstogramApplication">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Text.JudulBerita18" parent="Theme.InstogramApplication">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+    <style name="Text.Subjudul16" parent="Theme.InstogramApplication">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+    <style name="Text.Konten14" parent="Theme.InstogramApplication">
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="Text.Konten15" parent="Theme.InstogramApplication">
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="Text.Metadata12" parent="Theme.InstogramApplication">
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="Text.Header38_appbar" parent="Theme.InstogramApplication">
+        <item name="android:textSize">38sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="Text.Header22_appbar" parent="Theme.InstogramApplication">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Button.Back" parent="Theme.InstogramApplication">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <!--        <item name="android:backgroundTint">@color/white_trans</item>-->
+    </style>
+    <style name="Button.Back.Nobg" parent="Theme.InstogramApplication">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+
+    <style name="SearchViewStyle" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="android:textAppearance">@style/SearchViewTextApperance</item>
+    </style>
+    <style name="SearchViewTextApperance" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <!--    shapable view radius-->
+    <style name="Radius8">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+    <style name="Radius16">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+    <style name="Radius8NoBottomRight">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">8dp</item>
+        <item name="cornerSizeTopLeft">8dp</item>
+        <item name="cornerSizeBottomLeft">8dp</item>
+    </style>
+    <style name="RadiusBottomRight16">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomRight">16dp</item>
+    </style>
+    <style name="RadiusBottom24">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomLeft">24dp</item>
+        <item name="cornerSizeBottomRight">24dp</item>
+    </style>
+    <style name="RadiusTopRight16">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">16dp</item>
+    </style>
+    <style name="Circular">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+</resources>

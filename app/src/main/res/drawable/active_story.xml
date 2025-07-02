@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Lingkaran gradient luar -->
+    <item>
+        <shape android:shape="oval">
+            <gradient
+                android:type="sweep"
+                android:angle="0"
+                android:centerColor="@color/color_base"
+                android:startColor="@color/color_variant"
+                android:endColor="@color/color_variant"
+                />
+        </shape>
+    </item>
+
+    <!-- Background putih untuk pinggir foto -->
+    <item android:top="3dp"
+        android:bottom="3dp"
+        android:start="3dp"
+        android:end="3dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/white"/>
+        </shape>
+    </item>
+</layer-list>
