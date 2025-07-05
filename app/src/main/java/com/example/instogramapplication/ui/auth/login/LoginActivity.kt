@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.instogramapplication.ui.base.ListStoryActivity
+import com.example.instogramapplication.ui.story.list.ListStoryActivity
 import com.example.instogramapplication.databinding.ActivityLoginBinding
 import com.example.instogramapplication.utils.Resource
 import com.example.instogramapplication.viewmodel.UserViewModelFactory

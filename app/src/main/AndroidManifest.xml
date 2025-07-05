@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.base.ListStoryActivity"
+            android:name=".ui.story.list.ListStoryActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

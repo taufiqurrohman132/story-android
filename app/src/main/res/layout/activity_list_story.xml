@@ -5,13 +5,12 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.base.ListStoryActivity">
+    tools:context=".ui.story.list.ListStoryActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black">
-
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar_app"
             android:layout_width="match_parent"
@@ -54,8 +53,9 @@
             </LinearLayout>
 
         </com.google.android.material.appbar.MaterialToolbar>
-    </com.google.android.material.appbar.AppBarLayout>
 
+
+    </com.google.android.material.appbar.AppBarLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -71,6 +71,7 @@
             android:layout_height="wrap_content"
             tools:listitem="@layout/item_list_story_y"/>
     </LinearLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

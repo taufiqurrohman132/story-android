@@ -1,19 +1,15 @@
-package com.example.instogramapplication.ui.base
+package com.example.instogramapplication.ui.story.list
 
 import android.content.Context
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
-import com.example.instogramapplication.R
 import com.example.instogramapplication.data.remote.model.ListStoryItem
-import com.example.instogramapplication.databinding.ItemListStoryXBinding
 import com.example.instogramapplication.databinding.ItemListStoryYBinding
 
 class ListStoryYAdapter(

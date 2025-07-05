@@ -1,4 +1,4 @@
-package com.example.instogramapplication.ui.base
+package com.example.instogramapplication.ui.story.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

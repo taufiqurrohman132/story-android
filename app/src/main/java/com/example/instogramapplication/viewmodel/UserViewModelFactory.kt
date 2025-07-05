@@ -7,6 +7,7 @@ import com.example.instogramapplication.data.di.Injection
 import com.example.instogramapplication.data.repository.UserRepository
 import com.example.instogramapplication.ui.auth.login.LoginViewModel
 import com.example.instogramapplication.ui.auth.signup.SignUpViewModel
+import com.example.instogramapplication.ui.story.list.ListStoryViewModel
 
 class UserViewModelFactory(
     private val repository: UserRepository
@@ -27,8 +28,8 @@ class UserViewModelFactory(
             return SignUpViewModel(repository) as T
         }else if (modelClass.isAssignableFrom(LoginViewModel::class.java)){
             return LoginViewModel(repository) as T
-        }else if (modelClass.isAssignableFrom(_root_ide_package_.com.example.instogramapplication.ui.base.ListStoryViewModel::class.java)){
-            return _root_ide_package_.com.example.instogramapplication.ui.base.ListStoryViewModel(
+        }else if (modelClass.isAssignableFrom(ListStoryViewModel::class.java)){
+            return ListStoryViewModel(
                 repository
             ) as T
         }
