@@ -31,11 +31,13 @@ class ListStoryYAdapter(
                     .load(listStory.photoUrl)
                     .override(400)
                     .into(itemyImgPost)
+
+                itemyImgPost.setOnClickListener {
+                    onItemClick(listStory)
+                }
             }
 
-            itemView.setOnClickListener {
-                onItemClick(listStory)
-            }
+
         }
     }
 

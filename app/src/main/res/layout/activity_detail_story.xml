@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:paddingVertical="16dp"
+    tools:context=".ui.story.detail.DetailStoryActivity">
+
+    <ImageView
+        android:id="@+id/detail_img_story"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="30dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+
+    <ImageButton
+        android:id="@+id/detail.btn_back"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:backgroundTint="@color/transparents"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/detail.header"
+        style="@style/Text.Header22_appbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Detail Story"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/detail.btn_back"
+        app:layout_constraintEnd_toStartOf="@id/detail.img_btn_add_post"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/detail.btn_back"
+        app:layout_constraintTop_toTopOf="@id/detail.btn_back"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <ImageButton
+        android:id="@+id/detail.img_btn_add_post"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/transparents"
+        android:padding="14dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_post_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:tint="@color/white" />
+
+    <ImageButton
+        android:id="@+id/detail.btn_like"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:backgroundTint="@color/transparents"
+        android:padding="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_like"
+        app:layout_constraintBottom_toTopOf="@id/detail.btn_comment"
+        app:layout_constraintEnd_toEndOf="@id/detail.btn_comment"
+        app:layout_constraintStart_toStartOf="@id/detail.btn_comment"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:tint="@color/white" />
+
+    <ImageButton
+        android:id="@+id/detail.btn_comment"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:backgroundTint="@color/transparents"
+        android:padding="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_comment"
+        app:layout_constraintBottom_toTopOf="@id/detail.btn_shere"
+        app:layout_constraintEnd_toEndOf="@id/detail.btn_shere"
+        app:layout_constraintStart_toStartOf="@id/detail.btn_shere"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:tint="@color/white" />
+
+    <ImageButton
+        android:id="@+id/detail.btn_shere"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/transparents"
+        android:padding="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_share"
+        app:layout_constraintBottom_toTopOf="@id/detail.btn_options"
+        app:layout_constraintEnd_toEndOf="@id/detail.btn_options"
+        app:layout_constraintStart_toStartOf="@id/detail.btn_options"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:tint="@color/white" />
+
+    <ImageButton
+        android:id="@+id/detail.btn_options"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:backgroundTint="@color/transparents"
+        android:padding="18dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_options"
+        app:layout_constraintBottom_toTopOf="@id/detail.img_btn_music"
+        app:layout_constraintEnd_toEndOf="@id/detail.img_btn_music"
+        app:layout_constraintStart_toStartOf="@id/detail.img_btn_music"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:tint="@color/white" />
+
+    <ImageButton
+        android:id="@+id/detail.img_btn_music"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/transparents"
+        android:padding="12dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_music"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:tint="@color/white" />
+
+
+    <FrameLayout
+        android:id="@+id/detail.profil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/active_story"
+        app:layout_constraintBottom_toTopOf="@id/detail.desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/item_story_x"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="6dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/img"
+            app:shapeAppearanceOverlay="@style/Circular" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/detail.user"
+        style="@style/Text.Konten15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:text="sandika galih"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/detail.profil"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/detail.profil"
+        app:layout_constraintTop_toTopOf="@id/detail.profil" />
+
+    <TextView
+        android:id="@+id/detail.desc"
+        style="@style/Text.Konten15"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="sandika galih berjalan ke arau boroboudur sersama rekannya"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/detail.tv_selengkapnya"
+        app:layout_constraintEnd_toStartOf="@id/detail.img_btn_music"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/detail.tv_selengkapnya"
+        style="@style/Text.Konten15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:text="selengkapnya"
+        android:textColor="@color/abu_abu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

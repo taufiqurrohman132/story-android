@@ -1,5 +1,6 @@
 package com.example.instogramapplication.ui.story.list
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.instogramapplication.data.remote.model.ListStoryItem
 import com.example.instogramapplication.databinding.ActivityListStoryBinding
+import com.example.instogramapplication.ui.story.detail.DetailStoryActivity
 import com.example.instogramapplication.utils.Resource
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
 import kotlinx.coroutines.launch
@@ -45,6 +47,12 @@ class ListStoryActivity : AppCompatActivity() {
 
     }
 
+    private fun navigateToDetail(id: String?){
+        val intent = Intent(this, DetailStoryActivity::class.java)
+        intent.putExtra(DetailStoryActivity.DETAIL_ID, id)
+        startActivity(intent)
+    }
+
     private fun observer(){
         lifecycleScope.launch {
             viewModel.storiesState.collect { result ->
@@ -65,7 +73,7 @@ class ListStoryActivity : AppCompatActivity() {
         }
         val linearLayout = LinearLayoutManager(this)
         adapterY = ListStoryYAdapter(this){ story ->
-            onStoryYClick()
+            navigateToDetail(story.id)
         }
 
         binding.apply {
@@ -90,11 +98,6 @@ class ListStoryActivity : AppCompatActivity() {
     }
 
     private fun onStoryXClick(){
-
-    }
-
-    private fun onStoryYClick(){
-
 
     }
 

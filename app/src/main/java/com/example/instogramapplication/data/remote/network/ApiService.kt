@@ -1,5 +1,6 @@
 package com.example.instogramapplication.data.remote.network
 
+import com.example.instogramapplication.data.remote.model.DetailStoryResponse
 import com.example.instogramapplication.data.remote.model.LoginResponse
 import com.example.instogramapplication.data.remote.model.RegisterResponse
 import com.example.instogramapplication.data.remote.model.StoryResponse
@@ -10,6 +11,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ApiService {
     @POST("register")
@@ -34,6 +36,12 @@ interface ApiService {
 
     @GET("stories")
     suspend fun getStories(): Response<StoryResponse>
+
+    @GET("stories/{id}")
+    suspend fun getDetailStory(
+        @Path("id")
+        id: String
+    ): Response<DetailStoryResponse>
 
 
 }

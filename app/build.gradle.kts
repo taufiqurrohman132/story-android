@@ -62,6 +62,13 @@ dependencies {
     // glide
     implementation(libs.glide)
 
+    // camerax
+    implementation(libs.androidx.camera.camera2)
+    // If you want to additionally use the CameraX Lifecycle library
+    implementation(libs.camera.lifecycle)
+    // If you want to additionally use the CameraX View class
+    implementation(libs.androidx.camera.view)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

@@ -7,6 +7,7 @@ import com.example.instogramapplication.data.di.Injection
 import com.example.instogramapplication.data.repository.UserRepository
 import com.example.instogramapplication.ui.auth.login.LoginViewModel
 import com.example.instogramapplication.ui.auth.signup.SignUpViewModel
+import com.example.instogramapplication.ui.story.detail.DetailStoryViewModel
 import com.example.instogramapplication.ui.story.list.ListStoryViewModel
 
 class UserViewModelFactory(
@@ -29,9 +30,9 @@ class UserViewModelFactory(
         }else if (modelClass.isAssignableFrom(LoginViewModel::class.java)){
             return LoginViewModel(repository) as T
         }else if (modelClass.isAssignableFrom(ListStoryViewModel::class.java)){
-            return ListStoryViewModel(
-                repository
-            ) as T
+            return ListStoryViewModel(repository) as T
+        }else if (modelClass.isAssignableFrom(DetailStoryViewModel::class.java)){
+            return DetailStoryViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknwon Viewmodel Class")
     }
