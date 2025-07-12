@@ -29,7 +29,7 @@ Menyelesaikan submission akhir dengan menerapkan fitur-fitur sesuai standar pemb
 - Validasi format email langsung di EditText
 - Input password disembunyikan
 
-### 🗂Manajemen Sesi
+### Manajemen Sesi
 - Data token dan login disimpan di `DataStore`
 - Jika sudah login, langsung diarahkan ke halaman utama
 - Logout akan menghapus data sesi
