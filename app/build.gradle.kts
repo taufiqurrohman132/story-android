@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-parcelize")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -10,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.instogramapplication"
-        minSdk = 24
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -55,6 +56,7 @@ dependencies {
     implementation(libs.lifecycle.livedata.ktx)
     // Lifecycles only (without ViewModel or LiveData)
     implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.androidx.fragment.ktx)
 
     // Data store
     implementation(libs.androidx.datastore.preferences)
@@ -68,6 +70,16 @@ dependencies {
     implementation(libs.camera.lifecycle)
     // If you want to additionally use the CameraX View class
     implementation(libs.androidx.camera.view)
+
+    // bottom nav
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
+    // langue
+    implementation(libs.lingver)
+
+
+    implementation(libs.photoview)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

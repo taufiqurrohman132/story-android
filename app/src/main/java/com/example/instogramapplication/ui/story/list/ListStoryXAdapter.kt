@@ -1,8 +1,12 @@
 package com.example.instogramapplication.ui.story.list
 
+import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +16,7 @@ import com.example.instogramapplication.databinding.ItemListStoryXBinding
 
 class ListStoryXAdapter(
     private val context: Context,
-    private val onItemClick: (ListStoryItem) -> Unit
+    private val onItemClick: (View, View, ListStoryItem) -> Unit
 ) : ListAdapter<ListStoryItem, ListStoryXAdapter.ItemViewHolder>(DIFF_CALLBACK)  {
     inner class ItemViewHolder(private val item: ItemListStoryXBinding) : RecyclerView.ViewHolder(item.root){
         fun bind(listStory: ListStoryItem){
@@ -23,8 +27,19 @@ class ListStoryXAdapter(
                 .into(item.itemStoryX)
             item.storyUsername.text = listStory.name
 
-            itemView.setOnClickListener {
-                onItemClick(listStory)
+            item.itemStoryX.setOnClickListener {
+//                val optionCompat: ActivityOptionsCompat =
+//                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+//                        itemView.context as Activity,
+//                        Pair(item.itemStoryX, "img_story"),
+//                        Pair(item.storyUsername, "username")
+//
+//                    )
+                onItemClick(
+                    item.itemStoryX,
+                    item.storyUsername,
+                    listStory
+                )
             }
         }
     }

@@ -1,16 +1,25 @@
 package com.example.instogramapplication.data.repository
 
+import android.content.Context
 import android.util.Log
 import com.example.instogramapplication.R
 import com.example.instogramapplication.ResourceProvider
 import com.example.instogramapplication.data.local.datastore.UserPreferences
+import com.example.instogramapplication.data.remote.model.FileUploadResponse
 import com.example.instogramapplication.data.remote.model.ListStoryItem
 import com.example.instogramapplication.data.remote.model.Story
 import com.example.instogramapplication.data.remote.network.ApiService
 import com.example.instogramapplication.utils.ApiUtils
 import com.example.instogramapplication.utils.Resource
+import com.yariksoffice.lingver.Lingver
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.File
 import java.io.IOException
 
 class UserRepository private constructor(
@@ -88,6 +97,12 @@ class UserRepository private constructor(
         }
     }
 
+    suspend fun userLogout(){
+        userPref.clearSession()
+    }
+
+    fun isLoggedIn(): Flow<Boolean> = userPref.isLoggedIn()
+
     fun getStories(): Flow<Resource<List<ListStoryItem>>> = flow {
         emit(Resource.Loading())
 
@@ -140,6 +155,46 @@ class UserRepository private constructor(
             Log.e(TAG, "getDetailStory: error", e)
             Resource.Error("Errrorr")
         }
+    }
+
+    suspend fun uploadStory(imageFile: File, desc: String): Resource<String> {
+        Resource.Loading<String>()
+        return try {
+            val requestBody = desc.toRequestBody("text/plain".toMediaType())
+            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+            val multipartBody = MultipartBody.Part.createFormData(
+                "photo",
+                imageFile.name,
+                requestImageFile
+            )
+
+            val response = apiService.uploadStory(multipartBody, requestBody)
+            Log.d(TAG, "uploadStory: respons $response")
+            if (response.isSuccessful) {
+                val story = response.body()
+                if (story?.error == false) {
+                    Resource.Success(story.message.toString())
+                } else {
+                    Resource.Empty()
+                }
+            }else{
+                val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(response.code())
+                Log.e(TAG, "uploadStory: error not sukses $errorMsg")
+                Resource.Error(errorMsg)
+            }
+        }catch (e: Exception) {
+            Log.e(TAG, "uploadStory: error Exception", e)
+            Resource.Error(e.toString())
+        }
+    }
+
+    // language
+    suspend fun getCurrentLanguage(): String {
+        return userPref.getLang().first()
+    }
+
+    suspend fun setLanguage(langCode: String){
+        userPref.saveLangCode(langCode)
     }
 
     private fun errorHandling(code: Int): String {

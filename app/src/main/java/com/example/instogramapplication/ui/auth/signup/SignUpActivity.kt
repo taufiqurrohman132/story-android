@@ -33,6 +33,7 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initView()
         setupListeners()
         observer()
     }
@@ -40,13 +41,23 @@ class SignUpActivity : AppCompatActivity() {
     // inisialize tampilan awal
     private fun initView(){
         Log.d(TAG, "initView: Starting")
+        // setup
+        binding.signupInlayPass.apply {
+            setTextError("Password Kurang dari 8")
+            isSucces = {
+                it?.let {
+                    it.length >= 8
+                } ?: true
+            }
+        }
 
     }
 
     // pasang semua click dst
     private fun setupListeners(){
-        binding.signupBtnSignUp.setOnClickListener {
-            handleRegister()
+        binding.apply {
+            signupBtnSignUp.setOnClickListener { handleRegister() }
+            signupTvDaftar.setOnClickListener { finish() }
         }
     }
 

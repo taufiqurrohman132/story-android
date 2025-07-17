@@ -19,6 +19,8 @@ class CustomInputWithManualError2 @JvmOverloads constructor(
 
     private lateinit var errorMessage: String
 
+    var isSucces: (CharSequence?) -> Boolean = { false }
+
     init {
         post {
             setValidationListener()
@@ -29,10 +31,12 @@ class CustomInputWithManualError2 @JvmOverloads constructor(
     private fun setValidationListener() {
         editText?.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                this@CustomInputWithManualError2.error = if (s.toString().length < 8) {
-                    errorMessage
-                } else {
+                this@CustomInputWithManualError2.error = if (isSucces(s)) {
+                    isErrorEnabled = false
                     null
+                } else {
+                    isErrorEnabled = true
+                    errorMessage
                 }
             }
 

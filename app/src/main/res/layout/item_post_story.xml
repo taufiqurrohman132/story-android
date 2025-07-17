@@ -22,7 +22,6 @@
             android:layout_width="74dp"
             android:layout_height="74dp"
             android:layout_gravity="center"
-            android:transitionName="img_story"
             app:shapeAppearanceOverlay="@style/Circular"
             android:layout_margin="6dp"
             android:focusable="true"
@@ -30,13 +29,12 @@
             android:src="@drawable/img"
             />
     </FrameLayout>
-    
+
     <TextView
         android:id="@+id/storyUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
-        android:transitionName="username"
         style="@style/Text.Konten14"
         android:textColor="@color/black"
         android:textAlignment="center"

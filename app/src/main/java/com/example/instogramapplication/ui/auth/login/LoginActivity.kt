@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.instogramapplication.ui.story.list.ListStoryActivity
+import com.example.instogramapplication.MainActivity
+import com.example.instogramapplication.ui.story.list.ListStoryFragment
 import com.example.instogramapplication.databinding.ActivityLoginBinding
+import com.example.instogramapplication.ui.auth.signup.SignUpActivity
 import com.example.instogramapplication.utils.Resource
+import com.example.instogramapplication.utils.ValidationUtils
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
@@ -26,10 +29,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.loginInlayEmail.apply {
-            setTextError("Password Kurang dari 8")
-        }
-
+        initView()
         setupListener()
         observer()
 
@@ -37,12 +37,30 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initView(){
+        // setup
+        binding.apply {
+            loginInlayEmail.apply {
+                setTextError("Masukkan format Email yang sesuai")
+                isSucces = {
+                    ValidationUtils.isEmailValid(it)
+                }
+            }
+            loginInlayPass.apply {
+                setTextError("Password Kurang dari 8")
+                isSucces = {
+                    it?.let {
+                        it.length >= 8
+                    } ?: true
+                }
+            }
+        }
 
     }
 
     private fun setupListener(){
-        binding.loginBtnLogin.setOnClickListener {
-            handlerLogin()
+        binding.apply {
+            loginBtnLogin.setOnClickListener { handlerLogin() }
+            loginTvDaftar.setOnClickListener { navigateToRegister() }
         }
     }
 
@@ -64,7 +82,7 @@ class LoginActivity : AppCompatActivity() {
                 }
                 is Resource.Success -> {
                     // pindah ke LoginActivity atau Home
-                    startActivity(Intent(this, ListStoryActivity::class.java))
+                    startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }
                 is Resource.Error -> {
@@ -76,6 +94,11 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun navigateToRegister(){
+        val intent = Intent(this, SignUpActivity::class.java)
+        startActivity(intent)
     }
     companion object{
         val TAG = LoginActivity::class.java.simpleName

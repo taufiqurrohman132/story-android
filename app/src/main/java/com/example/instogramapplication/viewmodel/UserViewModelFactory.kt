@@ -3,12 +3,15 @@ package com.example.instogramapplication.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.instogramapplication.SplashViewModel
 import com.example.instogramapplication.data.di.Injection
 import com.example.instogramapplication.data.repository.UserRepository
 import com.example.instogramapplication.ui.auth.login.LoginViewModel
 import com.example.instogramapplication.ui.auth.signup.SignUpViewModel
 import com.example.instogramapplication.ui.story.detail.DetailStoryViewModel
 import com.example.instogramapplication.ui.story.list.ListStoryViewModel
+import com.example.instogramapplication.ui.story.post.EditViewModel
+import com.example.instogramapplication.ui.user.settings.SettingsViewModel
 
 class UserViewModelFactory(
     private val repository: UserRepository
@@ -25,15 +28,23 @@ class UserViewModelFactory(
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")
-        if (modelClass.isAssignableFrom(SignUpViewModel::class.java)){
-            return SignUpViewModel(repository) as T
-        }else if (modelClass.isAssignableFrom(LoginViewModel::class.java)){
-            return LoginViewModel(repository) as T
-        }else if (modelClass.isAssignableFrom(ListStoryViewModel::class.java)){
-            return ListStoryViewModel(repository) as T
-        }else if (modelClass.isAssignableFrom(DetailStoryViewModel::class.java)){
-            return DetailStoryViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknwon Viewmodel Class")
+        return when(modelClass){
+            SignUpViewModel::class.java ->
+                SignUpViewModel(repository)
+            LoginViewModel::class.java ->
+                LoginViewModel(repository)
+            ListStoryViewModel::class.java ->
+                ListStoryViewModel(repository)
+            DetailStoryViewModel::class.java ->
+                DetailStoryViewModel(repository)
+            EditViewModel::class.java ->
+                EditViewModel(repository)
+            SplashViewModel::class.java ->
+                SplashViewModel(repository)
+            SettingsViewModel::class.java ->
+                SettingsViewModel(repository)
+            else ->
+                throw IllegalArgumentException("Unknwon Viewmodel Class")
+        } as T
     }
 }
