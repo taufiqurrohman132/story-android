@@ -23,6 +23,8 @@ constraintlayout = "2.2.1"
 navigationUiKtx = "2.9.1"
 photoview = "2.3.0"
 retrofit = "3.0.0"
+shimmer = "0.5.0"
+swipetorefresh = "1.01"
 
 [libraries]
 androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraCamera2" }
@@ -49,6 +51,8 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 photoview = { module = "com.github.chrisbanes:PhotoView", version.ref = "photoview" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit2-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
+swipetorefresh = { module = "com.github.aliumujib:SwipeToRefresh", version.ref = "swipetorefresh" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

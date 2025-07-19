@@ -7,9 +7,9 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:paddingVertical="16dp"
-    tools:context=".ui.story.detail.DetailStoryFragment">
+    tools:context=".ui.story.detail.DetailStoryActivity">
 
-    <ImageView
+    <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/detail_img_story"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -176,6 +176,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_margin="6dp"
+            android:transitionName="profile"
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/img"
@@ -206,6 +207,7 @@
         android:layout_marginStart="16dp"
         android:ellipsize="end"
         android:maxLines="2"
+        android:transitionName="desc"
         android:text="sandika galih berjalan ke arau boroboudur sersama rekannya"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@id/detail.tv_selengkapnya"

@@ -2,19 +2,24 @@ package com.example.instogramapplication.ui.story.list
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.instogramapplication.data.remote.model.ListStoryItem
 import com.example.instogramapplication.databinding.ItemListStoryYBinding
+import com.google.android.material.imageview.ShapeableImageView
 
 class ListStoryYAdapter(
     private val context: Context,
-    private val onItemClick: (ListStoryItem) -> Unit
+    private val onItemClick: (ImageView, TextView, ListStoryItem) -> Unit
 ) : ListAdapter<ListStoryItem, ListStoryYAdapter.ItemFeedViewHolder>(DIFF_CALLBACK) {
 
     inner class ItemFeedViewHolder(private val binding: ItemListStoryYBinding) : ViewHolder(binding.root) {
@@ -29,15 +34,20 @@ class ListStoryYAdapter(
 
                 Glide.with(context)
                     .load(listStory.photoUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .override(400)
                     .into(itemyImgPost)
 
                 itemyImgPost.setOnClickListener {
-                    onItemClick(listStory)
+                    binding.apply {
+                        onItemClick(
+                            itemyImgPost,
+                            itemyTvDesk,
+                            listStory
+                        )
+                    }
                 }
             }
-
-
         }
     }
 

@@ -7,7 +7,6 @@ import com.example.instogramapplication.ResourceProvider
 import com.example.instogramapplication.data.local.datastore.UserPreferences
 import com.example.instogramapplication.data.remote.model.FileUploadResponse
 import com.example.instogramapplication.data.remote.model.ListStoryItem
-import com.example.instogramapplication.data.remote.model.Story
 import com.example.instogramapplication.data.remote.network.ApiService
 import com.example.instogramapplication.utils.ApiUtils
 import com.example.instogramapplication.utils.Resource
@@ -131,31 +130,31 @@ class UserRepository private constructor(
         }
     }
 
-    suspend fun getDetailStory(id: String): Resource<Story> {
-        Resource.Loading<Story>()
-
-        return try {
-            val response = apiService.getDetailStory(id)
-            Log.d(TAG, "getDetailStory: respons $response")
-            if (response.isSuccessful){
-                val story = response.body()?.story
-                if (story != null){
-                    Resource.Success(story)
-                }else{
-                    Resource.Empty()
-                }
-            }else{
-                Log.e(TAG, "getDetailStory: error not succes ${response.code()}")
-                val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(response.code())
-                Resource.Error(errorMsg)
-            }
-        }catch (e: IOException){
-            Resource.Error("Errror koneksi")
-        }catch (e: Exception){
-            Log.e(TAG, "getDetailStory: error", e)
-            Resource.Error("Errrorr")
-        }
-    }
+//    suspend fun getDetailStory(id: String): Resource<Story> {
+//        Resource.Loading<Story>()
+//
+//        return try {
+//            val response = apiService.getDetailStory(id)
+//            Log.d(TAG, "getDetailStory: respons $response")
+//            if (response.isSuccessful){
+//                val story = response.body()?.story
+//                if (story != null){
+//                    Resource.Success(story)
+//                }else{
+//                    Resource.Empty()
+//                }
+//            }else{
+//                Log.e(TAG, "getDetailStory: error not succes ${response.code()}")
+//                val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(response.code())
+//                Resource.Error(errorMsg)
+//            }
+//        }catch (e: IOException){
+//            Resource.Error("Errror koneksi")
+//        }catch (e: Exception){
+//            Log.e(TAG, "getDetailStory: error", e)
+//            Resource.Error("Errrorr")
+//        }
+//    }
 
     suspend fun uploadStory(imageFile: File, desc: String): Resource<String> {
         Resource.Loading<String>()
@@ -195,6 +194,24 @@ class UserRepository private constructor(
 
     suspend fun setLanguage(langCode: String){
         userPref.saveLangCode(langCode)
+    }
+
+    // widget
+    fun getItemWidget(): List<ListStoryItem>{
+        return try {
+            val response = apiService.getWidgetItems().execute() // ✅ Response<StoryResponse>
+            if (response.isSuccessful) {
+                val body = response.body()
+                Log.d("StackWidget", "API success, items: ${body?.listStory?.size}")
+                body?.listStory ?: emptyList()
+            } else {
+                Log.e("StackWidget", "API error: ${response.code()}")
+                emptyList()
+            }
+        } catch (e: Exception) {
+            Log.e("StackWidget", "API exception: ${e.message}")
+            emptyList()
+        }
     }
 
     private fun errorHandling(code: Int): String {

@@ -6,20 +6,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.instogramapplication.R
 import com.example.instogramapplication.data.remote.model.ListStoryItem
 import com.example.instogramapplication.databinding.FragmentListStoryBinding
-import com.example.instogramapplication.ui.story.detail.DetailStoryFragment
-import com.example.instogramapplication.ui.story.detail.DetailStoryFragment.Companion.DETAIL_ID
+import com.example.instogramapplication.ui.story.detail.DetailStoryActivity
+import com.example.instogramapplication.ui.story.detail.DetailStoryActivity.Companion.DETAIL_ID
 import com.example.instogramapplication.ui.story.post.PostActivity
 import com.example.instogramapplication.utils.Resource
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
@@ -84,24 +86,12 @@ class ListStoryFragment : Fragment() {
     private fun setupRecyclerView(){
         val horiLayout = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         adapterX = ListStoryXAdapter(requireActivity()) { imgStory, userName, story ->
-            val imageTransitionName = "img_story_${story.id}"
-            val nameTransitionName = "username_${story.id}"
 
-            imgStory.transitionName = imageTransitionName
-            userName.transitionName = nameTransitionName
-
-            val extras = FragmentNavigatorExtras(
-                imgStory to imageTransitionName,
-                userName to nameTransitionName
-            )
-            // navigate to detail
-            val action = ListStoryFragmentDirections.actionListStoryFragmentToDetailStoryFragment2(story.id)
-            findNavController().navigate(action, extras)
         }
 
         val linearLayout = LinearLayoutManager(requireActivity())
-        adapterY = ListStoryYAdapter(requireActivity()){ story ->
-            navigateToDetail(story.id)
+        adapterY = ListStoryYAdapter(requireActivity()){ img, desc, story ->
+            showDetailStory(desc, img, story)
         }
 
         binding.apply {
@@ -125,23 +115,22 @@ class ListStoryFragment : Fragment() {
 
     }
 
-    private fun onStoryXClick(id: String?){
+    private fun showDetailStory(desc: TextView, img: ImageView, story: ListStoryItem){
         Log.d(TAG, "onStoryXClick: navigate to post activity")
-        val intent = Intent(requireActivity(), PostActivity::class.java)
-        startActivity(intent)
-        val args = Bundle().apply {
-            putString(DETAIL_ID, id)
-        }
+        Glide.with(requireContext())
+            .load(story.photoUrl)
+            .into(img)
+        desc.text = story.description
 
-        val extras = FragmentNavigatorExtras(
-
-        )
-        findNavController().navigate(R.id.action_listStoryFragment_to_detailStoryFragment2, args)
-    }
-
-    private fun navigateToDetail(id: String?){
-        val action = ListStoryFragmentDirections.actionListStoryFragmentToDetailStoryFragment2(id)
-        findNavController().navigate(action)
+        val optionsCompat: ActivityOptionsCompat =
+            ActivityOptionsCompat.makeSceneTransitionAnimation(
+                requireActivity(),
+                Pair(img, "img_story"),
+                Pair(desc, "desc")
+            )
+        val intent = Intent(requireContext(), DetailStoryActivity::class.java)
+        intent.putExtra(DetailStoryActivity.EXTRA_DETAIL, story)
+        requireActivity().startActivity(intent, optionsCompat.toBundle())
     }
 
     private fun showStories(data: List<ListStoryItem>?) {
@@ -150,6 +139,6 @@ class ListStoryFragment : Fragment() {
     }
 
     companion object{
-        private val TAG = this::class.java.simpleName
+        private val TAG = ListStoryFragment::class.java.simpleName
     }
 }

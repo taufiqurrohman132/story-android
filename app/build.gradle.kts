@@ -78,8 +78,11 @@ dependencies {
     // langue
     implementation(libs.lingver)
 
-
     implementation(libs.photoview)
+
+    // loading
+    implementation(libs.swipetorefresh)
+    implementation(libs.shimmer)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

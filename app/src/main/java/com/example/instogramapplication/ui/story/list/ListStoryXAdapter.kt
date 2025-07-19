@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.instogramapplication.data.remote.model.ListStoryItem
 import com.example.instogramapplication.databinding.ItemListStoryXBinding
 
@@ -23,6 +24,7 @@ class ListStoryXAdapter(
             Glide.with(context)
                 .load(listStory.photoUrl)
                 .override(100)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
                 .into(item.itemStoryX)
             item.storyUsername.text = listStory.name

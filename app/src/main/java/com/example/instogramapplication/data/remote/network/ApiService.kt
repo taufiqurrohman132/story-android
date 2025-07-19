@@ -1,13 +1,14 @@
 package com.example.instogramapplication.data.remote.network
 
 import android.content.ClipDescription
-import com.example.instogramapplication.data.remote.model.DetailStoryResponse
 import com.example.instogramapplication.data.remote.model.FileUploadResponse
+import com.example.instogramapplication.data.remote.model.ListStoryItem
 import com.example.instogramapplication.data.remote.model.LoginResponse
 import com.example.instogramapplication.data.remote.model.RegisterResponse
 import com.example.instogramapplication.data.remote.model.StoryResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -42,11 +43,13 @@ interface ApiService {
     @GET("stories")
     suspend fun getStories(): Response<StoryResponse>
 
-    @GET("stories/{id}")
-    suspend fun getDetailStory(
-        @Path("id")
-        id: String
-    ): Response<DetailStoryResponse>
+    @GET("stories")
+    fun getWidgetItems(): Call<StoryResponse>
+//    @GET("stories/{id}")
+//    suspend fun getDetailStory(
+//        @Path("id")
+//        id: String
+//    ): Response<DetailStoryResponse>
 
     @POST("stories")
     @Multipart

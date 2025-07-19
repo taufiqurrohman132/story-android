@@ -19,5 +19,8 @@
     <string name="confirm_logout_message">Apakah Anda yakin ingin keluar\n?</string>
     <string name="yes">Ya</string>
     <string name="cancel">Batal\n</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 
 </resources>
