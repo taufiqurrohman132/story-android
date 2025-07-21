@@ -1,45 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_margin="6dp"
     android:clickable="true"
     android:focusable="true"
-    android:layout_margin="6dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
+
     <FrameLayout
+        android:id="@+id/add.image"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
         <com.example.instogramapplication.widget.GradientRingView
             android:layout_width="86dp"
             android:layout_height="86dp"
-            app:ringThickness="3dp"
-            app:ringStartColor="@color/color_base"
             app:ringCenterColor="@color/color_variant"
-            app:ringEndColor="@color/color_base"/>
+            app:ringEndColor="@color/color_base"
+            app:ringStartColor="@color/color_base"
+            app:ringThickness="3dp" />
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/item_story_x"
             android:layout_width="74dp"
             android:layout_height="74dp"
             android:layout_gravity="center"
-            app:shapeAppearanceOverlay="@style/Circular"
             android:layout_margin="6dp"
-            android:focusable="true"
             android:clickable="true"
+            android:focusable="true"
             android:src="@drawable/img"
-            />
+            app:shapeAppearanceOverlay="@style/Circular" />
+
+
     </FrameLayout>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/add.story"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/ic_add"
+        android:tint="@color/color_base"
+        app:shapeAppearanceOverlay="@style/Circular"
+        android:layout_marginBottom="-3dp"
+        android:layout_marginEnd="-3dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/add.image"
+        app:layout_constraintEnd_toEndOf="@id/add.image"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/storyUsername"
+        style="@style/Text.Konten14"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        style="@style/Text.Konten14"
-        android:textColor="@color/black"
-        android:textAlignment="center"
         android:layout_gravity="center_horizontal"
+        android:ellipsize="end"
         android:maxLines="1"
-        android:ellipsize="end"/>
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add.image"
+        app:layout_constraintVertical_bias="0.5" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

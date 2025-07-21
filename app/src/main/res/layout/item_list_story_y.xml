@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp">
 
     <!-- Gambar utama dalam Card -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+<!--    <com.google.android.material.card.MaterialCardView-->
+<!--        android:id="@+id/itemy.img_post"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="16dp"-->
+<!--        app:cardCornerRadius="30dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:strokeWidth="0dp">-->
 
-        <ImageView
-            android:id="@+id/itemy.img_post"
-            android:layout_width="match_parent"
-            android:layout_height="600dp"
-            android:transitionName="img_story"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:foreground="@drawable/gradient_bott_white"
-            android:src="@drawable/img"/>
-    </com.google.android.material.card.MaterialCardView>
+<!--    </com.google.android.material.card.MaterialCardView>-->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/itemy.img_post"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:layout_marginHorizontal="16dp"
+        app:shapeAppearanceOverlay="@style/RoundedCornerImageStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/img"/>
 
     <!-- Profil dan Nama -->
     <FrameLayout
@@ -33,16 +39,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="@id/card"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="@id/itemy.img_post"
+        app:layout_constraintTop_toTopOf="@id/itemy.img_post">
 
         <com.example.instogramapplication.widget.GradientRingView
             android:layout_width="44dp"
             android:layout_height="44dp"
-            app:ringThickness="2dp"
-            app:ringStartColor="@color/color_base"
             app:ringCenterColor="@color/color_variant"
-            app:ringEndColor="@color/color_base"/>
+            app:ringEndColor="@color/color_base"
+            app:ringStartColor="@color/color_base"
+            app:ringThickness="2dp" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/item_story_y"
@@ -50,121 +56,264 @@
             android:layout_height="32dp"
             android:layout_gravity="center"
             android:layout_margin="6dp"
-            android:transitionName="profile"
-            android:src="@drawable/img"
-            app:shapeAppearanceOverlay="@style/Circular"
+            android:clickable="true"
             android:focusable="true"
-            android:clickable="true"/>
+            android:src="@drawable/img"
+            android:transitionName="profile"
+            app:shapeAppearanceOverlay="@style/Circular" />
     </FrameLayout>
 
     <TextView
         android:id="@+id/itemy.tv_name"
-        android:layout_width="0dp"
+        style="@style/Text.Konten15"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="100dp"
-        android:transitionName="username"
+        android:ellipsize="end"
+        android:gravity="bottom"
+        android:maxLines="1"
         android:text="sandika galih"
         android:textColor="@color/white"
-        android:gravity="center_vertical"
         android:textStyle="bold"
-        android:maxLines="1"
-        android:ellipsize="end"
-        style="@style/Text.Konten15"
+        android:transitionName="username"
         app:layout_constraintBottom_toBottomOf="@id/itemy.profil"
+        app:layout_constraintEnd_toStartOf="@id/itemy.btn_options"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/itemy.profil"
         app:layout_constraintTop_toTopOf="@id/itemy.profil"
-        app:layout_constraintEnd_toStartOf="@id/itemy.btn_options"/>
+        app:layout_constraintVertical_bias="0.1" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="0dp"
+        android:padding="3dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_centang_ungu"
+        app:layout_constraintBottom_toBottomOf="@id/itemy.tv_name"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/itemy.tv_name"
+        app:layout_constraintTop_toTopOf="@id/itemy.tv_name"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
+        android:id="@+id/itemy.tv_berjalan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="top"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="Instogram Mobile Application Experience"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@id/itemy.profil"
+        app:layout_constraintEnd_toStartOf="@id/itemy.btn_options"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/itemy.tv_name"
+        app:layout_constraintTop_toBottomOf="@id/itemy.tv_name"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/itemy.btn_options"
-        style="@style/Button.Icon"
-        android:padding="18dp"
-        android:src="@drawable/ic_options"
-        android:scaleType="centerInside"
+        style="@style/Icon"
+        android:layout_marginEnd="8dp"
         android:backgroundTint="@color/transparents"
-        app:layout_constraintTop_toTopOf="@id/itemy.tv_name"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="12dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_options"
         app:layout_constraintBottom_toBottomOf="@id/itemy.tv_name"
+        app:layout_constraintEnd_toEndOf="@id/itemy.img_post"
+        app:layout_constraintTop_toTopOf="@id/itemy.tv_name"
         app:tint="@color/white" />
 
     <!-- Tombol Bawah -->
-    <ImageButton
-        android:id="@+id/itemy.btn_like"
-        style="@style/Button.Icon"
-        android:padding="16dp"
-        android:src="@drawable/ic_like"
-        android:scaleType="centerCrop"
-        android:backgroundTint="@color/transparents"
-        app:layout_constraintBottom_toTopOf="@id/itemy.tv_desk"
-        app:layout_constraintStart_toStartOf="parent"/>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/itemy.action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="@id/itemy.img_post"
+        app:layout_constraintStart_toStartOf="@id/itemy.img_post"
+        app:strokeWidth="0dp">
 
-    <ImageButton
-        android:id="@+id/itemy.btn_comment"
-        style="@style/Button.Icon"
-        android:padding="16dp"
-        android:layout_marginStart="4dp"
-        android:src="@drawable/ic_comment"
-        android:scaleType="centerCrop"
-        android:backgroundTint="@color/transparents"
-        app:layout_constraintStart_toEndOf="@id/itemy.btn_like"
-        app:layout_constraintTop_toTopOf="@id/itemy.btn_like"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="4dp"
+            android:paddingEnd="8dp">
 
-    <ImageButton
-        android:id="@+id/itemy.btn_share"
-        style="@style/Button.Icon"
-        android:padding="16dp"
-        android:src="@drawable/ic_share"
-        android:scaleType="centerCrop"
-        android:backgroundTint="@color/transparents"
-        app:layout_constraintStart_toEndOf="@id/itemy.btn_comment"
-        app:layout_constraintTop_toTopOf="@id/itemy.btn_like"/>
+            <ImageButton
+                android:id="@+id/itemy.btn_like"
+                style="@style/Icon"
+                android:backgroundTint="@color/transparents"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_like"
+                app:layout_constraintBottom_toTopOf="@id/itemy.tv_desk"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemy.img_post" />
 
-    <ImageButton
-        android:id="@+id/itemy.btn_favorit"
-        style="@style/Button.Icon"
-        android:padding="16dp"
-        android:src="@drawable/ic_favorite"
-        android:scaleType="centerCrop"
-        android:backgroundTint="@color/transparents"
-        app:layout_constraintTop_toTopOf="@id/itemy.btn_like"
-        app:layout_constraintEnd_toEndOf="parent"/>
+            <ImageButton
+                android:id="@+id/itemy.btn_comment"
+                style="@style/Icon"
+                android:backgroundTint="@color/transparents"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_comment"
+                app:layout_constraintStart_toEndOf="@id/itemy.btn_like"
+                app:layout_constraintTop_toTopOf="@id/itemy.btn_like" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="287rb"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/itemy.btn_share"
+                style="@style/Icon"
+                android:backgroundTint="@color/transparents"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_share"
+                app:layout_constraintStart_toEndOf="@id/itemy.btn_comment"
+                app:layout_constraintTop_toTopOf="@id/itemy.btn_like" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="245rb"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/itemy.flex_liked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        app:alignItems="center"
+        app:flexDirection="row"
+        app:layout_constraintBottom_toBottomOf="@id/itemy.action"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/itemy.action"
+        app:layout_constraintTop_toTopOf="@id/itemy.action"
+        app:layout_constraintVertical_bias="0.5">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/img"
+            app:shapeAppearanceOverlay="@style/Circular"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="-10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/img"
+            app:shapeAppearanceOverlay="@style/Circular"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="-10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/img"
+            app:shapeAppearanceOverlay="@style/Circular"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp" />
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+
+    <!--    <com.google.android.material.card.MaterialCardView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:cardCornerRadius="30dp"-->
+    <!--        android:backgroundTint="@color/white"-->
+    <!--        android:layout_marginEnd="8dp"-->
+    <!--        app:layout_constraintTop_toTopOf="@id/itemy.action"-->
+    <!--        app:layout_constraintEnd_toEndOf="@id/card"-->
+    <!--        app:strokeWidth="0dp">-->
+
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/itemy.btn_favorit"-->
+    <!--            style="@style/Icon"-->
+    <!--            android:padding="16dp"-->
+    <!--            android:src="@drawable/ic_favorite"-->
+    <!--            android:scaleType="centerCrop"-->
+    <!--            android:backgroundTint="@color/transparents" />-->
+    <!--    </com.google.android.material.card.MaterialCardView>-->
 
     <!-- Deskripsi -->
+
+    <TextView
+        android:id="@+id/itemy.jumlah_liked"
+        style="@style/Text.Konten14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Disukai oleh 238rb orang "
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/itemy.img_post"
+        app:layout_constraintTop_toBottomOf="@id/itemy.img_post" />
     <TextView
         android:id="@+id/itemy.tv_desk"
+        style="@style/Text.Konten15"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:transitionName="desc"
+        android:layout_marginHorizontal="16dp"
+        android:ellipsize="end"
+        android:maxLines="2"
         android:text="kdfkdfjdkjf"
         android:textColor="@color/black"
-        android:layout_marginHorizontal="16dp"
-        android:maxLines="2"
-        android:ellipsize="end"
-        style="@style/Text.Konten15"
-        app:layout_constraintTop_toBottomOf="@id/itemy.btn_like"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/itemy.jumlah_liked" />
 
     <TextView
         android:id="@+id/itemy.tv_selengkapnya"
-        android:layout_width="wrap_content"
+        style="@style/Text.Konten14"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="selengkapnya"
+        android:text="Selengkapnya"
         android:textColor="@color/abu_abu"
-        style="@style/Text.Konten15"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintStart_toStartOf="@id/itemy.img_post"
         app:layout_constraintTop_toBottomOf="@id/itemy.tv_desk"
-        app:layout_constraintStart_toStartOf="@id/itemy.tv_desk"/>
-
+        app:layout_constraintEnd_toEndOf="@id/itemy.img_post"/>
     <TextView
         android:id="@+id/itemy.tv_time"
+        style="@style/Text.Konten14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="4 Jam yang lalu | Lihat Terjemahan"
+        android:text="4 Jam yang lalu | Lihat terjemahan"
         android:textColor="@color/abu_abu"
-        style="@style/Text.Konten14"
         android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toBottomOf="@id/itemy.tv_selengkapnya"
-        app:layout_constraintStart_toStartOf="@id/itemy.tv_selengkapnya"
-        app:layout_constraintBottom_toBottomOf="@id/card"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/itemy.tv_desk"
+        app:layout_constraintTop_toBottomOf="@id/itemy.tv_selengkapnya" />
 </androidx.constraintlayout.widget.ConstraintLayout>

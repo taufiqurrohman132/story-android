@@ -80,8 +80,10 @@ dependencies {
 
     implementation(libs.photoview)
 
+    implementation(libs.flexbox)
+
     // loading
-    implementation(libs.swipetorefresh)
+//    implementation(libs.swipetorefresh)
     implementation(libs.shimmer)
 
     implementation(libs.androidx.core.ktx)

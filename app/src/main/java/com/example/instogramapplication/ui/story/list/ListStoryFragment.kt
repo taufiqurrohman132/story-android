@@ -1,6 +1,7 @@
 package com.example.instogramapplication.ui.story.list
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -17,6 +19,11 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.instogramapplication.R
 import com.example.instogramapplication.data.remote.model.ListStoryItem
 import com.example.instogramapplication.databinding.FragmentListStoryBinding
@@ -26,6 +33,7 @@ import com.example.instogramapplication.ui.story.post.PostActivity
 import com.example.instogramapplication.utils.Resource
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
 import kotlinx.coroutines.launch
+import java.util.Locale.filter
 
 class ListStoryFragment : Fragment() {
 
@@ -54,8 +62,11 @@ class ListStoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         setupRecyclerView()
         observer()
+
+
     }
 
     private fun initView(){
@@ -81,12 +92,30 @@ class ListStoryFragment : Fragment() {
                 }
             }
         }
+
+        // username on
+        viewModel.userName.observe(viewLifecycleOwner){ username ->
+            adapterX.updateUserName(username)
+        }
     }
 
     private fun setupRecyclerView(){
         val horiLayout = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-        adapterX = ListStoryXAdapter(requireActivity()) { imgStory, userName, story ->
 
+        adapterX = ListStoryXAdapter(
+            context = requireActivity(),
+            onItemClick = {img, desc, story ->
+                showDetailStory(desc, img, story)
+            },
+            onAddStory = {
+                val intent = Intent(requireActivity(), PostActivity::class.java)
+                startActivity(intent)
+            }
+        )
+
+        binding.rvStory.apply {
+            layoutManager = horiLayout
+            adapter = adapterX
         }
 
         val linearLayout = LinearLayoutManager(requireActivity())
@@ -95,10 +124,6 @@ class ListStoryFragment : Fragment() {
         }
 
         binding.apply {
-            rvStory.apply {
-                layoutManager = horiLayout
-                adapter = adapterX
-            }
             rvPost.apply {
                 layoutManager = linearLayout
                 adapter = adapterY
@@ -116,12 +141,6 @@ class ListStoryFragment : Fragment() {
     }
 
     private fun showDetailStory(desc: TextView, img: ImageView, story: ListStoryItem){
-        Log.d(TAG, "onStoryXClick: navigate to post activity")
-        Glide.with(requireContext())
-            .load(story.photoUrl)
-            .into(img)
-        desc.text = story.description
-
         val optionsCompat: ActivityOptionsCompat =
             ActivityOptionsCompat.makeSceneTransitionAnimation(
                 requireActivity(),
@@ -131,6 +150,8 @@ class ListStoryFragment : Fragment() {
         val intent = Intent(requireContext(), DetailStoryActivity::class.java)
         intent.putExtra(DetailStoryActivity.EXTRA_DETAIL, story)
         requireActivity().startActivity(intent, optionsCompat.toBundle())
+
+        Log.d(TAG, "onStoryXClick: navigate to post activity")
     }
 
     private fun showStories(data: List<ListStoryItem>?) {

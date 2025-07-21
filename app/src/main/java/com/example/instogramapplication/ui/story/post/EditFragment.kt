@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.instogramapplication.R
 import com.example.instogramapplication.databinding.FragmentEditBinding
 import com.example.instogramapplication.ui.story.list.ListStoryFragment
+import com.example.instogramapplication.utils.ExtensionUtils.reduceFileImage
 import com.example.instogramapplication.utils.ExtensionUtils.setGradientText
 import com.example.instogramapplication.utils.PostUtils
 import com.example.instogramapplication.utils.Resource
@@ -110,7 +111,7 @@ class EditFragment : Fragment() {
 
     private fun uploadStory(){
         currentImageUri?.let { uri ->
-            val imageFile = PostUtils.uriToFile(uri, requireActivity())
+            val imageFile = PostUtils.uriToFile(uri, requireActivity()).reduceFileImage()
             Log.d(TAG, "uploadStory: show image ${imageFile.path}")
             val desc = binding.postTvDesk.text.toString()
 

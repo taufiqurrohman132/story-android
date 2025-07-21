@@ -4,6 +4,7 @@ cameraCamera2 = "1.4.2"
 cameraLifecycle = "1.4.2"
 converterGson = "3.0.0"
 datastorePreferences = "1.1.7"
+flexbox = "3.0.0"
 fragmentKtx = "1.8.8"
 glide = "4.16.0"
 kotlin = "2.1.0"
@@ -36,6 +37,7 @@ androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-view
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationUiKtx" }
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationUiKtx" }
 camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraLifecycle" }
+flexbox = { module = "com.google.android.flexbox:flexbox", version.ref = "flexbox" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

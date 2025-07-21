@@ -76,9 +76,10 @@ class UserRepository private constructor(
             Log.d(TAG, "userLogin: respons login $response")
             if (response.isSuccessful){
                 val token = response.body()?.loginResult?.token
+                val userName = response.body()?.loginResult?.name
                 Log.d(TAG, "userLogin: message $token")
-                if (!token.isNullOrEmpty()){
-                    userPref.saveUserLoginToken(token)
+                if (!token.isNullOrEmpty() && !userName.isNullOrEmpty()){
+                    userPref.saveUserLoginToken(token, userName)
                     Resource.Success(token)
                 }else{
                     Resource.Empty()
@@ -95,6 +96,9 @@ class UserRepository private constructor(
             Resource.Error("Error")
         }
     }
+
+    suspend fun getUserName() =
+        userPref.getUsername()
 
     suspend fun userLogout(){
         userPref.clearSession()

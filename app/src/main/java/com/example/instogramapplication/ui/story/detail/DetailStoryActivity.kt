@@ -1,5 +1,6 @@
 package com.example.instogramapplication.ui.story.detail
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,14 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.instogramapplication.R
 import com.example.instogramapplication.data.remote.model.ListStoryItem
 import com.example.instogramapplication.databinding.ActiviityDetailStoryBinding
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
+import com.google.android.material.transition.platform.MaterialContainerTransform
 
 class DetailStoryActivity : AppCompatActivity() {
 
@@ -30,6 +36,8 @@ class DetailStoryActivity : AppCompatActivity() {
 //    private val args: DetailStoryFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+//        setupSharedElementTransition()
+
         super.onCreate(savedInstanceState)
         binding = ActiviityDetailStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -78,16 +86,31 @@ class DetailStoryActivity : AppCompatActivity() {
 
     }
 
+//    private fun setupSharedElementTransition() {
+//        val transform = MaterialContainerTransform().apply {
+//            addTarget(R.id.card_story_img_detail) // Ganti dengan ID view yang ingin dianimasikan
+//            duration = 300
+//            scrimColor = Color.TRANSPARENT
+//            setAllContainerColors(Color.WHITE) // Atur warna background selama transisi
+//        }
+//
+//        window.sharedElementEnterTransition = transform
+//        window.sharedElementReturnTransition = transform
+//    }
+
     private fun showStories(story: ListStoryItem?) {
         if (story != null){
             binding.apply {
                 detailUser.text = story.name
                 detailDesc.text = story.description
+
                 Glide.with(this@DetailStoryActivity)
                     .load(story.photoUrl)
                     .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .override(800)
                     .into(detailImgStory)
+
             }
         }
     }

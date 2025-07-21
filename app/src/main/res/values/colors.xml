@@ -5,6 +5,7 @@
     <color name="color_base">#2200CC</color>
     <color name="color_variant">#D000F7</color>
     <color name="red">#FF0000</color>
+    <color name="cocor_hastag">#007BFF</color>
 
     <color name="blue_trans">#802200CC</color>
 
@@ -15,7 +16,6 @@
     <color name="white_trans_60">#80FFFFFF</color>
     <color name="abu_abu_terang2">#F7F7F7</color>
     <color name="abu_abu_terang1">#E8E8E8</color>
-
     <color name="transparents">#00FFFFFF</color>
     <color name="light_blue_50">#FFE1F5FE</color>
     <color name="light_blue_200">#FF81D4FA</color>
