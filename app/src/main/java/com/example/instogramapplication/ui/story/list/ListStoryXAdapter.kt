@@ -53,7 +53,6 @@ class ListStoryXAdapter(
     inner class ItemAddViewHolder(private val item: ItemPostStoryBinding) : ViewHolder(item.root){
         fun bind(listStory: ListStoryItem?){
             if (listStory != null) {
-
                 Glide.with(context)
                     .load(listStory.photoUrl)
                     .override(100)
@@ -116,7 +115,7 @@ class ListStoryXAdapter(
         val story = getItem(position)
         when (getItemViewType(position)) {
             TYPE_ADD_STORY -> {
-                val myStories = currentList.filter { it.name == currentUserName }.maxByOrNull { it.createdAt ?: "" }
+                val myStories = currentList.filter { it.name == currentUserName }.maxByOrNull { it.createdAt ?:"" }
                 Log.d(
                     TAG,
                     "onBindViewHolder: data my story $myStories name ${story.name}, username $currentUserName"
