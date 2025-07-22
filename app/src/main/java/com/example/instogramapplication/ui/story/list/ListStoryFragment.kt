@@ -34,6 +34,7 @@ import com.example.instogramapplication.utils.Resource
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
 import kotlinx.coroutines.launch
 import java.util.Locale.filter
+import kotlin.math.abs
 
 class ListStoryFragment : Fragment() {
 
@@ -65,6 +66,7 @@ class ListStoryFragment : Fragment() {
 
         setupRecyclerView()
         observer()
+        setupCollapsStoryX()
 
 
     }
@@ -133,7 +135,12 @@ class ListStoryFragment : Fragment() {
     }
 
     private fun showLoading(){
+        binding.apply {
+            rvStory.visibility = View.GONE
+            rvPost.visibility = View.INVISIBLE
 
+            storySimmer.visibility = View.VISIBLE
+        }
     }
 
     private fun showError(message: String?){
@@ -155,8 +162,31 @@ class ListStoryFragment : Fragment() {
     }
 
     private fun showStories(data: List<ListStoryItem>?) {
+        binding.apply {
+            rvStory.visibility = View.VISIBLE
+            rvPost.visibility = View.VISIBLE
+
+            storySimmer.visibility = View.INVISIBLE
+        }
+
         adapterX.submitList(data)
         adapterY.submitList(data)
+    }
+
+    private fun setupCollapsStoryX(){
+//        if (viewModel.isCollaps)
+//            binding.rvStory.alpha = 0.0f
+//        else binding.rvStory.alpha = 1.0f
+
+        // listener
+        binding.appBarLayout2.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
+            val scrollRange = appBarLayout.totalScrollRange
+            viewModel.isCollaps = verticalOffset == -scrollRange
+            Log.d(TAG, "setupCollapsStoryX: scroll range ${-scrollRange} vertical offset $verticalOffset")
+
+            val alphaValue = 1f - (abs(verticalOffset) / scrollRange)
+            binding.rvStory.animate().alpha(alphaValue).setDuration(200).start()
+        }
     }
 
     companion object{

@@ -38,6 +38,8 @@ class ListStoryViewModel(
             Resource.Loading()
         )
 
+    var isCollaps = false
+
     init {
         viewModelScope.launch {
             val name = repository.getUserName()

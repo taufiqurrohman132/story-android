@@ -5,20 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp">
-
-    <!-- Gambar utama dalam Card -->
-<!--    <com.google.android.material.card.MaterialCardView-->
-<!--        android:id="@+id/itemy.img_post"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginHorizontal="16dp"-->
-<!--        app:cardCornerRadius="30dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:strokeWidth="0dp">-->
-
-<!--    </com.google.android.material.card.MaterialCardView>-->
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/itemy.img_post"
         android:layout_width="match_parent"
