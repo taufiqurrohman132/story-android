@@ -73,22 +73,22 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:orientation="vertical">
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/rv_story"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"/>-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_post"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/item_list_story_y"/>
 
-<!--        simmer-->
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--        simmer-->
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/story.simmer"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:visibility="invisible"
             app:shimmer_auto_start="true"
             app:shimmer_duration="1500"
             app:shimmer_repeat_count="3"
@@ -97,7 +97,28 @@
             <include
                 layout="@layout/simmer_story_home"/>
         </com.facebook.shimmer.ShimmerFrameLayout>
-    </LinearLayout>
+
+        <!--        lottie-->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/home.lottie_connect"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            app:lottie_rawRes="@raw/connection"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"/>
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/home.lottie_error"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:visibility="invisible"
+            android:layout_gravity="center"
+            app:lottie_rawRes="@raw/error"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"/>
+
+    </FrameLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

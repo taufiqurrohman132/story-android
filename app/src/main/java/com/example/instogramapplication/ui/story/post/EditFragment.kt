@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.instogramapplication.R
 import com.example.instogramapplication.databinding.FragmentEditBinding
 import com.example.instogramapplication.ui.story.list.ListStoryFragment
+import com.example.instogramapplication.utils.DialogUtils.showToast
 import com.example.instogramapplication.utils.ExtensionUtils.reduceFileImage
 import com.example.instogramapplication.utils.ExtensionUtils.setGradientText
 import com.example.instogramapplication.utils.PostUtils
@@ -95,7 +96,7 @@ class EditFragment : Fragment() {
                     is Resource.Loading -> {}
                     is Resource.Error -> {}
                     is Resource.Success -> {
-                        showToast("sukses upload")
+                        showToast("sukses upload", requireActivity())
                         uploadSuccess()
                     }
                     is Resource.Empty -> {}
@@ -115,16 +116,14 @@ class EditFragment : Fragment() {
             Log.d(TAG, "uploadStory: show image ${imageFile.path}")
             val desc = binding.postTvDesk.text.toString()
 
-            viewModel.uploadStory(imageFile, desc)
-        } ?: showToast("gambar kosong")
+            if (desc.isNotBlank())
+                viewModel.uploadStory(imageFile, desc)
+            else showToast("Silakan masukkan deskripsi", requireActivity())
+        } ?: showToast("gambar kosong", requireActivity())
     }
 
     private fun showLoading(isLoading: Boolean) {
 //        binding.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
     }
 
     private fun uploadSuccess(){

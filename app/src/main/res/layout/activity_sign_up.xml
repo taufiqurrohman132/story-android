@@ -145,6 +145,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="16dp"
                 app:endIconMode="password_toggle"
+                app:errorIconDrawable="@null"
                 app:hintTextColor="@color/color_base"
                 app:boxStrokeColor="@color/color_base"
                 app:boxStrokeErrorColor="@color/red"

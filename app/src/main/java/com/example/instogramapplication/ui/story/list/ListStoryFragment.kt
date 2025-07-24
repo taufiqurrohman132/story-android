@@ -1,5 +1,7 @@
 package com.example.instogramapplication.ui.story.list
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -30,6 +32,7 @@ import com.example.instogramapplication.databinding.FragmentListStoryBinding
 import com.example.instogramapplication.ui.story.detail.DetailStoryActivity
 import com.example.instogramapplication.ui.story.detail.DetailStoryActivity.Companion.DETAIL_ID
 import com.example.instogramapplication.ui.story.post.PostActivity
+import com.example.instogramapplication.utils.DialogUtils
 import com.example.instogramapplication.utils.Resource
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
 import kotlinx.coroutines.launch
@@ -90,7 +93,8 @@ class ListStoryFragment : Fragment() {
                     is Resource.Loading -> showLoading()
                     is Resource.Success -> showStories(result.data)
                     is Resource.Error -> showError(result.message)
-                    else -> {}
+                    is Resource.ErrorConnection -> showErrorConnect(result.message)
+                    is Resource.Empty -> showEmpty()
                 }
             }
         }
@@ -98,6 +102,26 @@ class ListStoryFragment : Fragment() {
         // username on
         viewModel.userName.observe(viewLifecycleOwner){ username ->
             adapterX.updateUserName(username)
+        }
+    }
+
+    private fun showEmpty() {
+
+    }
+
+    private fun showErrorConnect(message: String?) {
+        binding.apply {
+            homeLottieError.visibility = View.INVISIBLE
+            homeLottieConnect.visibility = View.VISIBLE
+            homeLottieConnect.addAnimatorListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    homeLottieConnect.visibility = View.INVISIBLE
+                }
+            })
+        }
+
+        message?.let {
+            DialogUtils.showToast(message, requireActivity())
         }
     }
 
@@ -140,11 +164,19 @@ class ListStoryFragment : Fragment() {
             rvPost.visibility = View.INVISIBLE
 
             storySimmer.visibility = View.VISIBLE
+
+            homeLottieError.visibility = View.INVISIBLE
         }
     }
 
     private fun showError(message: String?){
+        binding.apply {
+            homeLottieError.visibility = View.VISIBLE
+        }
 
+        message?.let {
+            DialogUtils.showToast(message, requireActivity())
+        }
     }
 
     private fun showDetailStory(desc: TextView, img: ImageView, story: ListStoryItem){
@@ -167,6 +199,7 @@ class ListStoryFragment : Fragment() {
             rvPost.visibility = View.VISIBLE
 
             storySimmer.visibility = View.INVISIBLE
+            homeLottieError.visibility = View.INVISIBLE
         }
 
         adapterX.submitList(data)
@@ -174,10 +207,6 @@ class ListStoryFragment : Fragment() {
     }
 
     private fun setupCollapsStoryX(){
-//        if (viewModel.isCollaps)
-//            binding.rvStory.alpha = 0.0f
-//        else binding.rvStory.alpha = 1.0f
-
         // listener
         binding.appBarLayout2.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
             val scrollRange = appBarLayout.totalScrollRange

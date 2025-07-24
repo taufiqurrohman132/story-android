@@ -1,6 +1,7 @@
 package com.example.instogramapplication.utils
 
 import android.content.Context
+import android.widget.Toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 object DialogUtils {
@@ -24,4 +25,9 @@ object DialogUtils {
             }
             .show()
     }
+
+    fun showToast(message: String, context: Context) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
 }

@@ -84,7 +84,10 @@ dependencies {
 
     // loading
 //    implementation(libs.swipetorefresh)
+    implementation(libs.library)
     implementation(libs.shimmer)
+
+    implementation(libs.lottie)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

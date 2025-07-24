@@ -43,7 +43,7 @@ class SignUpActivity : AppCompatActivity() {
         Log.d(TAG, "initView: Starting")
         // setup
         binding.signupInlayPass.apply {
-            setTextError("Password Kurang dari 8")
+            setTextError("Password Kurang dari 8 Karakter")
             isSucces = {
                 it?.let {
                     it.length >= 8

@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
             loginInlayPass.apply {
-                setTextError("Password Kurang dari 8")
+                setTextError("Password Kurang dari 8 Karakter")
                 isSucces = {
                     it?.let {
                         it.length >= 8
