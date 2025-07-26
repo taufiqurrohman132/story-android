@@ -84,7 +84,8 @@ dependencies {
 
     // loading
 //    implementation(libs.swipetorefresh)
-    implementation(libs.library)
+    implementation(libs.androidx.swiperefreshlayout)
+//    implementation(libs.library)
     implementation(libs.shimmer)
 
     implementation(libs.lottie)

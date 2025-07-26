@@ -44,6 +44,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_notifications"
+                        android:layout_gravity="center_vertical"
                         android:contentDescription="desc_notification_icon"
                         android:backgroundTint="@color/transparents"
                         app:tint="@color/white" />
@@ -52,6 +53,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_settings"
+                        android:layout_gravity="center_vertical"
                         android:contentDescription="desc_settings_icon"
                         android:backgroundTint="@color/transparents"
                         app:tint="@color/white" />
@@ -68,21 +70,30 @@
 
 
     </com.google.android.material.appbar.AppBarLayout>
-    <LinearLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/home.swip_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:orientation="vertical">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_post"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/item_list_story_y"/>
+        >
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_post"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_list_story_y"/>
+
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <!--        simmer-->
         <com.facebook.shimmer.ShimmerFrameLayout
@@ -99,15 +110,15 @@
         </com.facebook.shimmer.ShimmerFrameLayout>
 
         <!--        lottie-->
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/home.lottie_connect"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_gravity="center"
-            android:visibility="invisible"
-            app:lottie_rawRes="@raw/connection"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="false"/>
+<!--        <com.airbnb.lottie.LottieAnimationView-->
+<!--            android:id="@+id/home.lottie_connect"-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="300dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:visibility="invisible"-->
+<!--            app:lottie_rawRes="@raw/connection"-->
+<!--            app:lottie_autoPlay="true"-->
+<!--            app:lottie_loop="false"/>-->
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/home.lottie_error"
             android:layout_width="300dp"
@@ -115,6 +126,15 @@
             android:visibility="invisible"
             android:layout_gravity="center"
             app:lottie_rawRes="@raw/error"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"/>
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/home.lottie_layout_error_connect"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            app:lottie_rawRes="@raw/no_connection"
             app:lottie_autoPlay="true"
             app:lottie_loop="false"/>
 

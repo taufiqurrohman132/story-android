@@ -23,5 +23,6 @@
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
     <string name="hastag">#%1$s #InstogramApp #MobileApp #AndroidDeveloper #UXDesign #AppExperience #MVVMArchitecture</string>
+    <string name="cerita_anda">Cerita Anda</string>
 
 </resources>

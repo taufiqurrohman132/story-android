@@ -99,7 +99,28 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="74dp"
                     android:layout_height="74dp"
-                    android:layout_gravity="center"
+                    android:transitionName="img_story"
+                    app:shapeAppearanceOverlay="@style/Circular"
+                    android:layout_margin="6dp"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:background="@color/abu_abu_terang"
+                    />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp">
+                <com.example.instogramapplication.widget.GradientRingView
+                    android:layout_width="86dp"
+                    android:layout_height="86dp"
+                    app:ringThickness="3dp"
+                    app:ringStartColor="@color/abu_abu_terang"
+                    app:ringCenterColor="@color/abu_abu_terang"
+                    app:ringEndColor="@color/abu_abu_terang"/>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="74dp"
+                    android:layout_height="74dp"
                     android:transitionName="img_story"
                     app:shapeAppearanceOverlay="@style/Circular"
                     android:layout_margin="6dp"
@@ -113,6 +134,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp">
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/itemy.img_post"
@@ -164,52 +186,28 @@
                 android:gravity="bottom"
                 app:strokeWidth="0dp"
                 app:layout_constraintBottom_toBottomOf="@id/itemy.profil"
-                app:layout_constraintEnd_toStartOf="@id/itemy.btn_options"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@id/itemy.profil"
                 app:layout_constraintTop_toTopOf="@id/itemy.profil"
                 app:layout_constraintVertical_bias="0.1" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="0dp"
-                android:padding="3dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_centang_ungu"
-                app:layout_constraintBottom_toBottomOf="@id/itemy.tv_name"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@id/itemy.tv_name"
-                app:layout_constraintTop_toTopOf="@id/itemy.tv_name"
-                app:layout_constraintVertical_bias="0.5" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/itemy.tv_berjalan"
                 android:layout_width="0dp"
                 android:layout_height="10dp"
                 android:backgroundTint="@color/abu_abu"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="80dp"
                 android:layout_marginTop="4dp"
                 android:gravity="top"
                 app:strokeWidth="0dp"
                 app:layout_constraintBottom_toBottomOf="@id/itemy.profil"
-                app:layout_constraintEnd_toStartOf="@id/itemy.btn_options"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@id/itemy.tv_name"
                 app:layout_constraintTop_toBottomOf="@id/itemy.tv_name"
                 app:layout_constraintVertical_bias="0.0" />
-
-            <ImageButton
-                android:id="@+id/itemy.btn_options"
-                style="@style/Icon"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/transparents"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_options"
-                app:layout_constraintBottom_toBottomOf="@id/itemy.tv_name"
-                app:layout_constraintEnd_toEndOf="@id/itemy.img_post"
-                app:layout_constraintTop_toTopOf="@id/itemy.tv_name"
-                app:tint="@color/white" />
 
             <!-- Tombol Bawah -->
 
@@ -258,7 +256,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="150dp"
                 android:layout_height="10dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:backgroundTint="@color/abu_abu"
                 android:id="@+id/itemy1.jumlah_liked"
                 android:text="Disukai oleh 238rb orang "
@@ -365,7 +363,7 @@
                 app:layout_constraintVertical_bias="0.0"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintBottom_toBottomOf="@id/itemz.profil"
-                app:layout_constraintEnd_toStartOf="@id/itemz.btn_options"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/itemz.profil"
                 app:layout_constraintTop_toTopOf="@id/itemz.profil" />
 
@@ -385,26 +383,13 @@
                 app:strokeWidth="0dp"
                 android:layout_height="10dp"
                 android:backgroundTint="@color/abu_abu"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="80dp"
                 android:layout_marginTop="4dp"
                 app:layout_constraintVertical_bias="0.0"
                 app:layout_constraintBottom_toBottomOf="@id/itemz.profil"
-                app:layout_constraintEnd_toStartOf="@id/itemz.btn_options"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/itemz.tv_name"
                 app:layout_constraintTop_toBottomOf="@id/itemz.tv_name" />
-
-            <ImageButton
-                android:id="@+id/itemz.btn_options"
-                style="@style/Icon"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/transparents"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_options"
-                app:layout_constraintBottom_toBottomOf="@id/itemz.tv_name"
-                app:layout_constraintEnd_toEndOf="@id/itemz.img_post"
-                app:layout_constraintTop_toTopOf="@id/itemz.tv_name"
-                app:tint="@color/white" />
 
             <LinearLayout
                 android:id="@+id/itemz.action"
@@ -440,7 +425,7 @@
                 android:layout_width="150dp"
                 android:layout_height="10dp"
                 app:strokeWidth="0dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:backgroundTint="@color/abu_abu"
                 app:layout_constraintStart_toStartOf="@id/itemz.img_post"
                 app:layout_constraintTop_toBottomOf="@id/itemz.img_post" />

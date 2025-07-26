@@ -35,13 +35,6 @@ class ListStoryXAdapter(
             item.storyUsername.text = listStory.name
 
             item.itemStoryX.setOnClickListener {
-//                val optionCompat: ActivityOptionsCompat =
-//                    ActivityOptionsCompat.makeSceneTransitionAnimation(
-//                        itemView.context as Activity,
-//                        Pair(item.itemStoryX, "img_story"),
-//                        Pair(item.storyUsername, "username")
-//
-//                    )
                 onItemClick(
                     item.itemStoryX,
                     item.storyUsername,
@@ -59,8 +52,6 @@ class ListStoryXAdapter(
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .centerCrop()
                     .into(item.itemStoryX)
-
-                item.storyUsername.text = listStory.name
 
                 item.itemStoryX.setOnClickListener {
                     onItemClick(

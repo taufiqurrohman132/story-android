@@ -70,6 +70,7 @@ class ListStoryFragment : Fragment() {
         setupRecyclerView()
         observer()
         setupCollapsStoryX()
+        setupListener()
 
 
     }
@@ -79,7 +80,10 @@ class ListStoryFragment : Fragment() {
     }
 
     private fun setupListener(){
-
+        binding.homeSwipRefresh.setOnRefreshListener {
+            viewModel.refresh()
+            binding.homeSwipRefresh.isRefreshing = false
+        }
     }
 
     private fun handler(){
@@ -89,6 +93,7 @@ class ListStoryFragment : Fragment() {
     private fun observer(){
         lifecycleScope.launch {
             viewModel.storiesState.collect { result ->
+                Log.d(TAG, "observer: stories $result")
                 when (result) {
                     is Resource.Loading -> showLoading()
                     is Resource.Success -> showStories(result.data)
@@ -106,20 +111,35 @@ class ListStoryFragment : Fragment() {
     }
 
     private fun showEmpty() {
-
+        binding.apply {
+            storySimmer.visibility = View.INVISIBLE
+            homeLottieError.visibility = View.INVISIBLE
+            homeLottieLayoutErrorConnect.visibility = View.INVISIBLE
+        }
     }
 
     private fun showErrorConnect(message: String?) {
         binding.apply {
+            rvStory.visibility = View.VISIBLE
+            rvPost.visibility = View.VISIBLE
+            storySimmer.visibility = View.INVISIBLE
             homeLottieError.visibility = View.INVISIBLE
-            homeLottieConnect.visibility = View.VISIBLE
-            homeLottieConnect.addAnimatorListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator) {
-                    homeLottieConnect.visibility = View.INVISIBLE
-                }
-            })
+
+//            homeLottieConnect.apply {
+//                visibility = View.VISIBLE
+//                playAnimation()
+//                addAnimatorListener(object : AnimatorListenerAdapter() {
+//                    override fun onAnimationEnd(animation: Animator) {
+//                        homeLottieConnect.visibility = View.INVISIBLE
+//                        if (adapterX.currentList.isEmpty()){
+//                            homeLottieLayoutErrorConnect.visibility = View.VISIBLE
+//                        }
+//                    }
+//                })
+//            }
         }
 
+        Log.d(TAG, "showErrorConnect: is running")
         message?.let {
             DialogUtils.showToast(message, requireActivity())
         }
@@ -163,15 +183,22 @@ class ListStoryFragment : Fragment() {
             rvStory.visibility = View.GONE
             rvPost.visibility = View.INVISIBLE
 
-            storySimmer.visibility = View.VISIBLE
+            storySimmer.apply {
+                startShimmer()
+                visibility = View.VISIBLE
+            }
 
+            // error invisible
             homeLottieError.visibility = View.INVISIBLE
+            homeLottieLayoutErrorConnect.visibility = View.INVISIBLE
         }
     }
 
     private fun showError(message: String?){
         binding.apply {
-            homeLottieError.visibility = View.VISIBLE
+            storySimmer.visibility = View.INVISIBLE
+            homeLottieError.visibility = View.INVISIBLE
+            homeLottieLayoutErrorConnect.visibility = View.INVISIBLE
         }
 
         message?.let {
@@ -200,6 +227,7 @@ class ListStoryFragment : Fragment() {
 
             storySimmer.visibility = View.INVISIBLE
             homeLottieError.visibility = View.INVISIBLE
+            homeLottieLayoutErrorConnect.visibility = View.INVISIBLE
         }
 
         adapterX.submitList(data)
@@ -217,6 +245,7 @@ class ListStoryFragment : Fragment() {
             binding.rvStory.animate().alpha(alphaValue).setDuration(200).start()
         }
     }
+
 
     companion object{
         private val TAG = ListStoryFragment::class.java.simpleName

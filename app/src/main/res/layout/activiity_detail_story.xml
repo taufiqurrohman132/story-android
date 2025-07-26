@@ -9,13 +9,6 @@
     android:paddingVertical="16dp"
     tools:context=".ui.story.detail.DetailStoryActivity">
 
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:id="@+id/card_story_img_detail"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:cardCornerRadius="30dp"-->
-<!--        >-->
-<!--    </androidx.cardview.widget.CardView>-->
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/detail_img_story"
         android:layout_width="match_parent"
