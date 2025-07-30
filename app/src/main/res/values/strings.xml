@@ -25,4 +25,36 @@
     <string name="hastag">#%1$s #InstogramApp #MobileApp #AndroidDeveloper #UXDesign #AppExperience #MVVMArchitecture</string>
     <string name="cerita_anda">Cerita Anda</string>
 
+    <string name="logout">Logout</string>
+    <string name="logout_message">Are you sure you want to logout? \nThis action cannot be undone</string>
+<!--    popup-->
+    <string name="popup_error_desc">Unexpected error occurred. Try again later.</string>
+    <string name="popup_warning_desc">You verification is under observation. Try again later.</string>
+    <string name="popup_success_desc">You have successfully completed the task.</string>
+
+    <string name="popup_error_title">Upss</string>
+    <string name="popup_warning_title">Pending</string>
+    <string name="popup_success_title">Well Done</string>
+
+    <string name="popup_error_btn">Dismiss</string>
+    <string name="popup_warning_btn">Dismiss</string>
+    <string name="popup_success_btn">Selesai</string>
+
+    <string name="toast_success_upload">Story berhasil di unggah</string>
+
+<!--    time-->
+    <string name="time_just_now">just now</string>
+    <string name="time_minutes_ago">%1$d minutes ago</string>
+    <string name="time_hours_ago">%1$d hours ago</string>
+    <string name="time_days_ago">%1$d days ago</string>
+    <string name="time_weeks_ago">%1$d weeks ago</string>
+    <string name="time_months_ago">%1$d months ago</string>
+
+    <string name="dialog_exit_edit_title">Batalkan Mengedit?</string>
+    <string name="dialog_exit_edit_message">Perubahan yang belum disimpan akan hilang. Yakin ingin keluar?</string>
+    <string name="dialog_exit_edit_positive">Keluar</string>
+    <string name="dialog_exit_edit_negative">Batal</string>
+
+    <string name="selengkapnya">Selengkapnya</string>
+    <string name="lebih_sedikit">Lebih Sedikit</string>
 </resources>

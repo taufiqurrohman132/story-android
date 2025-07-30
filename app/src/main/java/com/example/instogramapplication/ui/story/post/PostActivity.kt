@@ -1,8 +1,10 @@
 package com.example.instogramapplication.ui.story.post
 
+
 import android.Manifest
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.util.Size
@@ -33,23 +35,44 @@ class PostActivity : AppCompatActivity() {
     private var imageCapture: ImageCapture? = null
     private var cameraProvider: ProcessCameraProvider? = null
 
+    private val REQUIRED_PERMISSION = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        arrayOf(
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_MEDIA_IMAGES
+        )
+    } else {
+        arrayOf(
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        )
+    }
+
     // request
     private val requestPermissionLauncher =
         registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted ->
-            if (isGranted) {
-                Toast.makeText(this, "Permission request granted", Toast.LENGTH_LONG).show()
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permission ->
+            val isGrantedAll = permission.all { it.value }
+            if (isGrantedAll) {
+                val latestImageUri = PostUtils.getLatestImageUri(this)
+                Log.d(TAG, "initView: latest image uri $latestImageUri")
+
+                if (latestImageUri != null)
+                    binding.postImageOpenGalery.setImageURI(latestImageUri)
+                else
+                    Toast.makeText(this, "Tidak ada gambar ditemukan", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "Permission request denied", Toast.LENGTH_LONG).show()
             }
         }
     // pengacekan
     private fun allPermissionsGranted() =
-        ContextCompat.checkSelfPermission(
+        REQUIRED_PERMISSION.all {
+            ContextCompat.checkSelfPermission(
             this,
-            REQUIRED_PERMISSION
-        ) == PackageManager.PERMISSION_GRANTED
+            it
+            ) == PackageManager.PERMISSION_GRANTED
+        }
 
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
@@ -69,8 +92,9 @@ class PostActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         if (!allPermissionsGranted()){
-            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
+            Log.d(TAG, "onCreate: not permission")
         }
+        requestPermissionLauncher.launch(REQUIRED_PERMISSION)
 
         startCamera()
         setupListener()
@@ -87,7 +111,11 @@ class PostActivity : AppCompatActivity() {
     }
 
     private fun initView(){
+        val latestImageUri = PostUtils.getLatestImageUri(this)
+        Log.d(TAG, "initView: latest image uri $latestImageUri")
 
+        if (latestImageUri != null)
+            binding.postImageOpenGalery.setImageURI(latestImageUri)
     }
 
     private fun setupListener(){
@@ -95,6 +123,7 @@ class PostActivity : AppCompatActivity() {
             postImageOpenGalery.setOnClickListener { openGalery() }
             postBtnSwitch.setOnClickListener { switchCamera() }
             postBtnClickCamera.setOnClickListener { takePhoto() }
+            postBtnBack.setOnClickListener { finish() }
 
         }
     }
@@ -222,8 +251,8 @@ class PostActivity : AppCompatActivity() {
     }
 
 
+
     companion object{
-        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
         private val TAG = PostActivity::class.java.simpleName
     }
 }

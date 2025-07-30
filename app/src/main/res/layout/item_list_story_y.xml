@@ -11,6 +11,7 @@
         android:layout_height="300dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
+        android:background="@color/abu_abu_terang"
         android:layout_marginHorizontal="16dp"
         app:shapeAppearanceOverlay="@style/RoundedCornerImageStyle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -142,7 +143,7 @@
                 android:backgroundTint="@color/transparents"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_like"
-                app:layout_constraintBottom_toTopOf="@id/itemy.tv_desk"
+                app:layout_constraintBottom_toTopOf="@id/itemy.tv_desk_expand"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/itemy.img_post" />
 
@@ -265,15 +266,16 @@
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/itemy.img_post"
         app:layout_constraintTop_toBottomOf="@id/itemy.img_post" />
-    <TextView
-        android:id="@+id/itemy.tv_desk"
+    <at.blogc.android.views.ExpandableTextView
+        android:id="@+id/itemy.tv_desk_expand"
         style="@style/Text.Konten15"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:ellipsize="end"
         android:maxLines="2"
-        android:text="kdfkdfjdkjf"
+        app:animation_duration="500"
+        android:text=""
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -289,17 +291,17 @@
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintStart_toStartOf="@id/itemy.img_post"
-        app:layout_constraintTop_toBottomOf="@id/itemy.tv_desk"
+        app:layout_constraintTop_toBottomOf="@id/itemy.tv_desk_expand"
         app:layout_constraintEnd_toEndOf="@id/itemy.img_post"/>
     <TextView
         android:id="@+id/itemy.tv_time"
         style="@style/Text.Konten14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="4 Jam yang lalu | Lihat terjemahan"
+        android:text="4 Jam yang lalu "
         android:textColor="@color/abu_abu"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/itemy.tv_desk"
+        app:layout_constraintStart_toStartOf="@id/itemy.tv_desk_expand"
         app:layout_constraintTop_toBottomOf="@id/itemy.tv_selengkapnya" />
 </androidx.constraintlayout.widget.ConstraintLayout>

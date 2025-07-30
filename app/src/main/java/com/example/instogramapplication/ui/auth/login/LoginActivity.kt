@@ -2,15 +2,21 @@ package com.example.instogramapplication.ui.auth.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.example.instogramapplication.MainActivity
+import com.example.instogramapplication.R
 import com.example.instogramapplication.ui.story.list.ListStoryFragment
 import com.example.instogramapplication.databinding.ActivityLoginBinding
 import com.example.instogramapplication.ui.auth.signup.SignUpActivity
+import com.example.instogramapplication.utils.DialogUtils
+import com.example.instogramapplication.utils.DialogUtils.showToast
 import com.example.instogramapplication.utils.Resource
 import com.example.instogramapplication.utils.ValidationUtils
+import com.example.instogramapplication.utils.constants.DialogType
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
@@ -48,13 +54,10 @@ class LoginActivity : AppCompatActivity() {
             loginInlayPass.apply {
                 setTextError("Password Kurang dari 8 Karakter")
                 isSucces = {
-                    it?.let {
-                        it.length >= 8
-                    } ?: true
+                    !(!it.isNullOrBlank() && it.length < 8)
                 }
             }
         }
-
     }
 
     private fun setupListener(){
@@ -79,18 +82,27 @@ class LoginActivity : AppCompatActivity() {
             when(story){
                 is Resource.Loading -> {
                     // tampilkan progress bar
+                    showLoading(true)
                 }
                 is Resource.Success -> {
                     // pindah ke LoginActivity atau Home
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+                    showLoading(false)
+                    showSuccess()
                 }
                 is Resource.Error -> {
                     // tampilkan error
-                    Toast.makeText(this, "kdkfkd", Toast.LENGTH_SHORT).show()
+                    showLoading(false)
+                    story.message?.let {
+                        showError(story.message)
+                    }
+                }
+                is Resource.ErrorConnection -> {
+                    // tampilkan error
+                    showLoading(false)
+                    showToast(this.getString(R.string.error_koneksi), this)
                 }
                 else ->{
-
+                    showLoading(false)
                 }
             }
         }
@@ -99,6 +111,43 @@ class LoginActivity : AppCompatActivity() {
     private fun navigateToRegister(){
         val intent = Intent(this, SignUpActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.apply {
+            dimOverlay.isVisible = isLoading
+            loading.isVisible = isLoading
+        }
+    }
+
+    private fun showError(desc: String) {
+        DialogUtils.stateDialog(
+            this,
+            DialogType.ERROR,
+            this.getString(R.string.popup_error_title),
+            desc,
+            this.getString(R.string.popup_error_btn)
+        ){
+            it.dismiss()
+            binding.dimOverlay.visibility = View.INVISIBLE
+
+        }
+    }
+
+    private fun showSuccess() {
+        DialogUtils.stateDialog(
+            this,
+            DialogType.SUCCESS,
+            this.getString(R.string.popup_success_title),
+            this.getString(R.string.popup_success_desc),
+            this.getString(R.string.popup_success_btn),
+        ){
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+
+            it.dismiss()
+            binding.dimOverlay.visibility = View.INVISIBLE
+        }
     }
     companion object{
         val TAG = LoginActivity::class.java.simpleName

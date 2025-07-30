@@ -56,10 +56,6 @@ class SettingsFragment : Fragment() {
 
     private fun observer(){
         viewLifecycleOwner.lifecycleScope.launch {
-//            viewModel.getCurrentLang().collectLatest{ langCode ->
-//                val displayName = LanguageUtils.getLanguage(langCode).find { it.code == langCode }?.name ?: "Default"
-//                binding.settingsTvBahasa.text = displayName
-//            }
             val langCode = viewModel.getCurrentLang()
             val displayName = LanguageUtils.getLanguage(langCode).find { it.code == langCode }?.name ?: "Default"
             Log.d(TAG, "observer: setting fragment display name $displayName lang code $langCode")
@@ -81,13 +77,11 @@ class SettingsFragment : Fragment() {
     }
 
     private fun logOut(){
-        DialogUtils.showConfirmationDialog(
-            context = requireContext(),
-            titleRes = R.string.confirm_title_logout,
-            messageRes = R.string.confirm_logout_message,
-            positiveRes = R.string.yes,
-            negativeRes = R.string.cancel
-        ) {
+        DialogUtils.confirmDialog(
+            requireContext(),
+            requireContext().getString(R.string.logout),
+            requireContext().getString(R.string.logout_message),
+        ){
             viewModel.logOut()
             val intent = Intent(requireActivity(), LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

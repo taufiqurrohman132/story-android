@@ -43,7 +43,6 @@ class UserPreferences private constructor(
     }
 
     suspend fun getUsername(): String {
-//        val userName = dataStore.data.map { it[USER_NAME] ?: "" }.first()
         val userName = dataStore.data
             .onEach { Log.d(TAG, "raw pref: $it") }
             .map { it[USER_NAME] ?: "" }

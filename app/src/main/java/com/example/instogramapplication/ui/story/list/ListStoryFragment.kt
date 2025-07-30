@@ -66,13 +66,10 @@ class ListStoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         setupRecyclerView()
         observer()
         setupCollapsStoryX()
         setupListener()
-
-
     }
 
     private fun initView(){
@@ -96,7 +93,7 @@ class ListStoryFragment : Fragment() {
                 Log.d(TAG, "observer: stories $result")
                 when (result) {
                     is Resource.Loading -> showLoading()
-                    is Resource.Success -> showStories(result.data)
+                    is Resource.Success -> showStories(result.data, result.message)
                     is Resource.Error -> showError(result.message)
                     is Resource.ErrorConnection -> showErrorConnect(result.message)
                     is Resource.Empty -> showEmpty()
@@ -105,8 +102,16 @@ class ListStoryFragment : Fragment() {
         }
 
         // username on
-        viewModel.userName.observe(viewLifecycleOwner){ username ->
-            adapterX.updateUserName(username)
+//        viewModel.userName.observe(viewLifecycleOwner){ username ->
+//            adapterX.updateUserName(username)
+//        }
+
+        // notif error
+        lifecycleScope.launch {
+            viewModel.eventFlow.collect{ message ->
+                Log.d(TAG, "observer: notif $message")
+                DialogUtils.showToast(message, requireActivity())
+            }
         }
     }
 
@@ -125,23 +130,8 @@ class ListStoryFragment : Fragment() {
             storySimmer.visibility = View.INVISIBLE
             homeLottieError.visibility = View.INVISIBLE
 
-//            homeLottieConnect.apply {
-//                visibility = View.VISIBLE
-//                playAnimation()
-//                addAnimatorListener(object : AnimatorListenerAdapter() {
-//                    override fun onAnimationEnd(animation: Animator) {
-//                        homeLottieConnect.visibility = View.INVISIBLE
-//                        if (adapterX.currentList.isEmpty()){
-//                            homeLottieLayoutErrorConnect.visibility = View.VISIBLE
-//                        }
-//                    }
-//                })
-//            }
-        }
-
-        Log.d(TAG, "showErrorConnect: is running")
-        message?.let {
-            DialogUtils.showToast(message, requireActivity())
+            if (adapterY.currentList.isEmpty())
+                homeLottieLayoutErrorConnect.visibility = View.VISIBLE
         }
     }
 
@@ -200,10 +190,6 @@ class ListStoryFragment : Fragment() {
             homeLottieError.visibility = View.INVISIBLE
             homeLottieLayoutErrorConnect.visibility = View.INVISIBLE
         }
-
-        message?.let {
-            DialogUtils.showToast(message, requireActivity())
-        }
     }
 
     private fun showDetailStory(desc: TextView, img: ImageView, story: ListStoryItem){
@@ -220,7 +206,7 @@ class ListStoryFragment : Fragment() {
         Log.d(TAG, "onStoryXClick: navigate to post activity")
     }
 
-    private fun showStories(data: List<ListStoryItem>?) {
+    private fun showStories(data: List<ListStoryItem>?, username: String?) {
         binding.apply {
             rvStory.visibility = View.VISIBLE
             rvPost.visibility = View.VISIBLE
@@ -230,8 +216,11 @@ class ListStoryFragment : Fragment() {
             homeLottieLayoutErrorConnect.visibility = View.INVISIBLE
         }
 
+        Log.d(TAG, "showStories: username $username")
+        adapterX.updateUserName(username)
         adapterX.submitList(data)
         adapterY.submitList(data)
+        Log.d(TAG, "showStories: data story $data")
     }
 
     private fun setupCollapsStoryX(){

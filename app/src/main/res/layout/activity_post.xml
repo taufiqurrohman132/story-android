@@ -5,7 +5,7 @@
     android:id="@+id/post_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_base"
+    android:background="@color/black"
     tools:context=".ui.story.post.PostActivity">
 
 
@@ -129,7 +129,7 @@
                     android:layout_height="match_parent"
                     android:clickable="true"
                     android:focusable="true"
-                    android:src="@drawable/img" />
+                    android:src="@drawable/placeholdre_image"/>
             </com.google.android.material.card.MaterialCardView>
         </com.google.android.material.card.MaterialCardView>
 

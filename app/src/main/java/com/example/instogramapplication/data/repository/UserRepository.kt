@@ -97,26 +97,27 @@ class UserRepository private constructor(
         }
     }
 
-    suspend fun getUserName() =
-        userPref.getUsername()
-
     suspend fun userLogout(){
         userPref.clearSession()
     }
 
     fun isLoggedIn(): Flow<Boolean> = userPref.isLoggedIn()
 
+//    suspend fun getUserName() =
+//        userPref.getUsername()
+
     fun getStories(): Flow<Resource<List<ListStoryItem>>> = flow {
         emit(Resource.Loading())
 
         try {
+            val username = userPref.getUsername()
             val response = apiService.getStories()
             Log.d(TAG, "getStories: respons $response")
             if (response.isSuccessful){
                 val stories = response.body()?.listStory
                 Log.d(TAG, "getStories: body $stories")
                 if (!stories.isNullOrEmpty()){
-                    emit(Resource.Success(stories))
+                    emit(Resource.Success(stories, username ))
                 }else{
                     emit(Resource.Empty())
                 }
@@ -134,34 +135,7 @@ class UserRepository private constructor(
         }
     }
 
-//    suspend fun getDetailStory(id: String): Resource<Story> {
-//        Resource.Loading<Story>()
-//
-//        return try {
-//            val response = apiService.getDetailStory(id)
-//            Log.d(TAG, "getDetailStory: respons $response")
-//            if (response.isSuccessful){
-//                val story = response.body()?.story
-//                if (story != null){
-//                    Resource.Success(story)
-//                }else{
-//                    Resource.Empty()
-//                }
-//            }else{
-//                Log.e(TAG, "getDetailStory: error not succes ${response.code()}")
-//                val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(response.code())
-//                Resource.Error(errorMsg)
-//            }
-//        }catch (e: IOException){
-//            Resource.Error("Errror koneksi")
-//        }catch (e: Exception){
-//            Log.e(TAG, "getDetailStory: error", e)
-//            Resource.Error("Errrorr")
-//        }
-//    }
-
     suspend fun uploadStory(imageFile: File, desc: String): Resource<String> {
-        Resource.Loading<String>()
         return try {
             val requestBody = desc.toRequestBody("text/plain".toMediaType())
             val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())

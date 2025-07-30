@@ -1,26 +1,41 @@
 package com.example.instogramapplication.ui.story.post
 
+import android.annotation.SuppressLint
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.instogramapplication.R
 import com.example.instogramapplication.databinding.FragmentEditBinding
+import com.example.instogramapplication.ui.auth.login.LoginActivity
 import com.example.instogramapplication.ui.story.list.ListStoryFragment
+import com.example.instogramapplication.utils.DialogUtils
 import com.example.instogramapplication.utils.DialogUtils.showToast
+import com.example.instogramapplication.utils.ExtensionUtils.observeKeyboardVisibility
 import com.example.instogramapplication.utils.ExtensionUtils.reduceFileImage
 import com.example.instogramapplication.utils.ExtensionUtils.setGradientText
 import com.example.instogramapplication.utils.PostUtils
+import com.example.instogramapplication.utils.PostUtils.isKeyboardVisible
 import com.example.instogramapplication.utils.Resource
+import com.example.instogramapplication.utils.constants.DialogType
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
 import kotlinx.coroutines.launch
 
@@ -67,6 +82,9 @@ class EditFragment : Fragment() {
         _binding = null
     }
 
+
+
+    @SuppressLint("ClickableViewAccessibility")
     private fun initView(){
         // terima uri gambar dari post act
         currentImageUri?.let { uri ->
@@ -80,11 +98,24 @@ class EditFragment : Fragment() {
             )
             isSelected = true
         }
+
+        // handle back
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    confirmBack()
+                }
+            })
+
+        // cek keyboard
+        binding.root.observeKeyboardVisibility(viewLifecycleOwner) { isVisible ->
+            binding.dimOverlayCamera.isVisible = isVisible
+        }
     }
 
     private fun setupListener(){
         binding.apply {
-            postBtnBackToTake.setOnClickListener { backToTakePhoto() }
+            postBtnBackToTake.setOnClickListener { confirmBack() }
             postBtnPosting.setOnClickListener { uploadStory() }
         }
     }
@@ -92,17 +123,64 @@ class EditFragment : Fragment() {
     private fun observer(){
         lifecycleScope.launch {
             viewModel.uploadState.collect{ result ->
+                Log.d(TAG, "observer: upload state $result")
                 when(result){
-                    is Resource.Loading -> {}
-                    is Resource.Error -> {}
-                    is Resource.Success -> {
-                        showToast("sukses upload", requireActivity())
-                        uploadSuccess()
+                    is Resource.Loading -> showLoading(true)
+                    is Resource.Error -> {
+                        showError()
+                        showLoading(false)
                     }
-                    is Resource.Empty -> {}
-                    else -> {}
+                    is Resource.Success -> {
+                        showSuccess()
+                        showLoading(false)
+                    }
+                    is Resource.Empty -> { showLoading(false)}
+                    is Resource.ErrorConnection -> {
+                        showLoading(false)
+                        showToast(requireContext().getString(R.string.error_koneksi), requireActivity())
+                    }
+                    else -> { showLoading(false)}
                 }
             }
+        }
+    }
+
+    private fun showError() {
+        DialogUtils.stateDialog(
+            requireContext(),
+            DialogType.ERROR,
+            requireActivity().getString(R.string.popup_error_title),
+            requireActivity().getString(R.string.popup_error_desc),
+            requireActivity().getString(R.string.popup_error_btn)
+        ){
+            it.dismiss()
+            binding.dimOverlay.visibility = View.INVISIBLE
+
+        }
+    }
+
+    private fun showSuccess() {
+        DialogUtils.stateDialog(
+            requireContext(),
+            DialogType.SUCCESS,
+            requireActivity().getString(R.string.popup_success_title),
+            requireActivity().getString(R.string.popup_success_desc),
+            requireActivity().getString(R.string.popup_success_btn),
+        ){
+            showToast(requireActivity().getString(R.string.toast_success_upload), requireActivity())
+            uploadSuccess()
+            it.dismiss()
+            binding.dimOverlay.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun confirmBack(){
+        DialogUtils.confirmDialog(
+            requireContext(),
+            requireContext().getString(R.string.dialog_exit_edit_title),
+            requireContext().getString(R.string.dialog_exit_edit_message),
+        ){
+            backToTakePhoto()
         }
     }
 
@@ -123,7 +201,10 @@ class EditFragment : Fragment() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-//        binding.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.apply {
+            dimOverlay.isVisible = isLoading
+            loading.isVisible = isLoading
+        }
     }
 
     private fun uploadSuccess(){

@@ -106,31 +106,6 @@
                     android:hint="Masukkan Email Kamu" />
             </com.example.instogramapplication.CustomInputWithManualError2>
 
-<!--            <com.google.android.material.textfield.TextInputLayout-->
-<!--                android:id="@+id/login.inlay_email"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginHorizontal="20dp"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                app:boxCornerRadiusBottomEnd="16dp"-->
-<!--                app:boxCornerRadiusBottomStart="16dp"-->
-<!--                app:boxCornerRadiusTopEnd="16dp"-->
-<!--                app:boxCornerRadiusTopStart="16dp"-->
-<!--                app:boxStrokeColor="@color/color_base"-->
-<!--                app:boxStrokeErrorColor="@color/red"-->
-<!--                app:hintTextColor="@color/color_base"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintHorizontal_bias="0.5"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/login.tv_belum_punya"-->
-<!--                app:layout_constraintVertical_bias="0.0">-->
-<!--                <com.example.instogramapplication.CustomInputWithManualError-->
-<!--                    android:id="@+id/login.edt_email"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content" />-->
-<!--            </com.google.android.material.textfield.TextInputLayout>-->
-
             <com.example.instogramapplication.CustomInputWithManualError2
                 android:id="@+id/login.inlay_pass"
                 android:layout_width="0dp"
@@ -205,4 +180,39 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+    <View
+        android:id="@+id/dimOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="2dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@color/color_black_trans"
+        android:visibility="invisible" />
+
+    <com.sn.lib.NestedProgress
+        android:id="@+id/loading"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:innerLoaderStrokeWidth="4dp"
+        app:outerLoaderStrokeWidth="10dp"
+        app:innerLoaderColor="@color/color_variant"
+        app:outerLoaderColor="@color/color_base"
+        app:spaceBetweenCircles="1dp"
+        app:outerLoaderLength="240"
+        app:innerLoaderLength="300"
+        android:elevation="4dp"
+        android:visibility="invisible"
+        android:layout_gravity="center"
+        app:innerAnimInterpolator="accelerateDecelerate"
+        app:outerAnimInterpolator="anticipateOvershoot"
+        app:outerLoaderAnimDuration="1500"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        />
 </FrameLayout>

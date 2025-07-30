@@ -228,7 +228,7 @@
                     app:shapeAppearanceOverlay="@style/Circular"
                     android:background="@color/abu_abu"
                     android:layout_margin="4dp"
-                    app:layout_constraintBottom_toTopOf="@id/itemy.tv_desk"
+                    app:layout_constraintBottom_toTopOf="@id/itemy1.tv_desk"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/itemy.img_post" />
                 <com.google.android.material.imageview.ShapeableImageView
@@ -236,7 +236,7 @@
                     app:shapeAppearanceOverlay="@style/Circular"
                     android:background="@color/abu_abu"
                     android:layout_margin="4dp"
-                    app:layout_constraintBottom_toTopOf="@id/itemy.tv_desk"
+                    app:layout_constraintBottom_toTopOf="@id/itemy1.tv_desk"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/itemy.img_post" />
                 <com.google.android.material.imageview.ShapeableImageView
@@ -244,7 +244,7 @@
                     app:shapeAppearanceOverlay="@style/Circular"
                     android:background="@color/abu_abu"
                     android:layout_margin="4dp"
-                    app:layout_constraintBottom_toTopOf="@id/itemy.tv_desk"
+                    app:layout_constraintBottom_toTopOf="@id/itemy1.tv_desk"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/itemy.img_post" />
 

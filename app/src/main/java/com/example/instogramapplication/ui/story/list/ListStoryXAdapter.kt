@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.instogramapplication.R
 import com.example.instogramapplication.data.remote.model.ListStoryItem
 import com.example.instogramapplication.databinding.ItemListStoryXBinding
 import com.example.instogramapplication.databinding.ItemPostStoryBinding
@@ -31,6 +32,8 @@ class ListStoryXAdapter(
                 .override(100)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
+                .placeholder(R.drawable.profile_placeholder)
+                .circleCrop()
                 .into(item.itemStoryX)
             item.storyUsername.text = listStory.name
 
@@ -51,6 +54,8 @@ class ListStoryXAdapter(
                     .override(100)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .centerCrop()
+                    .circleCrop()
+                    .placeholder(R.drawable.profile_placeholder)
                     .into(item.itemStoryX)
 
                 item.itemStoryX.setOnClickListener {
@@ -109,7 +114,7 @@ class ListStoryXAdapter(
                 val myStories = currentList.filter { it.name == currentUserName }.maxByOrNull { it.createdAt ?:"" }
                 Log.d(
                     TAG,
-                    "onBindViewHolder: data my story $myStories name ${story.name}, username $currentUserName"
+                    "onBindViewHolder: data my story $myStories name ${myStories?.name}, username $currentUserName"
                 )
                 (holder as ItemAddViewHolder).bind(myStories)
             }
@@ -119,8 +124,8 @@ class ListStoryXAdapter(
         }
     }
 
-    fun updateUserName(userName: String){
-        if (userName.isNotBlank()){
+    fun updateUserName(userName: String?){
+        if (!userName.isNullOrBlank()){
             currentUserName = userName
             notifyItemChanged(0)
         }

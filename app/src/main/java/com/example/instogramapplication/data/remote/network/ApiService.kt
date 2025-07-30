@@ -45,11 +45,6 @@ interface ApiService {
 
     @GET("stories")
     fun getWidgetItems(): Call<StoryResponse>
-//    @GET("stories/{id}")
-//    suspend fun getDetailStory(
-//        @Path("id")
-//        id: String
-//    ): Response<DetailStoryResponse>
 
     @POST("stories")
     @Multipart

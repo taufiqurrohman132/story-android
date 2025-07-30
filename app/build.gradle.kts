@@ -24,6 +24,7 @@ android {
     buildFeatures {
         buildConfig = true
         viewBinding = true
+        dataBinding = true // requirement pop up
     }
     buildTypes {
         release {
@@ -83,12 +84,19 @@ dependencies {
     implementation(libs.flexbox)
 
     // loading
-//    implementation(libs.swipetorefresh)
     implementation(libs.androidx.swiperefreshlayout)
-//    implementation(libs.library)
     implementation(libs.shimmer)
 
     implementation(libs.lottie)
+
+    // loading circular
+    implementation(libs.android.nested.progress)
+
+    // pop up
+    implementation(libs.popup.dialog)
+
+    // expanable teks
+    implementation(libs.expandabletextview)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

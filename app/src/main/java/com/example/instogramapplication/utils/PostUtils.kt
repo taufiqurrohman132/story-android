@@ -1,7 +1,11 @@
 package com.example.instogramapplication.utils
 
+import android.content.ContentUris
 import android.content.Context
 import android.net.Uri
+import android.provider.MediaStore
+import android.util.Log
+import android.view.View
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -30,4 +34,39 @@ object PostUtils {
         inputStream.close()
         return myFile
     }
+
+    fun getLatestImageUri(context: Context): Uri? {
+        val projection = arrayOf(
+            MediaStore.Images.Media._ID,
+            MediaStore.Images.Media.DATE_ADDED
+        )
+
+        val sortOrder = "${MediaStore.Images.Media.DATE_ADDED} DESC"
+
+        val cursor = context.contentResolver.query(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            projection,
+            null,
+            null,
+            sortOrder
+        )
+
+        cursor?.use {
+            if (it.moveToFirst()) {
+                val idColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media._ID)
+                val id = it.getLong(idColumn)
+                return ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+            } else {
+                Log.d("LatestImage", "Cursor kosong")
+            }
+        }
+
+        return null
+    }
+
+    fun isKeyboardVisible(rootView: View): Boolean{
+        val heightDiff = rootView.rootView.height - rootView.height
+        return heightDiff > 200
+    }
+
 }

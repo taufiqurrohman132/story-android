@@ -13,11 +13,12 @@ import java.io.File
 class EditViewModel(
     private val repository: UserRepository
 ) : ViewModel(){
-    private var _uploadState = MutableStateFlow<Resource<String>>(Resource.Loading())
+    private var _uploadState = MutableStateFlow<Resource<String>>(Resource.Empty())
     val uploadState: StateFlow<Resource<String>> = _uploadState
 
     fun uploadStory(imageFile: File, desc: String){
         viewModelScope.launch {
+            _uploadState.value = Resource.Loading()
             val result = repository.uploadStory(imageFile, desc)
             _uploadState.value = result
         }

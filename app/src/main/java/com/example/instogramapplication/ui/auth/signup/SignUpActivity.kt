@@ -4,17 +4,24 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract.CommonDataKinds.Email
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
+import com.example.instogramapplication.MainActivity
 import com.example.instogramapplication.R
 import com.example.instogramapplication.databinding.ActivityLoginBinding
 import com.example.instogramapplication.databinding.ActivitySignUpBinding
 import com.example.instogramapplication.ui.auth.login.LoginActivity
+import com.example.instogramapplication.utils.DialogUtils
+import com.example.instogramapplication.utils.DialogUtils.showToast
 import com.example.instogramapplication.utils.Resource
+import com.example.instogramapplication.utils.ValidationUtils
+import com.example.instogramapplication.utils.constants.DialogType
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
 
 class SignUpActivity : AppCompatActivity() {
@@ -42,15 +49,20 @@ class SignUpActivity : AppCompatActivity() {
     private fun initView(){
         Log.d(TAG, "initView: Starting")
         // setup
-        binding.signupInlayPass.apply {
-            setTextError("Password Kurang dari 8 Karakter")
-            isSucces = {
-                it?.let {
-                    it.length >= 8
-                } ?: true
+        binding.apply {
+            signupInlayEmail.apply {
+                setTextError("Masukkan format Email yang sesuai")
+                isSucces = {
+                    ValidationUtils.isEmailValid(it)
+                }
+            }
+            signupInlayPass.apply {
+                setTextError("Password Kurang dari 8 Karakter")
+                isSucces = {
+                    !(!it.isNullOrBlank() && it.length < 8)
+                }
             }
         }
-
     }
 
     // pasang semua click dst
@@ -82,21 +94,67 @@ class SignUpActivity : AppCompatActivity() {
                 when(result){
                     is Resource.Loading -> {
                         // tampilkan progress bar
+                        showLoading(true)
                     }
                     is Resource.Success -> {
                         // pindah ke LoginActivity atau Home
-                        startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
-                        finish()
+                        showLoading(false)
+                        showSuccess()
                     }
-                    is Resource .Error -> {
+                    is Resource.Error -> {
                         // tampilkan error
-                        Toast.makeText(this@SignUpActivity, "kdkfkd", Toast.LENGTH_SHORT).show()
+                        showLoading(false)
+                        result.message?.let {
+                            showError(result.message)
+                        }
+                    }
+                    is Resource.ErrorConnection -> {
+                        // tampilkan error
+                        showLoading(false)
+                        DialogUtils.showToast(this@SignUpActivity.getString(R.string.error_koneksi), this@SignUpActivity)
                     }
                     else ->{
-
+                        showLoading(false)
                     }
                 }
             }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.apply {
+            dimOverlay.isVisible = isLoading
+            loading.isVisible = isLoading
+        }
+    }
+
+    private fun showError(desc: String) {
+        DialogUtils.stateDialog(
+            this,
+            DialogType.ERROR,
+            this.getString(R.string.popup_error_title),
+            desc,
+            this.getString(R.string.popup_error_btn)
+        ){
+            it.dismiss()
+            binding.dimOverlay.visibility = View.INVISIBLE
+
+        }
+    }
+
+    private fun showSuccess() {
+        DialogUtils.stateDialog(
+            this,
+            DialogType.SUCCESS,
+            this.getString(R.string.popup_success_title),
+            this.getString(R.string.popup_error_desc),
+            this.getString(R.string.popup_success_btn),
+        ){
+            startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
+            finish()
+
+            it.dismiss()
+            binding.dimOverlay.visibility = View.INVISIBLE
         }
     }
 
