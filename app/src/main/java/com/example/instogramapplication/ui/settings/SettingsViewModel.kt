@@ -1,22 +1,20 @@
-package com.example.instogramapplication.ui.user.settings
+package com.example.instogramapplication.ui.settings
 
 import android.content.Context
-import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.instogramapplication.data.repository.UserRepository
 import com.yariksoffice.lingver.Lingver
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class SettingsViewModel(
     private val repository: UserRepository
-) : ViewModel(){
+) : ViewModel() {
     suspend fun getCurrentLang(): String {
         return repository.getCurrentLanguage()
     }
 
-    suspend fun getName(): String{
+    suspend fun getName(): String {
         return repository.getUserName()
     }
 
@@ -29,7 +27,7 @@ class SettingsViewModel(
         }
     }
 
-    fun logOut(){
+    fun logOut() {
         viewModelScope.launch {
             repository.userLogout()
         }

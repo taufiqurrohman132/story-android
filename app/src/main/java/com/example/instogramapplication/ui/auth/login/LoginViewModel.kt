@@ -1,6 +1,5 @@
 package com.example.instogramapplication.ui.auth.login
 
-import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +14,7 @@ class LoginViewModel(
     private val _loginResult = MutableLiveData<Resource<String>>()
     val loginResult: LiveData<Resource<String>> = _loginResult
 
-    fun login(email: String, password: String){
+    fun login(email: String, password: String) {
         viewModelScope.launch {
             _loginResult.value = Resource.Loading()
             val result = repository.userLogin(email, password)

@@ -1,9 +1,11 @@
 [versions]
+#noinspection AndroidGradlePluginVersion
 agp = "8.6.0"
 androidNestedProgress = "v1.0.2"
 cameraCamera2 = "1.4.2"
 cameraLifecycle = "1.4.2"
 converterGson = "3.0.0"
+coreSplashscreen = "1.0.1"
 datastorePreferences = "1.1.7"
 expandabletextview = "1.0.5"
 flexbox = "3.0.0"
@@ -12,12 +14,16 @@ glide = "4.16.0"
 kotlin = "2.1.0"
 coreKtx = "1.16.0"
 junit = "4.13.2"
+#noinspection GradleDependency
 junitVersion = "1.2.1"
+#noinspection GradleDependency
 espressoCore = "3.6.1"
 appcompat = "1.7.1"
-library = "1.1.2"
+#noinspection GradleDependency
 lifecycleLivedataKtx = "2.9.1"
+#noinspection GradleDependency
 lifecycleRuntimeKtx = "2.9.1"
+#noinspection GradleDependency
 lifecycleViewmodelKtx = "2.9.1"
 lingver = "1.3.0"
 loggingInterceptor = "4.12.0"
@@ -25,19 +31,20 @@ lottie = "6.6.7"
 material = "1.12.0"
 activity = "1.10.1"
 constraintlayout = "2.2.1"
+#noinspection GradleDependency
 navigationUiKtx = "2.9.1"
 photoview = "2.3.0"
 popupDialog = "2.0.0"
 retrofit = "3.0.0"
 shimmer = "0.5.0"
 swiperefreshlayout = "1.1.0"
-swipetorefresh = "1.01"
 
 [libraries]
 android-nested-progress = { module = "com.github.emreesen27:Android-Nested-Progress", version.ref = "androidNestedProgress" }
 androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraCamera2" }
 androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "cameraCamera2" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
@@ -52,7 +59,6 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-library = { module = "com.reginald.swiperefresh:library", version.ref = "library" }
 lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 lingver = { module = "com.github.YarikSOffice:lingver", version.ref = "lingver" }
@@ -66,7 +72,6 @@ popup-dialog = { module = "com.saadahmedev.popup-dialog:popup-dialog", version.r
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit2-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
-swipetorefresh = { module = "com.github.aliumujib:SwipeToRefresh", version.ref = "swipetorefresh" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

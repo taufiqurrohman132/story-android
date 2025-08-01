@@ -13,7 +13,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.instogramapplication.ui.user.settings.SettingsFragment"
+        android:name="com.example.instogramapplication.ui.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
 

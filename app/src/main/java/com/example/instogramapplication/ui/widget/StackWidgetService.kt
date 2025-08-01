@@ -1,4 +1,4 @@
-package com.example.instogramapplication
+package com.example.instogramapplication.ui.widget
 
 import android.content.Intent
 import android.widget.RemoteViewsService

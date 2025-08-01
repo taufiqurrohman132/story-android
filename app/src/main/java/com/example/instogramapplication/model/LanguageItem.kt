@@ -1,4 +1,4 @@
-package com.example.instogramapplication.data.local.cek
+package com.example.instogramapplication.model
 
 data class LanguageItem(
     val code: String,      // "id", "en"

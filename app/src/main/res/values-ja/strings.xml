@@ -1,0 +1,139 @@
+<resources>
+    <string name="app_name">Instogramアプリケーション</string>
+
+    <!-- Error handling -->
+    <string name="error_400">おっと！データリクエスト中にエラーが発生しました。もう一度ご確認ください。</string>
+    <string name="error_403">おっと！このデータにアクセスする権限がありません。</string>
+    <string name="error_404">お探しのものが見つかりませんでした。</string>
+    <string name="error_408">遅すぎます！インターネット接続を確認して再試行してください。</string>
+    <string name="error_500">おっと！サーバーに問題が発生しました。しばらくお待ちください。</string>
+    <string name="error_503">サーバーが混雑しています。後でもう一度お試しください。</string>
+    <string name="error_else">おっと！データリクエスト中にエラーが発生しました。もう一度ご確認ください。</string>
+    <string name="error_koneksi">インターネット接続がありません。ネットワークを確認してください。</string>
+    <string name="error_takterduga">予期しないエラーが発生しました。後でもう一度お試しください。</string>
+
+    <string name="hello_blank_fragment">こんにちは、ブランクフラグメント</string>
+    <string name="title_home">インストグラム</string>
+    <string name="next">次へ</string>
+
+    <string name="confirm_title_logout">確認</string>
+    <string name="confirm_logout_message">ログアウトしてもよろしいですか？</string>
+    <string name="yes">はい</string>
+    <string name="cancel">キャンセル</string>
+
+    <string name="appwidget_text">サンプル</string>
+    <string name="add_widget">ウィジェットを追加</string>
+    <string name="app_widget_description">最新のストーリーをチェック！アプリを開かずにウィジェットから直接確認できます。</string>
+
+    <string name="hastag">#%1$s #InstogramApp #モバイルアプリ #Android開発 #UXデザイン #アプリ体験 #MVVMアーキテクチャ</string>
+    <string name="cerita_anda">あなたのストーリー</string>
+
+    <string name="logout">ログアウト</string>
+    <string name="logout_message">本当にログアウトしますか？\nこの操作は元に戻せません</string>
+
+    <!-- popup -->
+    <string name="popup_error_desc">予期しないエラーが発生しました。後でもう一度お試しください。</string>
+    <string name="popup_warning_desc">検証が保留中です。後で再試行してください。</string>
+    <string name="popup_success_desc">操作が正常に完了しました。</string>
+
+    <string name="popup_error_title">エラー</string>
+    <string name="popup_warning_title">保留中</string>
+    <string name="popup_success_title">成功</string>
+
+    <string name="popup_error_btn">閉じる</string>
+    <string name="popup_warning_btn">閉じる</string>
+    <string name="popup_success_btn">完了</string>
+
+    <string name="toast_success_upload">ストーリーのアップロードに成功しました</string>
+
+    <string name="error_invalid_email">有効なメールアドレスを入力してください</string>
+    <string name="error_password_too_short">パスワードは8文字以上で入力してください</string>
+
+    <string name="error_empty_description">説明を入力してください</string>
+    <string name="error_empty_image">画像が選択されていません</string>
+
+    <string name="error_open_camera">カメラを開くことができませんでした。</string>
+
+    <string name="success_take_picture">写真を正常に撮影しました。</string>
+    <string name="error_take_picture">写真の撮影に失敗しました。</string>
+
+    <!-- time -->
+    <string name="time_just_now">たった今</string>
+    <string name="time_minutes_ago">%1$d 分前</string>
+    <string name="time_hours_ago">%1$d 時間前</string>
+    <string name="time_days_ago">%1$d 日前</string>
+    <string name="time_weeks_ago">%1$d 週間前</string>
+    <string name="time_months_ago">%1$d ヶ月前</string>
+
+    <string name="dialog_exit_edit_title">編集をキャンセルしますか？</string>
+    <string name="dialog_exit_edit_message">保存されていない変更は失われます。終了してもよろしいですか？</string>
+    <string name="dialog_exit_edit_positive">終了</string>
+    <string name="dialog_exit_edit_negative">キャンセル</string>
+
+    <string name="selengkapnya">もっと見る</string>
+    <string name="lebih_sedikit">少なく表示</string>
+    <string name="instogram_mobile">Instogram モバイルアプリ体験</string>
+    <string name="simpan">保存</string>
+
+    <string name="avatar_base_url">https://api.dicebear.com/9.x/initials/png?seed=%1$s</string>
+    <string name="masukkan_password_kamu">パスワードを入力してください</string>
+    <string name="masukkan_email_kamu">メールアドレスを入力してください</string>
+    <string name="masukkan_nama_kamu">名前を入力してください</string>
+
+    <string name="bg_auth">bg_auth</string>
+    <string name="back">戻る</string>
+    <string name="add_story">ストーリーを追加</string>
+    <string name="like">いいね</string>
+    <string name="comment">コメント</string>
+    <string name="share">共有</string>
+    <string name="option">オプション</string>
+    <string name="music">音楽</string>
+    <string name="centang">チェック</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="flash">フラッシュ</string>
+    <string name="ganti">変更</string>
+    <string name="take_picture">写真を撮る</string>
+    <string name="filter">フィルター</string>
+    <string name="sticker">ステッカー</string>
+    <string name="simmer">シマー</string>
+    <string name="detail_story">ストーリー詳細</string>
+
+    <string name="_25rb">25k</string>
+    <string name="_5rb">5k</string>
+    <string name="_15rb">15k</string>
+    <string name="instogram_mobile_application_experience">Instogram モバイルアプリ体験</string>
+    <string name="wellcome">ようこそ</string>
+    <string name="belum_punya_akun">アカウントをお持ちでないですか？</string>
+    <string name="daftar_disini">こちらから登録</string>
+    <string name="lupa_password">パスワードをお忘れですか？</string>
+    <string name="login">ログイン</string>
+    <string name="daftarkan_diri_kamu">アカウントを作成</string>
+    <string name="sudah_punya_akun">すでにアカウントをお持ちですか？</string>
+    <string name="login_disini">こちらからログイン</string>
+    <string name="sign_up">サインアップ</string>
+    <string name="story">ストーリー</string>
+    <string name="profile">プロフィール</string>
+    <string name="tambahkan_deskripsi">説明を追加…</string>
+    <string name="posting">投稿</string>
+    <string name="desc_notification_icon">通知アイコンの説明</string>
+    <string name="desc_settings_icon">設定アイコンの説明</string>
+    <string name="instogram_application">Instogramアプリケーション</string>
+    <string name="mode_gelap">ダークモード</string>
+    <string name="ganti_bahasa">言語を変更</string>
+    <string name="indonesia">インドネシア語</string>
+    <string name="appearance">外観</string>
+    <string name="kontak_darurat">緊急連絡先</string>
+    <string name="_287rb">287k</string>
+    <string name="_245rb">245k</string>
+    <string name="disukai_oleh_238rb_orang">238k人が「いいね」しました</string>
+    <string name="_4_jam_yang_lalu">4時間前</string>
+    <string name="story_tidak_tersedia">ストーリーが利用できません</string>
+
+    <string name="pengaturan">設定</string>
+    <string name="privacy">プライバシー</string>
+    <string name="security">セキュリティ</string>
+    <string name="ganti_kata_sandi">パスワードを変更</string>
+    <string name="keluar">ログアウト</string>
+
+</resources>

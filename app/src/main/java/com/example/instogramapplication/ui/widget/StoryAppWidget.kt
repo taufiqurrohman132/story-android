@@ -1,16 +1,15 @@
-package com.example.instogramapplication
+package com.example.instogramapplication.ui.widget
 
-import android.app.ListActivity
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.widget.RemoteViews
-import android.widget.Toast
 import androidx.core.net.toUri
+import com.example.instogramapplication.ui.main.MainActivity
+import com.example.instogramapplication.R
 
 class StoryAppWidget : AppWidgetProvider() {
     override fun onUpdate(
@@ -24,7 +23,7 @@ class StoryAppWidget : AppWidgetProvider() {
         }
     }
 
-    companion object{
+    companion object {
         private const val TOAST_ACTION = "com.dicoding.picodiploma.TOAST_ACTION"
         const val EXTRA_ITEM = "com.dicoding.picodiploma.EXTRA_ITEM"
 
@@ -50,11 +49,12 @@ class StoryAppWidget : AppWidgetProvider() {
                 putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
             }
 
-            val toastPendingIntent = PendingIntent.getBroadcast(context, 0, toastIntent,
+            val toastPendingIntent = PendingIntent.getBroadcast(
+                context, 0, toastIntent,
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                     PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
-                } else 0 )
-
+                } else 0
+            )
 
 
             val openAppIntent = Intent(context, MainActivity::class.java).apply {

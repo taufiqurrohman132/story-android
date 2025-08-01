@@ -7,10 +7,8 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.util.Size
 import android.view.ScaleGestureDetector
-import android.view.View
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -56,7 +54,6 @@ class PostActivity : AppCompatActivity() {
             val isGrantedAll = permission.all { it.value }
             if (isGrantedAll) {
                 val latestImageUri = PostUtils.getLatestImageUri(this)
-                Log.d(TAG, "initView: latest image uri $latestImageUri")
 
                 if (latestImageUri != null)
                     binding.postImageOpenGalery.setImageURI(latestImageUri)
@@ -66,24 +63,22 @@ class PostActivity : AppCompatActivity() {
                 Toast.makeText(this, "Permission request denied", Toast.LENGTH_LONG).show()
             }
         }
+
     // pengacekan
     private fun allPermissionsGranted() =
         REQUIRED_PERMISSION.all {
             ContextCompat.checkSelfPermission(
-            this,
-            it
+                this,
+                it
             ) == PackageManager.PERMISSION_GRANTED
         }
 
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
-    ){ uri ->
-        if (uri != null){
+    ) { uri ->
+        if (uri != null) {
             // Gambar dipilih dari galeri
-            Log.d(TAG, "Photo Picker selected")
             navigateToEdit(uri)
-        }else{
-            Log.d(TAG, "Photo Picker No media selected")
         }
     }
 
@@ -92,9 +87,6 @@ class PostActivity : AppCompatActivity() {
         binding = ActivityPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (!allPermissionsGranted()){
-            Log.d(TAG, "onCreate: not permission")
-        }
         requestPermissionLauncher.launch(REQUIRED_PERMISSION)
 
         startCamera()
@@ -103,23 +95,14 @@ class PostActivity : AppCompatActivity() {
         // back from edit
         supportFragmentManager.addOnBackStackChangedListener {
             val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_countainer)
-            if (currentFragment == null || currentFragment !is EditFragment){
+            if (currentFragment == null || currentFragment !is EditFragment) {
                 // Kalau tidak ada fragment, atau fragment edit sudah hilang
-                Log.d(TAG, "Back to main, restart camera")
                 startCamera()
             }
         }
     }
 
-    private fun initView(){
-        val latestImageUri = PostUtils.getLatestImageUri(this)
-        Log.d(TAG, "initView: latest image uri $latestImageUri")
-
-        if (latestImageUri != null)
-            binding.postImageOpenGalery.setImageURI(latestImageUri)
-    }
-
-    private fun setupListener(){
+    private fun setupListener() {
         binding.apply {
             postImageOpenGalery.setOnClickListener { openGalery() }
             postBtnSwitch.setOnClickListener { switchCamera() }
@@ -129,13 +112,13 @@ class PostActivity : AppCompatActivity() {
         }
     }
 
-    private fun openGalery(){
+    private fun openGalery() {
         launcherGallery.launch(
             PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
         )
     }
 
-    private fun startCamera(){
+    private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
 
         cameraProviderFuture.addListener({
@@ -161,22 +144,21 @@ class PostActivity : AppCompatActivity() {
                 )!!
 
                 setupCameraToZoom() // untuk bisa di zoom
-            }catch (exc: Exception) {
+            } catch (exc: Exception) {
                 Toast.makeText(
                     this@PostActivity,
                     getString(R.string.error_open_camera),
                     Toast.LENGTH_SHORT
                 ).show()
-                Log.e(TAG, "startCamera: ${exc.message}")
             }
         }, ContextCompat.getMainExecutor(this))
     }
 
-    private fun stopCamera(){
+    private fun stopCamera() {
         cameraProvider?.unbindAll()
     }
 
-    private fun switchCamera(){
+    private fun switchCamera() {
         cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA)
             CameraSelector.DEFAULT_FRONT_CAMERA
         else
@@ -186,8 +168,8 @@ class PostActivity : AppCompatActivity() {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun setupCameraToZoom(){
-        val listener = object : ScaleGestureDetector.SimpleOnScaleGestureListener(){
+    private fun setupCameraToZoom() {
+        val listener = object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
             override fun onScale(detector: ScaleGestureDetector): Boolean {
                 val currentZoomRatio = camera.cameraInfo.zoomState.value?.zoomRatio ?: 1f
                 val delta = detector.scaleFactor
@@ -204,7 +186,7 @@ class PostActivity : AppCompatActivity() {
         }
     }
 
-    private fun takePhoto(){
+    private fun takePhoto() {
         val imageCapture = this.imageCapture ?: return
 
         val photoFile = PostUtils.createCustomTempFile(this)
@@ -214,7 +196,7 @@ class PostActivity : AppCompatActivity() {
         imageCapture.takePicture(
             outputOptions,
             ContextCompat.getMainExecutor(this),
-            object : ImageCapture.OnImageSavedCallback{
+            object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     Toast.makeText(
                         this@PostActivity,
@@ -226,7 +208,6 @@ class PostActivity : AppCompatActivity() {
                     uri?.let {
                         navigateToEdit(uri)
                     }
-                    Log.d(TAG, "onImageSaved: result $output")
                 }
 
                 override fun onError(exc: ImageCaptureException) {
@@ -241,21 +222,13 @@ class PostActivity : AppCompatActivity() {
         )
     }
 
-    private fun navigateToEdit(uri: Uri){
-        Log.d(TAG, "navigateToEdit: ")
+    private fun navigateToEdit(uri: Uri) {
         val fragment = EditFragment.newInstance(uri.toString())
-        Log.d(TAG, "navigateToEdit: fagment $fragment")
 
         stopCamera()
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_countainer, fragment)
             .addToBackStack(null)
             .commit()
-    }
-
-
-
-    companion object{
-        private val TAG = PostActivity::class.java.simpleName
     }
 }

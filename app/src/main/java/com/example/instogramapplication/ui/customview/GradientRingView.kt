@@ -1,4 +1,4 @@
-package com.example.instogramapplication.widget
+package com.example.instogramapplication.ui.customview
 
 import android.content.Context
 import android.graphics.Canvas

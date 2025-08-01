@@ -1,0 +1,139 @@
+<resources>
+    <string name="app_name">InstogramApplication</string>
+
+    <!-- Error handling -->
+    <string name="error_400">¡Ups! Ocurrió un error al solicitar los datos. Por favor, verifica de nuevo.</string>
+    <string name="error_403">¡Ups! No tienes permiso para ver estos datos.</string>
+    <string name="error_404">No pudimos encontrar lo que estás buscando.</string>
+    <string name="error_408">¡Demasiado lento! Revisa tu conexión a internet e inténtalo de nuevo.</string>
+    <string name="error_500">¡Ups! Hay un problema con el servidor. Espera un momento.</string>
+    <string name="error_503">¡El servidor está ocupado! Intenta más tarde.</string>
+    <string name="error_else">¡Ups! Ocurrió un error al solicitar los datos. Por favor, verifica de nuevo.</string>
+    <string name="error_koneksi">Sin conexión a Internet. Verifica tu red.</string>
+    <string name="error_takterduga">Ocurrió un error inesperado. Intenta más tarde.</string>
+
+    <string name="hello_blank_fragment">Hola fragmento en blanco</string>
+    <string name="title_home">Instogram</string>
+    <string name="next">siguiente</string>
+
+    <string name="confirm_title_logout">Confirmación</string>
+    <string name="confirm_logout_message">¿Estás seguro de que deseas cerrar sesión?</string>
+    <string name="yes">Sí</string>
+    <string name="cancel">Cancelar</string>
+
+    <string name="appwidget_text">EJEMPLO</string>
+    <string name="add_widget">Agregar widget</string>
+    <string name="app_widget_description">¡Mantente actualizado con las últimas historias! Míralo directamente desde el widget sin abrir la app.</string>
+
+    <string name="hastag">#%1$s #InstogramApp #MobileApp #AndroidDeveloper #UXDesign #AppExperience #MVVMArchitecture</string>
+    <string name="cerita_anda">Tu Historia</string>
+
+    <string name="logout">Cerrar sesión</string>
+    <string name="logout_message">¿Estás seguro de que deseas cerrar sesión?\nEsta acción no se puede deshacer</string>
+
+    <!-- popup -->
+    <string name="popup_error_desc">Ocurrió un error inesperado. Intenta más tarde.</string>
+    <string name="popup_warning_desc">Tu verificación está bajo observación. Intenta más tarde.</string>
+    <string name="popup_success_desc">Has completado la tarea exitosamente.</string>
+
+    <string name="popup_error_title">Ups</string>
+    <string name="popup_warning_title">Pendiente</string>
+    <string name="popup_success_title">Bien hecho</string>
+
+    <string name="popup_error_btn">Cerrar</string>
+    <string name="popup_warning_btn">Cerrar</string>
+    <string name="popup_success_btn">Hecho</string>
+
+    <string name="toast_success_upload">Historia subida exitosamente</string>
+
+    <string name="error_invalid_email">Introduce un formato de correo electrónico válido</string>
+    <string name="error_password_too_short">La contraseña tiene menos de 8 caracteres</string>
+
+    <string name="error_empty_description">Por favor, ingresa una descripción</string>
+    <string name="error_empty_image">Imagen vacía</string>
+
+    <string name="error_open_camera">No se pudo abrir la cámara.</string>
+
+    <string name="success_take_picture">Foto tomada con éxito.</string>
+    <string name="error_take_picture">No se pudo tomar la foto.</string>
+
+    <!-- time -->
+    <string name="time_just_now">ahora mismo</string>
+    <string name="time_minutes_ago">hace %1$d minutos</string>
+    <string name="time_hours_ago">hace %1$d horas</string>
+    <string name="time_days_ago">hace %1$d días</string>
+    <string name="time_weeks_ago">hace %1$d semanas</string>
+    <string name="time_months_ago">hace %1$d meses</string>
+
+    <string name="dialog_exit_edit_title">¿Cancelar edición?</string>
+    <string name="dialog_exit_edit_message">Los cambios no guardados se perderán. ¿Estás seguro de que quieres salir?</string>
+    <string name="dialog_exit_edit_positive">Salir</string>
+    <string name="dialog_exit_edit_negative">Cancelar</string>
+
+    <string name="selengkapnya">Ver más</string>
+    <string name="lebih_sedikit">Ver menos</string>
+    <string name="instogram_mobile">Experiencia de la aplicación móvil Instogram</string>
+    <string name="simpan">Guardar</string>
+
+    <string name="avatar_base_url">https://api.dicebear.com/9.x/initials/png?seed=%1$s</string>
+    <string name="masukkan_password_kamu">Ingresa tu contraseña</string>
+    <string name="masukkan_email_kamu">Ingresa tu correo electrónico</string>
+    <string name="masukkan_nama_kamu">Ingresa tu nombre</string>
+
+    <string name="bg_auth">bg_auth</string>
+    <string name="back">atrás</string>
+    <string name="add_story">añadir historia</string>
+    <string name="like">me gusta</string>
+    <string name="comment">comentar</string>
+    <string name="share">compartir</string>
+    <string name="option">opción</string>
+    <string name="music">música</string>
+    <string name="centang">verificar</string>
+    <string name="google">google</string>
+    <string name="facebook">facebook</string>
+    <string name="flash">flash</string>
+    <string name="ganti">cambiar</string>
+    <string name="take_picture">tomar foto</string>
+    <string name="filter">filtro</string>
+    <string name="sticker">pegatina</string>
+    <string name="simmer">simmer</string>
+    <string name="detail_story">Detalle de la historia</string>
+
+    <string name="_25rb">25k</string>
+    <string name="_5rb">5k</string>
+    <string name="_15rb">15k</string>
+    <string name="instogram_mobile_application_experience">Experiencia de la aplicación móvil Instogram</string>
+    <string name="wellcome">Bienvenido</string>
+    <string name="belum_punya_akun">¿No tienes una cuenta?</string>
+    <string name="daftar_disini">Regístrate aquí</string>
+    <string name="lupa_password">¿Olvidaste tu contraseña?</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="daftarkan_diri_kamu">Regístrate</string>
+    <string name="sudah_punya_akun">¿Ya tienes una cuenta?</string>
+    <string name="login_disini">Inicia sesión aquí</string>
+    <string name="sign_up">Registrarse</string>
+    <string name="story">Historia</string>
+    <string name="profile">Perfil</string>
+    <string name="tambahkan_deskripsi">Agrega una descripción..</string>
+    <string name="posting">Publicar</string>
+    <string name="desc_notification_icon">icono_de_notificación_desc</string>
+    <string name="desc_settings_icon">icono_de_configuración_desc</string>
+    <string name="instogram_application">Aplicación Instogram</string>
+    <string name="mode_gelap">Modo Oscuro</string>
+    <string name="ganti_bahasa">Cambiar idioma</string>
+    <string name="indonesia">Indonesia</string>
+    <string name="appearance">Apariencia</string>
+    <string name="kontak_darurat">Contacto de emergencia</string>
+    <string name="_287rb">287k</string>
+    <string name="_245rb">245k</string>
+    <string name="disukai_oleh_238rb_orang">Le gustó a 238k personas</string>
+    <string name="_4_jam_yang_lalu">hace 4 horas</string>
+    <string name="story_tidak_tersedia">Historia no disponible</string>
+
+    <string name="pengaturan">Configuración</string>
+    <string name="privacy">Privacidad</string>
+    <string name="security">Seguridad</string>
+    <string name="ganti_kata_sandi">Cambiar contraseña</string>
+    <string name="keluar">Cerrar sesión</string>
+
+</resources>

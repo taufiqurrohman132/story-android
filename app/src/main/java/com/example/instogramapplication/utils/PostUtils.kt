@@ -5,7 +5,6 @@ import android.content.Context
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
-import android.view.View
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -17,12 +16,12 @@ object PostUtils {
     private const val FILENAME_FORMAT = "yyyyMMdd_HHmmss"
     private val timeStamp: String = SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(Date())
 
-    fun createCustomTempFile(context: Context): File{
+    fun createCustomTempFile(context: Context): File {
         val fileDir = context.externalCacheDir
         return File.createTempFile(timeStamp, ".jpg", fileDir)
     }
 
-    fun uriToFile(imageUri: Uri, context: Context): File{
+    fun uriToFile(imageUri: Uri, context: Context): File {
         val myFile = createCustomTempFile(context)
         val inputStream = context.contentResolver.openInputStream(imageUri) as InputStream
         val outputStream = FileOutputStream(myFile)
@@ -62,11 +61,6 @@ object PostUtils {
         }
 
         return null
-    }
-
-    fun isKeyboardVisible(rootView: View): Boolean{
-        val heightDiff = rootView.rootView.height - rootView.height
-        return heightDiff > 200
     }
 
 }

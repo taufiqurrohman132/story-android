@@ -2,9 +2,7 @@ package com.example.instogramapplication.utils
 
 import android.app.Dialog
 import android.content.Context
-import android.graphics.Color
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import com.example.instogramapplication.R
 import com.example.instogramapplication.utils.constants.DialogType
 import com.saadahmedev.popupdialog.PopupDialog
@@ -17,7 +15,7 @@ object DialogUtils {
         }
     }
 
-    fun confirmDialog(context: Context, heading: String, desc: String, listener: () -> Unit){
+    fun confirmDialog(context: Context, heading: String, desc: String, listener: () -> Unit) {
         PopupDialog.getInstance(context)
             .standardDialogBuilder()
             .createIOSDialog()
@@ -46,11 +44,11 @@ object DialogUtils {
         description: String,
         textButton: String,
         onDismiss: (Dialog) -> Unit = {}
-    ){
+    ) {
         val builder = PopupDialog.getInstance(context)
             .statusDialogBuilder()
 
-        val dialog = when(status){
+        val dialog = when (status) {
             DialogType.SUCCESS -> builder.createSuccessDialog()
             DialogType.WARNING -> builder.createWarningDialog()
             DialogType.ERROR -> builder.createErrorDialog()

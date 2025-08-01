@@ -1,0 +1,162 @@
+<resources>
+    <string name="app_name">تطبيق إنستوجرام</string>
+
+    <!-- Error Handling -->
+    <string name="error_400">عذرًا! حدث خطأ أثناء طلب البيانات. يرجى التحقق مرة أخرى.</string>
+    <string name="error_403">عذرًا! ليس لديك صلاحية للوصول إلى هذه البيانات.</string>
+    <string name="error_404">لم نتمكن من العثور على ما تبحث عنه.</string>
+    <string name="error_408">الاتصال بطيء! تحقق من اتصال الإنترنت وحاول مرة أخرى.</string>
+    <string name="error_500">عذرًا! حدث خطأ في الخادم. يرجى المحاولة لاحقًا.</string>
+    <string name="error_503">الخادم مشغول! يرجى المحاولة لاحقًا.</string>
+    <string name="error_else">عذرًا! حدث خطأ أثناء طلب البيانات. يرجى التحقق مرة أخرى.</string>
+    <string name="error_koneksi">لا يوجد اتصال بالإنترنت. يرجى التحقق من الشبكة.</string>
+    <string name="error_takterduga">حدث خطأ غير متوقع. يرجى المحاولة لاحقًا.</string>
+
+    <!-- Placeholder -->
+    <string name="hello_blank_fragment">مرحبًا بالمقطع الفارغ</string>
+
+    <!-- Titles -->
+    <string name="title_home">إنستوغرام</string>
+    <string name="next">التالي</string>
+
+    <!-- Logout Confirmation -->
+    <string name="confirm_title_logout">تأكيد</string>
+    <string name="confirm_logout_message">هل أنت متأكد أنك تريد تسجيل الخروج؟</string>
+    <string name="yes">نعم</string>
+    <string name="cancel">إلغاء</string>
+
+    <!-- Widget -->
+    <string name="appwidget_text">مثال</string>
+    <string name="add_widget">إضافة ويدجت</string>
+    <string name="app_widget_description">ابقَ على اطلاع بأحدث القصص! شاهدها مباشرة من الويدجت دون فتح التطبيق.</string>
+
+    <!-- Hashtag -->
+    <string name="hastag">#%1$s #تطبيق_إنستوجرام #تطبيق_جوال #تطوير_أندرويد #تجربة_المستخدم #تجربة_التطبيق #معمارية_MVVM</string>
+
+    <!-- Story -->
+    <string name="cerita_anda">قصتك</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="logout_message">هل أنت متأكد أنك تريد تسجيل الخروج؟ \nلا يمكن التراجع عن هذا الإجراء</string>
+
+    <!-- Popup -->
+    <string name="popup_error_desc">حدث خطأ غير متوقع. يرجى المحاولة لاحقًا.</string>
+    <string name="popup_warning_desc">يتم الآن مراجعة التحقق الخاص بك. يرجى المحاولة لاحقًا.</string>
+    <string name="popup_success_desc">تمت العملية بنجاح.</string>
+
+    <string name="popup_error_title">عذرًا</string>
+    <string name="popup_warning_title">قيد الانتظار</string>
+    <string name="popup_success_title">نجاح</string>
+
+    <string name="popup_error_btn">إغلاق</string>
+    <string name="popup_warning_btn">إغلاق</string>
+    <string name="popup_success_btn">تم</string>
+
+    <!-- Toast -->
+    <string name="toast_success_upload">تم تحميل القصة بنجاح</string>
+
+    <!-- Validation -->
+    <string name="error_invalid_email">يرجى إدخال بريد إلكتروني صالح</string>
+    <string name="error_password_too_short">كلمة المرور يجب أن تكون 8 أحرف على الأقل</string>
+    <string name="error_empty_description">يرجى إدخال وصف</string>
+    <string name="error_empty_image">الصورة فارغة</string>
+    <string name="error_open_camera">فشل في فتح الكاميرا.</string>
+    <string name="success_take_picture">تم التقاط الصورة بنجاح.</string>
+    <string name="error_take_picture">فشل في التقاط الصورة.</string>
+
+    <!-- Time -->
+    <string name="time_just_now">الآن</string>
+    <string name="time_minutes_ago">منذ %1$d دقيقة</string>
+    <string name="time_hours_ago">منذ %1$d ساعة</string>
+    <string name="time_days_ago">منذ %1$d يومًا</string>
+    <string name="time_weeks_ago">منذ %1$d أسبوعًا</string>
+    <string name="time_months_ago">منذ %1$d شهرًا</string>
+
+    <!-- Edit Dialog -->
+    <string name="dialog_exit_edit_title">إلغاء التعديل؟</string>
+    <string name="dialog_exit_edit_message">سيتم فقدان التغييرات غير المحفوظة. هل تريد الخروج؟</string>
+    <string name="dialog_exit_edit_positive">خروج</string>
+    <string name="dialog_exit_edit_negative">إلغاء</string>
+
+    <!-- Extra Text -->
+    <string name="selengkapnya">المزيد</string>
+    <string name="lebih_sedikit">أقل</string>
+    <string name="instogram_mobile">تجربة تطبيق إنستوجرام</string>
+    <string name="simpan">حفظ</string>
+
+    <!-- Base URL Avatar -->
+    <string name="avatar_base_url">https://api.dicebear.com/9.x/initials/png?seed=%1$s</string>
+
+    <!-- Form -->
+    <string name="masukkan_password_kamu">أدخل كلمة المرور</string>
+    <string name="masukkan_email_kamu">أدخل بريدك الإلكتروني</string>
+    <string name="masukkan_nama_kamu">أدخل اسمك</string>
+
+    <!-- Asset -->
+    <string name="bg_auth">خلفية_التوثيق</string>
+    <string name="back">رجوع</string>
+    <string name="add_story">أضف قصة</string>
+    <string name="like">إعجاب</string>
+    <string name="comment">تعليق</string>
+    <string name="share">مشاركة</string>
+    <string name="option">خيارات</string>
+    <string name="music">موسيقى</string>
+    <string name="centang">تم</string>
+    <string name="google">جوجل</string>
+    <string name="facebook">فيسبوك</string>
+    <string name="flash">فلاش</string>
+    <string name="ganti">تغيير</string>
+    <string name="take_picture">التقاط صورة</string>
+    <string name="filter">فلتر</string>
+    <string name="sticker">ملصق</string>
+    <string name="simmer">توهج</string>
+    <string name="detail_story">تفاصيل القصة</string>
+
+    <!-- Numbers -->
+    <string name="_25rb">٢٥ ألف</string>
+    <string name="_5rb">٥ آلاف</string>
+    <string name="_15rb">١٥ ألف</string>
+    <string name="_287rb">٢٨٧ ألف</string>
+    <string name="_245rb">٢٤٥ ألف</string>
+    <string name="disukai_oleh_238rb_orang">أُعجب بها ٢٣٨ ألف شخص</string>
+    <string name="_4_jam_yang_lalu">منذ ٤ ساعات</string>
+
+    <!-- Access -->
+    <string name="instogram_mobile_application_experience">تجربة تطبيق إنستوجرام</string>
+    <string name="wellcome">مرحبًا</string>
+    <string name="belum_punya_akun">لا تملك حسابًا؟</string>
+    <string name="daftar_disini">سجّل هنا</string>
+    <string name="lupa_password">هل نسيت كلمة المرور؟</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="daftarkan_diri_kamu">سجّل نفسك</string>
+    <string name="sudah_punya_akun">لديك حساب؟</string>
+    <string name="login_disini">تسجيل الدخول هنا</string>
+    <string name="sign_up">تسجيل</string>
+
+    <!-- Navigation -->
+    <string name="story">قصة</string>
+    <string name="profile">الملف الشخصي</string>
+    <string name="tambahkan_deskripsi">أضف وصفًا..</string>
+    <string name="posting">نشر</string>
+
+    <!-- Accessibility -->
+    <string name="desc_notification_icon">رمز الإشعارات</string>
+    <string name="desc_settings_icon">رمز الإعدادات</string>
+
+    <!-- Settings -->
+    <string name="instogram_application">تطبيق إنستوجرام</string>
+    <string name="mode_gelap">الوضع الليلي</string>
+    <string name="ganti_bahasa">تغيير اللغة</string>
+    <string name="indonesia">الإندونيسية</string>
+    <string name="appearance">المظهر</string>
+    <string name="kontak_darurat">جهة الاتصال الطارئة</string>
+
+    <!-- Story Not Available -->
+    <string name="story_tidak_tersedia">القصة غير متوفرة</string>
+
+    <string name="pengaturan">الإعدادات</string>
+    <string name="privacy">الخصوصية</string>
+    <string name="security">الأمان</string>
+    <string name="ganti_kata_sandi">تغيير كلمة المرور</string>
+    <string name="keluar">تسجيل الخروج</string>
+
+</resources>

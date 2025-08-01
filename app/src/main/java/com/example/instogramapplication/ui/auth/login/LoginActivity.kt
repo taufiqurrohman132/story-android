@@ -5,13 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.DecelerateInterpolator
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.example.instogramapplication.MainActivity
+import com.example.instogramapplication.ui.main.MainActivity
 import com.example.instogramapplication.R
-import com.example.instogramapplication.ui.story.list.ListStoryFragment
 import com.example.instogramapplication.databinding.ActivityLoginBinding
 import com.example.instogramapplication.ui.auth.signup.SignUpActivity
 import com.example.instogramapplication.utils.DialogUtils
@@ -40,11 +38,9 @@ class LoginActivity : AppCompatActivity() {
         initView()
         setupListener()
         observer()
-
-
     }
 
-    private fun initView(){
+    private fun initView() {
         // setup
         binding.apply {
             loginInlayEmail.apply {
@@ -71,35 +67,37 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupListener(){
+    private fun setupListener() {
         binding.apply {
             loginBtnLogin.setOnClickListener { handlerLogin() }
             loginTvDaftar.setOnClickListener { navigateToRegister() }
         }
     }
 
-    private fun handlerLogin(){
+    private fun handlerLogin() {
         val email = binding.loginEdtEmail.text.toString().trim()
         val pass = binding.loginEdtPass.text.toString().trim()
         doLogin(email, pass)
     }
 
-    private fun doLogin(email: String, pass: String){
+    private fun doLogin(email: String, pass: String) {
         viewModel.login(email, pass)
     }
 
     private fun observer() {
-        viewModel.loginResult.observe(this){ story ->
-            when(story){
+        viewModel.loginResult.observe(this) { story ->
+            when (story) {
                 is Resource.Loading -> {
                     // tampilkan progress bar
                     showLoading(true)
                 }
+
                 is Resource.Success -> {
                     // pindah ke LoginActivity atau Home
                     showLoading(false)
                     showSuccess()
                 }
+
                 is Resource.Error -> {
                     // tampilkan error
                     showLoading(false)
@@ -107,19 +105,21 @@ class LoginActivity : AppCompatActivity() {
                         showError(story.message)
                     }
                 }
+
                 is Resource.ErrorConnection -> {
                     // tampilkan error
                     showLoading(false)
                     showToast(this.getString(R.string.error_koneksi), this)
                 }
-                else ->{
+
+                else -> {
                     showLoading(false)
                 }
             }
         }
     }
 
-    private fun navigateToRegister(){
+    private fun navigateToRegister() {
         val intent = Intent(this, SignUpActivity::class.java)
         startActivity(intent)
     }
@@ -138,7 +138,7 @@ class LoginActivity : AppCompatActivity() {
             this.getString(R.string.popup_error_title),
             desc,
             this.getString(R.string.popup_error_btn)
-        ){
+        ) {
             it.dismiss()
             binding.dimOverlay.visibility = View.INVISIBLE
 
@@ -152,7 +152,7 @@ class LoginActivity : AppCompatActivity() {
             this.getString(R.string.popup_success_title),
             this.getString(R.string.popup_success_desc),
             this.getString(R.string.popup_success_btn),
-        ){
+        ) {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
 
@@ -160,7 +160,8 @@ class LoginActivity : AppCompatActivity() {
             binding.dimOverlay.visibility = View.INVISIBLE
         }
     }
-    companion object{
+
+    companion object {
         val TAG = LoginActivity::class.java.simpleName
     }
 }

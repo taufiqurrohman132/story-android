@@ -5,7 +5,7 @@
     android:initialLayout="@layout/story_app_widget"
     android:minHeight="100dp"
     android:minWidth="160dp"
-    android:previewImage="@drawable/example_appwidget_preview"
+    android:previewImage="@drawable/banner_widget"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="0"
     android:widgetCategory="home_screen" />

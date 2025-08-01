@@ -1,0 +1,130 @@
+<resources>
+    <string name="app_name">InstogramApplication</string>
+
+    <!-- Error handling -->
+    <string name="error_400">Waduh! Ana kesalahan nalika njaluk data. Coba priksa maneh.</string>
+    <string name="error_403">Maaf! Sampeyan ora nduweni ijin kanggo ndeleng data iki.</string>
+    <string name="error_404">Kita ora nemokake apa sing sampeyan goleki.</string>
+    <string name="error_408">Suwe banget! Coba priksa koneksi internetmu lan coba maneh.</string>
+    <string name="error_500">Waduh! Ana masalah saka server. Mangga enteni sedhela.</string>
+    <string name="error_503">Server sibuk banget! Coba maneh mengko.</string>
+    <string name="error_else">Waduh! Ana kesalahan nalika njaluk data. Coba priksa maneh.</string>
+    <string name="error_koneksi">Ora ana sambungan internet. Priksa jaringan sampeyan.</string>
+    <string name="error_takterduga">Kesalahan ora dikarepke kedadeyan. Coba maneh mengko.</string>
+
+    <!-- Lainnya -->
+    <string name="hello_blank_fragment">Halo fragment kosong</string>
+    <string name="title_home">Instogram</string>
+    <string name="next">terus</string>
+    <string name="confirm_title_logout">Konfirmasi</string>
+    <string name="confirm_logout_message">Apa sampeyan yakin arep metu?</string>
+    <string name="yes">Ya</string>
+    <string name="cancel">Batal</string>
+    <string name="appwidget_text">CONTOH</string>
+    <string name="add_widget">Tambah widget</string>
+    <string name="app_widget_description">Tetep update karo cerita anyar! Delengen langsung saka widget tanpa mbukak aplikasi.</string>
+    <string name="hastag">#%1$s #InstogramApp #MobileApp #AndroidDeveloper #UXDesign #AppExperience #MVVMArchitecture</string>
+    <string name="cerita_anda">Critamu</string>
+
+    <string name="logout">Metu</string>
+    <string name="logout_message">Apa sampeyan yakin arep metu? Tindakan iki ora bisa dibatalake</string>
+
+    <!-- popup -->
+    <string name="popup_error_desc">Kesalahan ora dikarepke kedadeyan. Coba maneh mengko.</string>
+    <string name="popup_warning_desc">Verifikasimu isih dipriksa. Coba maneh mengko.</string>
+    <string name="popup_success_desc">Sampeyan wis rampung nindakake tugas kasebut.</string>
+    <string name="popup_error_title">Waduh</string>
+    <string name="popup_warning_title">Nunggu</string>
+    <string name="popup_success_title">Apik Banget</string>
+    <string name="popup_error_btn">Nutup</string>
+    <string name="popup_warning_btn">Nutup</string>
+    <string name="popup_success_btn">Rampung</string>
+
+    <string name="toast_success_upload">Crita kasil diunggah</string>
+
+    <string name="error_invalid_email">Mangga lebokna alamat email sing bener</string>
+    <string name="error_password_too_short">Sandi kurang saka 8 karakter</string>
+    <string name="error_empty_description">Mangga lebokna deskripsi</string>
+    <string name="error_empty_image">Gambar kosong</string>
+    <string name="error_open_camera">Gagal mbukak kamera.</string>
+    <string name="success_take_picture">Kasil njupuk gambar.</string>
+    <string name="error_take_picture">Gagal njupuk gambar.</string>
+
+    <!-- time -->
+    <string name="time_just_now">saiki</string>
+    <string name="time_minutes_ago">%1$d menit kepungkur</string>
+    <string name="time_hours_ago">%1$d jam kepungkur</string>
+    <string name="time_days_ago">%1$d dina kepungkur</string>
+    <string name="time_weeks_ago">%1$d minggu kepungkur</string>
+    <string name="time_months_ago">%1$d wulan kepungkur</string>
+
+    <string name="dialog_exit_edit_title">Batal Suntingan?</string>
+    <string name="dialog_exit_edit_message">Owahan sing durung disimpen bakal ilang. Yakin arep metu?</string>
+    <string name="dialog_exit_edit_positive">Metu</string>
+    <string name="dialog_exit_edit_negative">Batal</string>
+
+    <string name="selengkapnya">Luwih lengkap</string>
+    <string name="lebih_sedikit">Luwih sithik</string>
+    <string name="instogram_mobile">Pengalaman Aplikasi Instogram</string>
+    <string name="simpan">Simpen</string>
+    <string name="avatar_base_url">https://api.dicebear.com/9.x/initials/png?seed=%1$s</string>
+    <string name="masukkan_password_kamu">Lebokna Sandi Sampeyan</string>
+    <string name="masukkan_email_kamu">Lebokna Email Sampeyan</string>
+    <string name="masukkan_nama_kamu">Lebokna Jeneng Sampeyan</string>
+
+    <string name="bg_auth">bg_auth</string>
+    <string name="back">bali</string>
+    <string name="add_story">tambah crita</string>
+    <string name="like">seneng</string>
+    <string name="comment">komentar</string>
+    <string name="share">barengake</string>
+    <string name="option">pilihan</string>
+    <string name="music">musik</string>
+    <string name="centang">centang</string>
+    <string name="google">google</string>
+    <string name="facebook">facebook</string>
+    <string name="flash">flash</string>
+    <string name="ganti">ganti</string>
+    <string name="take_picture">njupuk gambar</string>
+    <string name="filter">filter</string>
+    <string name="sticker">stiker</string>
+    <string name="simmer">simmer</string>
+    <string name="detail_story">Detail Crita</string>
+    <string name="_25rb">25 ewu</string>
+    <string name="_5rb">5 ewu</string>
+    <string name="_15rb">15 ewu</string>
+    <string name="instogram_mobile_application_experience">Pengalaman Aplikasi Seluler Instogram</string>
+    <string name="wellcome">Sugeng Rawuh</string>
+    <string name="belum_punya_akun">Durung duwe akun?</string>
+    <string name="daftar_disini">Daftar Kene</string>
+    <string name="lupa_password">Lali sandi?</string>
+    <string name="login">Mlebu</string>
+    <string name="daftarkan_diri_kamu">Daftaraké Awakému</string>
+    <string name="sudah_punya_akun">Wis duwe akun?</string>
+    <string name="login_disini">Mlebu Kene</string>
+    <string name="sign_up">Daftar</string>
+    <string name="story">Crita</string>
+    <string name="profile">Profil</string>
+    <string name="tambahkan_deskripsi">Tambahaké deskripsi..</string>
+    <string name="posting">Posting</string>
+    <string name="desc_notification_icon">ikon_notifikasi</string>
+    <string name="desc_settings_icon">ikon_pengaturan</string>
+    <string name="instogram_application">Aplikasi Instogram</string>
+    <string name="mode_gelap">Mode Peteng</string>
+    <string name="ganti_bahasa">Ganti Basa</string>
+    <string name="indonesia">Indonesia</string>
+    <string name="appearance">Tampilan</string>
+    <string name="kontak_darurat">Kontak Darurat</string>
+    <string name="_287rb">287 ewu</string>
+    <string name="_245rb">245 ewu</string>
+    <string name="disukai_oleh_238rb_orang">Disenengi déning 238 ewu wong</string>
+    <string name="_4_jam_yang_lalu">4 jam kepungkur</string>
+    <string name="story_tidak_tersedia">Crita ora kasedhiya</string>
+
+    <string name="pengaturan">Pengaturan</string>
+    <string name="privacy">Privasi</string>
+    <string name="security">Kaamanan</string>
+    <string name="ganti_kata_sandi">Ganti Sandi</string>
+    <string name="keluar">Metu</string>
+
+</resources>

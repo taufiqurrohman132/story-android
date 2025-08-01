@@ -1,42 +1,30 @@
 package com.example.instogramapplication.ui.story.post
 
 import android.annotation.SuppressLint
-import android.app.Dialog
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.instogramapplication.MainActivity
+import com.example.instogramapplication.ui.main.MainActivity
 import com.example.instogramapplication.R
 import com.example.instogramapplication.databinding.FragmentEditBinding
-import com.example.instogramapplication.ui.auth.login.LoginActivity
-import com.example.instogramapplication.ui.story.list.ListStoryFragment
 import com.example.instogramapplication.utils.DialogUtils
 import com.example.instogramapplication.utils.DialogUtils.showToast
 import com.example.instogramapplication.utils.ExtensionUtils.keyboardVisibilityFlow
 import com.example.instogramapplication.utils.ExtensionUtils.reduceFileImage
 import com.example.instogramapplication.utils.ExtensionUtils.setGradientText
 import com.example.instogramapplication.utils.PostUtils
-import com.example.instogramapplication.utils.PostUtils.isKeyboardVisible
 import com.example.instogramapplication.utils.Resource
 import com.example.instogramapplication.utils.constants.DialogType
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
@@ -53,7 +41,7 @@ class EditFragment : Fragment() {
         UserViewModelFactory.getInstance(requireActivity())
     }
 
-    private val viewModel: EditViewModel by viewModels{
+    private val viewModel: EditViewModel by viewModels {
         factory
     }
 
@@ -73,7 +61,6 @@ class EditFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, "onViewCreated: fragment")
 
         initView()
         setupListener()
@@ -85,10 +72,8 @@ class EditFragment : Fragment() {
         _binding = null
     }
 
-
-
     @SuppressLint("ClickableViewAccessibility")
-    private fun initView(){
+    private fun initView() {
         // terima uri gambar dari post act
         currentImageUri?.let { uri ->
             binding.imgvShowFromGalery.setImageURI(uri)
@@ -112,9 +97,9 @@ class EditFragment : Fragment() {
 
         // cek keyboard
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 binding.root.keyboardVisibilityFlow().collect { isVisible ->
-                    binding?.let {
+                    binding.let {
                         binding.dimOverlayCamera.isVisible = isVisible
                     }
                 }
@@ -122,33 +107,43 @@ class EditFragment : Fragment() {
         }
     }
 
-    private fun setupListener(){
+    private fun setupListener() {
         binding.apply {
             postBtnBackToTake.setOnClickListener { confirmBack() }
             postBtnPosting.setOnClickListener { uploadStory() }
         }
     }
 
-    private fun observer(){
+    private fun observer() {
         lifecycleScope.launch {
-            viewModel.uploadState.collect{ result ->
-                Log.d(TAG, "observer: upload state $result")
-                when(result){
+            viewModel.uploadState.collect { result ->
+                when (result) {
                     is Resource.Loading -> showLoading(true)
                     is Resource.Error -> {
                         showError()
                         showLoading(false)
                     }
+
                     is Resource.Success -> {
                         showSuccess()
                         showLoading(false)
                     }
-                    is Resource.Empty -> { showLoading(false)}
+
+                    is Resource.Empty -> {
+                        showLoading(false)
+                    }
+
                     is Resource.ErrorConnection -> {
                         showLoading(false)
-                        showToast(requireContext().getString(R.string.error_koneksi), requireActivity())
+                        showToast(
+                            requireContext().getString(R.string.error_koneksi),
+                            requireActivity()
+                        )
                     }
-                    else -> { showLoading(false)}
+
+                    else -> {
+                        showLoading(false)
+                    }
                 }
             }
         }
@@ -161,7 +156,7 @@ class EditFragment : Fragment() {
             requireActivity().getString(R.string.popup_error_title),
             requireActivity().getString(R.string.popup_error_desc),
             requireActivity().getString(R.string.popup_error_btn)
-        ){
+        ) {
             it.dismiss()
             binding.dimOverlay.visibility = View.INVISIBLE
 
@@ -175,7 +170,7 @@ class EditFragment : Fragment() {
             requireActivity().getString(R.string.popup_success_title),
             requireActivity().getString(R.string.popup_success_desc),
             requireActivity().getString(R.string.popup_success_btn),
-        ){
+        ) {
             showToast(requireActivity().getString(R.string.toast_success_upload), requireActivity())
             uploadSuccess()
             it.dismiss()
@@ -183,21 +178,21 @@ class EditFragment : Fragment() {
         }
     }
 
-    private fun confirmBack(){
+    private fun confirmBack() {
         DialogUtils.confirmDialog(
             requireContext(),
             requireContext().getString(R.string.dialog_exit_edit_title),
             requireContext().getString(R.string.dialog_exit_edit_message),
-        ){
+        ) {
             backToTakePhoto()
         }
     }
 
-    private fun backToTakePhoto(){
+    private fun backToTakePhoto() {
         requireActivity().supportFragmentManager.popBackStack()
     }
 
-    private fun uploadStory(){
+    private fun uploadStory() {
         currentImageUri?.let { uri ->
             val imageFile = PostUtils.uriToFile(uri, requireActivity()).reduceFileImage()
             val desc = binding.postTvDesk.text.toString()
@@ -218,18 +213,16 @@ class EditFragment : Fragment() {
         }
     }
 
-    private fun uploadSuccess(){
+    private fun uploadSuccess() {
         val intent = Intent(requireContext(), MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
     }
 
-    companion object{
-        private val TAG = EditFragment::class.java.simpleName
-
+    companion object {
         private const val ARG_URI = "image_uri"
 
-        fun newInstance(imageUri: String): EditFragment{
+        fun newInstance(imageUri: String): EditFragment {
             val fragment = EditFragment()
             val args = Bundle()
             args.putString(ARG_URI, imageUri)
@@ -237,9 +230,6 @@ class EditFragment : Fragment() {
             return fragment
         }
     }
-
-
-
 
 
 }

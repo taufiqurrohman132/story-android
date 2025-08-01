@@ -2,7 +2,6 @@
     <!-- Base application theme. -->
     <style name="Theme.InstogramApplication" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">@color/color_base</item>
@@ -19,10 +18,6 @@
         <item name="android:colorBackground">@color/white</item>>
 
     </style>
-
-    <!--    <style name="ActiveIndikatorStyle" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">-->
-    <!--        <item name="android:color">@color/biru_tua_trans30</item>-->
-    <!--    </style>-->
 
     <style name="Text.Header24" parent="Theme.InstogramApplication">
         <item name="android:textSize">24sp</item>

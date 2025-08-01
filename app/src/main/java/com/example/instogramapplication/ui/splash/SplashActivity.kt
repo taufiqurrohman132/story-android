@@ -1,15 +1,16 @@
-package com.example.instogramapplication
+package com.example.instogramapplication.ui.splash
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.instogramapplication.ui.main.MainActivity
 import com.example.instogramapplication.ui.auth.login.LoginActivity
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
     private val factory: UserViewModelFactory by lazy {
@@ -20,10 +21,11 @@ class SplashActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        installSplashScreen() // splash bawaan andorid 12+
 
-        viewModel.isLoggedIn.observe(this){ isLogin ->
+        super.onCreate(savedInstanceState)
+
+        viewModel.isLoggedIn.observe(this) { isLogin ->
             if (isLogin) {
                 startActivity(Intent(this, MainActivity::class.java))
             } else {

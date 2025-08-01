@@ -6,17 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.story.list.ListStoryFragment">
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/transparents">
+
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar_app"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:contentInsetStart="0dp"
             app:layout_scrollFlags="scroll|enterAlways">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -30,52 +33,54 @@
 
                     <TextView
                         android:id="@+id/halo_main"
+                        style="@style/Text.Header24"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginHorizontal="16dp"
-                        android:text="@string/title_home"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_weight="1"
+                        android:text="@string/title_home"
                         android:textColor="@color/white"
-                        style="@style/Text.Header24"
                         android:textStyle="bold" />
+
                     <ImageButton
                         android:id="@+id/btn_notif"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_notifications"
                         android:layout_gravity="center_vertical"
-                        android:contentDescription="desc_notification_icon"
                         android:backgroundTint="@color/transparents"
+                        android:contentDescription="@string/desc_notification_icon"
+                        android:src="@drawable/ic_notifications"
                         app:tint="@color/white" />
+
                     <ImageButton
                         android:id="@+id/btn_settings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_settings"
                         android:layout_gravity="center_vertical"
-                        android:contentDescription="desc_settings_icon"
                         android:backgroundTint="@color/transparents"
+                        android:contentDescription="@string/desc_settings_icon"
+                        android:src="@drawable/ic_settings"
                         app:tint="@color/white" />
                 </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_story"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
-
 
 
         </com.google.android.material.appbar.MaterialToolbar>
 
 
     </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/home.swip_refresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -86,10 +91,11 @@
                 android:id="@+id/rv_post"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/item_list_story_y"/>
+                tools:listitem="@layout/item_list_story_y" />
 
         </LinearLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -98,45 +104,45 @@
         <!--        simmer-->
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/story.simmer"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:shimmer_auto_start="true"
+            app:shimmer_direction="left_to_right"
             app:shimmer_duration="1500"
-            app:shimmer_repeat_count="3"
-            app:shimmer_direction="left_to_right">
+            app:shimmer_repeat_count="3">
 
-            <include
-                layout="@layout/simmer_story_home"/>
+            <include layout="@layout/simmer_story_home" />
         </com.facebook.shimmer.ShimmerFrameLayout>
 
         <!--        lottie-->
-<!--        <com.airbnb.lottie.LottieAnimationView-->
-<!--            android:id="@+id/home.lottie_connect"-->
-<!--            android:layout_width="300dp"-->
-<!--            android:layout_height="300dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:visibility="invisible"-->
-<!--            app:lottie_rawRes="@raw/connection"-->
-<!--            app:lottie_autoPlay="true"-->
-<!--            app:lottie_loop="false"/>-->
+        <!--        <com.airbnb.lottie.LottieAnimationView-->
+        <!--            android:id="@+id/home.lottie_connect"-->
+        <!--            android:layout_width="300dp"-->
+        <!--            android:layout_height="300dp"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:visibility="invisible"-->
+        <!--            app:lottie_rawRes="@raw/connection"-->
+        <!--            app:lottie_autoPlay="true"-->
+        <!--            app:lottie_loop="false"/>-->
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/home.lottie_error"
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:visibility="invisible"
             android:layout_gravity="center"
-            app:lottie_rawRes="@raw/error"
+            android:visibility="invisible"
             app:lottie_autoPlay="true"
-            app:lottie_loop="false"/>
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/error" />
+
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/home.lottie_layout_error_connect"
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_gravity="center"
             android:visibility="invisible"
-            app:lottie_rawRes="@raw/no_connection"
             app:lottie_autoPlay="true"
-            app:lottie_loop="false"/>
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/no_connection" />
 
     </FrameLayout>
 

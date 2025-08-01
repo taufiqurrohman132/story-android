@@ -1,4 +1,4 @@
-package com.example.instogramapplication
+package com.example.instogramapplication.data.remote.network.interceptor
 
 import com.example.instogramapplication.data.local.datastore.UserPreferences
 import kotlinx.coroutines.flow.first
@@ -6,7 +6,7 @@ import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class AuthInterceptor(private val userPref: UserPreferences): Interceptor {
+class AuthInterceptor(private val userPref: UserPreferences) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val token = runBlocking {
             userPref.getUserLoginToken().first()

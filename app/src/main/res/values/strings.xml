@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">InstogramApplication</string>
 
-    <!-- Error handling -->
+    <!-- Penanganan Error -->
     <string name="error_400">Oops! Ada kesalahan saat meminta data. Coba periksa kembali.</string>
     <string name="error_403">Ups! Kamu tidak punya izin untuk melihat data ini.</string>
     <string name="error_404">Kami tidak menemukan apa yang kamu cari.</string>
@@ -9,71 +9,153 @@
     <string name="error_500">Oops! Ada masalah di server. Tunggu sebentar.</string>
     <string name="error_503">Server sedang sibuk! Coba lagi nanti..</string>
     <string name="error_else">Oops! Ada kesalahan saat meminta data. Coba periksa kembali.</string>
-    <string name="error_koneksi">No internet connection. Please check your network.</string>
+    <string name="error_koneksi">Tidak ada koneksi internet. Silakan periksa jaringanmu.</string>
     <string name="error_takterduga">Terjadi kesalahan tak terduga. Coba lagi nanti.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_home">indonesia</string>
-    <string name="next">next</string>
-    <string name="confirm_title_logout">Konfirmasi\n</string>
-    <string name="confirm_logout_message">Apakah Anda yakin ingin keluar\n?</string>
-    <string name="yes">Ya</string>
-    <string name="cancel">Batal\n</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
-    <string name="app_widget_description">This is an app widget description</string>
-    <string name="hastag">#%1$s #InstogramApp #MobileApp #AndroidDeveloper #UXDesign #AppExperience #MVVMArchitecture</string>
-    <string name="cerita_anda">Cerita Anda</string>
 
-    <string name="logout">Logout</string>
-    <string name="logout_message">Are you sure you want to logout? \nThis action cannot be undone</string>
-<!--    popup-->
-    <string name="popup_error_desc">Unexpected error occurred. Try again later.</string>
-    <string name="popup_warning_desc">You verification is under observation. Try again later.</string>
-    <string name="popup_success_desc">You have successfully completed the task.</string>
+    <!-- Placeholder -->
+    <string name="hello_blank_fragment">Halo fragment kosong</string>
+
+    <!-- Judul -->
+    <string name="title_home">Instogram</string>
+    <string name="next">Selanjutnya</string>
+
+    <!-- Konfirmasi Logout -->
+    <string name="confirm_title_logout">Konfirmasi</string>
+    <string name="confirm_logout_message">Apakah Anda yakin ingin keluar?</string>
+    <string name="yes">Ya</string>
+    <string name="cancel">Batal</string>
+
+    <!-- Widget -->
+    <string name="appwidget_text">CONTOH</string>
+    <string name="add_widget">Tambah widget</string>
+    <string name="app_widget_description">Selalu update dengan story terbaru! Lihat langsung dari widget tanpa buka aplikasi.</string>
+
+    <!-- Hastag -->
+    <string name="hastag">#%1$s #InstogramApp #AplikasiMobile #PengembangAndroid #DesainUX #PengalamanAplikasi #ArsitekturMVVM</string>
+
+    <!-- Story -->
+    <string name="cerita_anda">Cerita Anda</string>
+    <string name="logout">Keluar</string>
+    <string name="logout_message">Apakah kamu yakin ingin keluar? \nTindakan ini tidak bisa dibatalkan</string>
+
+    <!-- Popup -->
+    <string name="popup_error_desc">Terjadi kesalahan tak terduga. Coba lagi nanti.</string>
+    <string name="popup_warning_desc">Verifikasimu sedang ditinjau. Coba lagi nanti.</string>
+    <string name="popup_success_desc">Kamu telah berhasil menyelesaikan tugas.</string>
 
     <string name="popup_error_title">Upss</string>
-    <string name="popup_warning_title">Pending</string>
-    <string name="popup_success_title">Well Done</string>
+    <string name="popup_warning_title">Menunggu</string>
+    <string name="popup_success_title">Berhasil</string>
 
-    <string name="popup_error_btn">Dismiss</string>
-    <string name="popup_warning_btn">Dismiss</string>
+    <string name="popup_error_btn">Tutup</string>
+    <string name="popup_warning_btn">Tutup</string>
     <string name="popup_success_btn">Selesai</string>
 
-    <string name="toast_success_upload">Story berhasil di unggah</string>
+    <!-- Toast -->
+    <string name="toast_success_upload">Story berhasil diunggah</string>
 
+    <!-- Validasi -->
     <string name="error_invalid_email">Masukkan format Email yang sesuai</string>
     <string name="error_password_too_short">Password kurang dari 8 karakter</string>
-
     <string name="error_empty_description">Silakan masukkan deskripsi</string>
     <string name="error_empty_image">Gambar kosong</string>
-
-    <string name="error_open_camera">Gagal memunculkan kamera.</string>
-
+    <string name="error_open_camera">Gagal membuka kamera.</string>
     <string name="success_take_picture">Berhasil mengambil gambar.</string>
     <string name="error_take_picture">Gagal mengambil gambar.</string>
 
-    <!--    time-->
-    <string name="time_just_now">just now</string>
-    <string name="time_minutes_ago">%1$d minutes ago</string>
-    <string name="time_hours_ago">%1$d hours ago</string>
-    <string name="time_days_ago">%1$d days ago</string>
-    <string name="time_weeks_ago">%1$d weeks ago</string>
-    <string name="time_months_ago">%1$d months ago</string>
+    <!-- Waktu -->
+    <string name="time_just_now">baru saja</string>
+    <string name="time_minutes_ago">%1$d menit yang lalu</string>
+    <string name="time_hours_ago">%1$d jam yang lalu</string>
+    <string name="time_days_ago">%1$d hari yang lalu</string>
+    <string name="time_weeks_ago">%1$d minggu yang lalu</string>
+    <string name="time_months_ago">%1$d bulan yang lalu</string>
 
+    <!-- Dialog Edit -->
     <string name="dialog_exit_edit_title">Batalkan Mengedit?</string>
     <string name="dialog_exit_edit_message">Perubahan yang belum disimpan akan hilang. Yakin ingin keluar?</string>
     <string name="dialog_exit_edit_positive">Keluar</string>
     <string name="dialog_exit_edit_negative">Batal</string>
 
+    <!-- Teks Tambahan -->
     <string name="selengkapnya">Selengkapnya</string>
     <string name="lebih_sedikit">Lebih Sedikit</string>
-    <string name="instogram_mobile">Instogram Mobile Application Experience</string>
+    <string name="instogram_mobile">Pengalaman Aplikasi Instogram Mobile</string>
     <string name="simpan">Simpan</string>
 
+    <!-- Base URL Avatar -->
     <string name="avatar_base_url">https://api.dicebear.com/9.x/initials/png?seed=%1$s</string>
+
+    <!-- Form -->
     <string name="masukkan_password_kamu">Masukkan Password Kamu</string>
     <string name="masukkan_email_kamu">Masukkan Email Kamu</string>
     <string name="masukkan_nama_kamu">Masukkan Nama Kamu</string>
+
+    <!-- Asset -->
     <string name="bg_auth">bg_auth</string>
+    <string name="back">kembali</string>
+    <string name="add_story">tambah_story</string>
+    <string name="like">suka</string>
+    <string name="comment">komentar</string>
+    <string name="share">bagikan</string>
+    <string name="option">opsi</string>
+    <string name="music">musik</string>
+    <string name="centang">centang</string>
+    <string name="google">google</string>
+    <string name="facebook">facebook</string>
+    <string name="flash">flash</string>
+    <string name="ganti">ganti</string>
+    <string name="take_picture">ambil gambar</string>
+    <string name="filter">filter</string>
+    <string name="sticker">stiker</string>
+    <string name="simmer">simmer</string>
+    <string name="detail_story">Detail Cerita</string>
+
+    <!-- Angka -->
+    <string name="_25rb">25rb</string>
+    <string name="_5rb">5rb</string>
+    <string name="_15rb">15rb</string>
+    <string name="_287rb">287rb</string>
+    <string name="_245rb">245rb</string>
+    <string name="disukai_oleh_238rb_orang">Disukai oleh 238rb orang</string>
+    <string name="_4_jam_yang_lalu">4 jam yang lalu</string>
+
+    <!-- Akses -->
+    <string name="instogram_mobile_application_experience">Pengalaman Aplikasi Instogram Mobile</string>
+    <string name="wellcome">Selamat Datang</string>
+    <string name="belum_punya_akun">Belum punya akun?</string>
+    <string name="daftar_disini">Daftar di sini</string>
+    <string name="lupa_password">Lupa Password?</string>
+    <string name="login">Masuk</string>
+    <string name="daftarkan_diri_kamu">Daftarkan Dirimu</string>
+    <string name="sudah_punya_akun">Sudah punya akun?</string>
+    <string name="login_disini">Masuk di sini</string>
+    <string name="sign_up">Daftar</string>
+
+    <!-- Navigasi -->
+    <string name="story">Cerita</string>
+    <string name="profile">Profil</string>
+    <string name="tambahkan_deskripsi">Tambahkan Deskripsi...</string>
+    <string name="posting">Posting</string>
+
+    <!-- Aksesibilitas -->
+    <string name="desc_notification_icon">ikon_notifikasi</string>
+    <string name="desc_settings_icon">ikon_pengaturan</string>
+
+    <!-- Pengaturan -->
+    <string name="instogram_application">Aplikasi Instogram</string>
+    <string name="mode_gelap">Mode Gelap</string>
+    <string name="ganti_bahasa">Ganti Bahasa</string>
+    <string name="indonesia">Indonesia</string>
+    <string name="appearance">Tampilan</string>
+    <string name="kontak_darurat">Kontak Darurat</string>
+
+    <!-- Story tidak tersedia -->
+    <string name="story_tidak_tersedia">Cerita tidak tersedia</string>
+
+    <string name="pengaturan">Pengaturan</string>
+    <string name="privacy">Privacy</string>
+    <string name="security">Security</string>
+    <string name="ganti_kata_sandi">Ganti Kata Sandi</string>
+    <string name="keluar">Keluar</string>
 </resources>

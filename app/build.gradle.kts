@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-kapt")
 }
 
 android {
@@ -12,7 +13,8 @@ android {
     defaultConfig {
         applicationId = "com.example.instogramapplication"
         minSdk = 28
-        targetSdk = 34
+        //noinspection OldTargetApi
+        targetSdk    = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -97,6 +99,9 @@ dependencies {
 
     // expanable teks
     implementation(libs.expandabletextview)
+
+    // splash android
+    implementation(libs.androidx.core.splashscreen)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

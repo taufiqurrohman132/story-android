@@ -1,12 +1,11 @@
-package com.example.instogramapplication
+package com.example.instogramapplication.ui.widget
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.widget.RemoteViews
-import android.widget.RemoteViewsService
 import android.widget.RemoteViewsService.RemoteViewsFactory
 import androidx.core.os.bundleOf
+import com.example.instogramapplication.R
 import com.example.instogramapplication.data.di.Injection
 import com.example.instogramapplication.data.remote.model.ListStoryItem
 import com.example.instogramapplication.data.repository.UserRepository
@@ -22,11 +21,6 @@ internal class StackRemoteViewsFactory(private val mContext: Context) : RemoteVi
     override fun onCreate() {}
 
     override fun onDataSetChanged() {
-        Log.d("StackWidget", "Fetching data...")
-
-        val itemsFromApi = repository.getItemWidget()
-        Log.d("StackWidget", "Fetched items: ${itemsFromApi.size}") // harusnya > 0
-
         items.apply {
             clear()
             addAll(repository.getItemWidget())

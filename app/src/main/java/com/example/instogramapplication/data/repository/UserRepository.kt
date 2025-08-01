@@ -1,16 +1,12 @@
 package com.example.instogramapplication.data.repository
 
-import android.content.Context
-import android.util.Log
 import com.example.instogramapplication.R
-import com.example.instogramapplication.ResourceProvider
+import com.example.instogramapplication.utils.ResourceProvider
 import com.example.instogramapplication.data.local.datastore.UserPreferences
-import com.example.instogramapplication.data.remote.model.FileUploadResponse
 import com.example.instogramapplication.data.remote.model.ListStoryItem
 import com.example.instogramapplication.data.remote.network.ApiService
 import com.example.instogramapplication.utils.ApiUtils
 import com.example.instogramapplication.utils.Resource
-import com.yariksoffice.lingver.Lingver
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
@@ -25,9 +21,8 @@ class UserRepository private constructor(
     private val apiService: ApiService,
     private val resourcesProvider: ResourceProvider,
     private val userPref: UserPreferences
-){
-    companion object{
-        val TAG = UserRepository::class.java.simpleName
+) {
+    companion object {
 
         @Volatile
         private var instance: UserRepository? = null
@@ -35,8 +30,7 @@ class UserRepository private constructor(
             apiService: ApiService,
             resourcesProvider: ResourceProvider,
             userPref: UserPreferences
-        ): UserRepository = instance ?: synchronized(this){
-            Log.d(TAG, "getInstance: inisialize repository pertama")
+        ): UserRepository = instance ?: synchronized(this) {
             instance ?: UserRepository(
                 apiService,
                 resourcesProvider,
@@ -49,55 +43,52 @@ class UserRepository private constructor(
     suspend fun userRegister(name: String, email: String, password: String): Resource<String> {
         return try {
             val response = apiService.register(name, email, password)
-            Log.d(TAG, "userRegister: respons register $response")
-            if (response.isSuccessful){
+            if (response.isSuccessful) {
                 val message = response.body()?.message.orEmpty()
-                Log.d(TAG, "userRegister: message $message")
-                if (message.isNotBlank()){
+                if (message.isNotBlank()) {
                     Resource.Success(message)
-                }else{
+                } else {
                     Resource.Empty()
                 }
-            }else{
-                val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(response.code())
-                Log.e(TAG, "userRegister: error notSuccess ${response.code()} message : $errorMsg")
+            } else {
+                val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(
+                    response.code()
+                )
                 Resource.Error(message = errorMsg)
             }
-        }catch (e: IOException){
+        } catch (e: IOException) {
             Resource.ErrorConnection("eror koneksi")
-        }catch (e: Exception){
-            Log.e(TAG, "userRegister: error exception ", e)
-            Resource.Error("Error")
-        }
-    }
-    suspend fun userLogin(email: String, password: String): Resource<String>{
-        return try {
-            val response = apiService.login(email, password)
-            Log.d(TAG, "userLogin: respons login $response")
-            if (response.isSuccessful){
-                val token = response.body()?.loginResult?.token
-                val userName = response.body()?.loginResult?.name
-                Log.d(TAG, "userLogin: message $token")
-                if (!token.isNullOrEmpty() && !userName.isNullOrEmpty()){
-                    userPref.saveUserLoginToken(token, userName)
-                    Resource.Success(token)
-                }else{
-                    Resource.Empty()
-                }
-            }else{
-                val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(response.code())
-                Log.e(TAG, "userLogin: error notSuccess ${response.code()} message : $errorMsg")
-                Resource.Error(message = errorMsg)
-            }
-        }catch (e: IOException){
-            Resource.ErrorConnection("eror koneksi")
-        }catch (e: Exception){
-            Log.e(TAG, "userLogin: error exception ", e)
+        } catch (e: Exception) {
             Resource.Error("Error")
         }
     }
 
-    suspend fun userLogout(){
+    suspend fun userLogin(email: String, password: String): Resource<String> {
+        return try {
+            val response = apiService.login(email, password)
+            if (response.isSuccessful) {
+                val token = response.body()?.loginResult?.token
+                val userName = response.body()?.loginResult?.name
+                if (!token.isNullOrEmpty() && !userName.isNullOrEmpty()) {
+                    userPref.saveUserLoginToken(token, userName)
+                    Resource.Success(token)
+                } else {
+                    Resource.Empty()
+                }
+            } else {
+                val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(
+                    response.code()
+                )
+                Resource.Error(message = errorMsg)
+            }
+        } catch (e: IOException) {
+            Resource.ErrorConnection("eror koneksi")
+        } catch (e: Exception) {
+            Resource.Error("Error")
+        }
+    }
+
+    suspend fun userLogout() {
         userPref.clearSession()
     }
 
@@ -112,25 +103,23 @@ class UserRepository private constructor(
         try {
             val username = userPref.getUsername()
             val response = apiService.getStories()
-            Log.d(TAG, "getStories: respons $response")
-            if (response.isSuccessful){
+            if (response.isSuccessful) {
                 val stories = response.body()?.listStory
-                Log.d(TAG, "getStories: body $stories username $username")
-                if (!stories.isNullOrEmpty()){
-                    emit(Resource.Success(stories, username ))
-                }else{
+                if (!stories.isNullOrEmpty()) {
+                    emit(Resource.Success(stories, username))
+                } else {
                     emit(Resource.Empty())
                 }
-            }else{
-                val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(response.code())
-                Log.e(TAG, "getStories: error notSuccess ${response.code()} message : $errorMsg")
+            } else {
+                val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(
+                    response.code()
+                )
                 emit(Resource.Error(errorMsg))
             }
 
-        }catch (e: IOException){
+        } catch (e: IOException) {
             emit(Resource.ErrorConnection("eror koneksi"))
-        }catch (e: Exception){
-            Log.e(TAG, "getStories: error exception ", e )
+        } catch (e: Exception) {
             emit(Resource.Error("Error"))
         }
     }
@@ -146,7 +135,6 @@ class UserRepository private constructor(
             )
 
             val response = apiService.uploadStory(multipartBody, requestBody)
-            Log.d(TAG, "uploadStory: respons $response")
             if (response.isSuccessful) {
                 val story = response.body()
                 if (story?.error == false) {
@@ -154,13 +142,13 @@ class UserRepository private constructor(
                 } else {
                     Resource.Empty()
                 }
-            }else{
-                val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(response.code())
-                Log.e(TAG, "uploadStory: error not sukses $errorMsg")
+            } else {
+                val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(
+                    response.code()
+                )
                 Resource.Error(errorMsg)
             }
-        }catch (e: Exception) {
-            Log.e(TAG, "uploadStory: error Exception", e)
+        } catch (e: Exception) {
             Resource.Error(e.toString())
         }
     }
@@ -170,24 +158,21 @@ class UserRepository private constructor(
         return userPref.getLang().first()
     }
 
-    suspend fun setLanguage(langCode: String){
+    suspend fun setLanguage(langCode: String) {
         userPref.saveLangCode(langCode)
     }
 
     // widget
-    fun getItemWidget(): List<ListStoryItem>{
+    fun getItemWidget(): List<ListStoryItem> {
         return try {
-            val response = apiService.getWidgetItems().execute() // ✅ Response<StoryResponse>
+            val response = apiService.getWidgetItems().execute()
             if (response.isSuccessful) {
                 val body = response.body()
-                Log.d("StackWidget", "API success, items: ${body?.listStory?.size}")
                 body?.listStory ?: emptyList()
             } else {
-                Log.e("StackWidget", "API error: ${response.code()}")
                 emptyList()
             }
         } catch (e: Exception) {
-            Log.e("StackWidget", "API exception: ${e.message}")
             emptyList()
         }
     }

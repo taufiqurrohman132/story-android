@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp">
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/itemy.img_post"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:background="@color/abu_abu_terang"
         android:layout_marginHorizontal="16dp"
-        app:shapeAppearanceOverlay="@style/RoundedCornerImageStyle"
+        android:adjustViewBounds="true"
+        android:background="@color/abu_abu_terang"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/RoundedCornerImageStyle" />
 
     <!-- Profil dan Nama -->
     <FrameLayout
@@ -42,9 +42,9 @@
             android:layout_height="32dp"
             android:layout_gravity="center"
             android:layout_margin="6dp"
+            android:background="@drawable/profile_placeholder"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/profile_placeholder"
             android:transitionName="profile"
             app:shapeAppearanceOverlay="@style/Circular" />
     </FrameLayout>
@@ -59,7 +59,6 @@
         android:ellipsize="end"
         android:gravity="bottom"
         android:maxLines="1"
-        android:text="sandika galih"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:transitionName="username"
@@ -73,6 +72,7 @@
     <ImageView
         android:layout_width="20dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/centang"
         android:padding="3dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_centang_ungu"
@@ -109,6 +109,7 @@
         style="@style/Icon"
         android:layout_marginEnd="8dp"
         android:backgroundTint="@color/transparents"
+        android:contentDescription="@string/option"
         android:padding="12dp"
         android:scaleType="centerInside"
         android:src="@drawable/ic_options"
@@ -140,6 +141,7 @@
                 android:id="@+id/itemy.btn_like"
                 style="@style/Icon"
                 android:backgroundTint="@color/transparents"
+                android:contentDescription="@string/like"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_like"
                 app:layout_constraintBottom_toTopOf="@id/itemy.tv_desk_expand"
@@ -150,6 +152,7 @@
                 android:id="@+id/itemy.btn_comment"
                 style="@style/Icon"
                 android:backgroundTint="@color/transparents"
+                android:contentDescription="@string/comment"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_comment"
                 app:layout_constraintStart_toEndOf="@id/itemy.btn_like"
@@ -159,7 +162,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="287rb"
+                android:text="@string/_287rb"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -167,6 +170,7 @@
                 android:id="@+id/itemy.btn_share"
                 style="@style/Icon"
                 android:backgroundTint="@color/transparents"
+                android:contentDescription="@string/share"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_share"
                 app:layout_constraintStart_toEndOf="@id/itemy.btn_comment"
@@ -176,7 +180,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="245rb"
+                android:text="@string/_245rb"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -202,8 +206,8 @@
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_gravity="center"
-            android:clickable="true"
             android:background="@drawable/profile_placeholder"
+            android:clickable="true"
             android:focusable="true"
             app:shapeAppearanceOverlay="@style/Circular"
             app:strokeColor="@color/white"
@@ -215,8 +219,8 @@
             android:layout_height="26dp"
             android:layout_gravity="center"
             android:layout_marginStart="-10dp"
-            android:clickable="true"
             android:background="@drawable/profile_placeholder"
+            android:clickable="true"
             android:focusable="true"
             app:shapeAppearanceOverlay="@style/Circular"
             app:strokeColor="@color/white"
@@ -228,10 +232,10 @@
             android:layout_height="26dp"
             android:layout_gravity="center"
             android:layout_marginStart="-10dp"
+            android:background="@drawable/profile_placeholder"
             android:clickable="true"
             android:focusable="true"
             app:shapeAppearanceOverlay="@style/Circular"
-            android:background="@drawable/profile_placeholder"
             app:strokeColor="@color/white"
             app:strokeWidth="1dp" />
 
@@ -242,10 +246,11 @@
         style="@style/Text.Konten14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Disukai oleh 238rb orang "
+        android:text="@string/disukai_oleh_238rb_orang"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/itemy.img_post"
         app:layout_constraintTop_toBottomOf="@id/itemy.img_post" />
+
     <at.blogc.android.views.ExpandableTextView
         android:id="@+id/itemy.tv_desk_expand"
         style="@style/Text.Konten15"
@@ -254,9 +259,9 @@
         android:layout_marginHorizontal="16dp"
         android:ellipsize="end"
         android:maxLines="2"
-        app:animation_duration="500"
         android:text=""
         android:textColor="@color/black"
+        app:animation_duration="500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/itemy.jumlah_liked" />
@@ -266,9 +271,9 @@
         style="@style/Text.Konten14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="4 Jam yang lalu "
-        android:textColor="@color/abu_abu"
         android:layout_marginBottom="16dp"
+        android:text="@string/_4_jam_yang_lalu"
+        android:textColor="@color/abu_abu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/itemy.tv_desk_expand"
         app:layout_constraintTop_toBottomOf="@id/itemy.tv_desk_expand" />

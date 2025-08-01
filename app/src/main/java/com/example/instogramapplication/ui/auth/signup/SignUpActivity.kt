@@ -3,20 +3,13 @@ package com.example.instogramapplication.ui.auth.signup
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Email
 import android.util.Log
 import android.view.View
 import android.view.animation.DecelerateInterpolator
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
-import com.example.instogramapplication.MainActivity
 import com.example.instogramapplication.R
-import com.example.instogramapplication.databinding.ActivityLoginBinding
 import com.example.instogramapplication.databinding.ActivitySignUpBinding
 import com.example.instogramapplication.ui.auth.login.LoginActivity
 import com.example.instogramapplication.utils.DialogUtils
@@ -48,7 +41,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     // inisialize tampilan awal
-    private fun initView(){
+    private fun initView() {
         Log.d(TAG, "initView: Starting")
         // setup
         binding.apply {
@@ -77,7 +70,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     // pasang semua click dst
-    private fun setupListeners(){
+    private fun setupListeners() {
         binding.apply {
             signupBtnSignUp.setOnClickListener { handleRegister() }
             signupTvDaftar.setOnClickListener { finish() }
@@ -85,8 +78,9 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     // validasi proses
-    private fun handleRegister(){
-        val name = binding.signupEdtName.text.toString().trim() // trim = mengahapus spasi awal n akhir
+    private fun handleRegister() {
+        val name =
+            binding.signupEdtName.text.toString().trim() // trim = mengahapus spasi awal n akhir
         val email = binding.signupEdtEmail.text.toString().trim()
         val password = binding.signupEdtPass.text.toString().trim()
         Log.d(TAG, "handleRegister: output $name, $email, $password")
@@ -95,23 +89,25 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     // proses inti
-    private fun doRegister(name: String, email: String, password: String){
+    private fun doRegister(name: String, email: String, password: String) {
         viewModel.register(name, email, password)
     }
 
-    private fun observer(){
+    private fun observer() {
         viewModel.apply {
-            registerResult.observe(this@SignUpActivity){ result ->
-                when(result){
+            registerResult.observe(this@SignUpActivity) { result ->
+                when (result) {
                     is Resource.Loading -> {
                         // tampilkan progress bar
                         showLoading(true)
                     }
+
                     is Resource.Success -> {
                         // pindah ke LoginActivity atau Home
                         showLoading(false)
                         showSuccess()
                     }
+
                     is Resource.Error -> {
                         // tampilkan error
                         showLoading(false)
@@ -119,12 +115,17 @@ class SignUpActivity : AppCompatActivity() {
                             showError(result.message)
                         }
                     }
+
                     is Resource.ErrorConnection -> {
                         // tampilkan error
                         showLoading(false)
-                        DialogUtils.showToast(this@SignUpActivity.getString(R.string.error_koneksi), this@SignUpActivity)
+                        showToast(
+                            this@SignUpActivity.getString(R.string.error_koneksi),
+                            this@SignUpActivity
+                        )
                     }
-                    else ->{
+
+                    else -> {
                         showLoading(false)
                     }
                 }
@@ -146,7 +147,7 @@ class SignUpActivity : AppCompatActivity() {
             this.getString(R.string.popup_error_title),
             desc,
             this.getString(R.string.popup_error_btn)
-        ){
+        ) {
             it.dismiss()
             binding.dimOverlay.visibility = View.INVISIBLE
         }
@@ -159,7 +160,7 @@ class SignUpActivity : AppCompatActivity() {
             this.getString(R.string.popup_success_title),
             this.getString(R.string.popup_error_desc),
             this.getString(R.string.popup_success_btn),
-        ){
+        ) {
             startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
             finish()
 
@@ -168,7 +169,7 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    companion object{
+    companion object {
         val TAG = SignUpActivity::class.java.simpleName
     }
 }

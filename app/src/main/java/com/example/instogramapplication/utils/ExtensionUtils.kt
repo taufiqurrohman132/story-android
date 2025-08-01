@@ -8,9 +8,6 @@ import android.graphics.Shader
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.TextView
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -21,7 +18,7 @@ import java.io.FileOutputStream
 object ExtensionUtils {
     private const val MAXIMAL_SIZE = 1000000
 
-    fun TextView.setGradientText(vararg colors: Int){
+    fun TextView.setGradientText(vararg colors: Int) {
         val width = paint.measureText(text.toString())
         paint.shader = LinearGradient(
             0f, 0f, width, 0f,
@@ -29,7 +26,7 @@ object ExtensionUtils {
         )
     }
 
-    fun File.reduceFileImage(): File{
+    fun File.reduceFileImage(): File {
         val file = this
         val bitmap = BitmapFactory.decodeFile(file.path)
         var compressQuality = 100

@@ -4,22 +4,22 @@
     <item>
         <shape android:shape="oval">
             <gradient
-                android:type="sweep"
-                android:useLevel="false"
                 android:centerColor="@color/color_base"
-                android:startColor="@color/color_variant"
                 android:endColor="@color/color_variant"
-                />
+                android:startColor="@color/color_variant"
+                android:type="sweep"
+                android:useLevel="false" />
         </shape>
     </item>
 
     <!-- Background putih untuk pinggir foto -->
-    <item android:top="3dp"
+    <item
         android:bottom="3dp"
+        android:end="3dp"
         android:start="3dp"
-        android:end="3dp">
+        android:top="3dp">
         <shape android:shape="oval">
-            <solid android:color="@color/transparents"/>
+            <solid android:color="@color/transparents" />
         </shape>
     </item>
 </layer-list>

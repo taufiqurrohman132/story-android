@@ -7,19 +7,19 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     tools:context=".ui.auth.login.LoginActivity">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@drawable/bg_auth"
-        android:contentDescription="@string/bg_auth"/>
+        android:contentDescription="@string/bg_auth" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/form_sign_up"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="30dp"
         android:layout_marginTop="220dp"
-        >
+        app:cardCornerRadius="30dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="24dp"
-                android:text="Daftarkan Diri Kamu"
+                android:text="@string/daftarkan_diri_kamu"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="16dp"
-                android:text="Sudah Punya Akun?"
+                android:text="@string/sudah_punya_akun"
                 android:textColor="@color/abu_abu"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:paddingHorizontal="16dp"
-                android:text="Login Disini"
+                android:text="@string/login_disini"
                 android:textColor="@color/color_base"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/signup.tv_belum_punya"
@@ -82,13 +82,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="16dp"
-                app:cursorColor="@color/color_variant"
                 app:boxCornerRadiusBottomEnd="16dp"
                 app:boxCornerRadiusBottomStart="16dp"
                 app:boxCornerRadiusTopEnd="16dp"
                 app:boxCornerRadiusTopStart="16dp"
                 app:boxStrokeColor="@color/color_base"
                 app:boxStrokeErrorColor="@color/red"
+                app:cursorColor="@color/color_variant"
                 app:hintTextColor="@color/color_base"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +106,7 @@
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.example.instogramapplication.CustomInputWithManualError2
+            <com.example.instogramapplication.CustomInputWithManualError
                 android:id="@+id/signup.inlay_email"
                 style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
                 android:layout_width="0dp"
@@ -135,9 +135,9 @@
                     android:ems="10"
                     android:hint="@string/masukkan_email_kamu"
                     android:textColor="@color/black" />
-            </com.example.instogramapplication.CustomInputWithManualError2>
+            </com.example.instogramapplication.CustomInputWithManualError>
 
-            <com.example.instogramapplication.CustomInputWithManualError2
+            <com.example.instogramapplication.CustomInputWithManualError
                 android:id="@+id/signup.inlay_pass"
                 style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
                 android:layout_width="0dp"
@@ -150,9 +150,9 @@
                 app:boxCornerRadiusTopStart="16dp"
                 app:boxStrokeColor="@color/color_base"
                 app:boxStrokeErrorColor="@color/red"
+                app:cursorColor="@color/color_variant"
                 app:endIconMode="password_toggle"
                 app:errorIconDrawable="@null"
-                app:cursorColor="@color/color_variant"
                 app:hintTextColor="@color/color_base"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -169,7 +169,7 @@
                     android:hint="@string/masukkan_password_kamu"
                     android:inputType="textPassword"
                     android:textColor="@color/black" />
-            </com.example.instogramapplication.CustomInputWithManualError2>
+            </com.example.instogramapplication.CustomInputWithManualError>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/signup.btn_sign_up"
@@ -184,7 +184,7 @@
                 android:paddingVertical="16dp"
                 android:shadowColor="@color/black"
                 android:shadowDy="20"
-                android:text="Sign Up"
+                android:text="@string/sign_up"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -197,6 +197,7 @@
                 android:id="@+id/login_google"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/bg_auth"
                 android:src="@drawable/icon_google"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/login_fb"
@@ -208,6 +209,7 @@
                 android:id="@+id/login_fb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/facebook"
                 android:src="@drawable/icon_fb"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -224,34 +226,33 @@
         android:id="@+id/dimOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="2dp"
-        android:clickable="true"
-        android:focusable="true"
         android:background="@color/color_black_trans"
+        android:clickable="true"
+        android:elevation="2dp"
+        android:focusable="true"
         android:visibility="invisible" />
 
     <com.sn.lib.NestedProgress
         android:id="@+id/loading"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:innerLoaderStrokeWidth="4dp"
-        app:outerLoaderStrokeWidth="10dp"
-        app:innerLoaderColor="@color/color_variant"
-        app:outerLoaderColor="@color/color_base"
-        app:spaceBetweenCircles="1dp"
-        app:outerLoaderLength="240"
-        app:innerLoaderLength="300"
+        android:layout_gravity="center"
         android:elevation="2dp"
         android:visibility="invisible"
-        android:layout_gravity="center"
         app:innerAnimInterpolator="accelerateDecelerate"
-        app:outerAnimInterpolator="anticipateOvershoot"
-        app:outerLoaderAnimDuration="1500"
+        app:innerLoaderColor="@color/color_variant"
+        app:innerLoaderLength="300"
+        app:innerLoaderStrokeWidth="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
-        />
+        app:outerAnimInterpolator="anticipateOvershoot"
+        app:outerLoaderAnimDuration="1500"
+        app:outerLoaderColor="@color/color_base"
+        app:outerLoaderLength="240"
+        app:outerLoaderStrokeWidth="10dp"
+        app:spaceBetweenCircles="1dp" />
 </FrameLayout>

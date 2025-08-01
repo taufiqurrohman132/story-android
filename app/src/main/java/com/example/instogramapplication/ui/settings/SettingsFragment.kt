@@ -1,13 +1,11 @@
-package com.example.instogramapplication.ui.user.settings
+package com.example.instogramapplication.ui.settings
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.createViewModelLazy
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -18,7 +16,6 @@ import com.example.instogramapplication.utils.ApiUtils
 import com.example.instogramapplication.utils.DialogUtils
 import com.example.instogramapplication.utils.LanguageUtils
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class SettingsFragment : Fragment() {
@@ -49,7 +46,7 @@ class SettingsFragment : Fragment() {
         setupListener()
     }
 
-    private fun initView(){
+    private fun initView() {
         viewLifecycleOwner.lifecycleScope.launch {
             val name = viewModel.getName()
             binding.settingsNameProfile.text = name
@@ -62,25 +59,24 @@ class SettingsFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             val langCode = viewModel.getCurrentLang()
-            val displayName = LanguageUtils.getLanguage(langCode).find { it.code == langCode }?.name ?: "Default"
-            Log.d(TAG, "observer: setting fragment display name $displayName lang code $langCode")
+            val displayName =
+                LanguageUtils.getLanguage(langCode).find { it.code == langCode }?.name ?: "Default"
             binding.settingsTvBahasa.text = displayName
         }
     }
 
-    private fun setupListener(){
+    private fun setupListener() {
         binding.apply {
             settingsGantiBahasa.setOnClickListener { showLanguageBottomSheet() }
             settingBtnLogout.setOnClickListener { logOut() }
         }
     }
 
-    private fun showLanguageBottomSheet(){
+    private fun showLanguageBottomSheet() {
         lifecycleScope.launch {
             val currentLang = viewModel.getCurrentLang()
-            Log.d(TAG, "showLanguageBottomSheet: current lang $currentLang")
-            val sheet = LanguageBottomSheet(currentLang){ selectLang ->
-                viewModel.setLanguage(requireContext(), selectLang){
+            val sheet = LanguageBottomSheet(currentLang) { selectLang ->
+                viewModel.setLanguage(requireContext(), selectLang) {
                     activity?.recreate()
                 }
             }
@@ -88,21 +84,16 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    private fun logOut(){
+    private fun logOut() {
         DialogUtils.confirmDialog(
             requireContext(),
             requireContext().getString(R.string.logout),
             requireContext().getString(R.string.logout_message),
-        ){
+        ) {
             viewModel.logOut()
             val intent = Intent(requireActivity(), LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
     }
-
-    companion object{
-        private val TAG = SettingsFragment::class.java.simpleName
-    }
-
 }

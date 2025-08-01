@@ -1,4 +1,4 @@
-package com.example.instogramapplication
+package com.example.instogramapplication.core
 
 import android.app.Application
 import android.content.Context

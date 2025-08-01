@@ -17,12 +17,12 @@ object ApiUtils {
             val gson = Gson()
             val jsonInString = errorBody?.charStream()
             gson.fromJson(jsonInString, ErrorRespons::class.java)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             null
         }
     }
 
-    fun getTimeAgo(context: Context, isoDate: String): String{
+    fun getTimeAgo(context: Context, isoDate: String): String {
         val formatter = DateTimeFormatter.ISO_DATE_TIME
         val dateTime = ZonedDateTime.parse(isoDate, formatter)
 
@@ -35,9 +35,8 @@ object ApiUtils {
         val hours = minutes / 60
         val days = hours / 24
         val months = days / 30
-        val years = days / 365
 
-        return when{
+        return when {
             seconds < 60 -> context.getString(R.string.time_just_now)
             minutes < 60 -> context.getString(R.string.time_minutes_ago, minutes)
             hours < 24 -> context.getString(R.string.time_hours_ago, hours)

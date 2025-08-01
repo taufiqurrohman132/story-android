@@ -1,11 +1,7 @@
 package com.example.instogramapplication.ui.story.list
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,20 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
-import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
-import com.example.instogramapplication.R
 import com.example.instogramapplication.data.remote.model.ListStoryItem
 import com.example.instogramapplication.databinding.FragmentListStoryBinding
 import com.example.instogramapplication.ui.story.detail.DetailStoryActivity
@@ -35,7 +21,6 @@ import com.example.instogramapplication.utils.DialogUtils
 import com.example.instogramapplication.utils.Resource
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
 import kotlinx.coroutines.launch
-import java.util.Locale.filter
 import kotlin.math.abs
 
 class ListStoryFragment : Fragment() {
@@ -71,44 +56,29 @@ class ListStoryFragment : Fragment() {
         setupListener()
     }
 
-    private fun initView(){
-
-    }
-
-    private fun setupListener(){
+    private fun setupListener() {
         binding.homeSwipRefresh.setOnRefreshListener {
             viewModel.refresh()
             binding.homeSwipRefresh.isRefreshing = false
         }
     }
 
-    private fun handler(){
-
-    }
-
-    private fun observer(){
+    private fun observer() {
         lifecycleScope.launch {
             viewModel.storiesState.collect { result ->
-                Log.d(TAG, "observer: stories $result")
                 when (result) {
                     is Resource.Loading -> showLoading()
                     is Resource.Success -> showStories(result.data, result.message)
-                    is Resource.Error -> showError(result.message)
+                    is Resource.Error -> showError()
                     is Resource.ErrorConnection -> showErrorConnect(result.message)
                     is Resource.Empty -> showEmpty()
                 }
             }
         }
 
-        // username on
-//        viewModel.userName.observe(viewLifecycleOwner){ username ->
-//            adapterX.updateUserName(username)
-//        }
-
         // notif error
         lifecycleScope.launch {
-            viewModel.eventFlow.collect{ message ->
-                Log.d(TAG, "observer: notif $message")
+            viewModel.eventFlow.collect { message ->
                 DialogUtils.showToast(message, requireActivity())
             }
         }
@@ -134,12 +104,13 @@ class ListStoryFragment : Fragment() {
         }
     }
 
-    private fun setupRecyclerView(){
-        val horiLayout = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+    private fun setupRecyclerView() {
+        val horiLayout =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
 
         adapterX = ListStoryXAdapter(
             context = requireActivity(),
-            onItemClick = {img, desc, story ->
+            onItemClick = { img, desc, story ->
                 showDetailStory(desc, img, story)
             },
             onAddStory = {
@@ -154,7 +125,7 @@ class ListStoryFragment : Fragment() {
         }
 
         val linearLayout = LinearLayoutManager(requireActivity())
-        adapterY = ListStoryYAdapter(requireActivity()){ img, desc, story ->
+        adapterY = ListStoryYAdapter(requireActivity()) { img, desc, story ->
             showDetailStory(desc, img, story)
         }
 
@@ -167,7 +138,7 @@ class ListStoryFragment : Fragment() {
 
     }
 
-    private fun showLoading(){
+    private fun showLoading() {
         binding.apply {
             rvStory.visibility = View.GONE
             rvPost.visibility = View.INVISIBLE
@@ -183,7 +154,7 @@ class ListStoryFragment : Fragment() {
         }
     }
 
-    private fun showError(message: String?){
+    private fun showError() {
         binding.apply {
             storySimmer.visibility = View.INVISIBLE
             homeLottieError.visibility = View.INVISIBLE
@@ -191,7 +162,7 @@ class ListStoryFragment : Fragment() {
         }
     }
 
-    private fun showDetailStory(desc: TextView, img: ImageView, story: ListStoryItem){
+    private fun showDetailStory(desc: TextView, img: ImageView, story: ListStoryItem) {
         val optionsCompat: ActivityOptionsCompat =
             ActivityOptionsCompat.makeSceneTransitionAnimation(
                 requireActivity(),
@@ -201,8 +172,6 @@ class ListStoryFragment : Fragment() {
         val intent = Intent(requireContext(), DetailStoryActivity::class.java)
         intent.putExtra(DetailStoryActivity.EXTRA_DETAIL, story)
         requireActivity().startActivity(intent, optionsCompat.toBundle())
-
-        Log.d(TAG, "onStoryXClick: navigate to post activity")
     }
 
     private fun showStories(data: List<ListStoryItem>?, username: String?) {
@@ -215,27 +184,19 @@ class ListStoryFragment : Fragment() {
             homeLottieLayoutErrorConnect.visibility = View.INVISIBLE
         }
 
-        Log.d(TAG, "showStories: username $username")
         adapterX.updateUserName(username)
         adapterX.submitList(data)
         adapterY.submitList(data)
-        Log.d(TAG, "showStories: data story $data")
     }
 
-    private fun setupCollapsStoryX(){
+    private fun setupCollapsStoryX() {
         // listener
         binding.appBarLayout2.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
             val scrollRange = appBarLayout.totalScrollRange
             viewModel.isCollaps = verticalOffset == -scrollRange
-            Log.d(TAG, "setupCollapsStoryX: scroll range ${-scrollRange} vertical offset $verticalOffset")
 
             val alphaValue = 1f - (abs(verticalOffset) / scrollRange)
             binding.rvStory.animate().alpha(alphaValue).setDuration(200).start()
         }
-    }
-
-
-    companion object{
-        private val TAG = ListStoryFragment::class.java.simpleName
     }
 }
