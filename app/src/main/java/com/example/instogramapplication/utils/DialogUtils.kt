@@ -60,6 +60,8 @@ object DialogUtils {
             setHeading(title)
             setDescription(description)
             setActionButtonText(textButton)
+
+            setCancelable(false)
             build { onDismiss(builder.dialog) }.show()
         }
     }

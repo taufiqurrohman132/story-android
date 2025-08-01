@@ -4,11 +4,13 @@
     android:layout_height="wrap_content"
     android:paddingHorizontal="12dp">
 
-    <RadioButton
+    <com.google.android.material.radiobutton.MaterialRadioButton
         android:id="@+id/radioButtonLanguage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bahasa"
+        android:theme="@style/Theme.Material3.Light"
+        android:text=""
+        android:textColor="@color/black"
         android:layout_gravity="center_vertical"
         android:focusable="false"
         android:clickable="false" />

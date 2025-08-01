@@ -16,8 +16,7 @@
         app:shapeAppearanceOverlay="@style/RoundedCornerImageStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/img"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <!-- Profil dan Nama -->
     <FrameLayout
@@ -38,14 +37,14 @@
             app:ringThickness="2dp" />
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/item_story_y"
+            android:id="@+id/item_story_y_profil"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_gravity="center"
             android:layout_margin="6dp"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/img"
+            android:background="@drawable/profile_placeholder"
             android:transitionName="profile"
             app:shapeAppearanceOverlay="@style/Circular" />
     </FrameLayout>
@@ -95,7 +94,7 @@
         android:marqueeRepeatLimit="marquee_forever"
         android:scrollHorizontally="true"
         android:singleLine="true"
-        android:text="Instogram Mobile Application Experience"
+        android:text="@string/instogram_mobile"
         android:textColor="@color/white"
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="@id/itemy.profil"
@@ -199,63 +198,44 @@
         app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_liked_1"
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_gravity="center"
             android:clickable="true"
+            android:background="@drawable/profile_placeholder"
             android:focusable="true"
-            android:src="@drawable/img"
             app:shapeAppearanceOverlay="@style/Circular"
             app:strokeColor="@color/white"
             app:strokeWidth="1dp" />
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_liked_2"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="-10dp"
+            android:clickable="true"
+            android:background="@drawable/profile_placeholder"
+            android:focusable="true"
+            app:shapeAppearanceOverlay="@style/Circular"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_liked_3"
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_gravity="center"
             android:layout_marginStart="-10dp"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/img"
             app:shapeAppearanceOverlay="@style/Circular"
-            app:strokeColor="@color/white"
-            app:strokeWidth="1dp" />
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="-10dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/img"
-            app:shapeAppearanceOverlay="@style/Circular"
+            android:background="@drawable/profile_placeholder"
             app:strokeColor="@color/white"
             app:strokeWidth="1dp" />
 
     </com.google.android.flexbox.FlexboxLayout>
-
-
-    <!--    <com.google.android.material.card.MaterialCardView-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:cardCornerRadius="30dp"-->
-    <!--        android:backgroundTint="@color/white"-->
-    <!--        android:layout_marginEnd="8dp"-->
-    <!--        app:layout_constraintTop_toTopOf="@id/itemy.action"-->
-    <!--        app:layout_constraintEnd_toEndOf="@id/card"-->
-    <!--        app:strokeWidth="0dp">-->
-
-    <!--        <ImageButton-->
-    <!--            android:id="@+id/itemy.btn_favorit"-->
-    <!--            style="@style/Icon"-->
-    <!--            android:padding="16dp"-->
-    <!--            android:src="@drawable/ic_favorite"-->
-    <!--            android:scaleType="centerCrop"-->
-    <!--            android:backgroundTint="@color/transparents" />-->
-    <!--    </com.google.android.material.card.MaterialCardView>-->
-
-    <!-- Deskripsi -->
 
     <TextView
         android:id="@+id/itemy.jumlah_liked"
@@ -282,18 +262,6 @@
         app:layout_constraintTop_toBottomOf="@id/itemy.jumlah_liked" />
 
     <TextView
-        android:id="@+id/itemy.tv_selengkapnya"
-        style="@style/Text.Konten14"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Selengkapnya"
-        android:textColor="@color/abu_abu"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintStart_toStartOf="@id/itemy.img_post"
-        app:layout_constraintTop_toBottomOf="@id/itemy.tv_desk_expand"
-        app:layout_constraintEnd_toEndOf="@id/itemy.img_post"/>
-    <TextView
         android:id="@+id/itemy.tv_time"
         style="@style/Text.Konten14"
         android:layout_width="wrap_content"
@@ -303,5 +271,5 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/itemy.tv_desk_expand"
-        app:layout_constraintTop_toBottomOf="@id/itemy.tv_selengkapnya" />
+        app:layout_constraintTop_toBottomOf="@id/itemy.tv_desk_expand" />
 </androidx.constraintlayout.widget.ConstraintLayout>

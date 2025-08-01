@@ -36,9 +36,8 @@
             android:layout_margin="6dp"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/img"
+            android:background="@drawable/profile_placeholder"
             app:shapeAppearanceOverlay="@style/Circular" />
-
 
     </FrameLayout>
 

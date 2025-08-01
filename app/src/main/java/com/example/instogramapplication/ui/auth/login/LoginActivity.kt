@@ -1,8 +1,10 @@
 package com.example.instogramapplication.ui.auth.login
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -46,16 +48,25 @@ class LoginActivity : AppCompatActivity() {
         // setup
         binding.apply {
             loginInlayEmail.apply {
-                setTextError("Masukkan format Email yang sesuai")
+                setTextError(context.getString(R.string.error_invalid_email))
                 isSucces = {
                     ValidationUtils.isEmailValid(it)
                 }
             }
             loginInlayPass.apply {
-                setTextError("Password Kurang dari 8 Karakter")
+                setTextError(context.getString(R.string.error_password_too_short))
                 isSucces = {
                     !(!it.isNullOrBlank() && it.length < 8)
                 }
+            }
+        }
+
+        // setup animation
+        binding.formLogin.post {
+            ObjectAnimator.ofFloat(binding.formLogin, View.TRANSLATION_Y, 600f, 0f).apply {
+                duration = 1000
+                interpolator = DecelerateInterpolator()
+                start()
             }
         }
     }

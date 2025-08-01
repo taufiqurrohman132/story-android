@@ -22,14 +22,17 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.example.instogramapplication.MainActivity
 import com.example.instogramapplication.R
 import com.example.instogramapplication.databinding.FragmentEditBinding
 import com.example.instogramapplication.ui.auth.login.LoginActivity
 import com.example.instogramapplication.ui.story.list.ListStoryFragment
 import com.example.instogramapplication.utils.DialogUtils
 import com.example.instogramapplication.utils.DialogUtils.showToast
-import com.example.instogramapplication.utils.ExtensionUtils.observeKeyboardVisibility
+import com.example.instogramapplication.utils.ExtensionUtils.keyboardVisibilityFlow
 import com.example.instogramapplication.utils.ExtensionUtils.reduceFileImage
 import com.example.instogramapplication.utils.ExtensionUtils.setGradientText
 import com.example.instogramapplication.utils.PostUtils
@@ -108,8 +111,14 @@ class EditFragment : Fragment() {
             })
 
         // cek keyboard
-        binding.root.observeKeyboardVisibility(viewLifecycleOwner) { isVisible ->
-            binding.dimOverlayCamera.isVisible = isVisible
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+                binding.root.keyboardVisibilityFlow().collect { isVisible ->
+                    binding?.let {
+                        binding.dimOverlayCamera.isVisible = isVisible
+                    }
+                }
+            }
         }
     }
 
@@ -191,13 +200,15 @@ class EditFragment : Fragment() {
     private fun uploadStory(){
         currentImageUri?.let { uri ->
             val imageFile = PostUtils.uriToFile(uri, requireActivity()).reduceFileImage()
-            Log.d(TAG, "uploadStory: show image ${imageFile.path}")
             val desc = binding.postTvDesk.text.toString()
 
-            if (desc.isNotBlank())
+            if (desc.isNotBlank()) {
                 viewModel.uploadStory(imageFile, desc)
-            else showToast("Silakan masukkan deskripsi", requireActivity())
-        } ?: showToast("gambar kosong", requireActivity())
+            } else {
+                showToast(getString(R.string.error_empty_description), requireActivity())
+            }
+        } ?: showToast(getString(R.string.error_empty_image), requireActivity())
+
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -208,7 +219,7 @@ class EditFragment : Fragment() {
     }
 
     private fun uploadSuccess(){
-        val intent = Intent(requireActivity(), ListStoryFragment::class.java)
+        val intent = Intent(requireContext(), MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
     }

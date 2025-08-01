@@ -13,18 +13,16 @@
         android:id="@+id/detail_img_story"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:transitionName="img_story"
-        android:scaleType="centerCrop"
-        android:src="@drawable/img"
+        android:layout_marginVertical="60dp"
         android:background="@color/abu_abu_terang"
-        android:layout_marginVertical="40dp"
+        android:scaleType="centerCrop"
+        android:transitionName="img_story"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5" />
-
 
 
     <ImageButton
@@ -77,49 +75,93 @@
 
     <ImageButton
         android:id="@+id/detail.btn_like"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        style="@style/Icon"
         android:backgroundTint="@color/transparents"
-        android:padding="16dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_like"
-        app:layout_constraintBottom_toTopOf="@id/detail.btn_comment"
-        app:layout_constraintEnd_toEndOf="@id/detail.btn_comment"
-        app:layout_constraintStart_toStartOf="@id/detail.btn_comment"
+        android:padding="6dp"
+        app:layout_constraintBottom_toTopOf="@id/detail.like_sum"
+        app:layout_constraintEnd_toEndOf="@id/detail.like_sum"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/detail.like_sum"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/detail.like_sum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="25rb"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/detail.btn_comment"
+        app:layout_constraintEnd_toEndOf="@id/detail.btn_comment"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/detail.btn_comment"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/detail.btn_comment"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        style="@style/Icon"
         android:backgroundTint="@color/transparents"
-        android:padding="16dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_comment"
-        app:layout_constraintBottom_toTopOf="@id/detail.btn_shere"
-        app:layout_constraintEnd_toEndOf="@id/detail.btn_shere"
-        app:layout_constraintStart_toStartOf="@id/detail.btn_shere"
+        android:padding="6dp"
+        app:layout_constraintBottom_toTopOf="@id/detail.comment_sum"
+        app:layout_constraintEnd_toEndOf="@id/detail.comment_sum"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/detail.comment_sum"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:tint="@color/white" />
 
+    <TextView
+        android:id="@+id/detail.comment_sum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="5rb"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/detail.btn_share"
+        app:layout_constraintEnd_toEndOf="@id/detail.btn_share"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/detail.btn_share"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
     <ImageButton
-        android:id="@+id/detail.btn_shere"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/detail.btn_share"
+        style="@style/Icon"
         android:backgroundTint="@color/transparents"
-        android:padding="16dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_share"
-        app:layout_constraintBottom_toTopOf="@id/detail.btn_options"
-        app:layout_constraintEnd_toEndOf="@id/detail.btn_options"
-        app:layout_constraintStart_toStartOf="@id/detail.btn_options"
+        android:padding="6dp"
+        app:layout_constraintBottom_toTopOf="@id/detail.share_sum"
+        app:layout_constraintEnd_toEndOf="@id/detail.share_sum"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/detail.share_sum"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/detail.share_sum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="15rb"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/detail.btn_options"
+        app:layout_constraintEnd_toEndOf="@id/detail.btn_options"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/detail.btn_options"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/detail.btn_options"
@@ -166,22 +208,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
+
         <com.example.instogramapplication.widget.GradientRingView
             android:layout_width="44dp"
             android:layout_height="44dp"
-            app:ringThickness="2dp"
-            app:ringStartColor="@color/color_base"
             app:ringCenterColor="@color/color_variant"
-            app:ringEndColor="@color/color_base"/>
+            app:ringEndColor="@color/color_base"
+            app:ringStartColor="@color/color_base"
+            app:ringThickness="2dp" />
+
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/item_story_x"
+            android:id="@+id/img_profile"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_margin="6dp"
-            android:transitionName="profile"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/img"
+            android:transitionName="profile"
             app:shapeAppearanceOverlay="@style/Circular" />
     </FrameLayout>
 
@@ -190,17 +233,30 @@
         style="@style/Text.Konten15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:transitionName="username"
         android:layout_marginHorizontal="8dp"
         android:text="sandika galih"
         android:textColor="@color/white"
         android:textStyle="bold"
+        android:transitionName="username"
         app:layout_constraintBottom_toBottomOf="@id/detail.profil"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.2"
         app:layout_constraintStart_toEndOf="@id/detail.profil"
-        app:layout_constraintTop_toTopOf="@id/detail.profil" />
+        app:layout_constraintTop_toTopOf="@id/detail.profil"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="0dp"
+        android:padding="3dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_centang_ungu"
+        app:layout_constraintBottom_toBottomOf="@id/detail.user"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/detail.user"
+        app:layout_constraintTop_toTopOf="@id/detail.user"
+        app:layout_constraintVertical_bias="0.5" />
+
 
     <TextView
         android:id="@+id/detail.tv_berjalan"
@@ -230,30 +286,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
         android:ellipsize="end"
         android:maxLines="2"
-        app:animation_duration="500"
-        android:transitionName="desc"
-        android:text="sandika galih berjalan ke arau boroboudur sersama rekannya"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@id/detail.tv_selengkapnya"
+        android:transitionName="desc"
+        app:animation_duration="500"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/detail.img_btn_music"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/detail.tv_selengkapnya"
-        style="@style/Text.Konten15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:text="selengkapnya"
-        android:textColor="@color/abu_abu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />

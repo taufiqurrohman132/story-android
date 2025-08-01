@@ -50,7 +50,7 @@ internal class StackRemoteViewsFactory(private val mContext: Context) : RemoteVi
         if (bitmap != null) {
             views.setImageViewBitmap(R.id.img_widget, bitmap)
         } else {
-            views.setImageViewResource(R.id.img_widget, R.drawable.img)
+            views.setImageViewResource(R.id.img_widget, R.drawable.placeholdre_image)
         }
 
         val extras = bundleOf(

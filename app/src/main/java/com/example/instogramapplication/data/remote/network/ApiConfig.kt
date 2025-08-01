@@ -1,6 +1,8 @@
 package com.example.instogramapplication.data.remote.network
 
+import com.example.instogramapplication.AuthInterceptor
 import com.example.instogramapplication.BuildConfig
+import com.example.instogramapplication.data.local.datastore.UserPreferences
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -9,23 +11,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
     companion object{
-        fun getApiService(token: String): ApiService{
+        fun getApiService(userPref: UserPreferences): ApiService{
             val loggingInterceptor = HttpLoggingInterceptor().setLevel(
                 if (BuildConfig.DEBUG)
                     HttpLoggingInterceptor.Level.BODY
                 else
                     HttpLoggingInterceptor.Level.NONE
             )
-            val authInterceptor = Interceptor { chain ->
-                val req = chain.request()
-                val requestHeaders = req.newBuilder()
-                    .addHeader("Authorization", "Bearer $token")
-                    .build()
-                chain.proceed(requestHeaders)
-            }
             val client = OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
-                .addInterceptor(authInterceptor)
+                .addInterceptor(AuthInterceptor(userPref))
                 .build()
             val retrofit = Retrofit.Builder()
                 .baseUrl(BuildConfig.BASE_URL)

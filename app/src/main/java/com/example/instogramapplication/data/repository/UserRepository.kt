@@ -103,8 +103,8 @@ class UserRepository private constructor(
 
     fun isLoggedIn(): Flow<Boolean> = userPref.isLoggedIn()
 
-//    suspend fun getUserName() =
-//        userPref.getUsername()
+    suspend fun getUserName() =
+        userPref.getUsername()
 
     fun getStories(): Flow<Resource<List<ListStoryItem>>> = flow {
         emit(Resource.Loading())
@@ -115,7 +115,7 @@ class UserRepository private constructor(
             Log.d(TAG, "getStories: respons $response")
             if (response.isSuccessful){
                 val stories = response.body()?.listStory
-                Log.d(TAG, "getStories: body $stories")
+                Log.d(TAG, "getStories: body $stories username $username")
                 if (!stories.isNullOrEmpty()){
                     emit(Resource.Success(stories, username ))
                 }else{

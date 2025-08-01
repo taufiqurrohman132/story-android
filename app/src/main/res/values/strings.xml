@@ -42,7 +42,18 @@
 
     <string name="toast_success_upload">Story berhasil di unggah</string>
 
-<!--    time-->
+    <string name="error_invalid_email">Masukkan format Email yang sesuai</string>
+    <string name="error_password_too_short">Password kurang dari 8 karakter</string>
+
+    <string name="error_empty_description">Silakan masukkan deskripsi</string>
+    <string name="error_empty_image">Gambar kosong</string>
+
+    <string name="error_open_camera">Gagal memunculkan kamera.</string>
+
+    <string name="success_take_picture">Berhasil mengambil gambar.</string>
+    <string name="error_take_picture">Gagal mengambil gambar.</string>
+
+    <!--    time-->
     <string name="time_just_now">just now</string>
     <string name="time_minutes_ago">%1$d minutes ago</string>
     <string name="time_hours_ago">%1$d hours ago</string>
@@ -57,4 +68,12 @@
 
     <string name="selengkapnya">Selengkapnya</string>
     <string name="lebih_sedikit">Lebih Sedikit</string>
+    <string name="instogram_mobile">Instogram Mobile Application Experience</string>
+    <string name="simpan">Simpan</string>
+
+    <string name="avatar_base_url">https://api.dicebear.com/9.x/initials/png?seed=%1$s</string>
+    <string name="masukkan_password_kamu">Masukkan Password Kamu</string>
+    <string name="masukkan_email_kamu">Masukkan Email Kamu</string>
+    <string name="masukkan_nama_kamu">Masukkan Nama Kamu</string>
+    <string name="bg_auth">bg_auth</string>
 </resources>

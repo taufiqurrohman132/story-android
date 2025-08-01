@@ -5,18 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red"
+    android:background="@color/black"
     tools:context=".ui.auth.login.LoginActivity">
-    <View
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/img"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/blue_trans"/>
-
+        android:layout_height="250dp"
+        android:background="@drawable/bg_auth"
+        android:contentDescription="@string/bg_auth"/>
     <androidx.cardview.widget.CardView
+        android:id="@+id/form_login"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardCornerRadius="30dp"
@@ -82,6 +79,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
+                app:cursorColor="@color/color_variant"
                 android:layout_marginTop="16dp"
                 app:hintTextColor="@color/color_base"
                 app:boxStrokeColor="@color/color_base"
@@ -103,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:ems="10"
-                    android:hint="Masukkan Email Kamu" />
+                    android:hint="@string/masukkan_email_kamu" />
             </com.example.instogramapplication.CustomInputWithManualError2>
 
             <com.example.instogramapplication.CustomInputWithManualError2
@@ -120,6 +118,7 @@
                 app:boxCornerRadiusTopStart="16dp"
                 app:boxStrokeColor="@color/color_base"
                 app:boxStrokeErrorColor="@color/red"
+                app:cursorColor="@color/color_variant"
                 app:hintTextColor="@color/color_base"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -133,7 +132,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Masukkan Password Kamu"
+                    android:inputType="textPassword"
+                    android:hint="@string/masukkan_password_kamu"
                     android:textColor="@color/black" />
             </com.example.instogramapplication.CustomInputWithManualError2>
 
@@ -176,6 +176,31 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/signup.tv_lupa_pass"
                 app:layout_constraintVertical_bias="0.0" />
+
+
+            <ImageView
+                android:id="@+id/login_google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_google"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/login_fb"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/login.btn_login"
+                app:layout_constraintVertical_bias="0.3" />
+
+            <ImageView
+                android:id="@+id/login_fb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_fb"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@id/login_google"
+                app:layout_constraintTop_toBottomOf="@id/login.btn_login"
+                app:layout_constraintVertical_bias="0.3" />
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

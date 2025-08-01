@@ -16,6 +16,10 @@ class SettingsViewModel(
         return repository.getCurrentLanguage()
     }
 
+    suspend fun getName(): String{
+        return repository.getUserName()
+    }
+
     fun setLanguage(context: Context, langCode: String, onComplite: () -> Unit) {
         Lingver.getInstance().setLocale(context, langCode)
         // save

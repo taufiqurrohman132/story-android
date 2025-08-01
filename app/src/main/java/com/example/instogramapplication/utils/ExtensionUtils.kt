@@ -11,6 +11,9 @@ import android.widget.TextView
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -42,31 +45,21 @@ object ExtensionUtils {
         return file
     }
 
-    fun View.observeKeyboardVisibility(owner: LifecycleOwner,onKeyboardVisibilityChanged: (Boolean) -> Unit) {
-        val rootView = this.rootView
-        var isKeyboardVisible = false
-
+    fun View.keyboardVisibilityFlow(): Flow<Boolean> = callbackFlow {
+        val rootView = this@keyboardVisibilityFlow.rootView
         val listener = ViewTreeObserver.OnGlobalLayoutListener {
-            val rect = Rect()
-            rootView.getWindowVisibleDisplayFrame(rect)
-
+            val r = Rect()
+            rootView.getWindowVisibleDisplayFrame(r)
             val screenHeight = rootView.height
-            val keypadHeight = screenHeight - rect.bottom
-
-            val visible = keypadHeight > screenHeight * 0.15 // 15% threshold
-            if (visible != isKeyboardVisible) {
-                isKeyboardVisible = visible
-                onKeyboardVisibilityChanged(visible)
-            }
+            val keypadHeight = screenHeight - r.bottom
+            trySend(keypadHeight > screenHeight * 0.15)
         }
 
-        viewTreeObserver.addOnGlobalLayoutListener(listener)
-
-        owner.lifecycle.addObserver(object : DefaultLifecycleObserver {
-            override fun onDestroy(owner: LifecycleOwner) {
-                viewTreeObserver.removeOnGlobalLayoutListener(listener)
-            }
-        })
+        rootView.viewTreeObserver.addOnGlobalLayoutListener(listener)
+        awaitClose {
+            rootView.viewTreeObserver.removeOnGlobalLayoutListener(listener)
+        }
     }
+
 
 }

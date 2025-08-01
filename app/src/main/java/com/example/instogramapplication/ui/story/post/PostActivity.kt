@@ -2,6 +2,7 @@ package com.example.instogramapplication.ui.story.post
 
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -163,7 +164,7 @@ class PostActivity : AppCompatActivity() {
             }catch (exc: Exception) {
                 Toast.makeText(
                     this@PostActivity,
-                    "Gagal memunculkan kamera.",
+                    getString(R.string.error_open_camera),
                     Toast.LENGTH_SHORT
                 ).show()
                 Log.e(TAG, "startCamera: ${exc.message}")
@@ -184,6 +185,7 @@ class PostActivity : AppCompatActivity() {
         startCamera()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setupCameraToZoom(){
         val listener = object : ScaleGestureDetector.SimpleOnScaleGestureListener(){
             override fun onScale(detector: ScaleGestureDetector): Boolean {
@@ -216,7 +218,7 @@ class PostActivity : AppCompatActivity() {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     Toast.makeText(
                         this@PostActivity,
-                        "Berhasil mengambil gambar.",
+                        getString(R.string.success_take_picture),
                         Toast.LENGTH_SHORT
                     ).show()
 
@@ -226,14 +228,15 @@ class PostActivity : AppCompatActivity() {
                     }
                     Log.d(TAG, "onImageSaved: result $output")
                 }
+
                 override fun onError(exc: ImageCaptureException) {
                     Toast.makeText(
                         this@PostActivity,
-                        "Gagal mengambil gambar.",
+                        getString(R.string.error_take_picture),
                         Toast.LENGTH_SHORT
                     ).show()
-                    Log.e(TAG, "onError: ${exc.message}")
                 }
+
             }
         )
     }

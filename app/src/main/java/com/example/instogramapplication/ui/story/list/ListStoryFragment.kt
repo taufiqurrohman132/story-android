@@ -30,7 +30,6 @@ import com.example.instogramapplication.R
 import com.example.instogramapplication.data.remote.model.ListStoryItem
 import com.example.instogramapplication.databinding.FragmentListStoryBinding
 import com.example.instogramapplication.ui.story.detail.DetailStoryActivity
-import com.example.instogramapplication.ui.story.detail.DetailStoryActivity.Companion.DETAIL_ID
 import com.example.instogramapplication.ui.story.post.PostActivity
 import com.example.instogramapplication.utils.DialogUtils
 import com.example.instogramapplication.utils.Resource

@@ -49,6 +49,8 @@ object ApiUtils {
                 dateTime.format(formaters) // contoh: "Januari 2022"
             }
         }
-
     }
+
+    fun avatarUrl(context: Context, name: String) =
+        context.getString(R.string.avatar_base_url, name)
 }

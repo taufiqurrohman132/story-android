@@ -7,11 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.createViewModelLazy
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.instogramapplication.R
 import com.example.instogramapplication.databinding.FragmentSettingsBinding
 import com.example.instogramapplication.ui.auth.login.LoginActivity
+import com.example.instogramapplication.utils.ApiUtils
 import com.example.instogramapplication.utils.DialogUtils
 import com.example.instogramapplication.utils.LanguageUtils
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
@@ -42,24 +45,33 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observer()
+        initView()
         setupListener()
+    }
 
+    private fun initView(){
+        viewLifecycleOwner.lifecycleScope.launch {
+            val name = viewModel.getName()
+            binding.settingsNameProfile.text = name
+
+            val imgUrl = ApiUtils.avatarUrl(requireContext(), name)
+            Glide.with(requireContext())
+                .load(imgUrl)
+                .into(binding.itemStoryProfile)
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val langCode = viewModel.getCurrentLang()
+            val displayName = LanguageUtils.getLanguage(langCode).find { it.code == langCode }?.name ?: "Default"
+            Log.d(TAG, "observer: setting fragment display name $displayName lang code $langCode")
+            binding.settingsTvBahasa.text = displayName
+        }
     }
 
     private fun setupListener(){
         binding.apply {
             settingsGantiBahasa.setOnClickListener { showLanguageBottomSheet() }
             settingBtnLogout.setOnClickListener { logOut() }
-        }
-    }
-
-    private fun observer(){
-        viewLifecycleOwner.lifecycleScope.launch {
-            val langCode = viewModel.getCurrentLang()
-            val displayName = LanguageUtils.getLanguage(langCode).find { it.code == langCode }?.name ?: "Default"
-            Log.d(TAG, "observer: setting fragment display name $displayName lang code $langCode")
-            binding.settingsTvBahasa.text = displayName
         }
     }
 

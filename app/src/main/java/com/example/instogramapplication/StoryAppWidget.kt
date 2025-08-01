@@ -24,15 +24,6 @@ class StoryAppWidget : AppWidgetProvider() {
         }
     }
 
-//    override fun onReceive(context: Context, intent: Intent) {
-//        super.onReceive(context, intent)
-//        intent.action?.let {
-//            if (intent.action == TOAST_ACTION){
-//                val viewIndex = intent.getIntExtra(EXTRA_ITEM, 0)
-//                Toast.makeText(context, "Touched view $viewIndex", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
     companion object{
         private const val TOAST_ACTION = "com.dicoding.picodiploma.TOAST_ACTION"
         const val EXTRA_ITEM = "com.dicoding.picodiploma.EXTRA_ITEM"

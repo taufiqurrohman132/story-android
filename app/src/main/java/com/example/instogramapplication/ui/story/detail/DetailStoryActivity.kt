@@ -112,7 +112,6 @@ class DetailStoryActivity : AppCompatActivity() {
                     text = desc
                     setOnClickListener {
                         toggle()
-                        detailTvSelengkapnya.isVisible = !detailTvSelengkapnya.isVisible
                     }
                 }
 
@@ -123,12 +122,12 @@ class DetailStoryActivity : AppCompatActivity() {
                     .override(800)
                     .into(detailImgStory)
 
-                // click selengkapnya
-                detailTvSelengkapnya.apply {
-                    setOnClickListener {
-                        detailDescExpand.toggle()
-                        detailTvSelengkapnya.isVisible = !detailTvSelengkapnya.isVisible
-                    }
+                // profile
+                story.name?.let {
+                    val imgUrl = ApiUtils.avatarUrl(this@DetailStoryActivity, story.name)
+                    Glide.with(this@DetailStoryActivity)
+                        .load(imgUrl)
+                        .into(imgProfile)
                 }
 
             }
@@ -136,7 +135,6 @@ class DetailStoryActivity : AppCompatActivity() {
     }
 
     companion object{
-        const val DETAIL_ID = "detail_id"
         const val EXTRA_DETAIL = "DETAIL"
         private val TAG = DetailStoryViewModel::class.java.simpleName
 

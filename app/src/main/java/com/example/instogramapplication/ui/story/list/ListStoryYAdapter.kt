@@ -37,9 +37,10 @@ class ListStoryYAdapter(
     private val onItemClick: (ImageView, TextView, ListStoryItem) -> Unit
 ) : ListAdapter<ListStoryItem, ListStoryYAdapter.ItemFeedViewHolder>(DIFF_CALLBACK) {
 
+    private val TAG = ListStoryYAdapter::class.java.simpleName
+
     inner class ItemFeedViewHolder(private val binding: ItemListStoryYBinding) : ViewHolder(binding.root) {
         val description = binding.itemyTvDeskExpand
-        val tvSelengkapnya = binding.itemyTvSelengkapnya
 
         fun bind(listStory: ListStoryItem){
             binding.apply {
@@ -54,9 +55,6 @@ class ListStoryYAdapter(
                     text = desc
                     setOnClickListener {
                         toggle()
-                        binding.itemyTvSelengkapnya.apply {
-                            isVisible = !isVisible
-                        }
                     }
                 }
                 itemyTvTime.text = ApiUtils.getTimeAgo(context,
@@ -66,18 +64,26 @@ class ListStoryYAdapter(
                 )
                 itemyTvBerjalan.isSelected = true
 
+                // profile
+                listStory.name?.let {
+                    val imgName = ApiUtils.avatarUrl(context, listStory.name)
+                    Glide.with(context)
+                        .load(imgName)
+                        .into(itemStoryYProfil)
+
+                    // liked
+                    Glide.with(context)
+                        .load(imgName)
+                        .into(imgLiked2)
+
+                    Log.d(TAG, "bind: avatar url $imgName")
+                }
+
                 Glide.with(context)
                     .load(listStory.photoUrl)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .override(400)
                     .into(itemyImgPost)
-
-                itemyTvSelengkapnya.setOnClickListener {
-                    itemyTvDeskExpand.toggle()
-                    itemyTvSelengkapnya.apply {
-                        isVisible = !isVisible
-                    }
-                }
 
                 itemyImgPost.setOnClickListener {
                     binding.apply {
@@ -114,9 +120,6 @@ class ListStoryYAdapter(
         if (position != RecyclerView.NO_POSITION)
             holder.apply {
                 description.collapse()
-                tvSelengkapnya.apply {
-                    isVisible = true
-                }
             }
     }
 

@@ -1,10 +1,12 @@
 package com.example.instogramapplication.ui.auth.signup
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract.CommonDataKinds.Email
 import android.util.Log
 import android.view.View
+import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -51,16 +53,25 @@ class SignUpActivity : AppCompatActivity() {
         // setup
         binding.apply {
             signupInlayEmail.apply {
-                setTextError("Masukkan format Email yang sesuai")
+                setTextError(context.getString(R.string.error_invalid_email))
                 isSucces = {
                     ValidationUtils.isEmailValid(it)
                 }
             }
             signupInlayPass.apply {
-                setTextError("Password Kurang dari 8 Karakter")
+                setTextError(context.getString(R.string.error_password_too_short))
                 isSucces = {
                     !(!it.isNullOrBlank() && it.length < 8)
                 }
+            }
+        }
+
+        // setup animation
+        binding.formSignUp.post {
+            ObjectAnimator.ofFloat(binding.formSignUp, View.TRANSLATION_Y, 600f, 0f).apply {
+                duration = 1000
+                interpolator = DecelerateInterpolator()
+                start()
             }
         }
     }
@@ -138,7 +149,6 @@ class SignUpActivity : AppCompatActivity() {
         ){
             it.dismiss()
             binding.dimOverlay.visibility = View.INVISIBLE
-
         }
     }
 
