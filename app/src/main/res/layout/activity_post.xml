@@ -92,7 +92,7 @@
             app:layout_constraintVertical_bias="0.5"
             app:shapeAppearanceOverlay="@style/Circular" />
 
-        <com.example.instogramapplication.widget.GradientRingView
+        <com.example.instogramapplication.ui.customview.GradientRingView
             android:id="@+id/post.btn_click_camera"
             android:layout_width="86dp"
             android:layout_height="86dp"

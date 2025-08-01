@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp">
 
-                <com.example.instogramapplication.widget.GradientRingView
+                <com.example.instogramapplication.ui.customview.GradientRingView
                     android:layout_width="86dp"
                     android:layout_height="86dp"
                     app:ringCenterColor="@color/abu_abu_terang"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp">
 
-                <com.example.instogramapplication.widget.GradientRingView
+                <com.example.instogramapplication.ui.customview.GradientRingView
                     android:layout_width="86dp"
                     android:layout_height="86dp"
                     app:ringCenterColor="@color/abu_abu_terang"
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp">
 
-                <com.example.instogramapplication.widget.GradientRingView
+                <com.example.instogramapplication.ui.customview.GradientRingView
                     android:layout_width="86dp"
                     android:layout_height="86dp"
                     app:ringCenterColor="@color/abu_abu_terang"
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp">
 
-                <com.example.instogramapplication.widget.GradientRingView
+                <com.example.instogramapplication.ui.customview.GradientRingView
                     android:layout_width="86dp"
                     android:layout_height="86dp"
                     app:ringCenterColor="@color/abu_abu_terang"
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp">
 
-                <com.example.instogramapplication.widget.GradientRingView
+                <com.example.instogramapplication.ui.customview.GradientRingView
                     android:layout_width="86dp"
                     android:layout_height="86dp"
                     app:ringCenterColor="@color/abu_abu_terang"
@@ -166,7 +166,7 @@
                 app:layout_constraintStart_toStartOf="@id/itemy.img_post"
                 app:layout_constraintTop_toTopOf="@id/itemy.img_post">
 
-                <com.example.instogramapplication.widget.GradientRingView
+                <com.example.instogramapplication.ui.customview.GradientRingView
                     android:layout_width="44dp"
                     android:layout_height="44dp"
                     app:ringCenterColor="@color/abu_abu"
@@ -340,7 +340,7 @@
                 app:layout_constraintStart_toStartOf="@id/itemz.img_post"
                 app:layout_constraintTop_toTopOf="@id/itemz.img_post">
 
-                <com.example.instogramapplication.widget.GradientRingView
+                <com.example.instogramapplication.ui.customview.GradientRingView
                     android:layout_width="44dp"
                     android:layout_height="44dp"
                     app:ringCenterColor="@color/abu_abu"

@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal">
 
-                    <com.example.instogramapplication.widget.GradientRingView
+                    <com.example.instogramapplication.ui.customview.GradientRingView
                         android:layout_width="96dp"
                         android:layout_height="96dp"
                         app:ringCenterColor="@color/color_variant"

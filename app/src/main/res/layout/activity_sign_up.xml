@@ -106,7 +106,7 @@
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.example.instogramapplication.CustomInputWithManualError
+            <com.example.instogramapplication.ui.customview.CustomInputWithManualError
                 android:id="@+id/signup.inlay_email"
                 style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
                 android:layout_width="0dp"
@@ -135,9 +135,9 @@
                     android:ems="10"
                     android:hint="@string/masukkan_email_kamu"
                     android:textColor="@color/black" />
-            </com.example.instogramapplication.CustomInputWithManualError>
+            </com.example.instogramapplication.ui.customview.CustomInputWithManualError>
 
-            <com.example.instogramapplication.CustomInputWithManualError
+            <com.example.instogramapplication.ui.customview.CustomInputWithManualError
                 android:id="@+id/signup.inlay_pass"
                 style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
                 android:layout_width="0dp"
@@ -169,7 +169,7 @@
                     android:hint="@string/masukkan_password_kamu"
                     android:inputType="textPassword"
                     android:textColor="@color/black" />
-            </com.example.instogramapplication.CustomInputWithManualError>
+            </com.example.instogramapplication.ui.customview.CustomInputWithManualError>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/signup.btn_sign_up"
