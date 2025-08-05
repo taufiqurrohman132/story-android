@@ -12,22 +12,28 @@ Proyek ini masih dalam proses pengembangan dan akan terus disempurnakan sesuai d
   <tr>
     <td align="center" valign="top">
       <strong>Home</strong><br>
-      <img src="https://github.com/user-attachments/assets/3b10caeb-b6c4-403e-8dae-e385034266a5" width="250"/>
+      <img src="https://github.com/user-attachments/assets/4ec9d426-aa2b-4838-8794-949391ab3392" width="250"/>
     </td>
     <td align="center" valign="top">
-      <strong>Detail</strong><br>
-      <img src="https://github.com/user-attachments/assets/b70957d8-8945-4f19-b6e5-ce4e8c222eea" width="250"/>
+      <strong></strong><br>
+      <img src="https://github.com/user-attachments/assets/ee2e79e4-f068-4b87-83e5-384bd0984b9e" width="250"/>
     </td>
     <td align="center" valign="top">
       <strong>Favorit</strong><br>
-      <img src="https://github.com/user-attachments/assets/bd31e099-e10f-4535-b3f3-174fd71d0af6" width="250"/>
+      <img src="https://github.com/user-attachments/assets/3c471f47-2ada-4e54-873d-bfa80db60618" width="250"/>
     </td>
     <td align="center" valign="top">
       <strong>Notification</strong><br>
-      <img src="https://github.com/user-attachments/assets/f5dcc37e-e4d5-47ff-adc5-637f054ec055" width="250"/>
+      <img src="https://github.com/user-attachments/assets/64b9028c-a87c-4e4a-8c49-95f2124b121d" width="250"/>
+    </td>
+    <td align="center" valign="top">
+      <strong>Notification</strong><br>
+      <img src="https://github.com/user-attachments/assets/73fa906e-24c9-45fe-9e5e-42c2c89fa0df" width="250"/>
     </td>
   </tr>
 </table>
+
+---
 
 ## 🎯 Tujuan Pengembangan
 
