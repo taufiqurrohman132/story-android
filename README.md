@@ -6,6 +6,29 @@ Proyek ini masih dalam proses pengembangan dan akan terus disempurnakan sesuai d
 
 ---
 
+## Cuplikan Layar
+
+<table align="center">
+  <tr>
+    <td align="center" valign="top">
+      <strong>Home</strong><br>
+      <img src="https://github.com/user-attachments/assets/3b10caeb-b6c4-403e-8dae-e385034266a5" width="250"/>
+    </td>
+    <td align="center" valign="top">
+      <strong>Detail</strong><br>
+      <img src="https://github.com/user-attachments/assets/b70957d8-8945-4f19-b6e5-ce4e8c222eea" width="250"/>
+    </td>
+    <td align="center" valign="top">
+      <strong>Favorit</strong><br>
+      <img src="https://github.com/user-attachments/assets/bd31e099-e10f-4535-b3f3-174fd71d0af6" width="250"/>
+    </td>
+    <td align="center" valign="top">
+      <strong>Notification</strong><br>
+      <img src="https://github.com/user-attachments/assets/f5dcc37e-e4d5-47ff-adc5-637f054ec055" width="250"/>
+    </td>
+  </tr>
+</table>
+
 ## 🎯 Tujuan Pengembangan
 
 Menyelesaikan submission akhir dengan menerapkan fitur-fitur sesuai standar pembelajaran, seperti:
