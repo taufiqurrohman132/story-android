@@ -83,6 +83,6 @@ Proyek ini masih terus saya kembangkan. Beberapa hal yang direncanakan:
 ## Status Proyek
 
 🛠️ Dalam pengembangan  
-🗓️ Target selesai: Akhir Juli 2025  
+🗓️ Target selesai: Akhir Agustus 2025  
 🎓 Tujuan: Submission kelas Mahir Dicoding
 
