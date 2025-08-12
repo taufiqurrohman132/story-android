@@ -16,5 +16,10 @@
         android:name="com.example.instogramapplication.ui.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/navigation_maps"
+        android:name="com.example.instogramapplication.ui.maps.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
 
 </navigation>

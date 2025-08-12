@@ -8,5 +8,10 @@
         android:id="@+id/navigation_profile"
         android:icon="@drawable/nav_profile"
         android:title="@string/profile" />
+    <item
+        android:id="@+id/navigation_maps"
+        android:icon="@drawable/nav_profile"
+        android:title="@string/profile" />
+
 
 </menu>
