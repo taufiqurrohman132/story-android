@@ -8,6 +8,7 @@ import com.example.instogramapplication.data.di.Injection
 import com.example.instogramapplication.data.repository.UserRepository
 import com.example.instogramapplication.ui.auth.login.LoginViewModel
 import com.example.instogramapplication.ui.auth.signup.SignUpViewModel
+import com.example.instogramapplication.ui.maps.MapsViewModel
 import com.example.instogramapplication.ui.story.list.ListStoryViewModel
 import com.example.instogramapplication.ui.story.post.EditViewModel
 import com.example.instogramapplication.ui.settings.SettingsViewModel
@@ -45,6 +46,9 @@ class UserViewModelFactory(
 
             SettingsViewModel::class.java ->
                 SettingsViewModel(repository)
+
+            MapsViewModel::class.java ->
+                MapsViewModel(repository)
 
             else ->
                 throw IllegalArgumentException("Unknwon Viewmodel Class")

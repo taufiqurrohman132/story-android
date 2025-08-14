@@ -64,6 +64,4 @@ class ListStoryViewModel(
             refreshTrigger.emit(Unit)
         }
     }
-
-
 }

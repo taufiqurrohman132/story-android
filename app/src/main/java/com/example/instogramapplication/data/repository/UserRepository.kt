@@ -1,5 +1,6 @@
 package com.example.instogramapplication.data.repository
 
+import android.location.Location
 import com.example.instogramapplication.R
 import com.example.instogramapplication.utils.ResourceProvider
 import com.example.instogramapplication.data.local.datastore.UserPreferences
@@ -97,12 +98,12 @@ class UserRepository private constructor(
     suspend fun getUserName() =
         userPref.getUsername()
 
-    fun getStories(): Flow<Resource<List<ListStoryItem>>> = flow {
+    fun getStories(location: Int? = null): Flow<Resource<List<ListStoryItem>>> = flow {
         emit(Resource.Loading())
 
         try {
             val username = userPref.getUsername()
-            val response = apiService.getStories()
+            val response = apiService.getStories(location)
             if (response.isSuccessful) {
                 val stories = response.body()?.listStory
                 if (!stories.isNullOrEmpty()) {
