@@ -2,7 +2,8 @@ package com.example.instogramapplication.ui.maps
 
 import android.content.pm.PackageManager
 import android.content.res.Resources
-import android.graphics.Color
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,11 +15,15 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.example.instogramapplication.R
-import com.example.instogramapplication.data.remote.model.ListStoryItem
+import com.example.instogramapplication.data.remote.model.StoryItem
 import com.example.instogramapplication.databinding.FragmentMapsBinding
-import com.example.instogramapplication.utils.ConvertionUtils
+import com.example.instogramapplication.utils.ApiUtils
 import com.example.instogramapplication.utils.DialogUtils
+import com.example.instogramapplication.utils.PostUtils
 import com.example.instogramapplication.utils.Resource
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -63,12 +68,12 @@ class MapsFragment : Fragment() {
         val sydney = LatLng(-34.0, 151.0)
         val dicodingSpace = LatLng(-6.8957643, 107.6338462)
         mMap.apply {
-            addMarker(
-                MarkerOptions()
-                    .position(dicodingSpace)
-                    .title("Dicoding Space")
-                    .snippet("Batik Kumeli No.50")
-            )
+//            addMarker(
+//                MarkerOptions()
+//                    .position(dicodingSpace)
+//                    .title("Dicoding Space")
+//                    .snippet("Batik Kumeli No.50")
+//            )
             animateCamera(CameraUpdateFactory.newLatLngZoom(dicodingSpace, 15f))
 
             uiSettings.apply {
@@ -78,48 +83,15 @@ class MapsFragment : Fragment() {
                 isMapToolbarEnabled = true
             }
 
-            setOnMapLongClickListener { latLng ->
-                addMarker(
-                    MarkerOptions()
-                        .position(latLng)
-                        .title("New Marker")
-                        .snippet("Lat: ${latLng.latitude} Long: ${latLng.longitude}")
-                        .icon(
-                            ConvertionUtils.vectorToBitmap(
-                            requireContext().resources,
-                            R.drawable.ic_filter,
-                            Color.RED
-                        ))
-                )
-            }
+//            setOnMapLongClickListener { latLng ->
+//                addMarker(
+//                    MarkerOptions()
+//                        .position(latLng)
+//                        .title("New Marker")
+//                        .snippet("Lat: ${latLng.latitude} Long: ${latLng.longitude}")
+//                )
+//            }
         }
-
-        getMyLocation()
-        setMapStyle()
-    }
-
-    private val requestPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ){ isGranted: Boolean ->
-            if (isGranted) {
-                getMyLocation()
-            }
-        }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentMapsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(callback)
 
         binding.mapsOptions.setOnClickListener {
             val popUp = PopupMenu(requireContext(), it)
@@ -154,6 +126,35 @@ class MapsFragment : Fragment() {
             popUp.show()
         }
 
+        getMyLocation()
+        setMapStyle()
+    }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                getMyLocation()
+            }
+        }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentMapsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync(callback)
+
+
+
         observer()
         setupListener()
     }
@@ -163,7 +164,7 @@ class MapsFragment : Fragment() {
         _binding = null
     }
 
-    private fun setupListener(){
+    private fun setupListener() {
         binding.addMarkerPeople.setOnClickListener { viewModel.loadStories(1) }
     }
 
@@ -173,41 +174,46 @@ class MapsFragment : Fragment() {
                 requireContext().applicationContext,
                 android.Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
-        ){
+        ) {
             mMap.isMyLocationEnabled = true
-        }else{
+        } else {
             requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }
 
-    private fun setMapStyle(){
+    private fun setMapStyle() {
         try {
             val success =
-                mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.map_style))
-            if (!success){
+                mMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                        requireContext(),
+                        R.raw.map_style
+                    )
+                )
+            if (!success) {
                 Log.e(TAG, "Style parsing failed.")
             }
-        }catch (exception: Resources.NotFoundException) {
+        } catch (exception: Resources.NotFoundException) {
             Log.e(TAG, "Can't find style. Error: ", exception)
         }
     }
 
-    private fun addManyMarker(){
+    private fun addManyMarker() {
 
     }
 
-    private fun observer(){
+    private fun observer() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.eventFlow.collect { message ->
                 DialogUtils.showToast(message, requireActivity())
             }
 
         }
-        viewModel.storiesState.observe(viewLifecycleOwner){ story ->
+        viewModel.storiesState.observe(viewLifecycleOwner) { story ->
             Log.d(TAG, "observer: result = $story")
             when (story) {
                 is Resource.Loading -> showLoading(true)
-                is Resource.Success -> showManyMarker(story.data, story.message)
+                is Resource.Success -> showManyMarker(story.data)
 //                    is Resource.Error -> showError()
 //                    is Resource.ErrorConnection -> showErrorConnect(result.message)
                 else -> "showEmpty()"
@@ -215,17 +221,34 @@ class MapsFragment : Fragment() {
         }
     }
 
-    private fun showManyMarker(data: List<ListStoryItem>?, message: String?) {
+    private fun showManyMarker(data: List<StoryItem>?) {
         data?.forEach { marker ->
             Log.d(TAG, "showManyMarker: letlang = $marker")
-            if (marker.lat != null && marker.lon != null){
+            if (marker.lat != null && marker.lon != null) {
                 val latLng = LatLng(marker.lat, marker.lon)
-                mMap.addMarker(
-                    MarkerOptions()
-                        .position(latLng)
-                        .title(marker.name)
-                        .snippet(marker.description)
-                )
+                val imgName = ApiUtils.avatarUrl(requireContext(), marker.name ?: "AN")
+                Glide.with(requireContext())
+                    .asBitmap()
+                    .load(imgName)
+                    .into(object : CustomTarget<Bitmap>() {
+                        override fun onResourceReady(
+                            resource: Bitmap,
+                            transition: Transition<in Bitmap>?
+                        ) {
+                            val markerIcon =
+                                PostUtils.createBalloonMarker(requireContext(), resource)
+                            mMap.addMarker(
+                                MarkerOptions()
+                                    .position(latLng)
+                                    .title(marker.name)
+                                    .snippet(marker.description)
+                                    .icon(markerIcon)
+                            )
+                        }
+
+                        override fun onLoadCleared(placeholder: Drawable?) {
+                        }
+                    })
                 boundsBuilder.include(latLng)
             }
         }
@@ -247,7 +270,7 @@ class MapsFragment : Fragment() {
     }
 
 
-    companion object{
+    companion object {
         private val TAG = MapsFragment::class.java.simpleName
     }
 

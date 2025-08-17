@@ -5,13 +5,10 @@ import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
-import android.util.Log
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import java.io.File
 import java.net.HttpURLConnection
 import java.net.URL
@@ -37,12 +34,14 @@ object ConvertionUtils {
         return if (file.exists()) BitmapFactory.decodeFile(file.absolutePath) else null
     }
 
-    fun vectorToBitmap(resources: Resources, @DrawableRes id: Int, @ColorInt color: Int): BitmapDescriptor{
+    fun vectorToBitmap(
+        resources: Resources,
+        @DrawableRes id: Int,
+        @ColorInt color: Int? = null
+    ): Bitmap {
         val vectorDrawable = ResourcesCompat.getDrawable(resources, id, null)
-        if (vectorDrawable == null){
-            Log.e("BitmapHelper", "Resource not found")
-            return BitmapDescriptorFactory.defaultMarker()
-        }
+            ?: throw IllegalArgumentException("Resource not found")
+
         val bitmap = Bitmap.createBitmap(
             vectorDrawable.intrinsicWidth,
             vectorDrawable.intrinsicHeight,
@@ -50,9 +49,9 @@ object ConvertionUtils {
         )
         val canvas = Canvas(bitmap)
         vectorDrawable.setBounds(0, 0, canvas.width, canvas.height)
-        DrawableCompat.setTint(vectorDrawable, color)
+        color?.let { DrawableCompat.setTint(vectorDrawable, it) }
         vectorDrawable.draw(canvas)
-        return BitmapDescriptorFactory.fromBitmap(bitmap)
+        return bitmap
     }
 
 }

@@ -2,8 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
     id("androidx.navigation.safeargs.kotlin")
-    id("kotlin-kapt")
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
@@ -86,6 +86,13 @@ dependencies {
 
     implementation(libs.flexbox)
 
+    // paging 3 n room
+    implementation(libs.androidx.paging.runtime.ktx)
+    ksp("androidx.room:room-compiler:2.6.0")
+    implementation("androidx.room:room-ktx:2.6.0")
+    // optional - Paging 3 Integration
+    implementation("androidx.room:room-paging:2.6.0")
+
     // loading
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.shimmer)
@@ -110,6 +117,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.play.services.maps)
+    implementation(libs.androidx.room.runtime.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

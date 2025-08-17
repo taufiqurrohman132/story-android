@@ -1,16 +1,25 @@
 package com.example.instogramapplication.data.repository
 
-import android.location.Location
+import androidx.lifecycle.LiveData
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
+import androidx.room.paging.util.queryDatabase
 import com.example.instogramapplication.R
+import com.example.instogramapplication.data.local.database.StoryDatabase
+import com.example.instogramapplication.data.paging.StoryPagingSource
 import com.example.instogramapplication.utils.ResourceProvider
 import com.example.instogramapplication.data.local.datastore.UserPreferences
-import com.example.instogramapplication.data.remote.model.ListStoryItem
+import com.example.instogramapplication.data.local.entity.StoryEntity
+import com.example.instogramapplication.data.paging.StoryRemoteMediator
+import com.example.instogramapplication.data.remote.model.StoryItem
 import com.example.instogramapplication.data.remote.network.ApiService
 import com.example.instogramapplication.utils.ApiUtils
 import com.example.instogramapplication.utils.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -19,6 +28,7 @@ import java.io.File
 import java.io.IOException
 
 class UserRepository private constructor(
+    private val storyDatabase: StoryDatabase,
     private val apiService: ApiService,
     private val resourcesProvider: ResourceProvider,
     private val userPref: UserPreferences
@@ -28,11 +38,13 @@ class UserRepository private constructor(
         @Volatile
         private var instance: UserRepository? = null
         fun getInstance(
+            database: StoryDatabase,
             apiService: ApiService,
             resourcesProvider: ResourceProvider,
             userPref: UserPreferences
         ): UserRepository = instance ?: synchronized(this) {
             instance ?: UserRepository(
+                database,
                 apiService,
                 resourcesProvider,
                 userPref
@@ -98,31 +110,48 @@ class UserRepository private constructor(
     suspend fun getUserName() =
         userPref.getUsername()
 
-    fun getStories(location: Int? = null): Flow<Resource<List<ListStoryItem>>> = flow {
-        emit(Resource.Loading())
+//    fun getStories(location: Int? = null): Flow<Resource<List<StoryItem>>> = flow {
+//        emit(Resource.Loading())
+//
+//        try {
+//            val username = userPref.getUsername()
+//            val response = apiService.getStories(location)
+//            if (response.isSuccessful) {
+//                val stories = response.body()?.listStory
+//                if (!stories.isNullOrEmpty()) {
+//                    emit(Resource.Success(stories, username))
+//                } else {
+//                    emit(Resource.Empty())
+//                }
+//            } else {
+//                val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(
+//                    response.code()
+//                )
+//                emit(Resource.Error(errorMsg))
+//            }
+//
+//        } catch (e: IOException) {
+//            emit(Resource.ErrorConnection("eror koneksi"))
+//        } catch (e: Exception) {
+//            emit(Resource.Error("Error"))
+//        }
+//    }
 
-        try {
-            val username = userPref.getUsername()
-            val response = apiService.getStories(location)
-            if (response.isSuccessful) {
-                val stories = response.body()?.listStory
-                if (!stories.isNullOrEmpty()) {
-                    emit(Resource.Success(stories, username))
-                } else {
-                    emit(Resource.Empty())
-                }
-            } else {
-                val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(
-                    response.code()
-                )
-                emit(Resource.Error(errorMsg))
+    @OptIn(ExperimentalPagingApi::class)
+    fun getStories(): LiveData<PagingData<StoryEntity>>{
+        return Pager(
+            config = PagingConfig(
+                pageSize = 3
+            ),
+            remoteMediator = StoryRemoteMediator(
+                storyDatabase,
+                apiService
+            ),
+            pagingSourceFactory = {
+//                StoryPagingSource(apiService)
+                storyDatabase.storyDao().getAllStory()
             }
-
-        } catch (e: IOException) {
-            emit(Resource.ErrorConnection("eror koneksi"))
-        } catch (e: Exception) {
-            emit(Resource.Error("Error"))
-        }
+        ).liveData
     }
 
     suspend fun uploadStory(imageFile: File, desc: String): Resource<String> {
@@ -164,7 +193,7 @@ class UserRepository private constructor(
     }
 
     // widget
-    fun getItemWidget(): List<ListStoryItem> {
+    fun getItemWidget(): List<StoryItem> {
         return try {
             val response = apiService.getWidgetItems().execute()
             if (response.isSuccessful) {

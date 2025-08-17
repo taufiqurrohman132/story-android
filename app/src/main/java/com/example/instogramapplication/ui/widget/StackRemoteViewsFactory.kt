@@ -7,13 +7,13 @@ import android.widget.RemoteViewsService.RemoteViewsFactory
 import androidx.core.os.bundleOf
 import com.example.instogramapplication.R
 import com.example.instogramapplication.data.di.Injection
-import com.example.instogramapplication.data.remote.model.ListStoryItem
+import com.example.instogramapplication.data.remote.model.StoryItem
 import com.example.instogramapplication.data.repository.UserRepository
 import com.example.instogramapplication.utils.ConvertionUtils
 import java.io.File
 
 internal class StackRemoteViewsFactory(private val mContext: Context) : RemoteViewsFactory {
-    private val items = mutableListOf<ListStoryItem>()
+    private val items = mutableListOf<StoryItem>()
     private val repository: UserRepository by lazy {
         Injection.provideRepository(mContext)
     }

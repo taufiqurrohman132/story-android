@@ -1,6 +1,7 @@
 package com.example.instogramapplication.data.remote.model
 
 import android.os.Parcelable
+import com.example.instogramapplication.data.local.entity.StoryEntity
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
@@ -9,7 +10,7 @@ import kotlinx.parcelize.Parcelize
 data class StoryResponse(
 
     @field:SerializedName("listStory")
-    val listStory: List<ListStoryItem> = emptyList(),
+    val listStory: List<StoryItem> = emptyList(),
 
     @field:SerializedName("error")
     val error: Boolean? = null,
@@ -19,7 +20,7 @@ data class StoryResponse(
 ) : Parcelable
 
 @Parcelize
-data class ListStoryItem(
+data class StoryItem(
 
     @field:SerializedName("photoUrl")
     val photoUrl: String? = null,
@@ -44,4 +45,6 @@ data class ListStoryItem(
 ) : Parcelable {
     @IgnoredOnParcel
     var isExpaned: Boolean = false
+
+    fun toEntity() = StoryEntity(id ?: "0", photoUrl, createdAt, name, description, lon, lat)
 }

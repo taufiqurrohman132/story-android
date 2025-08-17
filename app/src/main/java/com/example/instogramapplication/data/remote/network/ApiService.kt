@@ -3,6 +3,7 @@ package com.example.instogramapplication.data.remote.network
 import com.example.instogramapplication.data.remote.model.FileUploadResponse
 import com.example.instogramapplication.data.remote.model.LoginResponse
 import com.example.instogramapplication.data.remote.model.RegisterResponse
+import com.example.instogramapplication.data.remote.model.StoryItem
 import com.example.instogramapplication.data.remote.model.StoryResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -39,6 +40,8 @@ interface ApiService {
 
     @GET("stories")
     suspend fun getStories(
+        @Query("page") page: Int? = null,
+        @Query("size") size: Int? = null,
         @Query("location") location: Int? = null
     ): Response<StoryResponse>
 

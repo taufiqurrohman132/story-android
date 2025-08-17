@@ -2,6 +2,7 @@ package com.example.instogramapplication.ui.story.list
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,16 +10,22 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
+import androidx.paging.PagingData
+import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.instogramapplication.data.remote.model.ListStoryItem
+import com.example.instogramapplication.data.local.entity.StoryEntity
+import com.example.instogramapplication.data.remote.model.StoryItem
 import com.example.instogramapplication.databinding.FragmentListStoryBinding
 import com.example.instogramapplication.ui.story.detail.DetailStoryActivity
+import com.example.instogramapplication.ui.story.list.adapter.ListStoryXAdapter
+import com.example.instogramapplication.ui.story.list.adapter.ListStoryYAdapter
+import com.example.instogramapplication.ui.story.list.adapter.LoadingStateAdapter
 import com.example.instogramapplication.ui.story.post.PostActivity
-import com.example.instogramapplication.utils.DialogUtils
-import com.example.instogramapplication.utils.Resource
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
 import kotlinx.coroutines.launch
 import kotlin.math.abs
@@ -50,6 +57,10 @@ class ListStoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.storySimmer.isVisible = false
+        binding.rvStory.isVisible = true
+        binding.rvPost.isVisible = true
+
         setupRecyclerView()
         observer()
         setupCollapsStoryX()
@@ -58,29 +69,39 @@ class ListStoryFragment : Fragment() {
 
     private fun setupListener() {
         binding.homeSwipRefresh.setOnRefreshListener {
-            viewModel.refresh()
+//            viewModel.refresh()
             binding.homeSwipRefresh.isRefreshing = false
         }
     }
 
     private fun observer() {
-        lifecycleScope.launch {
-            viewModel.storiesState.collect { result ->
-                when (result) {
-                    is Resource.Loading -> showLoading()
-                    is Resource.Success -> showStories(result.data, result.message)
-                    is Resource.Error -> showError()
-                    is Resource.ErrorConnection -> showErrorConnect(result.message)
-                    is Resource.Empty -> showEmpty()
-                }
-            }
+
+//        lifecycleScope.launch {
+//            viewModel.storiesState.collect { result ->
+//                when (result) {
+//                    is Resource.Loading -> showLoading()
+//                    is Resource.Success -> showStories(result.data, result.message)
+//                    is Resource.Error -> showError()
+//                    is Resource.ErrorConnection -> showErrorConnect(result.message)
+//                    is Resource.Empty -> showEmpty()
+//                }
+//            }
+//        }
+
+//        viewModel.myStory.observe(viewLifecycleOwner) { story ->
+//            Log.d(TAG, "observer: story = $story")
+//            adapterX.setMyStory(story)
+//        }
+
+        viewModel.story.observe(viewLifecycleOwner){ story ->
+            showStories(story, story.map { it.name.toString() }.toString())
         }
 
         // notif error
         lifecycleScope.launch {
-            viewModel.eventFlow.collect { message ->
-                DialogUtils.showToast(message, requireActivity())
-            }
+//            viewModel.eventFlow.collect { message ->
+//                DialogUtils.showToast(message, requireActivity())
+//            }
         }
     }
 
@@ -99,8 +120,8 @@ class ListStoryFragment : Fragment() {
             storySimmer.visibility = View.INVISIBLE
             homeLottieError.visibility = View.INVISIBLE
 
-            if (adapterY.currentList.isEmpty())
-                homeLottieLayoutErrorConnect.visibility = View.VISIBLE
+//            if (adapterY.currentList.isEmpty())
+//                homeLottieLayoutErrorConnect.visibility = View.VISIBLE
         }
     }
 
@@ -132,9 +153,29 @@ class ListStoryFragment : Fragment() {
         binding.apply {
             rvPost.apply {
                 layoutManager = linearLayout
-                adapter = adapterY
+                adapter = adapterY.withLoadStateHeaderAndFooter(
+                    header = LoadingStateAdapter {
+                        adapterY.retry()
+                    },
+                    footer = LoadingStateAdapter {
+                        adapterY.retry()
+                    }
+                )
             }
         }
+
+        adapterY.addLoadStateListener { loadState ->
+            val isListEmpty =
+                loadState.refresh is LoadState.NotLoading &&
+                        adapterY.itemCount == 0
+
+            if (isListEmpty) {
+                Log.d(TAG, "Tidak ada data")
+            } else {
+                Log.d(TAG, "Jumlah item = ${adapterY.itemCount}")
+            }
+        }
+
 
     }
 
@@ -162,7 +203,7 @@ class ListStoryFragment : Fragment() {
         }
     }
 
-    private fun showDetailStory(desc: TextView, img: ImageView, story: ListStoryItem) {
+    private fun showDetailStory(desc: TextView, img: ImageView, story: StoryEntity) {
         val optionsCompat: ActivityOptionsCompat =
             ActivityOptionsCompat.makeSceneTransitionAnimation(
                 requireActivity(),
@@ -174,7 +215,7 @@ class ListStoryFragment : Fragment() {
         requireActivity().startActivity(intent, optionsCompat.toBundle())
     }
 
-    private fun showStories(data: List<ListStoryItem>?, username: String?) {
+    private fun showStories(data: PagingData<StoryEntity>, username: String?) {
         binding.apply {
             rvStory.visibility = View.VISIBLE
             rvPost.visibility = View.VISIBLE
@@ -185,8 +226,8 @@ class ListStoryFragment : Fragment() {
         }
 
         adapterX.updateUserName(username)
-        adapterX.submitList(data)
-        adapterY.submitList(data)
+        adapterX.submitData(lifecycle, data)
+        adapterY.submitData(lifecycle, data)
     }
 
     private fun setupCollapsStoryX() {
@@ -198,5 +239,9 @@ class ListStoryFragment : Fragment() {
             val alphaValue = 1f - (abs(verticalOffset) / scrollRange)
             binding.rvStory.animate().alpha(alphaValue).setDuration(200).start()
         }
+    }
+
+    companion object{
+        private val TAG = ListStoryFragment::class.java.simpleName
     }
 }

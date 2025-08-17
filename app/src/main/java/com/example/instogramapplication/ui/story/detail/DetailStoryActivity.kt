@@ -9,7 +9,7 @@ import androidx.core.text.buildSpannedString
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.instogramapplication.R
-import com.example.instogramapplication.data.remote.model.ListStoryItem
+import com.example.instogramapplication.data.remote.model.StoryItem
 import com.example.instogramapplication.databinding.ActiviityDetailStoryBinding
 import com.example.instogramapplication.ui.story.post.PostActivity
 import com.example.instogramapplication.utils.ApiUtils
@@ -31,7 +31,7 @@ class DetailStoryActivity : AppCompatActivity() {
 
 
     private fun initView() {
-        val story = intent.getParcelableExtra<ListStoryItem>(EXTRA_DETAIL)
+        val story = intent.getParcelableExtra<StoryItem>(EXTRA_DETAIL)
         showStories(story)
         binding.detailTvBerjalan.isSelected = true
     }
@@ -48,7 +48,7 @@ class DetailStoryActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun showStories(story: ListStoryItem?) {
+    private fun showStories(story: StoryItem?) {
         if (story != null) {
             binding.apply {
                 // desc n hastag
