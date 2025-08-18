@@ -94,8 +94,12 @@ dependencies {
     implementation("androidx.room:room-paging:2.6.0")
 
     // loading
-    implementation(libs.androidx.swiperefreshlayout)
+    implementation(libs.igrefreshlayout)
     implementation(libs.shimmer)
+    implementation("io.github.scwang90:refresh-layout-kernel:2.0.5") // inti
+    implementation("io.github.scwang90:refresh-footer-ball:2.0.5")
+    implementation("io.github.scwang90:refresh-header-radar:2.0.5")
+
 
     implementation(libs.lottie)
 

@@ -10,6 +10,7 @@ import com.example.instogramapplication.data.local.database.StoryDatabase
 import com.example.instogramapplication.data.local.entity.RemoteKeys
 import com.example.instogramapplication.data.local.entity.StoryEntity
 import com.example.instogramapplication.data.remote.network.ApiService
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalPagingApi::class)
 class StoryRemoteMediator(
@@ -50,6 +51,9 @@ class StoryRemoteMediator(
                 Log.d(TAG, "load: data story = $it")
                 it.toEntity()
             }
+
+            delay(500)
+
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {
                     database.remoteKeysDao().deleteRemoteKeys()

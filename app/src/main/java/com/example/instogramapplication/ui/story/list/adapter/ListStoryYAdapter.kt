@@ -31,7 +31,7 @@ class ListStoryYAdapter(
         ViewHolder(binding.root) {
         val description = binding.itemyTvDeskExpand
 
-        fun bind(listStory: StoryEntity?) {
+        fun bind(listStory: StoryEntity  ?) {
             listStory?.let {
                 binding.apply {
                     val hashtag = context.getString(R.string.hastag, listStory.name)

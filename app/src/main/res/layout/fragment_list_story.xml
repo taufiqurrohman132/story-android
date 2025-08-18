@@ -76,25 +76,34 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+<!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--        android:id="@+id/home.swip_refresh"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical">-->
+
+
+<!--        </LinearLayout>-->
+<!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
+    <uz.jamshid.library.IGRefreshLayout
         android:id="@+id/home.swip_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <LinearLayout
+        android:layout_height="match_parent"
+        app:offsetTop="120"
+        app:customBar="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_post"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_post"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/item_list_story_y" />
-
-        </LinearLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_list_story_y" />
+    </uz.jamshid.library.IGRefreshLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -114,16 +123,6 @@
             <include layout="@layout/simmer_story_home" />
         </com.facebook.shimmer.ShimmerFrameLayout>
 
-        <!--        lottie-->
-        <!--        <com.airbnb.lottie.LottieAnimationView-->
-        <!--            android:id="@+id/home.lottie_connect"-->
-        <!--            android:layout_width="300dp"-->
-        <!--            android:layout_height="300dp"-->
-        <!--            android:layout_gravity="center"-->
-        <!--            android:visibility="invisible"-->
-        <!--            app:lottie_rawRes="@raw/connection"-->
-        <!--            app:lottie_autoPlay="true"-->
-        <!--            app:lottie_loop="false"/>-->
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/home.lottie_error"
             android:layout_width="300dp"

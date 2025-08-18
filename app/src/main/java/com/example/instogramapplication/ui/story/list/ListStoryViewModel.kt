@@ -1,32 +1,19 @@
 package com.example.instogramapplication.ui.story.list
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import androidx.lifecycle.map
-import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import androidx.paging.filter
-import androidx.paging.log
+import androidx.paging.insertHeaderItem
 import androidx.paging.map
 import com.example.instogramapplication.data.local.entity.StoryEntity
+import com.example.instogramapplication.data.local.entity.UIModel
 import com.example.instogramapplication.data.remote.model.StoryItem
 import com.example.instogramapplication.data.repository.UserRepository
-import com.example.instogramapplication.utils.Resource
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 class ListStoryViewModel(
     private val repository: UserRepository
@@ -38,17 +25,59 @@ class ListStoryViewModel(
 //    private val _eventFlow = Channel<String>()
 //    val eventFlow = _eventFlow.receiveAsFlow()
 
-    private val _currentUserName = MutableLiveData<String>()
-    val myStory = MutableLiveData<StoryItem>() // untuk story khusus user
+//    private lateinit var currentUserName: String
+//    val myStory = MutableLiveData<StoryItem>() // untuk story khusus user
 
-    init {
-        viewModelScope.launch {
-            _currentUserName.value = repository.getUserName()
-        }
-    }
+    val storiesX: LiveData<PagingData<UIModel>> = liveData {
+        // ambil username dari repository (suspend)
+        val userName = repository.getUserName()
 
-    val story: LiveData<PagingData<StoryEntity>> =
-        repository.getStories().cachedIn(viewModelScope)
+        // ambil latestMyStory dari DB/API
+        val latestMyStory = repository.getLatestMyStory(userName)
+
+        // ambil PagingData stories + insert header
+        val pagingData = repository.getStories()
+            .map { pagingData ->
+                pagingData
+                    .map <StoryEntity, UIModel> { UIModel.StoriesItem(it) }
+                    .insertHeaderItem(item = UIModel.MyStoriesItem(latestMyStory))
+            }
+            .cachedIn(viewModelScope)
+
+        //sebagai LiveData
+        emitSource(pagingData)
+}
+
+//    init {
+//
+//        fun getStoriesWithHeader(username: String): LiveData<PagingData<UIModel>> = liveData {
+//        val latestMyStory = repository.getLatestMyStory(username)
+//        latestMyStory?.let { myStory ->
+//            emitSource(
+//                repository.getStories()
+//                    .map { pagingData ->
+//                        pagingData
+//                            .map<StoryEntity, UIModel> { UIModel.StoriesItem(it) }
+//                            .insertHeaderItem(item = UIModel.MyStoriesItem(myStory))
+//                    }
+//            )
+//        }
+//    }
+//            .map { pagingData: PagingData<StoryEntity> ->
+//                pagingData
+//                    // lagi-lagi paksa R = UIModel
+//                    .map<StoryEntity, UIModel> { entity -> UIModel.StoriesItem(entity) }
+//                    // sekarang aman nyisipin subclass lain sebagai header
+//                    .insertHeaderItem(item = UIModel.MyStoriesItem(latestMyStory))
+//            }
+//            .cachedIn(viewModelScope)
+//    val story: LiveData<PagingData<UIModel>> =
+//        repository.getStories()
+//            .map {pagingData ->
+//                pagingData.map {story ->
+//                    UIModel.StoryEntities(story)
+//                }
+//            }.cachedIn(viewModelScope)
 //        _currentUserName.switchMap { userName ->
 //            repository.getStories()
 //                .map { pagingData ->

@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.instogramapplication.R
 import com.example.instogramapplication.data.local.entity.StoryEntity
+import com.example.instogramapplication.data.local.entity.UIModel
 import com.example.instogramapplication.data.remote.model.StoryItem
 import com.example.instogramapplication.databinding.ItemListStoryXBinding
 import com.example.instogramapplication.databinding.ItemPostStoryBinding
@@ -21,7 +22,7 @@ class ListStoryXAdapter(
     private val context: Context,
     private val onItemClick: (ImageView, TextView, StoryEntity) -> Unit,
     private val onAddStory: () -> Unit,
-) : PagingDataAdapter<StoryEntity, ViewHolder>(DIFF_CALLBACK) {
+) : PagingDataAdapter<UIModel, ViewHolder>(DIFF_CALLBACK) {
 //    private var myStory: StoryItem? = null
     private var currentUserName = ""
 
@@ -110,26 +111,26 @@ class ListStoryXAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (position == 0) TYPE_ADD_STORY else TYPE_STORY
+//        return if (position == 0) TYPE_ADD_STORY else TYPE_STORY
+        return when(peek(position)){
+            is UIModel.MyStoriesItem -> TYPE_ADD_STORY
+            is UIModel.StoriesItem -> TYPE_STORY
+            else -> throw IllegalStateException("Unknown view type")
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val story = getItem(position)
         val allStories = snapshot().items
 
-        val latestMyStory = allStories
-            .filter { it.name == currentUserName }
-            .maxByOrNull { it.createdAt ?: "" }
+//        val latestMyStory = allStories
+//            .filter { it.name == currentUserName }
+//            .maxByOrNull { it.createdAt ?: "" }
 
-        when (getItemViewType(position)) {
-            TYPE_ADD_STORY -> {
-                Log.d(TAG, "onBindViewHolder: my stories = $latestMyStory")
-                (holder as ItemAddViewHolder).bind(latestMyStory)
-            }
-
-            TYPE_STORY -> {
-                (holder as ItemStoryViewHolder).bind(story)
-            }
+        when (val item = getItem(position)) {
+            is UIModel.MyStoriesItem -> (holder as ItemAddViewHolder).bind(item.myStory)
+            is UIModel.StoriesItem -> (holder as ItemStoryViewHolder).bind(item.story)
+            null -> TODO()
         }
     }
 
@@ -140,24 +141,18 @@ class ListStoryXAdapter(
         }
     }
 
-//    fun setMyStory(story: StoryItem?){
-//        this.myStory = story
-//        notifyItemChanged(0)
-//    }
-
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<StoryEntity>() {
-            override fun areItemsTheSame(oldItem: StoryEntity, newItem: StoryEntity): Boolean {
-                return oldItem == newItem
-            }
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<UIModel>() {
+            override fun areItemsTheSame(oldItem: UIModel, newItem: UIModel) =
+                when {
+                    oldItem is UIModel.MyStoriesItem && newItem is UIModel.MyStoriesItem ->
+                        oldItem.myStory?.id == newItem.myStory?.id
+                    oldItem is UIModel.StoriesItem && newItem is UIModel.StoriesItem ->
+                        oldItem.story.id == newItem.story.id
+                    else -> false
+                }
 
-            override fun areContentsTheSame(
-                oldItem: StoryEntity,
-                newItem: StoryEntity
-            ): Boolean {
-                return oldItem == newItem
-            }
-
+            override fun areContentsTheSame(oldItem: UIModel, newItem: UIModel) = oldItem == newItem
         }
 
         private val TAG = ListStoryXAdapter::class.java.simpleName

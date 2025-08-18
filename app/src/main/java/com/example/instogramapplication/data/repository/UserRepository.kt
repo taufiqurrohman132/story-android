@@ -154,6 +154,12 @@ class UserRepository private constructor(
         ).liveData
     }
 
+    fun getLatestMyStory(username: String): StoryEntity?{
+        return storyDatabase.storyDao().getLatestMyStory(username)
+    }
+
+
+
     suspend fun uploadStory(imageFile: File, desc: String): Resource<String> {
         return try {
             val requestBody = desc.toRequestBody("text/plain".toMediaType())

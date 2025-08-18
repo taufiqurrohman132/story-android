@@ -1,8 +1,10 @@
 package com.example.instogramapplication.ui.story.list
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +20,9 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.instogramapplication.R
 import com.example.instogramapplication.data.local.entity.StoryEntity
+import com.example.instogramapplication.data.local.entity.UIModel
 import com.example.instogramapplication.data.remote.model.StoryItem
 import com.example.instogramapplication.databinding.FragmentListStoryBinding
 import com.example.instogramapplication.ui.story.detail.DetailStoryActivity
@@ -28,6 +32,7 @@ import com.example.instogramapplication.ui.story.list.adapter.LoadingStateAdapte
 import com.example.instogramapplication.ui.story.post.PostActivity
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
 import kotlinx.coroutines.launch
+import uz.jamshid.library.progress_bar.CircleProgressBar
 import kotlin.math.abs
 
 class ListStoryFragment : Fragment() {
@@ -61,17 +66,33 @@ class ListStoryFragment : Fragment() {
         binding.rvStory.isVisible = true
         binding.rvPost.isVisible = true
 
+        init()
         setupRecyclerView()
         observer()
         setupCollapsStoryX()
         setupListener()
     }
 
-    private fun setupListener() {
-        binding.homeSwipRefresh.setOnRefreshListener {
-//            viewModel.refresh()
-            binding.homeSwipRefresh.isRefreshing = false
+    private fun init(){
+        // progress bar
+        val sizeCircularPx = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            50f,
+            requireContext().resources.displayMetrics
+        )
+        val circle = CircleProgressBar(requireContext())
+        circle.apply {
+            setColors(Color.WHITE, requireContext().getColor(R.color.color_variant))
+            setBorderWidth(2)
+            setSize(sizeCircularPx.toInt())
         }
+        binding.homeSwipRefresh.setCustomBar(circle)
+    }
+    private fun setupListener() {
+//        binding.homeSwipRefresh.setOnRefreshListener {
+////            viewModel.refresh()
+//            binding.homeSwipRefresh.isRefreshing = false
+//        }
     }
 
     private fun observer() {
@@ -93,7 +114,8 @@ class ListStoryFragment : Fragment() {
 //            adapterX.setMyStory(story)
 //        }
 
-        viewModel.story.observe(viewLifecycleOwner){ story ->
+        val username =
+        viewModel.stories.observe(viewLifecycleOwner){ story ->
             showStories(story, story.map { it.name.toString() }.toString())
         }
 
@@ -215,7 +237,7 @@ class ListStoryFragment : Fragment() {
         requireActivity().startActivity(intent, optionsCompat.toBundle())
     }
 
-    private fun showStories(data: PagingData<StoryEntity>, username: String?) {
+    private fun showStories(data: PagingData<UIModel>, username: String?) {
         binding.apply {
             rvStory.visibility = View.VISIBLE
             rvPost.visibility = View.VISIBLE

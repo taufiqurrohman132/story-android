@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.instogramapplication.data.local.entity.StoryEntity
-import com.example.instogramapplication.data.remote.model.StoryItem
 
 @Dao
 interface StoryDao {
@@ -19,4 +18,7 @@ interface StoryDao {
 
     @Query("Delete from story")
     suspend fun deleteAll()
+
+    @Query("SELECT * FROM story WHERE name = :username ORDER BY createdAt DESC LIMIT 1")
+    fun getLatestMyStory(username: String): StoryEntity?
 }
