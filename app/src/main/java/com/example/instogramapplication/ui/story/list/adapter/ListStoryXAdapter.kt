@@ -120,19 +120,14 @@ class ListStoryXAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val story = getItem(position)
-        val allStories = snapshot().items
+        val item = getItem(position) ?: return // jangan bind kalau null
 
-//        val latestMyStory = allStories
-//            .filter { it.name == currentUserName }
-//            .maxByOrNull { it.createdAt ?: "" }
-
-        when (val item = getItem(position)) {
+        when (item) {
             is UIModel.MyStoriesItem -> (holder as ItemAddViewHolder).bind(item.myStory)
             is UIModel.StoriesItem -> (holder as ItemStoryViewHolder).bind(item.story)
-            null -> TODO()
         }
     }
+
 
     fun updateUserName(userName: String?) {
         if (!userName.isNullOrBlank()) {

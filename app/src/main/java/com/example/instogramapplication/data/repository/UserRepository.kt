@@ -154,7 +154,7 @@ class UserRepository private constructor(
         ).liveData
     }
 
-    fun getLatestMyStory(username: String): StoryEntity?{
+    fun getLatestMyStory(username: String): LiveData<StoryEntity?>{
         return storyDatabase.storyDao().getLatestMyStory(username)
     }
 

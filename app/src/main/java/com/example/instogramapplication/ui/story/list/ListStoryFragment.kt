@@ -18,14 +18,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.paging.PagingData
-import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.instogramapplication.R
 import com.example.instogramapplication.data.local.entity.StoryEntity
 import com.example.instogramapplication.data.local.entity.UIModel
-import com.example.instogramapplication.data.remote.model.StoryItem
 import com.example.instogramapplication.databinding.FragmentListStoryBinding
 import com.example.instogramapplication.ui.story.detail.DetailStoryActivity
+import com.example.instogramapplication.ui.story.list.ListStoryViewModel
 import com.example.instogramapplication.ui.story.list.adapter.ListStoryXAdapter
 import com.example.instogramapplication.ui.story.list.adapter.ListStoryYAdapter
 import com.example.instogramapplication.ui.story.list.adapter.LoadingStateAdapter
@@ -73,7 +72,7 @@ class ListStoryFragment : Fragment() {
         setupListener()
     }
 
-    private fun init(){
+    private fun init() {
         // progress bar
         val sizeCircularPx = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
@@ -88,6 +87,7 @@ class ListStoryFragment : Fragment() {
         }
         binding.homeSwipRefresh.setCustomBar(circle)
     }
+
     private fun setupListener() {
 //        binding.homeSwipRefresh.setOnRefreshListener {
 ////            viewModel.refresh()
@@ -114,9 +114,12 @@ class ListStoryFragment : Fragment() {
 //            adapterX.setMyStory(story)
 //        }
 
-        val username =
-        viewModel.stories.observe(viewLifecycleOwner){ story ->
-            showStories(story, story.map { it.name.toString() }.toString())
+        viewModel.storiesX.observe(viewLifecycleOwner) { story ->
+            showStoriesX(story, "story.map { it.name.toString() }.toString()")
+        }
+
+        viewModel.storiesY.observe(viewLifecycleOwner) { story ->
+            showStoriesY(story)
         }
 
         // notif error
@@ -237,9 +240,22 @@ class ListStoryFragment : Fragment() {
         requireActivity().startActivity(intent, optionsCompat.toBundle())
     }
 
-    private fun showStories(data: PagingData<UIModel>, username: String?) {
+    private fun showStoriesX(data: PagingData<UIModel>, username: String?) {
         binding.apply {
             rvStory.visibility = View.VISIBLE
+
+            storySimmer.visibility = View.INVISIBLE
+            homeLottieError.visibility = View.INVISIBLE
+            homeLottieLayoutErrorConnect.visibility = View.INVISIBLE
+        }
+
+//        adapterX.updateUserName(username)
+        adapterX.submitData(lifecycle, data)
+//        adapterY.submitData(lifecycle, data)
+    }
+
+    private fun showStoriesY(data: PagingData<StoryEntity>) {
+        binding.apply {
             rvPost.visibility = View.VISIBLE
 
             storySimmer.visibility = View.INVISIBLE
@@ -247,8 +263,6 @@ class ListStoryFragment : Fragment() {
             homeLottieLayoutErrorConnect.visibility = View.INVISIBLE
         }
 
-        adapterX.updateUserName(username)
-        adapterX.submitData(lifecycle, data)
         adapterY.submitData(lifecycle, data)
     }
 
@@ -263,7 +277,7 @@ class ListStoryFragment : Fragment() {
         }
     }
 
-    companion object{
+    companion object {
         private val TAG = ListStoryFragment::class.java.simpleName
     }
 }

@@ -1,10 +1,13 @@
 package com.example.instogramapplication.ui.story.list
 
+import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
+import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
@@ -12,9 +15,8 @@ import androidx.paging.insertHeaderItem
 import androidx.paging.map
 import com.example.instogramapplication.data.local.entity.StoryEntity
 import com.example.instogramapplication.data.local.entity.UIModel
-import com.example.instogramapplication.data.remote.model.StoryItem
 import com.example.instogramapplication.data.repository.UserRepository
-import kotlinx.coroutines.launch
+
 class ListStoryViewModel(
     private val repository: UserRepository
 ) : ViewModel() {
@@ -28,25 +30,49 @@ class ListStoryViewModel(
 //    private lateinit var currentUserName: String
 //    val myStory = MutableLiveData<StoryItem>() // untuk story khusus user
 
+    val storiesY: LiveData<PagingData<StoryEntity>> =
+        repository.getStories().cachedIn(viewModelScope)
+
     val storiesX: LiveData<PagingData<UIModel>> = liveData {
-        // ambil username dari repository (suspend)
+        // ambil username
         val userName = repository.getUserName()
 
-        // ambil latestMyStory dari DB/API
-        val latestMyStory = repository.getLatestMyStory(userName)
+        // latest my story (LiveData)
+        val latestMyStory: LiveData<StoryEntity?> =
+            repository.getLatestMyStory(userName).distinctUntilChanged()
 
-        // ambil PagingData stories + insert header
-        val pagingData = repository.getStories()
-            .map { pagingData ->
-                pagingData
-                    .map <StoryEntity, UIModel> { UIModel.StoriesItem(it) }
-                    .insertHeaderItem(item = UIModel.MyStoriesItem(latestMyStory))
+        //  paging -> map ke UIModel ->cachedIn
+        val stories: LiveData<PagingData<UIModel>> =
+            repository.getStories()
+                .map { pagingData: PagingData<StoryEntity> ->
+                    pagingData.map<StoryEntity, UIModel> { storyEntity ->
+                        UIModel.StoriesItem(storyEntity)
+                    }
+                }
+                .cachedIn(viewModelScope)
+
+        val storiesPaging: LiveData<PagingData<UIModel>> = stories
+
+        // gabung dengan header pakai MediatorLiveData
+        val mediator = MediatorLiveData<PagingData<UIModel>>().apply {
+            addSource(storiesPaging) { paging: PagingData<UIModel> ->
+                val myStory = latestMyStory.value
+                value = if (myStory != null) {
+                    paging.insertHeaderItem(item = UIModel.MyStoriesItem(myStory))
+                } else {
+                    paging
+                }
             }
-            .cachedIn(viewModelScope)
+            addSource(latestMyStory) { myStory ->
+                val paging = storiesPaging.value
+                if (paging != null && myStory != null) {
+                    value = paging.insertHeaderItem(item = UIModel.MyStoriesItem(myStory))
+                }
+            }
+        }
 
-        //sebagai LiveData
-        emitSource(pagingData)
-}
+        emitSource(mediator)
+    }
 
 //    init {
 //
@@ -143,7 +169,7 @@ class ListStoryViewModel(
 //        }
 //    }
 
-    companion object{
+    companion object {
         private val TAG = ListStoryViewModel::class.java.simpleName
     }
 }

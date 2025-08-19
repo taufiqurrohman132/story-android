@@ -1,5 +1,6 @@
 package com.example.instogramapplication.data.local.dao
 
+import androidx.lifecycle.LiveData
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
@@ -20,5 +21,5 @@ interface StoryDao {
     suspend fun deleteAll()
 
     @Query("SELECT * FROM story WHERE name = :username ORDER BY createdAt DESC LIMIT 1")
-    fun getLatestMyStory(username: String): StoryEntity?
+    fun getLatestMyStory(username: String): LiveData<StoryEntity?>
 }
