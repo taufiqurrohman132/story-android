@@ -18,21 +18,21 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.paging.PagingData
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.instogramapplication.R
 import com.example.instogramapplication.data.local.entity.StoryEntity
-import com.example.instogramapplication.data.local.entity.UIModel
 import com.example.instogramapplication.databinding.FragmentListStoryBinding
 import com.example.instogramapplication.ui.story.detail.DetailStoryActivity
-import com.example.instogramapplication.ui.story.list.ListStoryViewModel
+import com.example.instogramapplication.ui.story.list.adapter.HeaderListStoryYAdapter
 import com.example.instogramapplication.ui.story.list.adapter.ListStoryXAdapter
 import com.example.instogramapplication.ui.story.list.adapter.ListStoryYAdapter
 import com.example.instogramapplication.ui.story.list.adapter.LoadingStateAdapter
+import com.example.instogramapplication.ui.story.list.adapter.MyStoryXAdapter
 import com.example.instogramapplication.ui.story.post.PostActivity
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
 import kotlinx.coroutines.launch
 import uz.jamshid.library.progress_bar.CircleProgressBar
-import kotlin.math.abs
 
 class ListStoryFragment : Fragment() {
 
@@ -41,6 +41,7 @@ class ListStoryFragment : Fragment() {
 
     private lateinit var adapterX: ListStoryXAdapter
     private lateinit var adapterY: ListStoryYAdapter
+    private lateinit var myAdapterX: MyStoryXAdapter
 
     private val factory: UserViewModelFactory by lazy {
         UserViewModelFactory.getInstance(requireActivity())
@@ -62,13 +63,11 @@ class ListStoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.storySimmer.isVisible = false
-        binding.rvStory.isVisible = true
         binding.rvPost.isVisible = true
 
         init()
         setupRecyclerView()
         observer()
-        setupCollapsStoryX()
         setupListener()
     }
 
@@ -89,10 +88,13 @@ class ListStoryFragment : Fragment() {
     }
 
     private fun setupListener() {
-//        binding.homeSwipRefresh.setOnRefreshListener {
-////            viewModel.refresh()
-//            binding.homeSwipRefresh.isRefreshing = false
-//        }
+        binding.homeSwipRefresh.apply {
+            setRefreshListener {
+                adapterX.refresh()
+                adapterY.refresh()
+
+            }
+        }
     }
 
     private fun observer() {
@@ -114,12 +116,12 @@ class ListStoryFragment : Fragment() {
 //            adapterX.setMyStory(story)
 //        }
 
-        viewModel.storiesX.observe(viewLifecycleOwner) { story ->
-            showStoriesX(story, "story.map { it.name.toString() }.toString()")
+        viewModel.myStory.observe(viewLifecycleOwner) { story ->
+            showMyStories(story)
         }
 
         viewModel.storiesY.observe(viewLifecycleOwner) { story ->
-            showStoriesY(story)
+            showStories(story, "")
         }
 
         // notif error
@@ -140,7 +142,6 @@ class ListStoryFragment : Fragment() {
 
     private fun showErrorConnect(message: String?) {
         binding.apply {
-            rvStory.visibility = View.VISIBLE
             rvPost.visibility = View.VISIBLE
             storySimmer.visibility = View.INVISIBLE
             homeLottieError.visibility = View.INVISIBLE
@@ -165,48 +166,60 @@ class ListStoryFragment : Fragment() {
             }
         )
 
-        binding.rvStory.apply {
-            layoutManager = horiLayout
-            adapter = adapterX
-        }
+        myAdapterX = MyStoryXAdapter(
+            context = requireActivity(),
+            onItemClick = { img, desc, story ->
+                showDetailStory(desc, img, story)
+            },
+            onAddStory = {
+                val intent = Intent(requireActivity(), PostActivity::class.java)
+                startActivity(intent)
+            }
+        )
+
+        val concatAdapterX = ConcatAdapter(myAdapterX, adapterX)
 
         val linearLayout = LinearLayoutManager(requireActivity())
         adapterY = ListStoryYAdapter(requireActivity()) { img, desc, story ->
             showDetailStory(desc, img, story)
         }
 
+        val headerAdapterStoryY = HeaderListStoryYAdapter(concatAdapterX)
+        val concatAdapterY = ConcatAdapter(headerAdapterStoryY,
+            adapterY.withLoadStateFooter(
+                footer = LoadingStateAdapter {
+                    adapterY.retry()
+                }
+            )
+        )
+
         binding.apply {
             rvPost.apply {
                 layoutManager = linearLayout
-                adapter = adapterY.withLoadStateHeaderAndFooter(
-                    header = LoadingStateAdapter {
-                        adapterY.retry()
-                    },
-                    footer = LoadingStateAdapter {
-                        adapterY.retry()
-                    }
-                )
+                adapter = concatAdapterY
             }
         }
+        adapterX.addLoadStateListener { loadState ->
+            val isRefreshDone = loadState.source.refresh is LoadState.NotLoading &&
+                    loadState.mediator?.refresh !is LoadState.Loading
+            if (isRefreshDone) {
+                Log.d(TAG, "setupRecyclerView: is refresh down")
+                binding.homeSwipRefresh.setRefreshing(false)
+            }
 
-        adapterY.addLoadStateListener { loadState ->
             val isListEmpty =
-                loadState.refresh is LoadState.NotLoading &&
-                        adapterY.itemCount == 0
-
-            if (isListEmpty) {
+                loadState.refresh is LoadState.NotLoading
+                        && adapterX.itemCount == 0
+            if (isListEmpty ) {
                 Log.d(TAG, "Tidak ada data")
             } else {
                 Log.d(TAG, "Jumlah item = ${adapterY.itemCount}")
             }
         }
-
-
     }
 
     private fun showLoading() {
         binding.apply {
-            rvStory.visibility = View.GONE
             rvPost.visibility = View.INVISIBLE
 
             storySimmer.apply {
@@ -240,21 +253,7 @@ class ListStoryFragment : Fragment() {
         requireActivity().startActivity(intent, optionsCompat.toBundle())
     }
 
-    private fun showStoriesX(data: PagingData<UIModel>, username: String?) {
-        binding.apply {
-            rvStory.visibility = View.VISIBLE
-
-            storySimmer.visibility = View.INVISIBLE
-            homeLottieError.visibility = View.INVISIBLE
-            homeLottieLayoutErrorConnect.visibility = View.INVISIBLE
-        }
-
-//        adapterX.updateUserName(username)
-        adapterX.submitData(lifecycle, data)
-//        adapterY.submitData(lifecycle, data)
-    }
-
-    private fun showStoriesY(data: PagingData<StoryEntity>) {
+    private fun showStories(data: PagingData<StoryEntity>, username: String?) {
         binding.apply {
             rvPost.visibility = View.VISIBLE
 
@@ -263,18 +262,12 @@ class ListStoryFragment : Fragment() {
             homeLottieLayoutErrorConnect.visibility = View.INVISIBLE
         }
 
+        adapterX.submitData(lifecycle, data)
         adapterY.submitData(lifecycle, data)
     }
 
-    private fun setupCollapsStoryX() {
-        // listener
-        binding.appBarLayout2.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
-            val scrollRange = appBarLayout.totalScrollRange
-            viewModel.isCollaps = verticalOffset == -scrollRange
-
-            val alphaValue = 1f - (abs(verticalOffset) / scrollRange)
-            binding.rvStory.animate().alpha(alphaValue).setDuration(200).start()
-        }
+    private fun showMyStories(data: StoryEntity?) {
+        myAdapterX.submitList(listOf(data))
     }
 
     companion object {

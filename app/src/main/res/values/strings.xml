@@ -166,4 +166,5 @@
     <string name="terrain_type">Terrain</string>
     <string name="hybrid_type">Hybrid</string>
     <string name="retry">Coba Lagi\n\n</string>
+    <string name="maps">Maps</string>
 </resources>

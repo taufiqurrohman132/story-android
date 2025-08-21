@@ -88,6 +88,7 @@ dependencies {
 
     // paging 3 n room
     implementation(libs.androidx.paging.runtime.ktx)
+    testImplementation(libs.junit.jupiter)
     ksp("androidx.room:room-compiler:2.6.0")
     implementation("androidx.room:room-ktx:2.6.0")
     // optional - Paging 3 Integration
@@ -96,9 +97,6 @@ dependencies {
     // loading
     implementation(libs.igrefreshlayout)
     implementation(libs.shimmer)
-    implementation("io.github.scwang90:refresh-layout-kernel:2.0.5") // inti
-    implementation("io.github.scwang90:refresh-footer-ball:2.0.5")
-    implementation("io.github.scwang90:refresh-header-radar:2.0.5")
 
 
     implementation(libs.lottie)
@@ -125,4 +123,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    androidTestImplementation(libs.androidx.core.testing) //InstantTaskExecutorRule
+    androidTestImplementation(libs.kotlinx.coroutines.test) //TestDispatcher
+
+    testImplementation(libs.androidx.core.testing) // InstantTaskExecutorRule
+    testImplementation(libs.kotlinx.coroutines.test) //TestDispatcher
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.inline)
 }

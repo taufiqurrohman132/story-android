@@ -52,7 +52,7 @@ class StoryRemoteMediator(
                 it.toEntity()
             }
 
-            delay(500)
+            delay(1000)
 
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {

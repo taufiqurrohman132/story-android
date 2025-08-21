@@ -6,35 +6,33 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.instogramapplication.R
 import com.example.instogramapplication.data.local.entity.StoryEntity
-import com.example.instogramapplication.databinding.ItemListStoryXBinding
+import com.example.instogramapplication.databinding.ItemPostStoryBinding
 
-class ListStoryXAdapter(
+class MyStoryXAdapter (
     private val context: Context,
     private val onItemClick: (ImageView, TextView, StoryEntity) -> Unit,
     private val onAddStory: () -> Unit,
-) : PagingDataAdapter<StoryEntity, ListStoryXAdapter.ItemStoryViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<StoryEntity, MyStoryXAdapter.ItemAddViewHolder>(DIFF_CALLBACK) {
     private var currentUserName = ""
 
-    inner class ItemStoryViewHolder(private val item: ItemListStoryXBinding) :
-        ViewHolder(item.root) {
+    inner class ItemAddViewHolder(private val item: ItemPostStoryBinding) : ViewHolder(item.root) {
         fun bind(listStory: StoryEntity?) {
-            listStory?.let {
+            if (listStory != null) {
                 Glide.with(context)
                     .load(listStory.photoUrl)
                     .override(100)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .centerCrop()
-                    .placeholder(R.drawable.profile_placeholder)
                     .circleCrop()
+                    .placeholder(R.drawable.profile_placeholder)
                     .into(item.itemStoryX)
-                item.storyUsername.text = listStory.name
 
                 item.itemStoryX.setOnClickListener {
                     onItemClick(
@@ -43,34 +41,45 @@ class ListStoryXAdapter(
                         listStory
                     )
                 }
+            } else {
+                item.itemStoryX.setOnClickListener {
+                    onAddStory()
+                }
+            }
+
+            item.addStory.setOnClickListener {
+                onAddStory()
             }
         }
     }
 
-    override fun onBindViewHolder(holder: ItemStoryViewHolder, position: Int) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemAddViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemPostStoryBinding.inflate(
+            inflater,
+            parent,
+            false
+        )
+        return ItemAddViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ItemAddViewHolder, position: Int) {
         val story = getItem(position)
         Log.d(TAG, "onBindViewHolder: story holder = $story")
         holder.bind(story)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemStoryViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding =
-            ItemListStoryXBinding.inflate(
-                inflater,
-                parent,
-                false
-            )
-        return ItemStoryViewHolder(binding)
-    }
 
-//
+
+
 //    fun updateUserName(userName: String?) {
 //        if (!userName.isNullOrBlank()) {
 //            currentUserName = userName
 //            notifyItemChanged(0)
 //        }
 //    }
+
+
 
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<StoryEntity>() {
@@ -86,7 +95,7 @@ class ListStoryXAdapter(
             }
         }
 
-        private val TAG = ListStoryXAdapter::class.java.simpleName
+        private val TAG = MyStoryXAdapter::class.java.simpleName
 
         private const val TYPE_STORY = 1
         private const val TYPE_ADD_STORY = 0
