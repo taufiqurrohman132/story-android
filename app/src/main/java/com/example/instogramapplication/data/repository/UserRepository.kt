@@ -6,7 +6,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
-import androidx.room.paging.util.queryDatabase
 import com.example.instogramapplication.R
 import com.example.instogramapplication.data.local.database.StoryDatabase
 import com.example.instogramapplication.utils.ResourceProvider
@@ -159,9 +158,8 @@ class UserRepository private constructor(
 
 
 
-    suspend fun uploadStory(imageFile: File, desc: String): Resource<String> {
+    suspend fun uploadStory(imageFile: File, desc: String, lat: String?, lon: String?): Resource<String> {
         return try {
-            val requestBody = desc.toRequestBody("text/plain".toMediaType())
             val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
             val multipartBody = MultipartBody.Part.createFormData(
                 "photo",
@@ -169,7 +167,11 @@ class UserRepository private constructor(
                 requestImageFile
             )
 
-            val response = apiService.uploadStory(multipartBody, requestBody)
+            val description = desc.toRequestBody("text/plain".toMediaType())
+            val latRequest = lat?.toRequestBody("text/plain".toMediaType())
+            val lonRequest = lon?.toRequestBody("text/plain".toMediaType())
+
+            val response = apiService.uploadStory(multipartBody, description, latRequest, lonRequest)
             if (response.isSuccessful) {
                 val story = response.body()
                 if (story?.error == false) {

@@ -15,14 +15,14 @@ object DialogUtils {
         }
     }
 
-    fun confirmDialog(context: Context, heading: String, desc: String, listener: () -> Unit) {
+    fun confirmDialog(context: Context, heading: String, desc: String, negBtnText: String,posBtnText: String, listener: () -> Unit) {
         PopupDialog.getInstance(context)
             .standardDialogBuilder()
             .createIOSDialog()
             .setHeading(heading)
             .setDescription(desc)
-            .setNegativeButtonText(context.getString(R.string.dialog_exit_edit_negative))
-            .setPositiveButtonText(context.getString(R.string.dialog_exit_edit_positive))
+            .setNegativeButtonText(negBtnText)
+            .setPositiveButtonText(posBtnText)
             .setPositiveButtonTextColor(R.color.red)
             .build(object : StandardDialogActionListener {
                 override fun onPositiveButtonClicked(dialog: Dialog) {

@@ -58,6 +58,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/transparents"
                         android:contentDescription="@string/desc_settings_icon"
                         android:src="@drawable/ic_settings"
@@ -79,52 +80,62 @@
         app:customBar="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_post"
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/item_list_story_y" />
+            android:layout_height="match_parent"
+            >
+            <ScrollView
+                android:id="@+id/story.scroll_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!--        simmer-->
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/story.simmer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:shimmer_auto_start="true"
+                        app:shimmer_direction="left_to_right"
+                        app:shimmer_duration="1500"
+                        app:shimmer_repeat_count="3">
+
+                        <include layout="@layout/simmer_story_home" />
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/home.lottie_error"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="false"
+                        app:lottie_rawRes="@raw/error" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/home.lottie_layout_error_connect"
+                        android:layout_width="300dp"
+                        android:layout_height="300dp"
+                        android:visibility="invisible"
+                        android:layout_gravity="center"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="false"
+                        app:lottie_rawRes="@raw/no_connection" />
+                </FrameLayout>
+            </ScrollView>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_post"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_list_story_y" />
+        </FrameLayout>
     </uz.jamshid.library.IGRefreshLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-        <!--        simmer-->
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/story.simmer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:shimmer_auto_start="true"
-            app:shimmer_direction="left_to_right"
-            app:shimmer_duration="1500"
-            app:shimmer_repeat_count="3">
-
-            <include layout="@layout/simmer_story_home" />
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/home.lottie_error"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_gravity="center"
-            android:visibility="invisible"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="false"
-            app:lottie_rawRes="@raw/error" />
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/home.lottie_layout_error_connect"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_gravity="center"
-            android:visibility="invisible"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="false"
-            app:lottie_rawRes="@raw/no_connection" />
-
-    </FrameLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

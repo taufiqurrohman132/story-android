@@ -209,7 +209,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@id/detail.desc_expand"
+        app:layout_constraintBottom_toTopOf="@id/detail.scroll_desc_expand"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -287,24 +287,32 @@
         app:layout_constraintVertical_bias="0.0" />
 
 
-    <at.blogc.android.views.ExpandableTextView
-        android:id="@+id/detail.desc_expand"
-        style="@style/Text.Konten15"
+    <ScrollView
+        android:id="@+id/detail.scroll_desc_expand"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:textColor="@color/white"
-        android:transitionName="desc"
-        app:animation_duration="500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/detail.img_btn_music"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0">
+
+        <at.blogc.android.views.ExpandableTextView
+            android:id="@+id/detail.desc_expand"
+            style="@style/Text.Konten15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/white"
+            android:transitionName="desc"
+            app:animation_duration="500"
+            />
+    </ScrollView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,8 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
     android:clickable="true"
-    android:focusable="true"
-    android:orientation="vertical">
+    android:focusable="true">
 
     <FrameLayout
         android:id="@+id/add.image"

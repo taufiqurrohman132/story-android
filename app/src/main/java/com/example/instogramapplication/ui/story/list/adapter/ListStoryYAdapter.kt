@@ -3,7 +3,6 @@ package com.example.instogramapplication.ui.story.list.adapter
 import android.content.Context
 import android.text.Spannable
 import android.text.style.ForegroundColorSpan
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -104,7 +103,6 @@ class ListStoryYAdapter(
 
     override fun onBindViewHolder(holder: ItemFeedViewHolder, position: Int) {
         val story = getItem(position)
-        Log.d("TAG", "onBindViewHolder: story holder = $story")
         holder.bind(story)
     }
 

@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.InstogramApplication" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
@@ -17,6 +17,12 @@
         <item name="colorSurface">@color/white</item>
         <item name="colorSurfaceVariant">@color/white</item>      <!-- search bar color dll . -->
         <item name="android:colorBackground">@color/white</item>>
+
+        <!--        snakbar-->
+        <item name="snackbarStyle">@style/MySnackbar</item>
+        <item name="snackbarButtonStyle">@style/MySnackbarText</item>
+
+
 
 
     </style>
@@ -117,9 +123,10 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
     <style name="RoundedCornerImageStyle">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">30dp</item> <!-- sesuai kebutuhan -->
+        <item name="cornerSize">30dp</item><!-- sesuai kebutuhan -->
     </style>
 
     <style name="Theme.InstogramApplication.AppWidgetContainerParent" parent="@android:style/Theme.DeviceDefault">
@@ -140,7 +147,22 @@
     <style name="Icon" parent="Theme.InstogramApplication">
         <item name="android:layout_width">42dp</item>
         <item name="android:layout_height">42dp</item>
-<!--        <item name="android:padding">16dp</item>-->
+        <!--        <item name="android:padding">16dp</item>-->
+    </style>
+
+    <style name="MySnackbar" parent="@style/Widget.Material3.Snackbar">
+        <item name="shapeAppearance">@style/ShapeAppearance.MySnackbar</item>
+        <item name="backgroundTint">@color/red</item>
+    </style>
+
+    <style name="MySnackbarText" parent="Widget.Material3.Button.TextButton.Snackbar">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/kuning_terang</item>
+    </style>
+
+    <style name="ShapeAppearance.MySnackbar" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item> <!-- radius snackbar -->
     </style>
 
 </resources>

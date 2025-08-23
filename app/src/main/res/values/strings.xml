@@ -11,6 +11,8 @@
     <string name="error_else">Oops! Ada kesalahan saat meminta data. Coba periksa kembali.</string>
     <string name="error_koneksi">Tidak ada koneksi internet. Silakan periksa jaringanmu.</string>
     <string name="error_takterduga">Terjadi kesalahan tak terduga. Coba lagi nanti.</string>
+    <string name="error_401">Sesi kamu sudah habis. Silakan login kembali.</string>
+    <string name="error_422">Data yang kamu kirim tidak valid. Periksa kembali.</string>
 
     <!-- Placeholder -->
     <string name="hello_blank_fragment">Halo fragment kosong</string>
@@ -149,6 +151,9 @@
     <string name="indonesia">Indonesia</string>
     <string name="appearance">Tampilan</string>
     <string name="kontak_darurat">Kontak Darurat</string>
+    <string name="dialog_open_setting_edit_title">Izin Lokasi Diperlukan</string>
+    <string name="dialog_open_setting_edit_message">Aplikasi membutuhkan izin lokasi untuk menambahkan cerita dengan lokasi Anda. Aktifkan izin di pengaturan.</string>
+
 
     <!-- Story tidak tersedia -->
     <string name="story_tidak_tersedia">Cerita tidak tersedia</string>
@@ -165,6 +170,6 @@
     <string name="satellite_type">Satellite</string>
     <string name="terrain_type">Terrain</string>
     <string name="hybrid_type">Hybrid</string>
-    <string name="retry">Coba Lagi\n\n</string>
+    <string name="retry">Coba Lagi</string>
     <string name="maps">Maps</string>
 </resources>

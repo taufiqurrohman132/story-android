@@ -1,13 +1,20 @@
 package com.example.instogramapplication.ui.story.post
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
@@ -16,9 +23,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.instogramapplication.ui.main.MainActivity
 import com.example.instogramapplication.R
 import com.example.instogramapplication.databinding.FragmentEditBinding
+import com.example.instogramapplication.ui.main.MainActivity
 import com.example.instogramapplication.utils.DialogUtils
 import com.example.instogramapplication.utils.DialogUtils.showToast
 import com.example.instogramapplication.utils.ExtensionUtils.keyboardVisibilityFlow
@@ -28,6 +35,7 @@ import com.example.instogramapplication.utils.PostUtils
 import com.example.instogramapplication.utils.Resource
 import com.example.instogramapplication.utils.constants.DialogType
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
+import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.launch
 
 class EditFragment : Fragment() {
@@ -36,6 +44,9 @@ class EditFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var currentImageUri: Uri? = null
+
+    private var currentLat: String? = null
+    private var currentLon: String? = null
 
     private val factory: UserViewModelFactory by lazy {
         UserViewModelFactory.getInstance(requireActivity())
@@ -111,6 +122,11 @@ class EditFragment : Fragment() {
         binding.apply {
             postBtnBackToTake.setOnClickListener { confirmBack() }
             postBtnPosting.setOnClickListener { uploadStory() }
+            postBtnAccessLocation.apply {
+                setOnClickListener {
+                    viewModel.toggleLocationSelected()
+                }
+            }
         }
     }
 
@@ -140,12 +156,20 @@ class EditFragment : Fragment() {
                             requireActivity()
                         )
                     }
-
-                    else -> {
-                        showLoading(false)
-                    }
                 }
             }
+        }
+        viewModel.isLocationSelected.observe(viewLifecycleOwner) {
+            binding.postBtnAccessLocation.apply {
+                isSelected = it
+                Log.d(TAG, "observer: location is selected $isSelected")
+                if (isSelected) {
+                    checkLocationPermission()
+                    setBackgroundResource(R.drawable.bg_round_button)
+                } else
+                    setBackgroundResource(0)
+            }
+
         }
     }
 
@@ -183,6 +207,8 @@ class EditFragment : Fragment() {
             requireContext(),
             requireContext().getString(R.string.dialog_exit_edit_title),
             requireContext().getString(R.string.dialog_exit_edit_message),
+            requireContext().getString(R.string.dialog_exit_edit_negative),
+            requireContext().getString(R.string.dialog_exit_edit_positive)
         ) {
             backToTakePhoto()
         }
@@ -198,7 +224,11 @@ class EditFragment : Fragment() {
             val desc = binding.postTvDesk.text.toString()
 
             if (desc.isNotBlank()) {
-                viewModel.uploadStory(imageFile, desc)
+                val latToSend = if (binding.postBtnAccessLocation.isSelected) currentLat else null
+                val lonToSend = if (binding.postBtnAccessLocation.isSelected) currentLon else null
+
+                Log.d(TAG, "uploadStory: lat = $latToSend, lon = $lonToSend")
+                viewModel.uploadStory(imageFile, desc, latToSend, lonToSend)
             } else {
                 showToast(getString(R.string.error_empty_description), requireActivity())
             }
@@ -219,6 +249,83 @@ class EditFragment : Fragment() {
         startActivity(intent)
     }
 
+    @SuppressLint("MissingPermission") // karena kita sudah cek permission sebelumnya
+    private fun getCurrentLocation() {
+        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location: Location? ->
+                if (location != null) {
+                    currentLat = location.latitude.toString()
+                    currentLon = location.longitude.toString()
+                    Log.d("LOCATION", "Lat: $currentLat, Lon: ${currentLon}u")
+                } else {
+                    Toast.makeText(requireContext(), "Lokasi tidak tersedia", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+            .addOnFailureListener { e ->
+                if (viewModel.isLocationSelected.value == true)
+                    viewModel.toggleLocationSelected()
+                Toast.makeText(
+                    requireContext(),
+                    "Gagal mendapatkan lokasi: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+    }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
+                if (viewModel.isLocationSelected.value == false)
+                    viewModel.toggleLocationSelected()
+                getCurrentLocation()
+                Toast.makeText(requireContext(), "Kirim lokasi Anda saat ini", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                viewModel.toggleLocationSelected()
+                Log.d(TAG, "togel running")
+                if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Izin lokasi diperlukan untuk fitur ini",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    // user pilih "Don't ask again"
+                    DialogUtils.confirmDialog(
+                        requireContext(),
+                        requireContext().getString(R.string.dialog_open_setting_edit_title),
+                        requireContext().getString(R.string.dialog_open_setting_edit_message),
+                        requireContext().getString(R.string.cancel),
+                        requireContext().getString(R.string.yes),
+                    ) {
+                        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                            data = Uri.fromParts("package", requireContext().packageName, null)
+                        }
+                        startActivity(intent)
+                    }
+                }
+            }
+        }
+
+    private fun checkLocationPermission() {
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                getCurrentLocation()
+            }
+
+            else -> {
+                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            }
+        }
+    }
+
+
     companion object {
         private const val ARG_URI = "image_uri"
 
@@ -229,6 +336,8 @@ class EditFragment : Fragment() {
             fragment.arguments = args
             return fragment
         }
+
+        private val TAG = EditFragment::class.java.simpleName
     }
 
 

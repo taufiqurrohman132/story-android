@@ -19,6 +19,9 @@
         <item name="colorSurfaceVariant">@color/white</item>      <!-- search bar color dll . -->
         <item name="android:colorBackground">@color/white</item>>
 
+        <item name="snackbarStyle">@style/MySnackbar</item>
+        <item name="snackbarButtonStyle">@style/MySnackbarText</item>
+
     </style>
 
     <style name="Text.Header24" parent="Theme.InstogramApplication">
@@ -143,5 +146,19 @@
         <!--        <item name="android:padding">16dp</item>-->
     </style>
 
+    <style name="MySnackbar" parent="@style/Widget.Material3.Snackbar">
+        <item name="shapeAppearance">@style/ShapeAppearance.MySnackbar</item>
+        <item name="backgroundTint">@color/red</item>
+    </style>
+
+    <style name="MySnackbarText" parent="Widget.Material3.Button.TextButton.Snackbar">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/kuning_terang</item>
+    </style>
+
+    <style name="ShapeAppearance.MySnackbar" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item> <!-- radius snackbar -->
+    </style>
 
 </resources>

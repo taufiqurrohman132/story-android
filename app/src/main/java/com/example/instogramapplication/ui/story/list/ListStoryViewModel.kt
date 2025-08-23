@@ -19,8 +19,5 @@ class ListStoryViewModel(
     val storiesY: LiveData<PagingData<StoryEntity>> =
         repository.getStories().cachedIn(viewModelScope)
 
-    companion object {
-        private val TAG = ListStoryViewModel::class.java.simpleName
-    }
 }
 

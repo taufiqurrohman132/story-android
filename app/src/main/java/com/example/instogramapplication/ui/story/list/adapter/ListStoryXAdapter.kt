@@ -18,9 +18,7 @@ import com.example.instogramapplication.databinding.ItemListStoryXBinding
 class ListStoryXAdapter(
     private val context: Context,
     private val onItemClick: (ImageView, TextView, StoryEntity) -> Unit,
-    private val onAddStory: () -> Unit,
 ) : PagingDataAdapter<StoryEntity, ListStoryXAdapter.ItemStoryViewHolder>(DIFF_CALLBACK) {
-    private var currentUserName = ""
 
     inner class ItemStoryViewHolder(private val item: ItemListStoryXBinding) :
         ViewHolder(item.root) {
@@ -63,14 +61,6 @@ class ListStoryXAdapter(
             )
         return ItemStoryViewHolder(binding)
     }
-
-//
-//    fun updateUserName(userName: String?) {
-//        if (!userName.isNullOrBlank()) {
-//            currentUserName = userName
-//            notifyItemChanged(0)
-//        }
-//    }
 
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<StoryEntity>() {

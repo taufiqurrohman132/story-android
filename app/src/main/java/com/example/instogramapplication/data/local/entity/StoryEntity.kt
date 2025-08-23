@@ -31,8 +31,3 @@ data class StoryEntity (
     @field:SerializedName("lat")
     val lat: Double? = null
 ) : Parcelable
-
-sealed class UIModel{
-    data class StoriesItem(val story: StoryEntity) : UIModel()
-    data class MyStoriesItem(val myStory: StoryEntity?) : UIModel()
-}

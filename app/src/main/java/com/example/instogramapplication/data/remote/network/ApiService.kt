@@ -54,7 +54,9 @@ interface ApiService {
         @Part
         file: MultipartBody.Part,
         @Part("description")
-        description: RequestBody
+        description: RequestBody,
+        @Part("lat") lat: RequestBody? = null,   // opsional
+        @Part("lon") lon: RequestBody? = null    // opsional
     ): Response<FileUploadResponse>
 
 }
