@@ -1,5 +1,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,30 +18,171 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Overlay View -->
-    <ImageButton
-        android:id="@+id/maps_options"
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/maps.floating_menu_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_options"
-        android:layout_margin="16dp"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="false"
+        android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        fab:menu_animationDelayPerItem="50"
+        fab:menu_backgroundColor="@android:color/transparent"
+        fab:menu_buttonSpacing="0dp"
+        fab:menu_colorNormal="@color/color_variant"
+        fab:menu_colorPressed="@color/color_base"
+        fab:menu_colorRipple="#99FFFFFF"
+        fab:menu_fab_hide_animation="@anim/my_hide_animation"
+        fab:menu_fab_show_animation="@anim/my_show_animation"
+        fab:menu_fab_size="normal"
+        fab:menu_icon="@drawable/ic_map_type"
+        fab:menu_labels_colorNormal="@color/white"
+        fab:menu_labels_colorPressed="@color/color_variant"
+        app:menu_labels_colorRipple="@color/color_variant"
+        fab:menu_labels_cornerRadius="16dp"
+        fab:menu_labels_ellipsize="none"
+        fab:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+        fab:menu_labels_margin="0dp"
+        fab:menu_labels_maxLines="-1"
+        fab:menu_labels_padding="8dp"
+        fab:menu_labels_paddingBottom="4dp"
+        fab:menu_labels_paddingLeft="8dp"
+        fab:menu_labels_paddingRight="8dp"
+        fab:menu_labels_paddingTop="4dp"
+        fab:menu_labels_position="left"
+        fab:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
+        fab:menu_labels_showShadow="true"
+        fab:menu_labels_singleLine="false"
+        fab:menu_labels_style="@style/ThemeOverlay.AppCompat.Dark"
+        fab:menu_labels_textColor="@color/white"
+        fab:menu_labels_textSize="14sp"
+        fab:menu_openDirection="down"
+        fab:menu_shadowColor="#66000000"
+        fab:menu_shadowRadius="4dp"
+        fab:menu_shadowXOffset="1dp"
+        fab:menu_shadowYOffset="3dp"
+        fab:menu_showShadow="true">
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/normal_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_map_normal"
+            fab:fab_label="@string/normal_type"
+            app:fab_colorNormal="@color/white_trans_60"
+            app:fab_colorPressed="@color/white"
+            android:scaleType="centerCrop"
+            fab:fab_size="mini" />
 
-    <ImageButton
-        android:id="@+id/add_marker_people"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/icon_google"
-        android:layout_margin="16dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintTop_toBottomOf="@id/maps_options"
-        app:layout_constraintEnd_toEndOf="@id/maps_options"
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/satellite_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/white_trans_60"
+            app:fab_colorPressed="@color/white"
+            android:src="@drawable/ic_map_satelit"
+            fab:fab_label="@string/satellite_type"
+            fab:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/terrain_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_map_terrain"
+            app:fab_colorNormal="@color/white_trans_60"
+            app:fab_colorPressed="@color/white"
+            fab:fab_label="@string/terrain_type"
+            fab:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/hybrid_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/white_trans_60"
+            app:fab_colorPressed="@color/white"
+            android:src="@drawable/ic_map_hybrid"
+            fab:fab_label="@string/hybrid_type"
+            fab:fab_size="mini" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/maps.floating_menu_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="false"
+        android:layout_marginEnd="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@id/maps_options"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        fab:menu_animationDelayPerItem="50"
+        fab:menu_backgroundColor="@android:color/transparent"
+        fab:menu_buttonSpacing="0dp"
+        fab:menu_colorNormal="@color/color_variant"
+        fab:menu_colorPressed="@color/color_base"
+        fab:menu_colorRipple="#99FFFFFF"
+        fab:menu_fab_hide_animation="@anim/my_hide_animation"
+        fab:menu_fab_show_animation="@anim/my_show_animation"
+        fab:menu_fab_size="normal"
+        fab:menu_icon="@drawable/ic_akses_location"
+        fab:menu_labels_colorNormal="@color/white"
+        fab:menu_labels_colorPressed="@color/color_variant"
+        app:menu_labels_colorRipple="@color/color_variant"
+        fab:menu_labels_cornerRadius="3dp"
+        fab:menu_labels_ellipsize="none"
+        fab:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+        fab:menu_labels_margin="0dp"
+        fab:menu_labels_maxLines="-1"
+        fab:menu_labels_padding="8dp"
+        fab:menu_labels_paddingBottom="4dp"
+        fab:menu_labels_paddingLeft="8dp"
+        fab:menu_labels_paddingRight="8dp"
+        fab:menu_labels_paddingTop="4dp"
+        fab:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
+        fab:menu_labels_showShadow="true"
+        fab:menu_labels_singleLine="false"
+        fab:menu_labels_position="left"
+        fab:menu_labels_style="@style/ThemeOverlay.AppCompat.Dark"
+        fab:menu_labels_textColor="#FFFFFF"
+        fab:menu_labels_textSize="14sp"
+        fab:menu_openDirection="down"
+        fab:menu_shadowColor="#66000000"
+        fab:menu_shadowRadius="4dp"
+        fab:menu_shadowXOffset="1dp"
+        fab:menu_shadowYOffset="3dp"
+        fab:menu_showShadow="true">
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_my_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_my_location"
+            app:fab_colorNormal="@color/white_trans_60"
+            app:fab_colorPressed="@color/white"
+            fab:fab_label="@string/find_my_location"
+            fab:fab_size="mini" />
+
+        <!-- FAB: Akses Story Orang Lain -->
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_user_story"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/white_trans_60"
+            app:fab_colorPressed="@color/white"
+            android:src="@drawable/ic_person_story"
+            fab:fab_label="@string/user_story"
+            fab:fab_size="mini" />
+
+
+    </com.github.clans.fab.FloatingActionMenu>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

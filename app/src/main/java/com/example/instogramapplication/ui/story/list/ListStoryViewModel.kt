@@ -17,7 +17,7 @@ class ListStoryViewModel(
         emitSource(repository.getLatestMyStory(username))
     }
     val storiesY: LiveData<PagingData<StoryEntity>> =
-        repository.getStories().cachedIn(viewModelScope)
+        repository.getStories(location = 1).cachedIn(viewModelScope)
 
 }
 

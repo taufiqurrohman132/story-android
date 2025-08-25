@@ -1,5 +1,6 @@
 package com.example.instogramapplication.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
@@ -136,17 +137,17 @@ class UserRepository private constructor(
 //    }
 
     @OptIn(ExperimentalPagingApi::class)
-    fun getStories(): LiveData<PagingData<StoryEntity>>{
+    fun getStories(location: Int): LiveData<PagingData<StoryEntity>>{
         return Pager(
             config = PagingConfig(
                 pageSize = 3
             ),
             remoteMediator = StoryRemoteMediator(
                 storyDatabase,
-                apiService
+                apiService,
+                location
             ),
             pagingSourceFactory = {
-//                StoryPagingSource(apiService)
                 storyDatabase.storyDao().getAllStory()
             }
         ).liveData
@@ -156,7 +157,22 @@ class UserRepository private constructor(
         return storyDatabase.storyDao().getLatestMyStory(username)
     }
 
+    fun getStoriesForMap(): LiveData<List<StoryEntity>> {
+        return storyDatabase.storyDao().getStoriesForMap()
+    }
 
+    suspend fun fetchStoriesFromApi(location: Int){
+        try {
+            val response = apiService.getStories(page = 1, size = 20, location = location).body()
+            if (response?.error == false){
+                val entities = response.listStory.map { it.toEntity() }
+                storyDatabase.storyDao().insertStory(entities)
+            }
+        }catch (e: Exception) {
+            Log.e("Repo", "Gagal fetch API: ${e.message}")
+        }
+
+    }
 
     suspend fun uploadStory(imageFile: File, desc: String, lat: String?, lon: String?): Resource<String> {
         return try {

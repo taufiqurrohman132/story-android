@@ -9,23 +9,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.instogramapplication.R
-import com.example.instogramapplication.data.remote.model.StoryItem
+import com.example.instogramapplication.data.local.entity.StoryEntity
 import com.example.instogramapplication.databinding.FragmentMapsBinding
 import com.example.instogramapplication.utils.ApiUtils
-import com.example.instogramapplication.utils.DialogUtils
 import com.example.instogramapplication.utils.PostUtils
-import com.example.instogramapplication.utils.Resource
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -34,16 +33,16 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.coroutines.launch
 
-class MapsFragment : Fragment() {
+class MapsFragment : Fragment(), OnMapReadyCallback {
 
     private var _binding: FragmentMapsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var mMap: GoogleMap
+    private var mMap: GoogleMap? = null
 
     private val boundsBuilder = LatLngBounds.Builder()
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     private val factory: UserViewModelFactory by lazy {
         UserViewModelFactory.getInstance(requireContext())
@@ -51,83 +50,6 @@ class MapsFragment : Fragment() {
 
     private val viewModel: MapsViewModel by viewModels {
         factory
-    }
-
-    private val callback = OnMapReadyCallback { googleMap ->
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
-        mMap = googleMap
-
-        val sydney = LatLng(-34.0, 151.0)
-        val dicodingSpace = LatLng(-6.8957643, 107.6338462)
-        mMap.apply {
-//            addMarker(
-//                MarkerOptions()
-//                    .position(dicodingSpace)
-//                    .title("Dicoding Space")
-//                    .snippet("Batik Kumeli No.50")
-//            )
-            animateCamera(CameraUpdateFactory.newLatLngZoom(dicodingSpace, 15f))
-
-            uiSettings.apply {
-                isZoomControlsEnabled = true
-                isIndoorLevelPickerEnabled = true
-                isCompassEnabled = true
-                isMapToolbarEnabled = true
-            }
-
-//            setOnMapLongClickListener { latLng ->
-//                addMarker(
-//                    MarkerOptions()
-//                        .position(latLng)
-//                        .title("New Marker")
-//                        .snippet("Lat: ${latLng.latitude} Long: ${latLng.longitude}")
-//                )
-//            }
-        }
-
-        binding.mapsOptions.setOnClickListener {
-            val popUp = PopupMenu(requireContext(), it)
-            popUp.menuInflater.inflate(R.menu.map_options, popUp.menu)
-            popUp.setOnMenuItemClickListener { item ->
-                when (item.itemId) {
-                    R.id.normal_type -> {
-                        mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
-                        true
-                    }
-
-                    R.id.satellite_type -> {
-                        mMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
-                        true
-                    }
-
-                    R.id.terrain_type -> {
-                        mMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
-                        true
-                    }
-
-                    R.id.hybrid_type -> {
-                        mMap.mapType = GoogleMap.MAP_TYPE_HYBRID
-                        true
-                    }
-
-                    else -> {
-                        super.onOptionsItemSelected(item)
-                    }
-                }
-            }
-            popUp.show()
-        }
-
-        getMyLocation()
-        setMapStyle()
     }
 
     private val requestPermissionLauncher =
@@ -151,9 +73,10 @@ class MapsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(callback)
+        mapFragment?.getMapAsync(this)
 
-
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireContext())
 
         observer()
         setupListener()
@@ -164,9 +87,69 @@ class MapsFragment : Fragment() {
         _binding = null
     }
 
-    private fun setupListener() {
-        binding.addMarkerPeople.setOnClickListener { viewModel.loadStories(1) }
+    override fun onMapReady(gMap: GoogleMap) {
+        mMap = gMap
+
+        mMap?.apply {
+            uiSettings.apply {
+                isZoomControlsEnabled = true
+                isIndoorLevelPickerEnabled = true
+                isCompassEnabled = true
+                isMapToolbarEnabled = true
+                isMyLocationButtonEnabled = false
+            }
+        }
+
+        setMapStyle()
     }
+
+    private fun setupListener() {
+        binding.apply {
+            mapsFloatingMenuMode.setOnMenuToggleListener { opened ->
+                if (opened) {
+                    mapsFloatingMenuLocation.close(true)
+                }
+            }
+            mapsFloatingMenuLocation.setOnMenuToggleListener { opened ->
+                if (opened) {
+                    mapsFloatingMenuMode.close(true)
+                }
+            }
+
+            normalType.setOnClickListener {
+                mMap?.mapType = GoogleMap.MAP_TYPE_NORMAL
+                closeMenus()
+            }
+            terrainType.setOnClickListener {
+                mMap?.mapType = GoogleMap.MAP_TYPE_TERRAIN
+                closeMenus()
+            }
+            hybridType.setOnClickListener {
+                mMap?.mapType = GoogleMap.MAP_TYPE_HYBRID
+                closeMenus()
+            }
+            satelliteType.setOnClickListener {
+                mMap?.mapType = GoogleMap.MAP_TYPE_SATELLITE
+                closeMenus()
+            }
+
+            fabUserStory.setOnClickListener {
+                // action user story di sini
+                viewModel.loadstoriesForMap()
+                closeMenus()
+            }
+            fabMyLocation.setOnClickListener {
+                getMyLocation()
+                closeMenus()
+            }
+        }
+    }
+
+    private fun closeMenus() {
+        binding.mapsFloatingMenuMode.close(true)
+        binding.mapsFloatingMenuLocation.close(true)
+    }
+
 
     private fun getMyLocation() {
         if (
@@ -175,7 +158,18 @@ class MapsFragment : Fragment() {
                 android.Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            mMap.isMyLocationEnabled = true
+            mMap?.isMyLocationEnabled = true
+
+            // ambil lokasi terahir
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+                if (location != null) {
+                    val latLng = LatLng(location.latitude, location.longitude)
+                    mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17f))
+                } else {
+                    Toast.makeText(requireContext(), "Lokasi tidak ditemukan", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
         } else {
             requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_FINE_LOCATION)
         }
@@ -184,13 +178,13 @@ class MapsFragment : Fragment() {
     private fun setMapStyle() {
         try {
             val success =
-                mMap.setMapStyle(
+                mMap?.setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(
                         requireContext(),
                         R.raw.map_style
                     )
                 )
-            if (!success) {
+            if (success != true) {
                 Log.e(TAG, "Style parsing failed.")
             }
         } catch (exception: Resources.NotFoundException) {
@@ -198,77 +192,102 @@ class MapsFragment : Fragment() {
         }
     }
 
-    private fun addManyMarker() {
-
-    }
-
     private fun observer() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.eventFlow.collect { message ->
-                DialogUtils.showToast(message, requireActivity())
-            }
-
-        }
-        viewModel.storiesState.observe(viewLifecycleOwner) { story ->
-            Log.d(TAG, "observer: result = $story")
-            when (story) {
-                is Resource.Loading -> showLoading(true)
-                is Resource.Success -> showManyMarker(story.data)
-//                    is Resource.Error -> showError()
-//                    is Resource.ErrorConnection -> showErrorConnect(result.message)
-                else -> "showEmpty()"
-            }
+//        viewModel.pagingStories.observe(viewLifecycleOwner) { data ->
+//
+//        }
+        viewModel.storiesForMap.observe(viewLifecycleOwner) { list ->
+            if (list.isEmpty()){
+                viewModel.loadstoriesForMap()
+            }else
+                showManyMarker(list) // kalau perlu convert ke StoryItem
+            Log.d(TAG, "observer: list lokasi $list")
         }
     }
 
-    private fun showManyMarker(data: List<StoryItem>?) {
+
+
+    private fun showManyMarker(data: List<StoryEntity>?) {
+        val indonesiaPoints = mutableListOf<LatLng>()
+        val globalPoints = mutableListOf<LatLng>()
+
         data?.forEach { marker ->
-            Log.d(TAG, "showManyMarker: letlang = $marker")
-            if (marker.lat != null && marker.lon != null) {
-                val latLng = LatLng(marker.lat, marker.lon)
-                val imgName = ApiUtils.avatarUrl(requireContext(), marker.name ?: "AN")
-                Glide.with(requireContext())
-                    .asBitmap()
-                    .load(imgName)
-                    .into(object : CustomTarget<Bitmap>() {
-                        override fun onResourceReady(
-                            resource: Bitmap,
-                            transition: Transition<in Bitmap>?
-                        ) {
-                            val markerIcon =
-                                PostUtils.createBalloonMarker(requireContext(), resource)
-                            mMap.addMarker(
-                                MarkerOptions()
-                                    .position(latLng)
-                                    .title(marker.name)
-                                    .snippet(marker.description)
-                                    .icon(markerIcon)
-                            )
-                        }
+            var safeLat = marker.lat ?: return@forEach
+            var safeLon = marker.lon ?: return@forEach
 
-                        override fun onLoadCleared(placeholder: Drawable?) {
-                        }
-                    })
-                boundsBuilder.include(latLng)
+            // normalisasi microdegrees
+            if (safeLat !in -90.0..90.0 || safeLon !in -180.0..180.0) {
+                if (kotlin.math.abs(safeLat) > 1000 || kotlin.math.abs(safeLon) > 1000) {
+                    safeLat /= 1_000_000.0
+                    safeLon /= 1_000_000.0
+                }
             }
+            if (safeLat !in -90.0..90.0 || safeLon !in -180.0..180.0) return@forEach
+
+            val latLng = LatLng(safeLat, safeLon)
+            globalPoints.add(latLng)
+
+            if (safeLat in -11.0..6.0 && safeLon in 95.0..141.0) {
+                indonesiaPoints.add(latLng)
+            }
+
+            val imgName = ApiUtils.avatarUrl(requireContext(), marker.name ?: "JK")
+            Glide.with(requireContext())
+                .asBitmap()
+                .load(imgName)
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        val markerIcon =
+                            PostUtils.createBalloonMarker(requireContext(), resource)
+                        mMap?.addMarker(
+                            MarkerOptions()
+                                .position(latLng)
+                                .title(marker.name)
+                                .snippet(marker.description)
+                                .icon(markerIcon)
+                        )
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                    }
+                })
         }
 
-        val bounds: LatLngBounds = boundsBuilder.build()
-        mMap.animateCamera(
-            CameraUpdateFactory.newLatLngBounds(
-                bounds,
-                requireContext().resources.displayMetrics.widthPixels,
-                requireContext().resources.displayMetrics.heightPixels,
-                300
-            )
-        )
+        // pilih target points: prioritaskan Indonesia
+        val targetPoints = indonesiaPoints.ifEmpty { globalPoints }
+
+        // kalau kosong, jangan build bounds
+        if (targetPoints.isEmpty()) {
+            Log.w(TAG, "Belum ada lokasi valid, skip animateCamera")
+            return
+        }
+
+        if (targetPoints.size == 1) {
+            // cuma 1 titik , zoom ke titik tsb
+            mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(targetPoints[0], 12f))
+        } else {
+            // bikin builder baru setiap kali update
+            val boundsBuilder = LatLngBounds.Builder()
+            targetPoints.forEach { boundsBuilder.include(it) }
+
+            try {
+                val bounds = boundsBuilder.build()
+                mMap?.animateCamera(
+                    CameraUpdateFactory.newLatLngBounds(
+                        bounds,
+                        requireContext().resources.displayMetrics.widthPixels,
+                        requireContext().resources.displayMetrics.heightPixels,
+                        300
+                    )
+                )
+            } catch (e: Exception) {
+                Log.e(TAG, "Gagal build bounds: ${e.message}")
+            }
+        }
     }
-
-    private fun showLoading(isLoading: Boolean) {
-
-
-    }
-
 
     companion object {
         private val TAG = MapsFragment::class.java.simpleName

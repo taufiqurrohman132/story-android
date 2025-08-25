@@ -22,4 +22,7 @@ interface StoryDao {
 
     @Query("SELECT * FROM story WHERE name = :username ORDER BY createdAt DESC LIMIT 1")
     fun getLatestMyStory(username: String): LiveData<StoryEntity?>
+
+    @Query("SELECT * FROM story WHERE lat IS NOT NULL AND lon IS NOT NULL")
+    fun getStoriesForMap(): LiveData<List<StoryEntity>>
 }

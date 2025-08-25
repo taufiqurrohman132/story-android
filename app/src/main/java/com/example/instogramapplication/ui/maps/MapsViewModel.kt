@@ -1,10 +1,16 @@
 package com.example.instogramapplication.ui.maps
 
+import android.location.Location
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.example.instogramapplication.data.local.entity.StoryEntity
 import com.example.instogramapplication.data.remote.model.StoryItem
 import com.example.instogramapplication.data.repository.UserRepository
 import com.example.instogramapplication.utils.Resource
@@ -18,33 +24,44 @@ class MapsViewModel(
 ) : ViewModel() {
 
     // state untuk daftar cerita
-    private val _storiesState = MutableLiveData<Resource<List<StoryItem>>>()
-    val storiesState: LiveData<Resource<List<StoryItem>>> = _storiesState
+    private val _storiesForMap = MediatorLiveData<List<StoryEntity>>()
+    val storiesForMap: LiveData<List<StoryEntity>> get() =  _storiesForMap
 
     // notif
-    private val _eventChannel = Channel<String>()
-    val eventFlow = _eventChannel.receiveAsFlow()
+//    private val _eventChannel = Channel<String>()
+//    val eventFlow = _eventChannel.receiveAsFlow()
 
-    fun loadStories(location: Int) {
-        Log.d(TAG, "loadStories: location = $location")
-        viewModelScope.launch {
-            _storiesState.postValue(Resource.Loading())
-//            try {
-//                repository.getStories(location).collect { res ->
-//                    _storiesState.postValue(res)
-//                    if (
-//                        res is Resource.Error ||
-//                        res is Resource.ErrorConnection ||
-//                        res is Resource.Empty
-//                    ) {
-//                        res.message?.let { msg ->
-//                            _eventChannel.send(msg) // kirim notif sekali pakai
-//                        }
-//                    }
-//                }
-//            } catch (e: Exception) {
-//                _eventChannel.send(e.message ?: "Unknown error")
-//            }
+//    private val locationParam = MutableLiveData<Int>()
+//    val location: LiveData<PagingData<StoryEntity>> =
+//        locationParam.switchMap { location ->
+//            repository.getStories(location)
+//                .cachedIn(viewModelScope)
+//        }
+//
+//    fun loadStory(location: Int){
+//        locationParam.value = location
+//    }
+//    val pagingStories: LiveData<PagingData<StoryEntity>> =
+//        repository.getStories(location = 1)
+
+
+//    val storiesForMap: LiveData<List<StoryEntity>> =
+//        repository.getStoriesForMap()
+//
+    fun loadstoriesForMap() {
+        val source = repository.getStoriesForMap()
+        _storiesForMap.addSource(source) { story ->
+            Log.d(TAG, "loadstoriesForMap: loas story viewmodel is running")
+            if (story.isNullOrEmpty()){
+                Log.d(TAG, "loadstoriesForMap: load from api")
+                viewModelScope.launch {
+                    repository.fetchStoriesFromApi(1)
+                }
+                _storiesForMap.value = emptyList()
+            }else {
+                _storiesForMap.value = story
+            }
+            _storiesForMap.removeSource(source)// agar tidak doble
         }
     }
 

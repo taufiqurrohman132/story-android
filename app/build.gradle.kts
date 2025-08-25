@@ -99,6 +99,8 @@ dependencies {
     implementation(libs.igrefreshlayout)
     implementation(libs.shimmer)
 
+    // floating multiple option menu
+    implementation("com.github.clans:fab:1.6.4")
 
     implementation(libs.lottie)
 
