@@ -6,6 +6,43 @@ Proyek ini masih dalam proses pengembangan dan akan terus disempurnakan sesuai d
 
 ---
 
+## Cuplikan Layar
+
+<table align="center">
+  <tr>
+    <td align="center" valign="top">
+      <strong>Registration</strong><br>
+      <img src="https://github.com/user-attachments/assets/73fa906e-24c9-45fe-9e5e-42c2c89fa0df" width="250"/>
+    </td>
+    <td align="center" valign="top">
+      <strong>Home</strong><br>
+      <img src="https://github.com/user-attachments/assets/4ec9d426-aa2b-4838-8794-949391ab3392" width="250"/>
+    </td>
+    <td align="center" valign="top">
+      <strong>Detail</strong><br>
+      <img src="https://github.com/user-attachments/assets/8d5473df-3207-4723-ac67-87f04b6a2fea" width="250"/>
+    </td>
+    <td align="center" valign="top">
+      <strong>Upload Story</strong><br>
+      <img src="https://github.com/user-attachments/assets/64b9028c-a87c-4e4a-8c49-95f2124b121d" width="250"/>
+    </td>
+  </tr>
+</table>
+<table align="center">
+  <tr>
+    <td align="center" valign="top">
+      <strong>Language</strong><br>
+      <img src="https://github.com/user-attachments/assets/ee2e79e4-f068-4b87-83e5-384bd0984b9e" width="250"/>
+    </td>
+    <td align="center" valign="top">
+      <strong>Stack Widget</strong><br>
+      <img src="https://github.com/user-attachments/assets/3c471f47-2ada-4e54-873d-bfa80db60618" width="250"/>
+    </td>
+  </tr>
+</table>
+
+---
+
 ## 🎯 Tujuan Pengembangan
 
 Menyelesaikan submission akhir dengan menerapkan fitur-fitur sesuai standar pembelajaran, seperti:
@@ -83,6 +120,6 @@ Proyek ini masih terus saya kembangkan. Beberapa hal yang direncanakan:
 ## Status Proyek
 
 🛠️ Dalam pengembangan  
-🗓️ Target selesai: Akhir Juli 2025  
+🗓️ Target selesai: Akhir Agustus 2025  
 🎓 Tujuan: Submission kelas Mahir Dicoding
 
