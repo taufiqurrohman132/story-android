@@ -53,12 +53,28 @@
     <string name="error_take_picture">Gagal njupuk gambar.</string>
 
     <!-- time -->
-    <string name="time_just_now">saiki</string>
-    <string name="time_minutes_ago">%1$d menit kepungkur</string>
-    <string name="time_hours_ago">%1$d jam kepungkur</string>
-    <string name="time_days_ago">%1$d dina kepungkur</string>
-    <string name="time_weeks_ago">%1$d minggu kepungkur</string>
-    <string name="time_months_ago">%1$d wulan kepungkur</string>
+    <string name="time_just_now">sepisanan</string>
+
+    <plurals name="time_minutes_ago">
+        <item quantity="other">%1$d menit kepungkur</item>
+    </plurals>
+
+    <plurals name="time_hours_ago">
+        <item quantity="other">%1$d jam kepungkur</item>
+    </plurals>
+
+    <plurals name="time_days_ago">
+        <item quantity="other">%1$d dina kepungkur</item>
+    </plurals>
+
+    <plurals name="time_weeks_ago">
+        <item quantity="other">%1$d minggu kepungkur</item>
+    </plurals>
+
+    <plurals name="time_months_ago">
+        <item quantity="other">%1$d wulan kepungkur</item>
+    </plurals>
+
 
     <string name="dialog_exit_edit_title">Batal Suntingan?</string>
     <string name="dialog_exit_edit_message">Owahan sing durung disimpen bakal ilang. Yakin arep metu?</string>
@@ -113,19 +129,31 @@
     <string name="instogram_application">Aplikasi Instogram</string>
     <string name="mode_gelap">Mode Peteng</string>
     <string name="ganti_bahasa">Ganti Basa</string>
-    <string name="indonesia">Indonesia</string>
-    <string name="appearance">Tampilan</string>
+    <string name="indonesia">Basa Indonesia</string>
+    <string name="appearance">Penampilan</string>
     <string name="kontak_darurat">Kontak Darurat</string>
-    <string name="_287rb">287 ewu</string>
-    <string name="_245rb">245 ewu</string>
-    <string name="disukai_oleh_238rb_orang">Disenengi déning 238 ewu wong</string>
-    <string name="_4_jam_yang_lalu">4 jam kepungkur</string>
+    <string name="dialog_open_setting_edit_title">Ijin Lokasi Dibutuhake</string>
+    <string name="dialog_open_setting_edit_message">Aplikasi mbutuhake ijin lokasi kanggo nambah crita karo lokasi panjenengan. Aktifake ijin ing setelan.</string>
+
     <string name="story_tidak_tersedia">Crita ora kasedhiya</string>
 
-    <string name="pengaturan">Pengaturan</string>
+    <string name="pengaturan">Setelan</string>
     <string name="privacy">Privasi</string>
-    <string name="security">Kaamanan</string>
+    <string name="security">Keamanan</string>
     <string name="ganti_kata_sandi">Ganti Sandi</string>
     <string name="keluar">Metu</string>
+
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="normal_type">Normal</string>
+    <string name="satellite_type">Satelit</string>
+    <string name="terrain_type">Lereng</string>
+    <string name="hybrid_type">Hibrida</string>
+    <string name="retry">Coba Meneh</string>
+    <string name="maps">Peta</string>
+    <string name="find_my_location">Goleki Lokasiku</string>
+    <string name="user_story">Crita Pangguna</string>
+    <string name="dialog_exit_edit_yes">Ya</string>
+    <string name="dialog_exit_edit_no">Ora</string>
+
 
 </resources>

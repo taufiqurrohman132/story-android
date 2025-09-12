@@ -61,11 +61,37 @@
 
     <!-- time -->
     <string name="time_just_now">à l’instant</string>
-    <string name="time_minutes_ago">il y a %1$d minutes</string>
-    <string name="time_hours_ago">il y a %1$d heures</string>
-    <string name="time_days_ago">il y a %1$d jours</string>
-    <string name="time_weeks_ago">il y a %1$d semaines</string>
-    <string name="time_months_ago">il y a %1$d mois</string>
+
+    <plurals name="time_minutes_ago">
+        <item quantity="one">il y a %1$d minute</item>
+        <item quantity="many">il y a %1$d minutes</item>
+        <item quantity="other">il y a %1$d minutes</item>
+    </plurals>
+
+    <plurals name="time_hours_ago">
+        <item quantity="one">il y a %1$d heure</item>
+        <item quantity="many">il y a %1$d heures</item>
+        <item quantity="other">il y a %1$d heures</item>
+    </plurals>
+
+    <plurals name="time_days_ago">
+        <item quantity="one">il y a %1$d jour</item>
+        <item quantity="many">il y a %1$d jours</item>
+        <item quantity="other">il y a %1$d jours</item>
+    </plurals>
+
+    <plurals name="time_weeks_ago">
+        <item quantity="one">il y a %1$d semaine</item>
+        <item quantity="many">il y a %1$d semaines</item>
+        <item quantity="other">il y a %1$d semaines</item>
+    </plurals>
+
+    <plurals name="time_months_ago">
+        <item quantity="one">il y a %1$d mois</item>
+        <item quantity="many">il y a %1$d mois</item>
+        <item quantity="other">il y a %1$d mois</item>
+    </plurals>
+
 
     <string name="dialog_exit_edit_title">Annuler la modification?</string>
     <string name="dialog_exit_edit_message">Les modifications non enregistrées seront perdues. Voulez-vous vraiment quitter?</string>
@@ -122,19 +148,30 @@
     <string name="instogram_application">Application Instogram</string>
     <string name="mode_gelap">Mode sombre</string>
     <string name="ganti_bahasa">Changer de langue</string>
-    <string name="indonesia">Indonésie</string>
+    <string name="indonesia">Indonésien</string>
     <string name="appearance">Apparence</string>
-    <string name="kontak_darurat">Contact d\'urgence</string>
-    <string name="_287rb">287k</string>
-    <string name="_245rb">245k</string>
-    <string name="disukai_oleh_238rb_orang">Aimé par 238k personnes</string>
-    <string name="_4_jam_yang_lalu">il y a 4 heures</string>
-    <string name="story_tidak_tersedia">Histoire non disponible</string>
+    <string name="kontak_darurat">Contact d’urgence</string>
+    <string name="dialog_open_setting_edit_title">Autorisation de localisation requise</string>
+    <string name="dialog_open_setting_edit_message">L’application nécessite l’autorisation de localisation pour ajouter une story avec votre position. Activez l’autorisation dans les paramètres.</string>
+
+    <string name="story_tidak_tersedia">Story non disponible</string>
 
     <string name="pengaturan">Paramètres</string>
     <string name="privacy">Confidentialité</string>
     <string name="security">Sécurité</string>
     <string name="ganti_kata_sandi">Changer le mot de passe</string>
     <string name="keluar">Déconnexion</string>
+
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="normal_type">Normal</string>
+    <string name="satellite_type">Satellite</string>
+    <string name="terrain_type">Relief</string>
+    <string name="hybrid_type">Hybride</string>
+    <string name="retry">Réessayer</string>
+    <string name="maps">Cartes</string>
+    <string name="find_my_location">Trouver ma position</string>
+    <string name="user_story">Story utilisateur</string>
+    <string name="dialog_exit_edit_yes">Oui</string>
+    <string name="dialog_exit_edit_no">Non</string>
 
 </resources>

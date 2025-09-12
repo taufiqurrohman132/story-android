@@ -25,25 +25,20 @@ android {
         )
 
         buildConfigField("String", "BASE_URL", "\"https://story-api.dicoding.dev/v1/\"")
-//        buildConfigField("boolean", "TEST_MODE", "false")
     }
 
     buildFeatures {
         buildConfig = true
         viewBinding = true
-        dataBinding = true // requirement pop up
+//        dataBinding = true // requirement pop up
     }
     buildTypes {
-//        debug {
-//            buildConfigField("boolean", "TEST_MODE", "true")
-//        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-//            buildConfigField("boolean", "TEST_MODE", "false")
         }
     }
     compileOptions {

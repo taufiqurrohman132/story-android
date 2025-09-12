@@ -67,11 +67,31 @@
 
     <!-- Time -->
     <string name="time_just_now">just now</string>
-    <string name="time_minutes_ago">%1$d minutes ago</string>
-    <string name="time_hours_ago">%1$d hours ago</string>
-    <string name="time_days_ago">%1$d days ago</string>
-    <string name="time_weeks_ago">%1$d weeks ago</string>
-    <string name="time_months_ago">%1$d months ago</string>
+
+    <plurals name="time_minutes_ago">
+        <item quantity="one">%1$d minute ago</item>
+        <item quantity="other">%1$d minutes ago</item>
+    </plurals>
+
+    <plurals name="time_hours_ago">
+        <item quantity="one">%1$d hour ago</item>
+        <item quantity="other">%1$d hours ago</item>
+    </plurals>
+
+    <plurals name="time_days_ago">
+        <item quantity="one">%1$d day ago</item>
+        <item quantity="other">%1$d days ago</item>
+    </plurals>
+
+    <plurals name="time_weeks_ago">
+        <item quantity="one">%1$d week ago</item>
+        <item quantity="other">%1$d weeks ago</item>
+    </plurals>
+
+    <plurals name="time_months_ago">
+        <item quantity="one">%1$d month ago</item>
+        <item quantity="other">%1$d months ago</item>
+    </plurals>
 
     <!-- Edit Dialog -->
     <string name="dialog_exit_edit_title">Cancel Editing?</string>
@@ -150,14 +170,27 @@
     <string name="indonesia">Indonesian</string>
     <string name="appearance">Appearance</string>
     <string name="kontak_darurat">Emergency Contact</string>
+    <string name="dialog_open_setting_edit_title">Location Permission Required</string>
+    <string name="dialog_open_setting_edit_message">The app requires location permission to add a story with your location. Enable the permission in settings.</string>
 
-    <!-- Story Not Available -->
     <string name="story_tidak_tersedia">Story not available</string>
 
     <string name="pengaturan">Settings</string>
     <string name="privacy">Privacy</string>
     <string name="security">Security</string>
     <string name="ganti_kata_sandi">Change Password</string>
-    <string name="keluar">Log Out</string>
+    <string name="keluar">Logout</string>
+
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="normal_type">Normal</string>
+    <string name="satellite_type">Satellite</string>
+    <string name="terrain_type">Terrain</string>
+    <string name="hybrid_type">Hybrid</string>
+    <string name="retry">Retry</string>
+    <string name="maps">Maps</string>
+    <string name="find_my_location">Find My Location</string>
+    <string name="user_story">User Story</string>
+    <string name="dialog_exit_edit_yes">Yes</string>
+    <string name="dialog_exit_edit_no">No</string>
 
 </resources>

@@ -42,16 +42,24 @@ object ApiUtils {
 
         return when {
             seconds < 60 -> context.getString(R.string.time_just_now)
-            minutes < 60 -> context.getString(R.string.time_minutes_ago, minutes)
-            hours < 24 -> context.getString(R.string.time_hours_ago, hours)
-            days < 7 -> context.getString(R.string.time_days_ago, days)
-            days < 30 -> context.getString(R.string.time_weeks_ago, days / 7)
-            months < 12 -> context.getString(R.string.time_months_ago, months)
+            minutes < 60 -> context.resources.getQuantityString(R.plurals.time_minutes_ago,
+                minutes.toInt(), minutes)
+            hours < 24 -> context.resources.getQuantityString(R.plurals.time_hours_ago,
+                hours.toInt(), hours)
+            days < 7 -> context.resources.getQuantityString(R.plurals.time_days_ago,
+                days.toInt(), days)
+            days < 30 -> {
+                val weeks = days / 7
+                context.resources.getQuantityString(R.plurals.time_weeks_ago, weeks.toInt(), weeks)
+            }
+            months < 12 -> context.resources.getQuantityString(R.plurals.time_months_ago,
+                months.toInt(), months)
             else -> {
-                val formaters = DateTimeFormatter.ofPattern("MMMM yyyy", Locale("id", "ID"))
-                dateTime.format(formaters) // contoh: "Januari 2022"
+                val format = DateTimeFormatter.ofPattern("MMMM yyyy", Locale("id", "ID"))
+                dateTime.format(format) // contoh: "Januari 2022"
             }
         }
+
     }
 
     fun avatarUrl(context: Context, name: String) =

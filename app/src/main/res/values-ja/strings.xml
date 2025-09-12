@@ -61,11 +61,26 @@
 
     <!-- time -->
     <string name="time_just_now">たった今</string>
-    <string name="time_minutes_ago">%1$d 分前</string>
-    <string name="time_hours_ago">%1$d 時間前</string>
-    <string name="time_days_ago">%1$d 日前</string>
-    <string name="time_weeks_ago">%1$d 週間前</string>
-    <string name="time_months_ago">%1$d ヶ月前</string>
+
+    <plurals name="time_minutes_ago">
+        <item quantity="other">%1$d分前</item>
+    </plurals>
+
+    <plurals name="time_hours_ago">
+        <item quantity="other">%1$d時間前</item>
+    </plurals>
+
+    <plurals name="time_days_ago">
+        <item quantity="other">%1$d日前</item>
+    </plurals>
+
+    <plurals name="time_weeks_ago">
+        <item quantity="other">%1$d週間前</item>
+    </plurals>
+
+    <plurals name="time_months_ago">
+        <item quantity="other">%1$dか月前</item>
+    </plurals>
 
     <string name="dialog_exit_edit_title">編集をキャンセルしますか？</string>
     <string name="dialog_exit_edit_message">保存されていない変更は失われます。終了してもよろしいですか？</string>
@@ -119,22 +134,33 @@
     <string name="posting">投稿</string>
     <string name="desc_notification_icon">通知アイコンの説明</string>
     <string name="desc_settings_icon">設定アイコンの説明</string>
-    <string name="instogram_application">Instogramアプリケーション</string>
+    <string name="instogram_application">インストグラム アプリ</string>
     <string name="mode_gelap">ダークモード</string>
     <string name="ganti_bahasa">言語を変更</string>
     <string name="indonesia">インドネシア語</string>
     <string name="appearance">外観</string>
     <string name="kontak_darurat">緊急連絡先</string>
-    <string name="_287rb">287k</string>
-    <string name="_245rb">245k</string>
-    <string name="disukai_oleh_238rb_orang">238k人が「いいね」しました</string>
-    <string name="_4_jam_yang_lalu">4時間前</string>
-    <string name="story_tidak_tersedia">ストーリーが利用できません</string>
+    <string name="dialog_open_setting_edit_title">位置情報の許可が必要です</string>
+    <string name="dialog_open_setting_edit_message">アプリは位置情報の許可が必要です。位置情報付きのストーリーを追加するには、設定で許可を有効にしてください。</string>
+
+    <string name="story_tidak_tersedia">ストーリーは利用できません</string>
 
     <string name="pengaturan">設定</string>
     <string name="privacy">プライバシー</string>
     <string name="security">セキュリティ</string>
     <string name="ganti_kata_sandi">パスワードを変更</string>
     <string name="keluar">ログアウト</string>
+
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="normal_type">標準</string>
+    <string name="satellite_type">衛星</string>
+    <string name="terrain_type">地形</string>
+    <string name="hybrid_type">ハイブリッド</string>
+    <string name="retry">再試行</string>
+    <string name="maps">マップ</string>
+    <string name="find_my_location">自分の位置を探す</string>
+    <string name="user_story">ユーザーストーリー</string>
+    <string name="dialog_exit_edit_yes">はい</string>
+    <string name="dialog_exit_edit_no">いいえ</string>
 
 </resources>

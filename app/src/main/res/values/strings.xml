@@ -67,11 +67,32 @@
 
     <!-- Waktu -->
     <string name="time_just_now">baru saja</string>
-    <string name="time_minutes_ago">%1$d menit yang lalu</string>
-    <string name="time_hours_ago">%1$d jam yang lalu</string>
-    <string name="time_days_ago">%1$d hari yang lalu</string>
-    <string name="time_weeks_ago">%1$d minggu yang lalu</string>
-    <string name="time_months_ago">%1$d bulan yang lalu</string>
+
+    <plurals name="time_minutes_ago">
+        <item quantity="one">%1$d menit yang lalu</item>
+        <item quantity="other">%1$d menit yang lalu</item>
+    </plurals>
+
+    <plurals name="time_hours_ago">
+        <item quantity="one">%1$d jam yang lalu</item>
+        <item quantity="other">%1$d jam yang lalu</item>
+    </plurals>
+
+    <plurals name="time_days_ago">
+        <item quantity="one">%1$d hari yang lalu</item>
+        <item quantity="other">%1$d hari yang lalu</item>
+    </plurals>
+
+    <plurals name="time_weeks_ago">
+        <item quantity="one">%1$d minggu yang lalu</item>
+        <item quantity="other">%1$d minggu yang lalu</item>
+    </plurals>
+
+    <plurals name="time_months_ago">
+        <item quantity="one">%1$d bulan yang lalu</item>
+        <item quantity="other">%1$d bulan yang lalu</item>
+    </plurals>
+
 
     <!-- Dialog Edit -->
     <string name="dialog_exit_edit_title">Batalkan Mengedit?</string>
