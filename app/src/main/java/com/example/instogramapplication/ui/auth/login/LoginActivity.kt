@@ -160,8 +160,4 @@ class LoginActivity : AppCompatActivity() {
             binding.dimOverlay.visibility = View.INVISIBLE
         }
     }
-
-    companion object {
-        val TAG = LoginActivity::class.java.simpleName
-    }
 }

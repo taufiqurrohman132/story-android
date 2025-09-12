@@ -2,17 +2,17 @@
     <string name="app_name">InstogramApplication</string>
 
     <!-- Penanganan Error -->
-    <string name="error_400">Oops! Ada kesalahan saat meminta data. Coba periksa kembali.</string>
-    <string name="error_403">Ups! Kamu tidak punya izin untuk melihat data ini.</string>
-    <string name="error_404">Kami tidak menemukan apa yang kamu cari.</string>
-    <string name="error_408">Lama banget! Coba cek koneksi internetmu dan coba lagi</string>
-    <string name="error_500">Oops! Ada masalah di server. Tunggu sebentar.</string>
-    <string name="error_503">Server sedang sibuk! Coba lagi nanti..</string>
-    <string name="error_else">Oops! Ada kesalahan saat meminta data. Coba periksa kembali.</string>
-    <string name="error_koneksi">Tidak ada koneksi internet. Silakan periksa jaringanmu.</string>
-    <string name="error_takterduga">Terjadi kesalahan tak terduga. Coba lagi nanti.</string>
-    <string name="error_401">Sesi kamu sudah habis. Silakan login kembali.</string>
-    <string name="error_422">Data yang kamu kirim tidak valid. Periksa kembali.</string>
+    <string name="error_400">Permintaan tidak valid. Silakan periksa kembali data Anda.</string>
+    <string name="error_401">Sesi telah berakhir. Silakan login kembali.</string>
+    <string name="error_403">Anda tidak memiliki izin untuk mengakses data ini.</string>
+    <string name="error_404">Data yang Anda cari tidak ditemukan.</string>
+    <string name="error_408">Waktu permintaan habis. Periksa koneksi internet Anda.</string>
+    <string name="error_422">Data yang dikirim tidak valid. Periksa kembali.</string>
+    <string name="error_500">Terjadi kesalahan pada server. Silakan coba lagi nanti.</string>
+    <string name="error_503">Server sedang sibuk. Silakan coba lagi nanti.</string>
+    <string name="error_koneksi">Tidak ada koneksi internet. Periksa jaringan Anda.</string>
+    <string name="error_takterduga">Terjadi kesalahan tak terduga. Silakan coba lagi nanti.</string>
+    <string name="error_else">Terjadi kesalahan. Silakan coba lagi nanti.</string>
 
     <!-- Placeholder -->
     <string name="hello_blank_fragment">Halo fragment kosong</string>

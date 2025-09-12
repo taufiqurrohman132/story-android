@@ -1,16 +1,18 @@
 <resources>
     <string name="app_name">InstogramApplication</string>
 
-    <!-- Error handling -->
-    <string name="error_400">¡Ups! Ocurrió un error al solicitar los datos. Por favor, verifica de nuevo.</string>
-    <string name="error_403">¡Ups! No tienes permiso para ver estos datos.</string>
-    <string name="error_404">No pudimos encontrar lo que estás buscando.</string>
-    <string name="error_408">¡Demasiado lento! Revisa tu conexión a internet e inténtalo de nuevo.</string>
-    <string name="error_500">¡Ups! Hay un problema con el servidor. Espera un momento.</string>
-    <string name="error_503">¡El servidor está ocupado! Intenta más tarde.</string>
-    <string name="error_else">¡Ups! Ocurrió un error al solicitar los datos. Por favor, verifica de nuevo.</string>
-    <string name="error_koneksi">Sin conexión a Internet. Verifica tu red.</string>
-    <string name="error_takterduga">Ocurrió un error inesperado. Intenta más tarde.</string>
+    <!-- Manejo de Errores -->
+    <string name="error_400">Solicitud no válida. Verifica tus datos nuevamente.</string>
+    <string name="error_401">Tu sesión ha expirado. Inicia sesión de nuevo.</string>
+    <string name="error_403">No tienes permiso para acceder a estos datos.</string>
+    <string name="error_404">Los datos que buscas no se encontraron.</string>
+    <string name="error_408">La solicitud agotó el tiempo. Verifica tu conexión a internet.</string>
+    <string name="error_422">Los datos enviados no son válidos. Revísalos nuevamente.</string>
+    <string name="error_500">Ocurrió un error en el servidor. Inténtalo más tarde.</string>
+    <string name="error_503">El servidor está ocupado. Inténtalo más tarde.</string>
+    <string name="error_koneksi">Sin conexión a internet. Verifica tu red.</string>
+    <string name="error_takterduga">Ocurrió un error inesperado. Inténtalo más tarde.</string>
+    <string name="error_else">Ocurrió un error. Inténtalo más tarde.</string>
 
     <string name="hello_blank_fragment">Hola fragmento en blanco</string>
     <string name="title_home">Instogram</string>

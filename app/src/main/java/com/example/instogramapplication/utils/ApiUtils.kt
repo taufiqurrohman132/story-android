@@ -1,8 +1,9 @@
 package com.example.instogramapplication.utils
 
 import android.content.Context
+import android.util.Log
 import com.example.instogramapplication.R
-import com.example.instogramapplication.data.remote.model.ErrorRespons
+import com.example.instogramapplication.data.remote.model.RegisterResponse
 import com.google.gson.Gson
 import okhttp3.ResponseBody
 import java.time.Duration
@@ -12,12 +13,15 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 object ApiUtils {
-    fun parseError(errorBody: ResponseBody?): ErrorRespons? {
+    private val TAG = ApiUtils::class.java.simpleName
+
+    fun parseError(errorBody: ResponseBody?): RegisterResponse? {
         return try {
             val gson = Gson()
             val jsonInString = errorBody?.charStream()
-            gson.fromJson(jsonInString, ErrorRespons::class.java)
+            gson.fromJson(jsonInString, RegisterResponse::class.java)
         } catch (e: Exception) {
+            Log.e(TAG, "parseError: message ", e)
             null
         }
     }

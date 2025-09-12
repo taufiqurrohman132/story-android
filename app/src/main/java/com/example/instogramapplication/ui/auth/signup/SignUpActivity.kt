@@ -170,6 +170,6 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     companion object {
-        val TAG = SignUpActivity::class.java.simpleName
+        private val TAG = SignUpActivity::class.java.simpleName
     }
 }

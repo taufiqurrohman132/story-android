@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.util.Size
 import android.view.ScaleGestureDetector
 import android.widget.Toast
@@ -57,15 +58,6 @@ class PostActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Permission request denied", Toast.LENGTH_LONG).show()
             }
-        }
-
-    // pengacekan
-    private fun allPermissionsGranted() =
-        REQUIRED_PERMISSION.all {
-            ContextCompat.checkSelfPermission(
-                this,
-                it
-            ) == PackageManager.PERMISSION_GRANTED
         }
 
     private val launcherGallery = registerForActivityResult(
@@ -130,15 +122,21 @@ class PostActivity : AppCompatActivity() {
                 .build()
 
             try {
-                cameraProvider?.unbindAll()
-                camera = cameraProvider?.bindToLifecycle(
-                    this,
-                    cameraSelector,
-                    preview,
-                    imageCapture
-                )!!
+                cameraProvider?.let { provider ->
+                    provider.unbindAll()
 
-                setupCameraToZoom() // untuk bisa di zoom
+                    camera = provider.bindToLifecycle(
+                        this,
+                        cameraSelector,
+                        preview,
+                        imageCapture
+                    )
+
+                    setupCameraToZoom() // untuk bisa di zoom
+                } ?: run {
+                    // cameraProvider ternyata null
+                    Log.e(TAG, "Camera provider is null")
+                }
             } catch (exc: Exception) {
                 Toast.makeText(
                     this@PostActivity,
@@ -235,5 +233,9 @@ class PostActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Tidak ada gambar ditemukan", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    companion object{
+        private val TAG = PostActivity::class.java.simpleName
     }
 }

@@ -67,17 +67,17 @@ class UserRepository private constructor(
                     Resource.Empty()
                 }
             } else {
-                val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(
-                    response.code()
-                )
+                val errorMsg = ApiUtils.parseError(response.errorBody())?.message
+                    ?: errorHandling(response.code())
                 Resource.Error(message = errorMsg)
             }
         } catch (e: IOException) {
-            Resource.ErrorConnection("eror koneksi")
+            Resource.ErrorConnection(resourcesProvider.getString(R.string.error_koneksi))
         } catch (e: Exception) {
-            Resource.Error("Error")
+            Resource.Error(resourcesProvider.getString(R.string.error_takterduga))
         }
     }
+
 
     suspend fun userLogin(email: String, password: String): Resource<String> =
         withContext(Dispatchers.IO) { // background thread
@@ -97,7 +97,7 @@ class UserRepository private constructor(
                         userPref.saveUserLoginToken(token, userName)
                         Resource.Success(token)
                     } else {
-                        Resource.Error("Respons tidak valid dari server.")
+                        Resource.Error(resourcesProvider.getString(R.string.error_else))
                     }
                 } else {
                     val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(
@@ -141,7 +141,7 @@ class UserRepository private constructor(
         return storyDatabase.storyDao().getStoriesForMap()
     }
 
-    suspend fun fetchStoriesFromApi(location: Int){
+    suspend fun fetchStoriesFromApi(location: Int) {
         try {
             var page = 1
             var hasMore = true
@@ -156,10 +156,13 @@ class UserRepository private constructor(
                     hasMore = false
                 }
             }
-        }catch (e: Exception) {
-            Log.e("Repo", "Gagal fetch API: ${e.message}")
+        } catch (e: IOException) {
+            Log.e("Repo", resourcesProvider.getString(R.string.error_koneksi))
+        } catch (e: Exception) {
+            Log.e("Repo", resourcesProvider.getString(R.string.error_takterduga))
         }
     }
+
 
     suspend fun uploadStory(imageFile: File, desc: String, lat: String?, lon: String?): Resource<String> {
         return try {
@@ -220,12 +223,15 @@ class UserRepository private constructor(
     private fun errorHandling(code: Int): String {
         return when (code) {
             400 -> resourcesProvider.getString(R.string.error_400)
+            401 -> resourcesProvider.getString(R.string.error_401)
             403 -> resourcesProvider.getString(R.string.error_403)
             404 -> resourcesProvider.getString(R.string.error_404)
             408 -> resourcesProvider.getString(R.string.error_408)
+            422 -> resourcesProvider.getString(R.string.error_422)
             500 -> resourcesProvider.getString(R.string.error_500)
             503 -> resourcesProvider.getString(R.string.error_503)
             else -> resourcesProvider.getString(R.string.error_else)
         }
     }
+
 }

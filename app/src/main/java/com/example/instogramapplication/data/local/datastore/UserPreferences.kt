@@ -17,10 +17,6 @@ val Context.userDataStore: DataStore<Preferences> by preferencesDataStore("user"
 class UserPreferences private constructor(
     private val dataStore: DataStore<Preferences>
 ) {
-    private val TOKEN_KEY = stringPreferencesKey("token")
-    private val IS_LOGGED_IN = booleanPreferencesKey("is_logged_in")
-    private val LANGUAGE = stringPreferencesKey("language")
-    private val USER_NAME = stringPreferencesKey("user_name")
 
     // sesion
     fun getUserLoginToken(): Flow<String> =
@@ -77,5 +73,9 @@ class UserPreferences private constructor(
                 instance
             }
 
+        private val TOKEN_KEY = stringPreferencesKey("token")
+        private val IS_LOGGED_IN = booleanPreferencesKey("is_logged_in")
+        private val LANGUAGE = stringPreferencesKey("language")
+        private val USER_NAME = stringPreferencesKey("user_name")
     }
 }

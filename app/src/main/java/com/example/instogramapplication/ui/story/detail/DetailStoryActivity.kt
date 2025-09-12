@@ -15,6 +15,7 @@ import com.example.instogramapplication.data.remote.model.StoryItem
 import com.example.instogramapplication.databinding.ActiviityDetailStoryBinding
 import com.example.instogramapplication.ui.story.post.PostActivity
 import com.example.instogramapplication.utils.ApiUtils
+import com.example.instogramapplication.utils.ExtensionUtils.loadUrl
 
 class DetailStoryActivity : AppCompatActivity() {
 
@@ -80,19 +81,12 @@ class DetailStoryActivity : AppCompatActivity() {
                     }
                 }
 
-                Glide.with(this@DetailStoryActivity)
-                    .load(story.photoUrl)
-                    .centerCrop()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .override(800)
-                    .into(detailImgStory)
+                detailImgStory.loadUrl(story.photoUrl, 800)
 
                 // profile
                 story.name?.let {
                     val imgUrl = ApiUtils.avatarUrl(this@DetailStoryActivity, story.name)
-                    Glide.with(this@DetailStoryActivity)
-                        .load(imgUrl)
-                        .into(imgProfile)
+                    imgProfile.loadUrl(imgUrl)
                 }
 
             }

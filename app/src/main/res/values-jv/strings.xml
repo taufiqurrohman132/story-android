@@ -1,16 +1,18 @@
 <resources>
     <string name="app_name">InstogramApplication</string>
 
-    <!-- Error handling -->
-    <string name="error_400">Waduh! Ana kesalahan nalika njaluk data. Coba priksa maneh.</string>
-    <string name="error_403">Maaf! Sampeyan ora nduweni ijin kanggo ndeleng data iki.</string>
-    <string name="error_404">Kita ora nemokake apa sing sampeyan goleki.</string>
-    <string name="error_408">Suwe banget! Coba priksa koneksi internetmu lan coba maneh.</string>
-    <string name="error_500">Waduh! Ana masalah saka server. Mangga enteni sedhela.</string>
-    <string name="error_503">Server sibuk banget! Coba maneh mengko.</string>
-    <string name="error_else">Waduh! Ana kesalahan nalika njaluk data. Coba priksa maneh.</string>
-    <string name="error_koneksi">Ora ana sambungan internet. Priksa jaringan sampeyan.</string>
-    <string name="error_takterduga">Kesalahan ora dikarepke kedadeyan. Coba maneh mengko.</string>
+    <!-- Nglola Kaluputan -->
+    <string name="error_400">Panjalukan ora sah. Priksa maneh data panjenengan.</string>
+    <string name="error_401">Sesi wis entek. Mangga mlebu maneh.</string>
+    <string name="error_403">Panjenengan ora nduwé ijin kanggo ngakses data iki.</string>
+    <string name="error_404">Data sing digoleki ora ketemu.</string>
+    <string name="error_408">Panjalukan suwé banget. Priksa sambungan internet panjenengan.</string>
+    <string name="error_422">Data sing dikirim ora sah. Priksa maneh.</string>
+    <string name="error_500">Ana kaluputan ing server. Coba maneh mengko.</string>
+    <string name="error_503">Server lagi rame. Coba maneh mengko.</string>
+    <string name="error_koneksi">Ora ana sambungan internet. Priksa jaringan panjenengan.</string>
+    <string name="error_takterduga">Ana kaluputan sing ora dikira-kira. Coba maneh mengko.</string>
+    <string name="error_else">Ana kaluputan. Coba maneh mengko.</string>
 
     <!-- Lainnya -->
     <string name="hello_blank_fragment">Halo fragment kosong</string>

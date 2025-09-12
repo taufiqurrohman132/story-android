@@ -20,6 +20,7 @@ import com.example.instogramapplication.data.local.entity.StoryEntity
 import com.example.instogramapplication.data.remote.model.StoryItem
 import com.example.instogramapplication.databinding.ItemListStoryYBinding
 import com.example.instogramapplication.utils.ApiUtils
+import com.example.instogramapplication.utils.ExtensionUtils.loadUrl
 
 class ListStoryYAdapter(
     private val context: Context,
@@ -61,22 +62,11 @@ class ListStoryYAdapter(
                     // profile
                     listStory.name?.let {
                         val imgName = ApiUtils.avatarUrl(context, listStory.name)
-                        Glide.with(context)
-                            .load(imgName)
-                            .into(itemStoryYProfil)
-
-                        // liked
-                        Glide.with(context)
-                            .load(imgName)
-                            .into(imgLiked2)
-
+                        itemStoryYProfil.loadUrl(imgName)
+                        imgLiked2.loadUrl(imgName)
                     }
 
-                    Glide.with(context)
-                        .load(listStory.photoUrl)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .override(400)
-                        .into(itemyImgPost)
+                    itemyImgPost.loadUrl(listStory.photoUrl, 400)
 
                     itemyImgPost.setOnClickListener {
                         binding.apply {

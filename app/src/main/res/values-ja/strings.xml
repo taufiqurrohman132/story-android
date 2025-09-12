@@ -1,16 +1,18 @@
 <resources>
     <string name="app_name">Instogramアプリケーション</string>
 
-    <!-- Error handling -->
-    <string name="error_400">おっと！データリクエスト中にエラーが発生しました。もう一度ご確認ください。</string>
-    <string name="error_403">おっと！このデータにアクセスする権限がありません。</string>
-    <string name="error_404">お探しのものが見つかりませんでした。</string>
-    <string name="error_408">遅すぎます！インターネット接続を確認して再試行してください。</string>
-    <string name="error_500">おっと！サーバーに問題が発生しました。しばらくお待ちください。</string>
+    <!-- エラーハンドリング -->
+    <string name="error_400">無効なリクエストです。入力内容を確認してください。</string>
+    <string name="error_401">セッションの有効期限が切れました。再度ログインしてください。</string>
+    <string name="error_403">このデータにアクセスする権限がありません。</string>
+    <string name="error_404">お探しのデータが見つかりませんでした。</string>
+    <string name="error_408">リクエストがタイムアウトしました。インターネット接続を確認してください。</string>
+    <string name="error_422">送信したデータが無効です。確認してください。</string>
+    <string name="error_500">サーバーエラーが発生しました。後でもう一度お試しください。</string>
     <string name="error_503">サーバーが混雑しています。後でもう一度お試しください。</string>
-    <string name="error_else">おっと！データリクエスト中にエラーが発生しました。もう一度ご確認ください。</string>
     <string name="error_koneksi">インターネット接続がありません。ネットワークを確認してください。</string>
     <string name="error_takterduga">予期しないエラーが発生しました。後でもう一度お試しください。</string>
+    <string name="error_else">エラーが発生しました。後でもう一度お試しください。</string>
 
     <string name="hello_blank_fragment">こんにちは、ブランクフラグメント</string>
     <string name="title_home">インストグラム</string>

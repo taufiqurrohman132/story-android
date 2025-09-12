@@ -14,6 +14,7 @@ import com.example.instogramapplication.databinding.FragmentSettingsBinding
 import com.example.instogramapplication.ui.auth.login.LoginActivity
 import com.example.instogramapplication.utils.ApiUtils
 import com.example.instogramapplication.utils.DialogUtils
+import com.example.instogramapplication.utils.ExtensionUtils.loadUrl
 import com.example.instogramapplication.utils.LanguageUtils
 import com.example.instogramapplication.viewmodel.UserViewModelFactory
 import kotlinx.coroutines.launch
@@ -52,9 +53,7 @@ class SettingsFragment : Fragment() {
             binding.settingsNameProfile.text = name
 
             val imgUrl = ApiUtils.avatarUrl(requireContext(), name)
-            Glide.with(requireContext())
-                .load(imgUrl)
-                .into(binding.itemStoryProfile)
+            binding.itemStoryProfile.loadUrl(imgUrl)
         }
 
         viewLifecycleOwner.lifecycleScope.launch {

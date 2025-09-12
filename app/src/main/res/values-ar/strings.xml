@@ -1,16 +1,18 @@
 <resources>
     <string name="app_name">تطبيق إنستوجرام</string>
 
-    <!-- Error Handling -->
-    <string name="error_400">عذرًا! حدث خطأ أثناء طلب البيانات. يرجى التحقق مرة أخرى.</string>
-    <string name="error_403">عذرًا! ليس لديك صلاحية للوصول إلى هذه البيانات.</string>
-    <string name="error_404">لم نتمكن من العثور على ما تبحث عنه.</string>
-    <string name="error_408">الاتصال بطيء! تحقق من اتصال الإنترنت وحاول مرة أخرى.</string>
-    <string name="error_500">عذرًا! حدث خطأ في الخادم. يرجى المحاولة لاحقًا.</string>
-    <string name="error_503">الخادم مشغول! يرجى المحاولة لاحقًا.</string>
-    <string name="error_else">عذرًا! حدث خطأ أثناء طلب البيانات. يرجى التحقق مرة أخرى.</string>
-    <string name="error_koneksi">لا يوجد اتصال بالإنترنت. يرجى التحقق من الشبكة.</string>
+    <!-- معالجة الأخطاء -->
+    <string name="error_400">الطلب غير صالح. يرجى التحقق من بياناتك.</string>
+    <string name="error_401">انتهت جلستك. يرجى تسجيل الدخول مرة أخرى.</string>
+    <string name="error_403">ليس لديك إذن للوصول إلى هذه البيانات.</string>
+    <string name="error_404">البيانات التي تبحث عنها غير موجودة.</string>
+    <string name="error_408">انتهت مهلة الطلب. تحقق من اتصال الإنترنت لديك.</string>
+    <string name="error_422">البيانات التي أرسلتها غير صالحة. يرجى المراجعة مرة أخرى.</string>
+    <string name="error_500">حدث خطأ في الخادم. يرجى المحاولة لاحقًا.</string>
+    <string name="error_503">الخادم مشغول. يرجى المحاولة لاحقًا.</string>
+    <string name="error_koneksi">لا يوجد اتصال بالإنترنت. تحقق من الشبكة الخاصة بك.</string>
     <string name="error_takterduga">حدث خطأ غير متوقع. يرجى المحاولة لاحقًا.</string>
+    <string name="error_else">حدث خطأ. يرجى المحاولة لاحقًا.</string>
 
     <!-- Placeholder -->
     <string name="hello_blank_fragment">مرحبًا بالمقطع الفارغ</string>
