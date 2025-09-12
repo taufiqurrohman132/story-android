@@ -22,48 +22,42 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="?attr/actionBarSize"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/halo_main"
+                    style="@style/Text.Header24"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/lobster"
+                    android:text="@string/title_home"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/halo_main"
-                        style="@style/Text.Header24"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/lobster"
-                        android:text="@string/title_home"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
+                <ImageButton
+                    android:id="@+id/btn_notif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:backgroundTint="@color/transparents"
+                    android:contentDescription="@string/desc_notification_icon"
+                    android:src="@drawable/ic_notifications"
+                    app:tint="@color/black" />
 
-                    <ImageButton
-                        android:id="@+id/btn_notif"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:backgroundTint="@color/transparents"
-                        android:contentDescription="@string/desc_notification_icon"
-                        android:src="@drawable/ic_notifications"
-                        app:tint="@color/black" />
-
-                    <ImageButton
-                        android:id="@+id/btn_settings"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="8dp"
-                        android:backgroundTint="@color/transparents"
-                        android:contentDescription="@string/desc_settings_icon"
-                        android:src="@drawable/ic_settings"
-                        app:tint="@color/black" />
-                </LinearLayout>
+                <ImageButton
+                    android:id="@+id/btn_settings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/transparents"
+                    android:contentDescription="@string/desc_settings_icon"
+                    android:src="@drawable/ic_settings"
+                    app:tint="@color/black" />
             </LinearLayout>
 
 
@@ -76,19 +70,19 @@
         android:id="@+id/home.swip_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:offsetTop="120"
         app:customBar="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
+        app:offsetTop="120">
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
+
             <ScrollView
                 android:id="@+id/story.scroll_frame"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -119,8 +113,8 @@
                         android:id="@+id/home.lottie_layout_error_connect"
                         android:layout_width="300dp"
                         android:layout_height="300dp"
-                        android:visibility="invisible"
                         android:layout_gravity="center"
+                        android:visibility="invisible"
                         app:lottie_autoPlay="true"
                         app:lottie_loop="false"
                         app:lottie_rawRes="@raw/no_connection" />
@@ -135,7 +129,6 @@
                 tools:listitem="@layout/item_list_story_y" />
         </FrameLayout>
     </uz.jamshid.library.IGRefreshLayout>
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

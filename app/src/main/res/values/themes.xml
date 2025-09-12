@@ -50,73 +50,10 @@
         <item name="android:textSize">15sp</item>
     </style>
 
-    <style name="Text.Metadata12" parent="Theme.InstogramApplication">
-        <item name="android:textSize">12sp</item>
-    </style>
-
-    <style name="Text.Header38_appbar" parent="Theme.InstogramApplication">
-        <item name="android:textSize">38sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
-
     <style name="Text.Header22_appbar" parent="Theme.InstogramApplication">
         <item name="android:textSize">22sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/black</item>
-    </style>
-
-    <style name="Button.Back" parent="Theme.InstogramApplication">
-        <item name="android:layout_width">48dp</item>
-        <item name="android:layout_height">48dp</item>
-        <!--        <item name="android:backgroundTint">@color/white_trans</item>-->
-    </style>
-
-    <style name="Button.Back.Nobg" parent="Theme.InstogramApplication">
-        <item name="android:layout_width">48dp</item>
-        <item name="android:layout_height">48dp</item>
-    </style>
-
-    <style name="SearchViewStyle" parent="ThemeOverlay.MaterialComponents.Light">
-        <item name="android:textAppearance">@style/SearchViewTextApperance</item>
-    </style>
-
-    <style name="SearchViewTextApperance" parent="TextAppearance.AppCompat.Medium">
-        <item name="android:textSize">15sp</item>
-    </style>
-
-    <!--    shapable view radius-->
-    <style name="Radius8">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">8dp</item>
-    </style>
-
-    <style name="Radius16">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item>
-    </style>
-
-    <style name="Radius8NoBottomRight">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopRight">8dp</item>
-        <item name="cornerSizeTopLeft">8dp</item>
-        <item name="cornerSizeBottomLeft">8dp</item>
-    </style>
-
-    <style name="RadiusBottomRight16">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeBottomRight">16dp</item>
-    </style>
-
-    <style name="RadiusBottom24">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeBottomLeft">24dp</item>
-        <item name="cornerSizeBottomRight">24dp</item>
-    </style>
-
-    <style name="RadiusTopRight16">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopRight">16dp</item>
     </style>
 
     <style name="Circular">

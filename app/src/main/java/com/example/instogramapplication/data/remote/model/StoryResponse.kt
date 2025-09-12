@@ -3,7 +3,6 @@ package com.example.instogramapplication.data.remote.model
 import android.os.Parcelable
 import com.example.instogramapplication.data.local.entity.StoryEntity
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
