@@ -41,7 +41,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     private var mMap: GoogleMap? = null
 
-    private val boundsBuilder = LatLngBounds.Builder()
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     private val factory: UserViewModelFactory by lazy {

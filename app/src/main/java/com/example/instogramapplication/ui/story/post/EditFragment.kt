@@ -23,7 +23,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.instogramapplication.BuildConfig
 import com.example.instogramapplication.R
 import com.example.instogramapplication.databinding.FragmentEditBinding
 import com.example.instogramapplication.ui.main.MainActivity
@@ -233,7 +232,11 @@ class EditFragment : Fragment() {
                 viewModel.uploadStory(imageFile, desc, latToSend, lonToSend)
             } else {
                 val messageToShow = getString(R.string.error_empty_description)
-                Toast.makeText(requireActivity().applicationContext, messageToShow, Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireActivity().applicationContext,
+                    messageToShow,
+                    Toast.LENGTH_LONG
+                ).show()
             }
         } ?: showToast(getString(R.string.error_empty_image), requireActivity())
 

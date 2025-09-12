@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.instogramapplication.data.repository.UserRepository
-import com.example.instogramapplication.databinding.BottomSheetLanguageBinding
 import com.example.instogramapplication.utils.Resource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,9 +20,10 @@ class EditViewModel(
     private val _isLocationSelected = MutableLiveData(false)
     val isLocationSelected: LiveData<Boolean> get() = _isLocationSelected
 
-    fun toggleLocationSelected(){
+    fun toggleLocationSelected() {
         _isLocationSelected.value = !(_isLocationSelected.value ?: false)
     }
+
     fun uploadStory(imageFile: File, desc: String, lat: String?, lon: String?) {
         viewModelScope.launch {
             _uploadState.value = Resource.Loading()

@@ -1,9 +1,9 @@
 package com.example.instogramapplication.utils
+
 import android.util.Log
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
-import androidx.test.uiautomator.Until
 
 /**
  * Utilitas kelas untuk memberikan (grant) izin runtime secara otomatis

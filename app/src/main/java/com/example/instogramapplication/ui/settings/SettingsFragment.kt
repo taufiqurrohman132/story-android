@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
 import com.example.instogramapplication.R
 import com.example.instogramapplication.databinding.FragmentSettingsBinding
 import com.example.instogramapplication.ui.auth.login.LoginActivity

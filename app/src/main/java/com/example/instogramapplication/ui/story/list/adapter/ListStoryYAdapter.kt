@@ -13,11 +13,8 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.instogramapplication.R
 import com.example.instogramapplication.data.local.entity.StoryEntity
-import com.example.instogramapplication.data.remote.model.StoryItem
 import com.example.instogramapplication.databinding.ItemListStoryYBinding
 import com.example.instogramapplication.utils.ApiUtils
 import com.example.instogramapplication.utils.ExtensionUtils.loadUrl
@@ -31,7 +28,7 @@ class ListStoryYAdapter(
         ViewHolder(binding.root) {
         val description = binding.itemyTvDeskExpand
 
-        fun bind(listStory: StoryEntity  ?) {
+        fun bind(listStory: StoryEntity?) {
             listStory?.let {
                 binding.apply {
                     val hashtag = context.getString(R.string.hastag, listStory.name)

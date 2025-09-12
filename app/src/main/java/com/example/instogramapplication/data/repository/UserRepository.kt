@@ -9,15 +9,14 @@ import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.example.instogramapplication.R
 import com.example.instogramapplication.data.local.database.StoryDatabase
-import com.example.instogramapplication.utils.ResourceProvider
 import com.example.instogramapplication.data.local.datastore.UserPreferences
 import com.example.instogramapplication.data.local.entity.StoryEntity
 import com.example.instogramapplication.data.paging.StoryRemoteMediator
 import com.example.instogramapplication.data.remote.model.StoryItem
 import com.example.instogramapplication.data.remote.network.ApiService
 import com.example.instogramapplication.utils.ApiUtils
-import com.example.instogramapplication.utils.EspressoIdlingResource
 import com.example.instogramapplication.utils.Resource
+import com.example.instogramapplication.utils.ResourceProvider
 import com.example.instogramapplication.utils.wrapEspressoIdlingResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -100,9 +99,10 @@ class UserRepository private constructor(
                         Resource.Error(resourcesProvider.getString(R.string.error_else))
                     }
                 } else {
-                    val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(
-                        response.code()
-                    )
+                    val errorMsg =
+                        ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(
+                            response.code()
+                        )
                     Resource.Error(message = errorMsg)
                 }
             }
@@ -118,7 +118,7 @@ class UserRepository private constructor(
         userPref.getUsername()
 
     @OptIn(ExperimentalPagingApi::class)
-    fun getStories(): LiveData<PagingData<StoryEntity>>{
+    fun getStories(): LiveData<PagingData<StoryEntity>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 3
@@ -133,7 +133,7 @@ class UserRepository private constructor(
         ).liveData
     }
 
-    fun getLatestMyStory(username: String): LiveData<StoryEntity?>{
+    fun getLatestMyStory(username: String): LiveData<StoryEntity?> {
         return storyDatabase.storyDao().getLatestMyStory(username)
     }
 
@@ -146,7 +146,8 @@ class UserRepository private constructor(
             var page = 1
             var hasMore = true
             while (hasMore) {
-                val response = apiService.getStories(page = page, size = 20, location = location).body()
+                val response =
+                    apiService.getStories(page = page, size = 20, location = location).body()
                 if (response?.error == false) {
                     val entities = response.listStory.map { it.toEntity() }
                     storyDatabase.storyDao().insertStory(entities)
@@ -164,7 +165,12 @@ class UserRepository private constructor(
     }
 
 
-    suspend fun uploadStory(imageFile: File, desc: String, lat: String?, lon: String?): Resource<String> {
+    suspend fun uploadStory(
+        imageFile: File,
+        desc: String,
+        lat: String?,
+        lon: String?
+    ): Resource<String> {
         return try {
             val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
             val multipartBody = MultipartBody.Part.createFormData(
@@ -177,7 +183,8 @@ class UserRepository private constructor(
             val latRequest = lat?.toRequestBody("text/plain".toMediaType())
             val lonRequest = lon?.toRequestBody("text/plain".toMediaType())
 
-            val response = apiService.uploadStory(multipartBody, description, latRequest, lonRequest)
+            val response =
+                apiService.uploadStory(multipartBody, description, latRequest, lonRequest)
             if (response.isSuccessful) {
                 val story = response.body()
                 if (story?.error == false) {

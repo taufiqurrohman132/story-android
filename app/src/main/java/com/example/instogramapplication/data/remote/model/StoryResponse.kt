@@ -43,8 +43,6 @@ data class StoryItem(
     @field:SerializedName("lat")
     val lat: Double? = null
 ) : Parcelable {
-    @IgnoredOnParcel
-    var isExpaned: Boolean = false
 
     fun toEntity() = StoryEntity(id ?: "0", photoUrl, createdAt, name, description, lon, lat)
 }

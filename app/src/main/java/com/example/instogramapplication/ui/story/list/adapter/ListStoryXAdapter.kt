@@ -78,7 +78,5 @@ class ListStoryXAdapter(
 
         private val TAG = ListStoryXAdapter::class.java.simpleName
 
-        private const val TYPE_STORY = 1
-        private const val TYPE_ADD_STORY = 0
     }
 }

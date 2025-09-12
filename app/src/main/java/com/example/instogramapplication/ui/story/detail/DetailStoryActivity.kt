@@ -7,11 +7,8 @@ import android.text.style.ForegroundColorSpan
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.buildSpannedString
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.instogramapplication.R
 import com.example.instogramapplication.data.local.entity.StoryEntity
-import com.example.instogramapplication.data.remote.model.StoryItem
 import com.example.instogramapplication.databinding.ActiviityDetailStoryBinding
 import com.example.instogramapplication.ui.story.post.PostActivity
 import com.example.instogramapplication.utils.ApiUtils

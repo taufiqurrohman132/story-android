@@ -3,7 +3,7 @@ package com.example.instogramapplication.utils
 import com.example.instogramapplication.model.LanguageItem
 
 object LanguageUtils {
-    val languages = listOf(
+    private val languages = listOf(
         LanguageItem("en", "English", false),
         LanguageItem("id", "Bahasa Indonesia", false),
         LanguageItem("ar", "العربية", false),              // Arab

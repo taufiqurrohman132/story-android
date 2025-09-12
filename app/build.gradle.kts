@@ -114,7 +114,7 @@ dependencies {
     implementation(libs.shimmer)
 
     // floating multiple option menu
-    implementation("com.github.clans:fab:1.6.4")
+    implementation(libs.fab)
 
     implementation(libs.lottie)
 
@@ -143,11 +143,11 @@ dependencies {
 
     androidTestImplementation(libs.androidx.core.testing) //InstantTaskExecutorRule
     androidTestImplementation(libs.kotlinx.coroutines.test) //TestDispatcher
-    androidTestImplementation("androidx.test.espresso:espresso-intents:3.6.1") //TestDispatcher
-    androidTestImplementation("androidx.test:rules:1.6.1")
-    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.6.1")
-    androidTestImplementation("org.mockito:mockito-android:5.12.0")
-    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0")
+    androidTestImplementation(libs.androidx.espresso.intents) //TestDispatcher
+    androidTestImplementation(libs.androidx.rules)
+    androidTestImplementation(libs.androidx.espresso.contrib)
+    androidTestImplementation(libs.mockito.android)
+    androidTestImplementation(libs.androidx.uiautomator)
 //    androidTestImplementation("androidx.test.espresso:idling-resource:3.6.1")
 
     testImplementation(libs.androidx.core.testing) // InstantTaskExecutorRule

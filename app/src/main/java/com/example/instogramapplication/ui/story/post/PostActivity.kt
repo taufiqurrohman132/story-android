@@ -3,7 +3,6 @@ package com.example.instogramapplication.ui.story.post
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -21,7 +20,6 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import com.example.instogramapplication.BuildConfig
 import com.example.instogramapplication.R
 import com.example.instogramapplication.databinding.ActivityPostBinding
 import com.example.instogramapplication.utils.PostUtils
@@ -35,7 +33,7 @@ class PostActivity : AppCompatActivity() {
     private var imageCapture: ImageCapture? = null
     private var cameraProvider: ProcessCameraProvider? = null
 
-    private val REQUIRED_PERMISSION = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+    private val requiredPermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         arrayOf(
             Manifest.permission.CAMERA,
             Manifest.permission.READ_MEDIA_IMAGES
@@ -74,7 +72,7 @@ class PostActivity : AppCompatActivity() {
         binding = ActivityPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        requestPermissionLauncher.launch(REQUIRED_PERMISSION)
+        requestPermissionLauncher.launch(requiredPermission)
 
         startCamera()
         setupListener()

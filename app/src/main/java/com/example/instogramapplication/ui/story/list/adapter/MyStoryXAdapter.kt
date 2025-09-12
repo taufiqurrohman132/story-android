@@ -20,7 +20,6 @@ class MyStoryXAdapter (
     private val onItemClick: (ImageView, TextView, StoryEntity) -> Unit,
     private val onAddStory: () -> Unit,
 ) : ListAdapter<StoryEntity, MyStoryXAdapter.ItemAddViewHolder>(DIFF_CALLBACK) {
-    private var currentUserName = ""
 
     inner class ItemAddViewHolder(private val item: ItemPostStoryBinding) : ViewHolder(item.root) {
         fun bind(listStory: StoryEntity?) {
@@ -97,7 +96,5 @@ class MyStoryXAdapter (
 
         private val TAG = MyStoryXAdapter::class.java.simpleName
 
-        private const val TYPE_STORY = 1
-        private const val TYPE_ADD_STORY = 0
     }
 }

@@ -115,6 +115,8 @@
     <EditText
         android:id="@+id/post.tv_desk"
         style="@style/Text.Konten15"
+        android:inputType="text"
+        android:autofillHints="name"
         android:theme="@style/Theme.Material3.Dark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
