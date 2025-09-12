@@ -193,9 +193,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun observer() {
-//        viewModel.pagingStories.observe(viewLifecycleOwner) { data ->
-//
-//        }
         viewModel.storiesForMap.observe(viewLifecycleOwner) { list ->
             if (list.isEmpty()){
                 viewModel.loadstoriesForMap()

@@ -65,7 +65,7 @@
 
     <string name="selengkapnya">Luwih lengkap</string>
     <string name="lebih_sedikit">Luwih sithik</string>
-    <string name="instogram_mobile">Pengalaman Aplikasi Instogram</string>
+    <string name="instogram_mobile">Pengalaman Instagram Mobile minangka Ruang Digital Pribadi</string>
     <string name="simpan">Simpen</string>
     <string name="avatar_base_url">https://api.dicebear.com/9.x/initials/png?seed=%1$s</string>
     <string name="masukkan_password_kamu">Lebokna Sandi Sampeyan</string>
@@ -93,7 +93,6 @@
     <string name="_25rb">25 ewu</string>
     <string name="_5rb">5 ewu</string>
     <string name="_15rb">15 ewu</string>
-    <string name="instogram_mobile_application_experience">Pengalaman Aplikasi Seluler Instogram</string>
     <string name="wellcome">Sugeng Rawuh</string>
     <string name="belum_punya_akun">Durung duwe akun?</string>
     <string name="daftar_disini">Daftar Kene</string>

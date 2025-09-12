@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Spannable
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.buildSpannedString
 import com.bumptech.glide.Glide
@@ -69,6 +70,8 @@ class DetailStoryActivity : AppCompatActivity() {
                     )
                     append("\n $createAt")
                 }
+                Log.d(TAG, "showStories: teks desc = $desc")
+                Log.d(TAG, "showStories: create at = $createAt")
                 detailUser.text = story.name
                 detailDescExpand.apply {
                     text = desc
@@ -98,5 +101,6 @@ class DetailStoryActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_DETAIL = "DETAIL"
+        private val TAG = DetailStoryActivity::class.java.simpleName
     }
 }

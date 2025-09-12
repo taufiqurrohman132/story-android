@@ -14,7 +14,7 @@ interface StoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertStory(story: List<StoryEntity>)
 
-    @Query("Select * from story")
+    @Query("Select * from story ORDER BY createdAt DESC")
     fun getAllStory(): PagingSource<Int, StoryEntity>
 
     @Query("Delete from story")

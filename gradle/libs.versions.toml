@@ -37,6 +37,8 @@ navigationUiKtx = "2.9.1"
 photoview = "2.3.0"
 popupDialog = "2.0.0"
 retrofit = "3.0.0"
+roomCompiler = "2.6.0"
+roomKtx = "2.6.0"
 shimmer = "0.5.0"
 swiperefreshlayout = "1.1.0"
 googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
@@ -49,9 +51,14 @@ mockitoCore = "4.4.0"
 mockitoInline = "4.4.0"
 junitJupiter = "5.8.1"
 playServicesLocation = "21.3.0"
+espressoIdlingResource = "3.7.0"
+uiautomator = "2.3.0"
 
 [libraries]
 androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
+androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "roomCompiler" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockitoInline" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
@@ -93,6 +100,8 @@ play-services-maps = { group = "com.google.android.gms", name = "play-services-m
 androidx-room-runtime-android = { group = "androidx.room", name = "room-runtime-android", version.ref = "roomRuntimeAndroid" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
+androidx-espresso-idling-resource = { group = "androidx.test.espresso", name = "espresso-idling-resource", version.ref = "espressoIdlingResource" }
+androidx-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

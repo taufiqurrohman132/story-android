@@ -89,8 +89,8 @@ class SettingsFragment : Fragment() {
             requireContext(),
             requireContext().getString(R.string.logout),
             requireContext().getString(R.string.logout_message),
-            requireContext().getString(R.string.dialog_exit_edit_negative),
-            requireContext().getString(R.string.dialog_exit_edit_positive),
+            requireContext().getString(R.string.dialog_exit_edit_no),
+            requireContext().getString(R.string.dialog_exit_edit_yes),
         ) {
             viewModel.logOut()
             val intent = Intent(requireActivity(), LoginActivity::class.java)

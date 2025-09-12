@@ -15,13 +15,17 @@ android {
         applicationId = "com.example.instogramapplication"
         minSdk = 28
         //noinspection OldTargetApi
-        targetSdk    = 34
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments += mapOf(
+            "clearPackageData" to "true"
+        )
 
         buildConfigField("String", "BASE_URL", "\"https://story-api.dicoding.dev/v1/\"")
+//        buildConfigField("boolean", "TEST_MODE", "false")
     }
 
     buildFeatures {
@@ -30,12 +34,16 @@ android {
         dataBinding = true // requirement pop up
     }
     buildTypes {
+//        debug {
+//            buildConfigField("boolean", "TEST_MODE", "true")
+//        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+//            buildConfigField("boolean", "TEST_MODE", "false")
         }
     }
     compileOptions {
@@ -44,6 +52,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    testOptions {
+        animationsDisabled = true
     }
 }
 
@@ -89,11 +101,13 @@ dependencies {
     // paging 3 n room
     implementation(libs.androidx.paging.runtime.ktx)
     implementation(libs.play.services.location)
+    implementation(libs.androidx.espresso.idling.resource)
+//    implementation(libs.androidx.uiautomator)
     testImplementation(libs.junit.jupiter)
-    ksp("androidx.room:room-compiler:2.6.0")
-    implementation("androidx.room:room-ktx:2.6.0")
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
     // optional - Paging 3 Integration
-    implementation("androidx.room:room-paging:2.6.0")
+    implementation(libs.androidx.room.paging)
 
     // loading
     implementation(libs.igrefreshlayout)
@@ -129,6 +143,12 @@ dependencies {
 
     androidTestImplementation(libs.androidx.core.testing) //InstantTaskExecutorRule
     androidTestImplementation(libs.kotlinx.coroutines.test) //TestDispatcher
+    androidTestImplementation("androidx.test.espresso:espresso-intents:3.6.1") //TestDispatcher
+    androidTestImplementation("androidx.test:rules:1.6.1")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.6.1")
+    androidTestImplementation("org.mockito:mockito-android:5.12.0")
+    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0")
+//    androidTestImplementation("androidx.test.espresso:idling-resource:3.6.1")
 
     testImplementation(libs.androidx.core.testing) // InstantTaskExecutorRule
     testImplementation(libs.kotlinx.coroutines.test) //TestDispatcher

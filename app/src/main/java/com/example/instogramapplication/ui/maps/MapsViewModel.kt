@@ -27,40 +27,16 @@ class MapsViewModel(
     private val _storiesForMap = MediatorLiveData<List<StoryEntity>>()
     val storiesForMap: LiveData<List<StoryEntity>> get() =  _storiesForMap
 
-    // notif
-//    private val _eventChannel = Channel<String>()
-//    val eventFlow = _eventChannel.receiveAsFlow()
-
-//    private val locationParam = MutableLiveData<Int>()
-//    val location: LiveData<PagingData<StoryEntity>> =
-//        locationParam.switchMap { location ->
-//            repository.getStories(location)
-//                .cachedIn(viewModelScope)
-//        }
-//
-//    fun loadStory(location: Int){
-//        locationParam.value = location
-//    }
-//    val pagingStories: LiveData<PagingData<StoryEntity>> =
-//        repository.getStories(location = 1)
-
-
-//    val storiesForMap: LiveData<List<StoryEntity>> =
-//        repository.getStoriesForMap()
-//
     fun loadstoriesForMap() {
-        val source = repository.getStoriesForMap()
+        val source = repository.getStoriesForMap() // local
         _storiesForMap.addSource(source) { story ->
             Log.d(TAG, "loadstoriesForMap: loas story viewmodel is running")
-            if (story.isNullOrEmpty()){
-                Log.d(TAG, "loadstoriesForMap: load from api")
-                viewModelScope.launch {
-                    repository.fetchStoriesFromApi(1)
-                }
-                _storiesForMap.value = emptyList()
-            }else {
-                _storiesForMap.value = story
+            Log.d(TAG, "loadstoriesForMap: load from api size ${story.size}")
+            viewModelScope.launch {
+                repository.fetchStoriesFromApi(1)
             }
+            _storiesForMap.value = story
+
             _storiesForMap.removeSource(source)// agar tidak doble
         }
     }

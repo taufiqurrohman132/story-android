@@ -80,7 +80,7 @@
     <!-- Extra Text -->
     <string name="selengkapnya">Read More</string>
     <string name="lebih_sedikit">Show Less</string>
-    <string name="instogram_mobile">Instogram Mobile App Experience</string>
+    <string name="instogram_mobile">Instagram Mobile Experience as a Personal Digital Space</string>
     <string name="simpan">Save</string>
 
     <!-- Base URL Avatar -->
@@ -121,7 +121,6 @@
     <string name="_4_jam_yang_lalu">4 hours ago</string>
 
     <!-- Access -->
-    <string name="instogram_mobile_application_experience">Instogram Mobile App Experience</string>
     <string name="wellcome">Welcome</string>
     <string name="belum_punya_akun">Don\'t have an account?</string>
     <string name="daftar_disini">Sign up here</string>

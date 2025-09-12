@@ -80,7 +80,7 @@
     <!-- Extra Text -->
     <string name="selengkapnya">المزيد</string>
     <string name="lebih_sedikit">أقل</string>
-    <string name="instogram_mobile">تجربة تطبيق إنستوجرام</string>
+    <string name="instogram_mobile">تجربة إنستغرام موبايل كمساحة رقمية شخصية</string>
     <string name="simpan">حفظ</string>
 
     <!-- Base URL Avatar -->
@@ -121,7 +121,6 @@
     <string name="_4_jam_yang_lalu">منذ ٤ ساعات</string>
 
     <!-- Access -->
-    <string name="instogram_mobile_application_experience">تجربة تطبيق إنستوجرام</string>
     <string name="wellcome">مرحبًا</string>
     <string name="belum_punya_akun">لا تملك حسابًا؟</string>
     <string name="daftar_disini">سجّل هنا</string>

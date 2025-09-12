@@ -82,7 +82,7 @@
     <!-- Teks Tambahan -->
     <string name="selengkapnya">Selengkapnya</string>
     <string name="lebih_sedikit">Lebih Sedikit</string>
-    <string name="instogram_mobile">Pengalaman Aplikasi Instogram Mobile</string>
+    <string name="instogram_mobile">Pengalaman Instogram Mobile sebagai Ruang Digital Personal</string>
     <string name="simpan">Simpan</string>
 
     <!-- Base URL Avatar -->
@@ -123,7 +123,6 @@
     <string name="_4_jam_yang_lalu">4 jam yang lalu</string>
 
     <!-- Akses -->
-    <string name="instogram_mobile_application_experience">Pengalaman Aplikasi Instogram Mobile</string>
     <string name="wellcome">Selamat Datang</string>
     <string name="belum_punya_akun">Belum punya akun?</string>
     <string name="daftar_disini">Daftar di sini</string>
@@ -174,4 +173,6 @@
     <string name="maps">Maps</string>
     <string name="find_my_location">Temukan Lokasi Saya</string>
     <string name="user_story">Story Pengguna</string>
+    <string name="dialog_exit_edit_yes">Ya</string>
+    <string name="dialog_exit_edit_no">Tidak</string>
 </resources>

@@ -23,6 +23,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.instogramapplication.BuildConfig
 import com.example.instogramapplication.R
 import com.example.instogramapplication.databinding.FragmentEditBinding
 import com.example.instogramapplication.ui.main.MainActivity
@@ -157,6 +158,7 @@ class EditFragment : Fragment() {
                         )
                     }
                 }
+                Log.d(TAG, "observer: resosuse $result")
             }
         }
         viewModel.isLocationSelected.observe(viewLifecycleOwner) {
@@ -207,8 +209,8 @@ class EditFragment : Fragment() {
             requireContext(),
             requireContext().getString(R.string.dialog_exit_edit_title),
             requireContext().getString(R.string.dialog_exit_edit_message),
-            requireContext().getString(R.string.dialog_exit_edit_negative),
-            requireContext().getString(R.string.dialog_exit_edit_positive)
+            requireContext().getString(R.string.dialog_exit_edit_no),
+            requireContext().getString(R.string.dialog_exit_edit_yes)
         ) {
             backToTakePhoto()
         }
@@ -223,14 +225,15 @@ class EditFragment : Fragment() {
             val imageFile = PostUtils.uriToFile(uri, requireActivity()).reduceFileImage()
             val desc = binding.postTvDesk.text.toString()
 
-            if (desc.isNotBlank()) {
+            if (desc.trim().isNotBlank()) {
                 val latToSend = if (binding.postBtnAccessLocation.isSelected) currentLat else null
                 val lonToSend = if (binding.postBtnAccessLocation.isSelected) currentLon else null
 
                 Log.d(TAG, "uploadStory: lat = $latToSend, lon = $lonToSend")
                 viewModel.uploadStory(imageFile, desc, latToSend, lonToSend)
             } else {
-                showToast(getString(R.string.error_empty_description), requireActivity())
+                val messageToShow = getString(R.string.error_empty_description)
+                Toast.makeText(requireActivity().applicationContext, messageToShow, Toast.LENGTH_LONG).show()
             }
         } ?: showToast(getString(R.string.error_empty_image), requireActivity())
 

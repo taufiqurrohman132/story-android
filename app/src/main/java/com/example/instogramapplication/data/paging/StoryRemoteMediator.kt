@@ -15,8 +15,7 @@ import kotlinx.coroutines.delay
 @OptIn(ExperimentalPagingApi::class)
 class StoryRemoteMediator(
     private val database: StoryDatabase,
-    private val apiService: ApiService,
-    private val location: Int,
+    private val apiService: ApiService
 ) : RemoteMediator<Int, StoryEntity>() {
     override suspend fun load(
         loadType: LoadType,
@@ -44,7 +43,10 @@ class StoryRemoteMediator(
         }
 
         try {
-            val responseData = apiService.getStories(page, state.config.pageSize, location).body()
+            val responseData = apiService.getStories(
+                page,
+                state.config.pageSize
+            ).body()
 
             val endOfPaginationReached = responseData?.listStory?.isEmpty() ?: false
 

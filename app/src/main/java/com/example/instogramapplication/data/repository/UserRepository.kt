@@ -16,9 +16,13 @@ import com.example.instogramapplication.data.paging.StoryRemoteMediator
 import com.example.instogramapplication.data.remote.model.StoryItem
 import com.example.instogramapplication.data.remote.network.ApiService
 import com.example.instogramapplication.utils.ApiUtils
+import com.example.instogramapplication.utils.EspressoIdlingResource
 import com.example.instogramapplication.utils.Resource
+import com.example.instogramapplication.utils.wrapEspressoIdlingResource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -75,30 +79,34 @@ class UserRepository private constructor(
         }
     }
 
-    suspend fun userLogin(email: String, password: String): Resource<String> {
-        return try {
-            val response = apiService.login(email, password)
-            if (response.isSuccessful) {
-                val token = response.body()?.loginResult?.token
-                val userName = response.body()?.loginResult?.name
-                if (!token.isNullOrEmpty() && !userName.isNullOrEmpty()) {
-                    userPref.saveUserLoginToken(token, userName)
-                    Resource.Success(token)
-                } else {
-                    Resource.Empty()
+    suspend fun userLogin(email: String, password: String): Resource<String> =
+        withContext(Dispatchers.IO) { // background thread
+            wrapEspressoIdlingResource {
+                val response = try {
+                    apiService.login(email, password)
+                } catch (e: IOException) {
+                    return@wrapEspressoIdlingResource Resource.ErrorConnection("Tidak dapat terhubung ke server.")
+                } catch (e: Exception) {
+                    return@wrapEspressoIdlingResource Resource.Error("Terjadi error yang tidak diketahui.")
                 }
-            } else {
-                val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(
-                    response.code()
-                )
-                Resource.Error(message = errorMsg)
+
+                if (response.isSuccessful) {
+                    val token = response.body()?.loginResult?.token
+                    val userName = response.body()?.loginResult?.name
+                    if (!token.isNullOrEmpty() && !userName.isNullOrEmpty()) {
+                        userPref.saveUserLoginToken(token, userName)
+                        Resource.Success(token)
+                    } else {
+                        Resource.Error("Respons tidak valid dari server.")
+                    }
+                } else {
+                    val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(
+                        response.code()
+                    )
+                    Resource.Error(message = errorMsg)
+                }
             }
-        } catch (e: IOException) {
-            Resource.ErrorConnection("eror koneksi")
-        } catch (e: Exception) {
-            Resource.Error("Error")
         }
-    }
 
     suspend fun userLogout() {
         userPref.clearSession()
@@ -109,43 +117,15 @@ class UserRepository private constructor(
     suspend fun getUserName() =
         userPref.getUsername()
 
-//    fun getStories(location: Int? = null): Flow<Resource<List<StoryItem>>> = flow {
-//        emit(Resource.Loading())
-//
-//        try {
-//            val username = userPref.getUsername()
-//            val response = apiService.getStories(location)
-//            if (response.isSuccessful) {
-//                val stories = response.body()?.listStory
-//                if (!stories.isNullOrEmpty()) {
-//                    emit(Resource.Success(stories, username))
-//                } else {
-//                    emit(Resource.Empty())
-//                }
-//            } else {
-//                val errorMsg = ApiUtils.parseError(response.errorBody())?.message ?: errorHandling(
-//                    response.code()
-//                )
-//                emit(Resource.Error(errorMsg))
-//            }
-//
-//        } catch (e: IOException) {
-//            emit(Resource.ErrorConnection("eror koneksi"))
-//        } catch (e: Exception) {
-//            emit(Resource.Error("Error"))
-//        }
-//    }
-
     @OptIn(ExperimentalPagingApi::class)
-    fun getStories(location: Int): LiveData<PagingData<StoryEntity>>{
+    fun getStories(): LiveData<PagingData<StoryEntity>>{
         return Pager(
             config = PagingConfig(
                 pageSize = 3
             ),
             remoteMediator = StoryRemoteMediator(
                 storyDatabase,
-                apiService,
-                location
+                apiService
             ),
             pagingSourceFactory = {
                 storyDatabase.storyDao().getAllStory()
@@ -163,15 +143,22 @@ class UserRepository private constructor(
 
     suspend fun fetchStoriesFromApi(location: Int){
         try {
-            val response = apiService.getStories(page = 1, size = 20, location = location).body()
-            if (response?.error == false){
-                val entities = response.listStory.map { it.toEntity() }
-                storyDatabase.storyDao().insertStory(entities)
+            var page = 1
+            var hasMore = true
+            while (hasMore) {
+                val response = apiService.getStories(page = page, size = 20, location = location).body()
+                if (response?.error == false) {
+                    val entities = response.listStory.map { it.toEntity() }
+                    storyDatabase.storyDao().insertStory(entities)
+                    hasMore = response.listStory.isNotEmpty()
+                    page++
+                } else {
+                    hasMore = false
+                }
             }
         }catch (e: Exception) {
             Log.e("Repo", "Gagal fetch API: ${e.message}")
         }
-
     }
 
     suspend fun uploadStory(imageFile: File, desc: String, lat: String?, lon: String?): Resource<String> {

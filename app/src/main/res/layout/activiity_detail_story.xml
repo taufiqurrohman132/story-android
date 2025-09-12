@@ -277,7 +277,7 @@
         android:marqueeRepeatLimit="marquee_forever"
         android:scrollHorizontally="true"
         android:singleLine="true"
-        android:text="@string/instogram_mobile_application_experience"
+        android:text="@string/instogram_mobile"
         android:textColor="@color/white"
         android:textSize="11sp"
         app:layout_constraintEnd_toStartOf="@id/detail.btn_options"
@@ -301,7 +301,7 @@
         <at.blogc.android.views.ExpandableTextView
             android:id="@+id/detail.desc_expand"
             style="@style/Text.Konten15"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"

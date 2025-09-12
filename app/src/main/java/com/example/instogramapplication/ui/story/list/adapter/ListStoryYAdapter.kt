@@ -36,7 +36,7 @@ class ListStoryYAdapter(
                     val hashtag = context.getString(R.string.hastag, listStory.name)
                     val desc = buildSpannedString {
                         bold { append("${listStory.name} ") }
-                        append(listStory.description)
+                        append("${listStory.description} ")
                         append(
                             hashtag,
                             ForegroundColorSpan(context.getColor(R.color.cocor_hastag)),

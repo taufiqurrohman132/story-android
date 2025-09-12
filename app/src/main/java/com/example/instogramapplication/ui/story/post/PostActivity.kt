@@ -20,12 +20,12 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import com.example.instogramapplication.BuildConfig
 import com.example.instogramapplication.R
 import com.example.instogramapplication.databinding.ActivityPostBinding
 import com.example.instogramapplication.utils.PostUtils
 
 class PostActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityPostBinding
 
     // inisialize kamera yang di pake pertama
@@ -53,12 +53,7 @@ class PostActivity : AppCompatActivity() {
         ) { permission ->
             val isGrantedAll = permission.all { it.value }
             if (isGrantedAll) {
-                val latestImageUri = PostUtils.getLatestImageUri(this)
-
-                if (latestImageUri != null)
-                    binding.postImageOpenGalery.setImageURI(latestImageUri)
-                else
-                    Toast.makeText(this, "Tidak ada gambar ditemukan", Toast.LENGTH_SHORT).show()
+                onPermissionGranted()
             } else {
                 Toast.makeText(this, "Permission request denied", Toast.LENGTH_LONG).show()
             }
@@ -230,5 +225,15 @@ class PostActivity : AppCompatActivity() {
             .replace(R.id.fragment_countainer, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    private fun onPermissionGranted() {
+        val latestImageUri = PostUtils.getLatestImageUri(this)
+
+        if (latestImageUri != null) {
+            binding.postImageOpenGalery.setImageURI(latestImageUri)
+        } else {
+            Toast.makeText(this, "Tidak ada gambar ditemukan", Toast.LENGTH_SHORT).show()
+        }
     }
 }
