@@ -14,21 +14,15 @@
     <string name="error_takterduga">Terjadi kesalahan tak terduga. Silakan coba lagi nanti.</string>
     <string name="error_else">Terjadi kesalahan. Silakan coba lagi nanti.</string>
 
-    <!-- Placeholder -->
-    <string name="hello_blank_fragment">Halo fragment kosong</string>
-
     <!-- Judul -->
     <string name="title_home">Instogram</string>
     <string name="next">Selanjutnya</string>
 
     <!-- Konfirmasi Logout -->
-    <string name="confirm_title_logout">Konfirmasi</string>
-    <string name="confirm_logout_message">Apakah Anda yakin ingin keluar?</string>
     <string name="yes">Ya</string>
     <string name="cancel">Batal</string>
 
     <!-- Widget -->
-    <string name="appwidget_text">CONTOH</string>
     <string name="add_widget">Tambah widget</string>
     <string name="app_widget_description">Selalu update dengan story terbaru! Lihat langsung dari widget tanpa buka aplikasi.</string>
 
@@ -42,15 +36,12 @@
 
     <!-- Popup -->
     <string name="popup_error_desc">Terjadi kesalahan tak terduga. Coba lagi nanti.</string>
-    <string name="popup_warning_desc">Verifikasimu sedang ditinjau. Coba lagi nanti.</string>
     <string name="popup_success_desc">Kamu telah berhasil menyelesaikan tugas.</string>
 
     <string name="popup_error_title">Upss</string>
-    <string name="popup_warning_title">Menunggu</string>
     <string name="popup_success_title">Berhasil</string>
 
     <string name="popup_error_btn">Tutup</string>
-    <string name="popup_warning_btn">Tutup</string>
     <string name="popup_success_btn">Selesai</string>
 
     <!-- Toast -->
@@ -97,12 +88,8 @@
     <!-- Dialog Edit -->
     <string name="dialog_exit_edit_title">Batalkan Mengedit?</string>
     <string name="dialog_exit_edit_message">Perubahan yang belum disimpan akan hilang. Yakin ingin keluar?</string>
-    <string name="dialog_exit_edit_positive">Keluar</string>
-    <string name="dialog_exit_edit_negative">Batal</string>
 
     <!-- Teks Tambahan -->
-    <string name="selengkapnya">Selengkapnya</string>
-    <string name="lebih_sedikit">Lebih Sedikit</string>
     <string name="instogram_mobile">Pengalaman Instogram Mobile sebagai Ruang Digital Personal</string>
     <string name="simpan">Simpan</string>
 
@@ -185,7 +172,6 @@
     <string name="keluar">Keluar</string>
 
     <!--    maps-->
-    <string name="title_activity_maps">MapsActivity</string>
     <string name="normal_type">Normal</string>
     <string name="satellite_type">Satellite</string>
     <string name="terrain_type">Terrain</string>
