@@ -8,39 +8,46 @@ Proyek ini masih dalam proses pengembangan dan akan terus disempurnakan sesuai d
 
 ## Cuplikan Layar
 
-<table style="margin:auto;">
+<table>
   <tr>
-    <td style="text-align:center; vertical-align:top;">
-      <strong>Registration</strong><br>
-      <img src="https://github.com/user-attachments/assets/73fa906e-24c9-45fe-9e5e-42c2c89fa0df" width="250" alt="Registration Page Screenshot"/>
+    <td align="center"><strong>Registration</strong></td>
+    <td align="center"><strong>Home</strong></td>
+    <td align="center"><strong>Detail</strong></td>
+    <td align="center"><strong>Upload Story</strong></td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/73fa906e-24c9-45fe-9e5e-42c2c89fa0df" width="250" alt="Registration Page"/>
     </td>
-    <td style="text-align:center; vertical-align:top;">
-      <strong>Home</strong><br>
-      <img src="https://github.com/user-attachments/assets/4ec9d426-aa2b-4838-8794-949391ab3392" width="250" alt="Home Page Screenshot"/>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/4ec9d426-aa2b-4838-8794-949391ab3392" width="250" alt="Home Page"/>
     </td>
-    <td style="text-align:center; vertical-align:top;">
-      <strong>Detail</strong><br>
-      <img src="https://github.com/user-attachments/assets/8d5473df-3207-4723-ac67-87f04b6a2fea" width="250" alt="Detail Page Screenshot"/>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/8d5473df-3207-4723-ac67-87f04b6a2fea" width="250" alt="Detail Page"/>
     </td>
-    <td style="text-align:center; vertical-align:top;">
-      <strong>Upload Story</strong><br>
-      <img src="https://github.com/user-attachments/assets/64b9028c-a87c-4e4a-8c49-95f2124b121d" width="250" alt="Upload Story Page Screenshot"/>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/64b9028c-a87c-4e4a-8c49-95f2124b121d" width="250" alt="Upload Story Page"/>
     </td>
   </tr>
 </table>
 
-<table style="margin:auto;">
-  <tr>
-    <td style="text-align:center; vertical-align:top;">
-      <strong>Language</strong><br>
-      <img src="https://github.com/user-attachments/assets/ee2e79e4-f068-4b87-83e5-384bd0984b9e" width="250" alt="Language Settings Page Screenshot"/>
-    </td>
-    <td style="text-align:center; vertical-align:top;">
-      <strong>Stack Widget</strong><br>
-      <img src="https://github.com/user-attachments/assets/3c471f47-2ada-4e54-873d-bfa80db60618" width="250" alt="Stack Widget Example Screenshot"/>
-    </td>
-  </tr>
-</table>
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><strong>Language</strong></td>
+      <td align="center"><strong>Stack Widget</strong></td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="https://github.com/user-attachments/assets/ee2e79e4-f068-4b87-83e5-384bd0984b9e" width="250" alt="Language Page"/>
+      </td>
+      <td align="center">
+        <img src="https://github.com/user-attachments/assets/3c471f47-2ada-4e54-873d-bfa80db60618" width="250" alt="Stack Widget"/>
+      </td>
+    </tr>
+  </table>
+</div>
+
 
 ---
 
