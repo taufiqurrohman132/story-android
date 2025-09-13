@@ -4,6 +4,7 @@ plugins {
     id("kotlin-parcelize")
     id("com.google.devtools.ksp")
     id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-kapt") // Rekomen untuk Data Binding
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
@@ -30,7 +31,7 @@ android {
     buildFeatures {
         buildConfig = true
         viewBinding = true
-//        dataBinding = true // requirement pop up
+        dataBinding = true // requirement pop up
     }
     buildTypes {
         release {
@@ -98,7 +99,6 @@ dependencies {
     implementation(libs.androidx.paging.runtime.ktx)
     implementation(libs.play.services.location)
     implementation(libs.androidx.espresso.idling.resource)
-//    implementation(libs.androidx.uiautomator)
     testImplementation(libs.junit.jupiter)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
@@ -144,7 +144,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.contrib)
     androidTestImplementation(libs.mockito.android)
     androidTestImplementation(libs.androidx.uiautomator)
-//    androidTestImplementation("androidx.test.espresso:idling-resource:3.6.1")
 
     testImplementation(libs.androidx.core.testing) // InstantTaskExecutorRule
     testImplementation(libs.kotlinx.coroutines.test) //TestDispatcher
