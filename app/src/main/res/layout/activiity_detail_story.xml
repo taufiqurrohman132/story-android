@@ -5,9 +5,17 @@
     android:id="@+id/detail_story_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     android:paddingVertical="16dp"
     tools:context=".ui.story.detail.DetailStoryActivity">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/detail_img_story"

@@ -49,6 +49,7 @@ android {
         jvmTarget = "1.8"
     }
 
+    @Suppress("UnstableApiUsage")
     testOptions {
         animationsDisabled = true
     }

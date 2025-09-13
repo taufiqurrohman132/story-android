@@ -96,9 +96,11 @@ class StoryPagingSource : PagingSource<Int, LiveData<List<StoryEntity>>>() {
         }
     }
 
+    @Suppress("Detekt:ReturnConstant")
     override fun getRefreshKey(state: PagingState<Int, LiveData<List<StoryEntity>>>): Int {
         return 0
     }
+
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, LiveData<List<StoryEntity>>> {
         return LoadResult.Page(emptyList(), 0, 1)

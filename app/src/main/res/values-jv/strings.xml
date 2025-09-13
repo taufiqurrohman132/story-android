@@ -15,14 +15,10 @@
     <string name="error_else">Ana kaluputan. Coba maneh mengko.</string>
 
     <!-- Lainnya -->
-    <string name="hello_blank_fragment">Halo fragment kosong</string>
     <string name="title_home">Instogram</string>
     <string name="next">terus</string>
-    <string name="confirm_title_logout">Konfirmasi</string>
-    <string name="confirm_logout_message">Apa sampeyan yakin arep metu?</string>
     <string name="yes">Ya</string>
     <string name="cancel">Batal</string>
-    <string name="appwidget_text">CONTOH</string>
     <string name="add_widget">Tambah widget</string>
     <string name="app_widget_description">Tetep update karo cerita anyar! Delengen langsung saka widget tanpa mbukak aplikasi.</string>
     <string name="hastag">#%1$s #InstogramApp #MobileApp #AndroidDeveloper #UXDesign #AppExperience #MVVMArchitecture</string>
@@ -33,13 +29,10 @@
 
     <!-- popup -->
     <string name="popup_error_desc">Kesalahan ora dikarepke kedadeyan. Coba maneh mengko.</string>
-    <string name="popup_warning_desc">Verifikasimu isih dipriksa. Coba maneh mengko.</string>
     <string name="popup_success_desc">Sampeyan wis rampung nindakake tugas kasebut.</string>
     <string name="popup_error_title">Waduh</string>
-    <string name="popup_warning_title">Nunggu</string>
     <string name="popup_success_title">Apik Banget</string>
     <string name="popup_error_btn">Nutup</string>
-    <string name="popup_warning_btn">Nutup</string>
     <string name="popup_success_btn">Rampung</string>
 
     <string name="toast_success_upload">Crita kasil diunggah</string>
@@ -78,11 +71,7 @@
 
     <string name="dialog_exit_edit_title">Batal Suntingan?</string>
     <string name="dialog_exit_edit_message">Owahan sing durung disimpen bakal ilang. Yakin arep metu?</string>
-    <string name="dialog_exit_edit_positive">Metu</string>
-    <string name="dialog_exit_edit_negative">Batal</string>
 
-    <string name="selengkapnya">Luwih lengkap</string>
-    <string name="lebih_sedikit">Luwih sithik</string>
     <string name="instogram_mobile">Pengalaman Instagram Mobile minangka Ruang Digital Pribadi</string>
     <string name="simpan">Simpen</string>
     <string name="avatar_base_url">https://api.dicebear.com/9.x/initials/png?seed=%1$s</string>
@@ -108,9 +97,14 @@
     <string name="sticker">stiker</string>
     <string name="simmer">simmer</string>
     <string name="detail_story">Detail Crita</string>
+    <!-- Angka -->
     <string name="_25rb">25 ewu</string>
     <string name="_5rb">5 ewu</string>
     <string name="_15rb">15 ewu</string>
+    <string name="_245rb">245 ewu</string>
+    <string name="disukai_oleh_238rb_orang">Disenengi dening 238 ewu wong</string>
+    <string name="_4_jam_yang_lalu">4 jam kepungkur</string>
+
     <string name="wellcome">Sugeng Rawuh</string>
     <string name="belum_punya_akun">Durung duwe akun?</string>
     <string name="daftar_disini">Daftar Kene</string>
@@ -143,7 +137,6 @@
     <string name="ganti_kata_sandi">Ganti Sandi</string>
     <string name="keluar">Metu</string>
 
-    <string name="title_activity_maps">MapsActivity</string>
     <string name="normal_type">Normal</string>
     <string name="satellite_type">Satelit</string>
     <string name="terrain_type">Lereng</string>

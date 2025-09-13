@@ -14,16 +14,12 @@
     <string name="error_takterduga">予期しないエラーが発生しました。後でもう一度お試しください。</string>
     <string name="error_else">エラーが発生しました。後でもう一度お試しください。</string>
 
-    <string name="hello_blank_fragment">こんにちは、ブランクフラグメント</string>
     <string name="title_home">インストグラム</string>
     <string name="next">次へ</string>
 
-    <string name="confirm_title_logout">確認</string>
-    <string name="confirm_logout_message">ログアウトしてもよろしいですか？</string>
     <string name="yes">はい</string>
     <string name="cancel">キャンセル</string>
 
-    <string name="appwidget_text">サンプル</string>
     <string name="add_widget">ウィジェットを追加</string>
     <string name="app_widget_description">最新のストーリーをチェック！アプリを開かずにウィジェットから直接確認できます。</string>
 
@@ -35,15 +31,12 @@
 
     <!-- popup -->
     <string name="popup_error_desc">予期しないエラーが発生しました。後でもう一度お試しください。</string>
-    <string name="popup_warning_desc">検証が保留中です。後で再試行してください。</string>
     <string name="popup_success_desc">操作が正常に完了しました。</string>
 
     <string name="popup_error_title">エラー</string>
-    <string name="popup_warning_title">保留中</string>
     <string name="popup_success_title">成功</string>
 
     <string name="popup_error_btn">閉じる</string>
-    <string name="popup_warning_btn">閉じる</string>
     <string name="popup_success_btn">完了</string>
 
     <string name="toast_success_upload">ストーリーのアップロードに成功しました</string>
@@ -84,11 +77,7 @@
 
     <string name="dialog_exit_edit_title">編集をキャンセルしますか？</string>
     <string name="dialog_exit_edit_message">保存されていない変更は失われます。終了してもよろしいですか？</string>
-    <string name="dialog_exit_edit_positive">終了</string>
-    <string name="dialog_exit_edit_negative">キャンセル</string>
 
-    <string name="selengkapnya">もっと見る</string>
-    <string name="lebih_sedikit">少なく表示</string>
     <string name="instogram_mobile">パーソナルデジタルスペースとしてのInstagramモバイル体験</string>
     <string name="simpan">保存</string>
 
@@ -115,10 +104,14 @@
     <string name="sticker">ステッカー</string>
     <string name="simmer">シマー</string>
     <string name="detail_story">ストーリー詳細</string>
+    <!-- 数字 -->
+    <string name="_25rb">2.5万</string>
+    <string name="_5rb">5千</string>
+    <string name="_15rb">1.5万</string>
+    <string name="_245rb">24.5万</string>
+    <string name="disukai_oleh_238rb_orang">238,000人が「いいね！」しました</string>
+    <string name="_4_jam_yang_lalu">4時間前</string>
 
-    <string name="_25rb">25k</string>
-    <string name="_5rb">5k</string>
-    <string name="_15rb">15k</string>
     <string name="wellcome">ようこそ</string>
     <string name="belum_punya_akun">アカウントをお持ちでないですか？</string>
     <string name="daftar_disini">こちらから登録</string>
@@ -151,7 +144,6 @@
     <string name="ganti_kata_sandi">パスワードを変更</string>
     <string name="keluar">ログアウト</string>
 
-    <string name="title_activity_maps">MapsActivity</string>
     <string name="normal_type">標準</string>
     <string name="satellite_type">衛星</string>
     <string name="terrain_type">地形</string>

@@ -14,21 +14,15 @@
     <string name="error_takterduga">An unexpected error occurred. Please try again later.</string>
     <string name="error_else">An error occurred. Please try again later.</string>
 
-    <!-- Placeholder -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <!-- Titles -->
     <string name="title_home">Instogram</string>
     <string name="next">Next</string>
 
     <!-- Logout Confirmation -->
-    <string name="confirm_title_logout">Confirmation</string>
-    <string name="confirm_logout_message">Are you sure you want to log out?</string>
     <string name="yes">Yes</string>
     <string name="cancel">Cancel</string>
 
     <!-- Widget -->
-    <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">Stay updated with the latest stories! See them right from your widget without opening the app.</string>
 
@@ -42,15 +36,12 @@
 
     <!-- Popup -->
     <string name="popup_error_desc">An unexpected error occurred. Please try again later.</string>
-    <string name="popup_warning_desc">Your verification is being reviewed. Please try again later.</string>
     <string name="popup_success_desc">You have successfully completed the task.</string>
 
     <string name="popup_error_title">Oops</string>
-    <string name="popup_warning_title">Pending</string>
     <string name="popup_success_title">Success</string>
 
     <string name="popup_error_btn">Close</string>
-    <string name="popup_warning_btn">Close</string>
     <string name="popup_success_btn">Done</string>
 
     <!-- Toast -->
@@ -96,12 +87,8 @@
     <!-- Edit Dialog -->
     <string name="dialog_exit_edit_title">Cancel Editing?</string>
     <string name="dialog_exit_edit_message">Unsaved changes will be lost. Are you sure you want to exit?</string>
-    <string name="dialog_exit_edit_positive">Exit</string>
-    <string name="dialog_exit_edit_negative">Cancel</string>
 
     <!-- Extra Text -->
-    <string name="selengkapnya">Read More</string>
-    <string name="lebih_sedikit">Show Less</string>
     <string name="instogram_mobile">Instagram Mobile Experience as a Personal Digital Space</string>
     <string name="simpan">Save</string>
 
@@ -137,7 +124,6 @@
     <string name="_25rb">25k</string>
     <string name="_5rb">5k</string>
     <string name="_15rb">15k</string>
-    <string name="_287rb">287k</string>
     <string name="_245rb">245k</string>
     <string name="disukai_oleh_238rb_orang">Liked by 238k people</string>
     <string name="_4_jam_yang_lalu">4 hours ago</string>
@@ -181,7 +167,6 @@
     <string name="ganti_kata_sandi">Change Password</string>
     <string name="keluar">Logout</string>
 
-    <string name="title_activity_maps">MapsActivity</string>
     <string name="normal_type">Normal</string>
     <string name="satellite_type">Satellite</string>
     <string name="terrain_type">Terrain</string>

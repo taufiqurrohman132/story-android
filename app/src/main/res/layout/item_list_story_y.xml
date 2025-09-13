@@ -162,7 +162,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="@string/_287rb"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 

@@ -14,16 +14,12 @@
     <string name="error_takterduga">Ocurrió un error inesperado. Inténtalo más tarde.</string>
     <string name="error_else">Ocurrió un error. Inténtalo más tarde.</string>
 
-    <string name="hello_blank_fragment">Hola fragmento en blanco</string>
     <string name="title_home">Instogram</string>
     <string name="next">siguiente</string>
 
-    <string name="confirm_title_logout">Confirmación</string>
-    <string name="confirm_logout_message">¿Estás seguro de que deseas cerrar sesión?</string>
     <string name="yes">Sí</string>
     <string name="cancel">Cancelar</string>
 
-    <string name="appwidget_text">EJEMPLO</string>
     <string name="add_widget">Agregar widget</string>
     <string name="app_widget_description">¡Mantente actualizado con las últimas historias! Míralo directamente desde el widget sin abrir la app.</string>
 
@@ -35,15 +31,12 @@
 
     <!-- popup -->
     <string name="popup_error_desc">Ocurrió un error inesperado. Intenta más tarde.</string>
-    <string name="popup_warning_desc">Tu verificación está bajo observación. Intenta más tarde.</string>
     <string name="popup_success_desc">Has completado la tarea exitosamente.</string>
 
     <string name="popup_error_title">Ups</string>
-    <string name="popup_warning_title">Pendiente</string>
     <string name="popup_success_title">Bien hecho</string>
 
     <string name="popup_error_btn">Cerrar</string>
-    <string name="popup_warning_btn">Cerrar</string>
     <string name="popup_success_btn">Hecho</string>
 
     <string name="toast_success_upload">Historia subida exitosamente</string>
@@ -95,11 +88,7 @@
 
     <string name="dialog_exit_edit_title">¿Cancelar edición?</string>
     <string name="dialog_exit_edit_message">Los cambios no guardados se perderán. ¿Estás seguro de que quieres salir?</string>
-    <string name="dialog_exit_edit_positive">Salir</string>
-    <string name="dialog_exit_edit_negative">Cancelar</string>
 
-    <string name="selengkapnya">Ver más</string>
-    <string name="lebih_sedikit">Ver menos</string>
     <string name="instogram_mobile">Experiencia de Instagram Móvil como un Espacio Digital Personal</string>
     <string name="simpan">Guardar</string>
 
@@ -127,9 +116,14 @@
     <string name="simmer">simmer</string>
     <string name="detail_story">Detalle de la historia</string>
 
-    <string name="_25rb">25k</string>
-    <string name="_5rb">5k</string>
-    <string name="_15rb">15k</string>
+    <!-- Números -->
+    <string name="_25rb">25 mil</string>
+    <string name="_5rb">5 mil</string>
+    <string name="_15rb">15 mil</string>
+    <string name="_245rb">245 mil</string>
+    <string name="disukai_oleh_238rb_orang">Le gustó a 238 mil personas</string>
+    <string name="_4_jam_yang_lalu">Hace 4 horas</string>
+
     <string name="wellcome">Bienvenido</string>
     <string name="belum_punya_akun">¿No tienes una cuenta?</string>
     <string name="daftar_disini">Regístrate aquí</string>
@@ -162,7 +156,6 @@
     <string name="ganti_kata_sandi">Cambiar contraseña</string>
     <string name="keluar">Cerrar sesión</string>
 
-    <string name="title_activity_maps">MapsActivity</string>
     <string name="normal_type">Normal</string>
     <string name="satellite_type">Satélite</string>
     <string name="terrain_type">Terreno</string>
