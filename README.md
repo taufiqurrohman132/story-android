@@ -1,8 +1,7 @@
 # StoryApp – Proyek Submission Aplikasi Story
 
-StoryApp adalah aplikasi Android sederhana yang saya kembangkan sebagai bagian dari tugas akhir kelas Android Mahir Dicoding melalui program beasiswa IDCamp. Aplikasi ini memiliki fitur login, registrasi, menampilkan daftar cerita dari API, menambah cerita baru, dan melihat detail cerita.
-
-Proyek ini masih dalam proses pengembangan dan akan terus disempurnakan sesuai dengan kriteria dan saran dari reviewer.
+Aplikasi Android untuk submission kelas **Belajar Pengembangan Aplikasi Android Intermediate** dari [Dicoding](https://www.dicoding.com/).  
+Story App memungkinkan pengguna untuk **register, login, melihat daftar cerita, menambah cerita baru dengan foto + deskripsi, melihat detail cerita, menampilkan peta lokasi cerita, serta logout**.  
 
 ---
 
@@ -51,83 +50,38 @@ Proyek ini masih dalam proses pengembangan dan akan terus disempurnakan sesuai d
 
 ---
 
-## 🎯 Tujuan Pengembangan
+## ✨ Fitur Utama
 
-Menyelesaikan submission akhir dengan menerapkan fitur-fitur sesuai standar pembelajaran, seperti:
-
-- Halaman login dan register
-- Menyimpan sesi login menggunakan DataStore
-- Menampilkan daftar cerita dari API
-- Menambah cerita dengan foto dan deskripsi
-- Melihat detail cerita
-- Logout yang menghapus data sesi
-- Validasi input dan animasi dasar
-
----
-
-## ✨Fitur Aplikasi
-
-### Autentikasi
-- Login dengan email dan password
-- Register dengan nama, email, dan password
-- Validasi password minimal 8 karakter langsung di EditText
-- Validasi format email langsung di EditText
-- Input password disembunyikan
-
-### Manajemen Sesi
-- Data token dan login disimpan di `DataStore`
-- Jika sudah login, langsung diarahkan ke halaman utama
-- Logout akan menghapus data sesi
-
-### Daftar Cerita
-- Menampilkan daftar cerita dari endpoint API
-- Informasi yang ditampilkan:
-  - Nama user (R.id.tv_item_name)
-  - Foto (R.id.iv_item_photo)
-
-### Detail Cerita
-- Menampilkan informasi detail:
-  - Nama (R.id.tv_detail_name)
-  - Foto (R.id.iv_detail_photo)
-  - Deskripsi (R.id.tv_detail_description)
-
-### Tambah Cerita
-- Upload gambar dari galeri
-- Tambahkan deskripsi (R.id.ed_add_description)
-- Kirim data ke server dengan tombol (R.id.button_add)
-- Setelah sukses, kembali ke halaman list dan data muncul di paling atas
-
-### Animasi
-- Menggunakan **Shared Element Transition** saat berpindah dari list ke detail
+| Kategori            | Fitur                                                                 |
+|---------------------|----------------------------------------------------------------------|
+| **Autentikasi**  | - Register akun (nama, email, password) <br> - Login akun (email, password) <br> - Password tersembunyi <br> - Custom `EditText` dengan validasi (password ≥ 8, email valid) <br> - Session Management dengan DataStore (auto login & logout hapus session/token) |
+| **Daftar Cerita** | - Menampilkan list story (nama, foto) <br> - Klik item → detail story (nama, foto, deskripsi) |
+| **Tambah Cerita** | - Upload foto (Gallery / Camera) <br> - Input deskripsi <br> - Tombol upload <br> - Setelah sukses, kembali & data baru muncul di atas |
+| **Animasi**      | - Property Animation / Motion Animation / Shared Element <br> - Dicatat di Student Note |
+| **Maps Integration** | - Halaman peta menampilkan story dengan lokasi (`?location=1`) <br> - Marker berisi nama & deskripsi |
+| **Paging 3**      | - Mendukung infinite scroll (`page`, `size`) <br> - RemoteMediator untuk efisiensi data |
+| 🧪 **Testing**       | - Unit test ViewModel Paging: <br> ✅ Berhasil load data <br> ✅ Data tidak null <br> ✅ Jumlah sesuai ekspektasi <br> ✅ Data pertama sesuai <br> ✅ Kosong → jumlah nol |
 
 ---
 
-## Teknologi yang Digunakan
-
+## 🛠️ Tech Stack
 - Kotlin
-- MVVM Architecture
-- Retrofit
+- Android Jetpack
+  - ViewModel
+  - LiveData
+  - DataStore
+  - Paging 3
+- Retrofit + OkHttp
+- Google Maps API
 - Glide
-- ViewModel & LiveData
-- DataStore
-- ViewBinding
+- Coroutine + Flow
+- JUnit, Expresso, Mockito (Testing)
 
 ---
 
-## Catatan Tambahan
-
-Proyek ini masih terus saya kembangkan. Beberapa hal yang direncanakan:
-
-- Menambahkan fitur upload dari kamera
-- Loading dan error handling saat memanggil API
-- Localization (multi bahasa)
-- Navigasi yang lebih baik (tidak kembali ke login setelah berhasil login)
-
----
-
-## Status Proyek
-
-🛠️ Dalam pengembangan  
-🗓️ Target selesai: Akhir Agustus 2025  
-🎓 Tujuan: Submission kelas Mahir Dicoding
+## 🚀 Cara Menjalankan Project
+1. Clone repository:
+   ```bash
+   git clone https://github.com/username/story-android.git
+   cd story-android
 
