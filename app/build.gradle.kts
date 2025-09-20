@@ -8,6 +8,8 @@ plugins {
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
+val MAPS_API_KEY: String = project.findProperty("MAPS_API_KEY") as String? ?: "" // ⬅️ taruh di sini
+
 android {
     namespace = "com.example.instogramapplication"
     compileSdk = 35
@@ -26,6 +28,7 @@ android {
         )
 
         buildConfigField("String", "BASE_URL", "\"https://story-api.dicoding.dev/v1/\"")
+        manifestPlaceholders["MAPS_API_KEY"] = MAPS_API_KEY
     }
 
     buildFeatures {

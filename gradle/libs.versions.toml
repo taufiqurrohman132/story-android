@@ -63,10 +63,8 @@ pagingRuntimeKtx = "3.1.0"
 coreTesting = "2.1.0"
 #noinspection GradleDependency
 kotlinxCoroutinesTest = "1.6.1"
-#noinspection GradleDependency
-mockitoCore = "4.4.0"
-#noinspection GradleDependency
-mockitoInline = "4.4.0"
+mockitoCore = "5.12.0"
+mockitoInline = "5.2.0"
 junitJupiter = "5.8.1"
 playServicesLocation = "21.3.0"
 espressoIdlingResource = "3.7.0"
